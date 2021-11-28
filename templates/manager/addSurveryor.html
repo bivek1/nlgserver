@@ -1,0 +1,53 @@
+{% extends "manager/dashboard.html" %}
+{% block title %}
+    Add Surveryor
+{% endblock title %}
+
+{% block inner %}
+    <div class="text-center">
+        {% if messages %}
+        {% for m in messages  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+   
+    
+    <form action="" method="post" style="width: 100%; padding: 30px;">
+        <h3>Add Surveryor</h3>
+        <div class="row formbox">
+            <div class="col-6">
+                {{form.name.label_tag}}
+                {{form.name}}
+                {{form.name.errors}}
+            </div>
+            <div class="col-6">
+                {{form.specilization.label_tag}}
+                {{form.specilization}}
+                {{form.specilization.errors}}
+            </div>
+            <div class="col-6">
+                {{form.area.label_tag}}
+                {{form.area}}
+                {{form.area.errors}}
+            </div>
+            <div class="col-6">
+                {{form.contact.label_tag}}
+                {{form.contact}}
+                {{form.contact.errors}}
+            </div>
+            <div class="col-12">
+                {{form.email.label_tag}}
+                {{form.email}}
+                {{form.email.errors}}
+            </div>
+        </div>
+     
+        {% csrf_token %}
+        <br>
+        <button class="btn btn-danger btn-block" id="submit"> <i class="fa fa-key"></i> ADD SURVERYOR </button>
+    </form>
+{% endblock inner %}

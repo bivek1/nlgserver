@@ -1,0 +1,481 @@
+{% extends "pillar.html" %}
+{% load static %}
+{% block title %}
+  About NLG
+{% endblock title %}
+{% block content %}
+<style>
+    
+      .fa-diamond{
+        color: black;font-size: 21px;
+      }
+      .fa-envelope{
+        color: black;font-size: 21px;
+      }
+      .bod h6{
+          color:black;
+      }
+      .bod:hover p .fa-diamond{
+        color: white!important;
+      } 
+      .bod:hover p .fa-envelope{
+        color: white!important;
+      }
+      .bod:hover h6{
+        color: white!important;
+      }
+      .bod:hover h6 span{
+          color: black!important;
+      }
+</style>
+<div class="container-fluid">
+    <div class="row backandrollall">
+        <div class="col-md-5 col-12 col-sm-12 p-0 m-0 head-right">
+          <div class="firsthead p-3 ml-4 aboutfist">
+            <h3 class="pl-2">About NLG </h3>
+            <hr>
+            <div class="glass">
+                <p class="text-dark"  style="font-size:14px;">
+                    NLG Insurance Company Limited is a part of National Life & General Insurance(NLGI) incorporated in 1988 to conduct Life as well as General business, as composite insurance company. As per requirement of the Insurance Act of Nepal, General Insurance business of NLGI was separated and a new company by the name NLG Insurance Company Ltd.
+                    (NLG) was incorporated in 2005. 'NLG' has above 3 decade of experience in providing insurance services to its individual and corporate clients. Through our customer driven service packages, personalized service delivery and technology focused operation, our clients enjoy value that are unparallel in the industry.
+
+                    While 'NLG' is widely acknowledged for its promptness in claims services, it serves its large client base by providing diverse product range throughout the country by its largest number of network. Our clients span all levels of society - business corporations, government offices, development organizations and individual customers. 'NLG' has reliable reinsurance support of world's renowned reinsurer Hannover Re as its lead reinsurer.
+                    Its strategic stakeholders are:
+                    <p class="m-0 p-0 mt-1 text-dark" style="font-size:14px;">
+                      National Life Insurance Co. Ltd.
+                    </p>
+                    <p class="m-0 p-0 mt-1 text-dark" style="font-size:14px;">
+                      Rastriya Banijya Bank.
+                    </p>
+                    
+                    <p class="m-0 p-0 mt-1 text-dark" style="font-size:14px;">
+                      Public Stakeholders.
+                    </p>
+                </p>
+
+                <div class="row">
+              
+                    <div class="col-md-4 col-12 p-0 m-0 mr-4" data-toggle="modal" data-target="#exampleModalCenter1">
+                        <div class="bod p-0 m-0" style="height: 61px;cursor: pointer;">
+                          <p class="text-center p-0 m-0 pt-2">   <i class="fa fa-envelope" ></i>  </p>
+                          <h6 class="text-center">CEO <span class="text-danger"> Messages </span> </h6>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 p-0 m-0" data-toggle="modal" data-target="#exampleModalCenter">
+                        <div class="bod p-0 m-0" style="height: 61px;cursor: pointer;">
+                          <p class="text-center p-0 m-0 pt-2">   <i class="fa fa-diamond" ></i>  </p>
+                          <h6 class="text-center">Corporated <span class="text-danger"> Goal </span> </h6>
+                        </div>
+                    </div>
+                </div>
+                <br>
+         
+            </div>
+          
+           
+
+        </div>
+        </div>
+        <div class="aboutmaintain">
+
+        </div>
+        <div class="col-md-7 col-12 col-xs-12 mt-3">
+            <div class="insurance-product p-3">
+                <h4> NLG Insurance Company Limited</h4>
+                <div class="product-hr"></div>
+                <div class="row">
+                 
+                  <div class="col-md-4 col-12 p-3">
+                      <a href="#boardofD">
+                        <div class="bod" style="height: 76px; cursor: pointer;">
+                            <p class="text-center p-0 m-0 pt-2">   <i class="fa fa-user" style="font-size: 30px;"></i>  </p>
+                            
+                            <h6 class="text-center">Board of <span class="text-danger"> Directors </span> </h6>
+                            
+                        </div>
+                      </a>
+                       
+                      
+                   </div>
+
+                    <div class="col-md-4 col-12 p-3" data-toggle="modal" data-target=".bd-example-modal-lg-mgmt">
+                        <div class="bod" style="height: 76px; cursor: pointer;">
+                        <p class="text-center p-0 m-0 pt-2">   <i class="fa fa-users" style="font-size: 30px;"></i>  </p>
+                        
+                        <h6 class="text-center">Management <span class="text-danger"> Team </span> </h6>
+                        </div>
+                        <div class="modal fade bd-example-modal-lg-mgmt" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                <h6 class="text-center modal-title" id="exampleModalLongTitle" style="color: black;">Management <span class="text-danger"> Team </span> </h6>
+                                
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-12 col-md-12 text-center mt-4">
+                                           
+                                                <div class="bod d-flex" >
+                                                    <img src="{%static 'images/ceo.jpeg'%}" alt="">
+                                                    <div class="p-2">
+                                                       <h6 class="">Mr. Sunil Ballav Pant</h6>
+                                                       <p class="text-danger m-0 p-0">C.E.O</p> 
+                                                       <small>Email: sunil.pant@nlgi.com.np</small><br>
+                                                       <small>Phone: 4442646</small>
+                                                    </div>
+                                                   
+                                                </div>
+                                    
+                                            
+                                        </div>
+                                        <div class="col-12 col-md-12 text-center mt-4">
+                                            <div class="bod d-flex">
+                                                <img src="{%static 'images/AGM.jpg'%}" alt="">
+                                                <div class="p-2">
+                                                   <h6 class="">Mr. Manoj Shrestha</h6>
+                                                   <p class="text-danger">Deputy General Manager / Company Secretary</p>
+                                                   <small>Email: manoj.shrestha@nlgi.com.np</small><br>
+                                                   <small>Phone: 4442646</small>
+                                                </div>
+                                             </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 text-center  mt-4" >
+                                            <div class="bod d-flex">
+                                                <img src="{%static 'images/head.jpg'%}" alt="">
+                                                <div class="p-2">
+                                                   <h6 class="">Mr. Deepak Kumar Chand</h6>
+                                                   <small class="text-danger">Head- Underwritting</small> <br>
+                                                   <small>Email: deepak.chand@nlgi.com.np</small><br>
+                                                   <small>Phone: 4442646</small>
+                                                </div>
+                                               
+                                             </div>
+                                             <br><br>
+                                        </div>
+                                        <div class="col-6 col-md-6 text-center  mt-4">
+                                            <div class="bod d-flex">
+                                                <img src="{%static 'images/p.jpg'%}" alt="">
+                                                <div class="p-2">
+                                                   <h6 class="">Mr. Naumi Nath Adhikari</h6>
+                                                   <small class="text-danger">Head- Personnel & Establishment</small><br>
+                                                   <small>Email: naumi.adhikari@nlgi.com.np</small><br>
+                                                   <small>Phone: 4442646</small>
+                                                </div>
+                                               
+                                             </div>
+                                             <br><br>
+                                        </div>
+                                        
+                                    </div>
+                             
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+               
+                        </div>
+                    </div>
+
+                   
+
+                    <div class="col-md-4 col-12 p-3" data-toggle="modal" data-target=".bd-example-modal-lg-depart">
+                        <div class="bod" style="height: 76px; cursor: pointer;">
+                        <p class="text-center p-0 m-0 pt-2">   <i class="fa fa-briefcase" style="font-size: 30px;"></i>  </p>
+                        
+                        <h6 class="text-center">Department <span class="text-danger"> Head </span> </h6>
+                        </div>
+
+                         <!-- Modal -->
+              <div class="modal fade bd-example-modal-lg-depart" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                    <h6 class="text-center modal-title" id="exampleModalLongTitle"  style="color: black;">Department <span class="text-danger"> Head </span> </h6>
+                    
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 m-auto mt-3">
+                                <div class="mainman text-center " style="height: auto;">
+                                    <img src="{%static 'images/head.jpg'%}" alt="" srcset="">
+                                    <h6>Mr. Deepak Kumar Chand</h6>
+                                    <p class="text-danger p-0 m-0">Head-Underwriting</p>
+                                    <small class="d-block">deepak.chand@nlgi.com.np</small>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <div class="mainman text-center " style="height: auto;">
+                                    <img src="{%static 'images/p.jpg'%}" alt="" srcset="">
+                                    <h6>Mr. Naumi Nath Adhikari</h6>
+                                    <p class="text-danger p-0 m-0">Head-Personnel & Establishment</p>
+                                    <small class="d-block">naumi.adhikari@nlgi.com.np</small>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <div class="mainman text-center " style="height: auto;">
+                                    <img src="{%static 'images/birat.jpg'%}" alt="" srcset="">
+                                    <h6>Mr. Birat Nidhi Tiwari</h6>
+                                    <p class="text-danger p-0 m-0">Head-Re-Insurance</p>
+                                    <small class="d-block">birat.tiwari@nlgi.com.np</small>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <div class="mainman text-center " style="height: auto;">
+                                    <img src="{%static 'images/anil.jpg'%}" alt="" srcset="">
+                                    <h6>Mr. Anal Gautam</h6>
+                                    <p class="text-danger p-0 m-0">Head-Claim</p>
+                                    <small class="d-block">ak.gautam@nlgi.com.np</small>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <div class="mainman text-center " style="height: auto;">
+                                    <img src="{%static 'images/prabhat.jpg'%}" alt="" srcset="">
+                                    <h6>Mr. Prabhat A.C.</h6>
+                                    <p class="text-danger p-0 m-0">Head-Finance</p>
+                                    <small class="d-block">prabhat.ac@nlgi.com.np</small>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <div class="mainman text-center " style="height: auto;">
+                                    <img src="{%static 'images/promod.jpg'%}" alt="" srcset="">
+                                    <h6>Mr. Pramod Niraula</h6>
+                                    <p class="text-danger p-0 m-0">Head-IT</p>
+                                    <small class="d-block">pramod.niraula@nlgi.com.np</small>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <div class="mainman text-center " style="height: auto;">
+                                    <img src="{%static 'images/sunder.jpg'%}" alt="" srcset="">
+                                    <h6>Mr. Sundar Ghimire</h6>
+                                    <p class="text-danger p-0 m-0">Head-Marketing</p>
+                                    <small class="d-block">sundar.ghimire@nlgi.com.np</small>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                 
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                        </div>
+                  </div>
+                </div>
+                </div>
+   
+                </div>
+                </div>
+
+                    <div class="col-md-4 col-12 p-3">
+                        <div class="bod" style="height: 76px; cursor: pointer;">
+                            <p class="text-center p-0 m-0 pt-2">   <i class="fa fa-user-plus" style="font-size: 30px;"></i>  </p>
+                    
+                            <h6 class="text-center">RI <span class="text-danger"> Partner </span> </h6>
+                        </div>
+                    </div>
+            
+
+                </div>
+                <div class="moreelement pt-1 mt-4 ml-3">
+                    <h5 class="text-dark">More  <span class="text-danger">About Us</span> </h5>
+                    <a href="{%url 'landing:surveyor'%}" class="mt-2">
+                        <div class="btn btn-danger roundbtn text-light blockforphone">
+                            <i class="fa fa-user-secret"></i> SURVEYOR
+                        </div>
+                    </a>
+                    <a href="{%url 'landing:agents'%}" class="mt-2">
+                        <div class="btn btn-danger roundbtn text-light blockforphone">
+                            <i class="fa fa-user-plus"></i> Agents
+                        </div>
+                    </a>
+                   
+                    <a href="{%url 'landing:citizen'%}" class="mt-2">
+                        <div class="btn btn-danger roundbtn text-light blockforphone">
+                            <i class="fa fa-users"></i> Citizen’s Charter
+                        </div>
+                    </a>
+                  
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <br>
+    <div class="row" id="boardofD">
+        <div class="col-md-12 col-12 text-center">
+            <h4>Our <span class="text-danger">Board of Directors</span></h4>
+            <!-- <div class="product-hr"></div> -->
+        </div>
+        
+        <div class="col-md-12 col-12 p-3 m-auto">
+            <div class="mainman text-center ">
+                <img src="{%static 'images/bimal.jpg'%}" alt="" srcset="">
+                <h6>Mr. Bimal Prasad Wagle</h6>
+                <p class="text-danger p-0 m-0">Chairman</p>
+                <small class="d-block">Samuha(Ka)</small>
+                <!-- <button class="btn btn-outline-danger mt-2">
+                    View More
+                </button> -->
+            </div>
+        </div>
+        <div class="col-md-4 col-6 p-3">
+            <div class="mainman text-center ">
+                <img src="{%static 'images/bharat.jpg'%}" alt="" srcset="">
+                <h6>Mr. Bharat Bahadur Basnet</h6>
+                <p class="text-danger p-0 m-0">Director</p>
+                <small class="d-block">Samuha(Ka)</small>
+                <!-- <button class="btn btn-outline-danger mt-2">
+                    View More
+                </button> -->
+            </div>
+        </div>
+        <div class="col-md-4 col-6 p-3">
+            <div class="mainman text-center ">
+                <img src="{%static 'images/sures.jpg'%}" alt="" srcset="">
+                <h6>Mr. Suresh Prasad Khatri</h6>
+                <p class="text-danger p-0 m-0">Director</p>
+                <small class="d-block">Samuha(Ka)</small>
+                <!-- <button class="btn btn-outline-danger mt-2">
+                    View More
+                </button> -->
+            </div>
+        </div>
+        <div class="col-md-4 col-6 p-3">
+            <div class="mainman text-center ">
+                <img src="{%static 'images/min.jpg'%}" alt="" srcset="">
+                <h6>Mr. Min Bahadur Samari</h6>
+                <p class="text-danger p-0 m-0">Director</p>
+                <small class="d-block">Samuha(Ga)</small>
+                <!-- <button class="btn btn-outline-danger mt-2">
+                    View More
+                </button> -->
+            </div>
+        </div>
+        <div class="col-md-4 col-6 p-3">
+            <div class="mainman text-center ">
+                <img src="{%static 'images/naren.jpg'%}" alt="" srcset="">
+                <h6>Mr. Narendra Singh Bista</h6>
+                <p class="text-danger p-0 m-0">Director</p>
+            
+                <!-- <button class="btn btn-outline-danger mt-2">
+                    View More
+                </button> -->
+            </div>
+        </div>
+        <div class="col-md-4 col-6 p-3">
+            <div class="mainman text-center ">
+                <img src="{%static 'images/sha.png'%}" alt="" srcset="">
+                <h6>Ms. Shalini Rana </h6>
+                <p class="text-danger p-0 m-0">Director</p>
+           
+                <!-- <button class="btn btn-outline-danger mt-2">
+                    View More
+                </button> -->
+            </div>
+        </div>
+        <div class="col-md-4 col-6 p-3">
+            <div class="mainman text-center ">
+                <img src="{%static 'images/bh.jpg'%}" alt="" srcset="">
+                <h6>Dr. Bharat Kumar Thapa</h6>
+                <p class="text-danger p-0 m-0">Independent Director</p>
+              
+                <!-- <button class="btn btn-outline-danger mt-2">
+                    View More
+                </button> -->
+            </div>
+        </div>
+    </div>
+  
+</div>
+<div class="container">
+    <br><br>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Corporated Goal</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    <div class="modalchange">
+                        <h4 class="text-center">Our Vision</h4>
+                       
+                    </div>
+                    
+                    <p>To be insurer of first choice of Nepal.</p>
+
+                    <div class="modalchange">
+                        <h4 class="text-center">Our Mission</h4>
+                    </div>
+                     
+                     <p>To deliver first class insurance services, run as a successful and professional insurance business, procure quality business in order to provide adequate returns to the shareholders and contribute to the 
+                         nation by the way of developing man-power and promoting socio-economy as social responsibility.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+    
+        
+          <!-- Modal -->
+          <div class="modal fade bd-example-modal-lg" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">CEOs Message</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <div class="modalchange">
+                    <h4 class="text-center">CEOs Message</h4>
+                   
+                </div>
+                
+                <p>
+                    Though we have 60 years of history in insurance sector in Nepal, its growth seems to be very low. Although the importance of insurance is high, people here in Nepal are not quite aware of the features of insurance. The reason behind this can be crisis in political, economic and industrial sectors. We, all general insurance companies along with participation of Insurance Board have been trying to raise public awareness among people by forming marketing committee, but we found it as a challenging job.
+                    The devastating earthquake that shook Nepal on 2015/04/25 and continuous aftershocks occurring after it has badly affected all the financial sectors including general insurance. For the damages done by the devastative earthquake, NLG has discharged Rs. 19 Crore to the victims. Out of the total 16,700 number of claims lodged with all the general insurance companies, 1,353 claims were lodged against NLG among which 892 claims were settled.
+                </p>
+
+                <p>
+                    There was an alarming belief that insurance companies would have to face high amount of claims leading to failure of many insurance companies due to the devastating earthquake, however NLG has been successful in converting these challenges into opportunities and simultaneously achieved profit, though less than in previous years due to the increase in claim expenses than in previous years.
+                    NLG has been working towards discharging pending claims as soon as possible with an aim that such payments would be of great help for the victims in reconstructing the destructions done by the massive earthquake. In fulfilling this aim, NLG has arranged a separate desk for the victims of earthquake and has brought easiness in discharging claims of small amount. However, the insured having huge claims in amount cannot be settled immediately as some time is required for evaluation of loss but arrangements were made to provide claim advances to such insured.
+                    Despite such devastating event, insurance companies have been able to properly manage themselves. Talking about NLG, it is not only active in insurance business but also is an active participant in social welfare events. Professional discipline and transparency are its assets. It has also been honored by awards such as National BPA Award which has added even more responsibilities to the company. We have been working so as to be the top insurance company conducting business in Nepal.
+                </p>
+
+             
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                </div>
+              </div>
+            </div>
+            </div>
+
+          </div>
+    </div>   
+</div>
+{% endblock content %}
+

@@ -1,0 +1,83 @@
+{% extends "manager/dashboard.html" %}
+{% block title %}
+    Add Branch
+{% endblock title %}
+
+{% block inner %}
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+    <div class="text-center">
+        {% if messages %}
+        {% for m in messages  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+   
+    
+    <form action="" method="post" style="width: 100%; padding: 30px;" enctype="multipart/form-data">
+        <H3>Add Branch</H3>
+        <hr>
+        <div class="row  formbox" >
+            <div class="col-6">
+                {{form.district.label_tag}}
+                {{form.district}}
+                {{form.district.errors}}
+            </div>
+            <div class="col-6">
+                {{form.street.label_tag}}
+                {{form.street}}
+                {{form.street.errors}}
+            </div>
+            <div class="col-6">
+                {{form.contact.label_tag}}
+                {{form.contact}}
+                {{form.contact.errors}}
+            </div>
+            <div class="col-6">
+                {{form.fax.label_tag}}
+                {{form.fax}}
+                {{form.fax.errors}}
+            </div>
+            <div class="col-6">
+                {{form.email.label_tag}}
+                {{form.email}}
+                {{form.email.errors}}
+            </div>
+            <div class="col-6">
+                {{form.focal.label_tag}}
+                {{form.focal}}
+                {{form.focal.errors}}
+            </div>
+            <div class="col-6">
+                {{form.provience.label_tag}}
+                {{form.provience}}
+                {{form.provience.errors}}
+            </div>
+            <div class="col-6">
+                {{form.number.label_tag}}
+                {{form.number}}
+                {{form.number.errors}}
+            </div>
+            <div class="col-6">
+                {{form.focal_img.label_tag}}
+                {{form.focal_img}}
+                {{form.focal_img.errors}}
+            </div>
+        </div>
+        <div class="row mt-2">
+            
+            {% csrf_token %}
+            <br>
+            <button class="btn btn-danger btn-block text-light" id="submit"> <i class="fa fa-key"></i> ADD BRANCH </button>
+        </div>
+       
+    </form>
+    <br><br><br><br>
+{% endblock inner %}

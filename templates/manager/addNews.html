@@ -1,0 +1,30 @@
+{% extends "manager/dashboard.html" %}
+{% block title %}
+    Add News
+{% endblock title %}
+
+{% block inner %}
+    <div class="text-center">
+        {% if messages %}
+        {% for m in messages  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+   
+    
+    <form action="" method="post" style="width: 100%; padding: 30px;" enctype="multipart/form-data">
+        <h3>Add News</h3>
+        <hr>
+        <div class="row formbox">
+            {{form}}
+        </div>
+   
+        {% csrf_token %}
+        <br>
+        <button class="btn btn-danger btn-block text-light" id="submit"> <i class="fa fa-key"></i> ADD NEWS </button>
+    </form>
+{% endblock inner %}

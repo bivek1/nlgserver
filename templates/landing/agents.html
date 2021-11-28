@@ -1,0 +1,168 @@
+{% extends "pillar.html" %}
+{% block title %}
+  Agents
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <h4 class="text-center">Our  <span class="text-danger">Agents</span></h4>
+    <hr>
+    <p class="text-center">
+      All together there are 282 agents associated with NLG Insurance Co. Ltd. (NLG) among which details of institutional agents are listed below:
+    </p>
+    <table class="table table-striped">
+        <!-- <thead>
+          <tr>
+            <th scope="col">S.N</th>
+            <th scope="col">Name of Surveyor</th>
+            <th scope="col">Address</th>
+            <th scope="col">Contact No</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            {% for sa in s  %}
+            <tr>
+                <th scope="row">{{sa.id}}</th>
+                <td>{{sa.name}}</td>
+                <td>{{sa.address}}</td>
+                <td>{{sa.contact}}</td>
+                <td>{{sa.email}}</td>
+            </tr>
+            {% endfor %}
+                
+         
+        </tbody> -->
+        <tbody>
+          <tr height="20">
+            <td height="20" style="height:20px;width:36px;">S.No</td>
+            <td style="width:223px;">Name</td>
+            <td style="width:161px;">Address</td>
+            <td style="width:101px;">Contact No</td>
+            <td style="width:209px;">E-mail</td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">1</td>
+            <td>M/s Rastriya Banijya Bank Ltd</td>
+            <td>Singhadurbar</td>
+            <td>01-4257528</td>
+            <td><a href="mailto:corporate@rbb.com.np">corporate@rbb.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">2</td>
+            <td>&nbsp;M/s Nabil bank Ltd</td>
+            <td>Teendhara</td>
+            <td>01-4221718</td>
+            <td><a href="http://www.nabilbank.com.np/">www.nabilbank.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">3</td>
+            <td>&nbsp;M/s Bank of Asia Ltd (NIC Asia)</td>
+            <td>Thapathali</td>
+            <td>01-5111177</td>
+            <td><a href="http://www.nicasiabank.com/">www.nicasiabank.com</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">4</td>
+            <td>&nbsp;M/s Sanima Bank Ltd</td>
+            <td>Naxal</td>
+            <td>01-4428977</td>
+            <td><a href="mailto:sanima@sanimabank.com">sanima@sanimabank.com</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">5</td>
+            <td>&nbsp;M/s Siddhartha Bank Ltd</td>
+            <td>Hattisar</td>
+            <td>01-4442919</td>
+            <td><a href="mailto:sbl@siddharthabank.com">sbl@siddharthabank.com</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">6</td>
+            <td>&nbsp;M/s NMB Bank Ltd</td>
+            <td>Babarmahal</td>
+            <td>01-4246160</td>
+            <td><a href="mailto:call@nmb.com.np">call@nmb.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">7</td>
+            <td>&nbsp;M/s Century Commercial bank Ltd</td>
+            <td>Putalisadak</td>
+            <td>01-4445062</td>
+            <td><a href="mailto:welcome@centurybank.com.np">welcome@centurybank.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">8</td>
+            <td>&nbsp;M/s Prabhu bank Ltd</td>
+            <td>Babarmahal</td>
+            <td>01-4788500</td>
+            <td><a href="mailto:info@prabhubank.com">info@prabhubank.com</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">9</td>
+            <td>&nbsp;M/s Nepal SBI BanK Ltd</td>
+            <td>kesharmahal</td>
+            <td>01-4435613</td>
+            <td><a href="mailto:carporate@nsbl.com.np">carporate@nsbl.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">10</td>
+            <td>&nbsp;M/s Himalayan Bank Ltd</td>
+            <td>Kamaladi</td>
+            <td>01-4246218</td>
+            <td><a href="http://www.himalayanbank.com/">www.himalayanbank.com</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">11</td>
+            <td>&nbsp;M/s Prime Bank Ltd</td>
+            <td>kamalpokhari</td>
+            <td>01-4423432</td>
+            <td><a href="mailto:info@pcbl.com.np">info@pcbl.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">12</td>
+            <td>&nbsp;M/s Machhapuchhre Bank Ltd</td>
+            <td>Lazimpat</td>
+            <td>01-4428556</td>
+            <td><a href="mailto:machbank@mbl.com.np">machbank@mbl.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">13</td>
+            <td>&nbsp;M/s N.B Bank Ltd</td>
+            <td>Kamaladi</td>
+            <td>01-4233780</td>
+            <td><a href="mailto:nbblho@nbbl.com.np">nbblho@nbbl.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">14</td>
+            <td>&nbsp;M/s Bank of Kathmandu Ltd</td>
+            <td>Teendhara</td>
+            <td>01-4414541</td>
+            <td><a href="mailto:info@bok.com.np">info@bok.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">15</td>
+            <td>&nbsp;M/s Muktinath Bikash Bank Ltd</td>
+            <td>Kamaladi</td>
+            <td>01-4168683</td>
+            <td><a href="mailto:info@muktinathbank.com.np">info@muktinathbank.com.np</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">16</td>
+            <td>M/s Janta Bank Nepal Ltd</td>
+            <td>Thapathali</td>
+            <td>01-4101634</td>
+            <td><a href="mailto:info@janatabank.com.np">info@janatabank.com.np&nbsp;</a></td>
+          </tr>
+          <tr height="20">
+            <td align="right" height="20" style="height:20px;">17</td>
+            <td>Excel Development Bank</td>
+            <td>Birtamode, Jhapa, Nepal</td>
+            <td>023-543714</td>
+            <td><a href="mailto:info@edb.com.np">info@edb.com.np</a></td>
+          </tr>
+        </tbody>  
+    </table>
+</div>
+{% endblock content %}

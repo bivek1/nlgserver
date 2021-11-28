@@ -1,0 +1,98 @@
+{% extends 'manager/dashboard.html' %}
+
+{% block title %}
+    {{name}}  Report
+{% endblock title %}
+
+
+{% block inner %}
+    <div class="row p-4">
+        <h4>{{name}} </h4>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table stylish-table no-wrap">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0" colspan="2">Name</th>
+                                        <th class="border-top-0">Date</th>
+                                        <th class="border-top-0">File</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in report %}
+                                        <tr>
+                                            <td style="width:50px;"><span class="round">F</span></td>
+                                            <td class="align-middle">
+                                                <h6>{{i.name}}</h6>
+                                            </td>
+                                            <td class="align-middle">{{i.dateof}}</td>
+                                            <td class="align-middle">
+                                               
+                                               {% if i.files %}
+                                               <a href="{{i.pdf}}">
+                                                <button class="btn btn-sm btn-danger text-light">
+                                                    <i class="fa fa-eye p-2"></i>
+                                                    View
+                                                </button>
+                                                    
+                                                </a>    
+                                                <a href="{{i.download}}">
+                                                    <button class="btn btn-sm btn-light btn-danger btn-danger">
+                                                        <i class="fa fa-download p-2"></i>
+                                                        Download
+                                                    </button>
+                                                    
+                                                </a>    
+                                               {% endif %}
+                                               
+                                               {% if i.image %}
+                                               <p >
+                                                <button class="btn btn-sm btn-danger text-light" data-toggle="modal" data-target="#exampleModalCenter">
+                                                    <i class="fa fa-eye p-2"></i>
+                                                    View
+                                                </button>
+
+                                                </p>
+                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <img src="{{i.image.url}}" alt="" srcset="" style=" height:100%; width:100%;" >
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>   
+                                               {% endif %}
+                                                   
+                                              
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+            
+    </div>
+
+{% endblock inner %}
+

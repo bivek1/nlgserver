@@ -1,0 +1,184 @@
+{% extends "pillar.html" %}
+{% load static %}
+{% block title %}
+  NLG Branches
+{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row backandrollall">
+        <div class="col-md-12 col-12 p-0 m-0 head-right">
+            <div class="firsthead p-3 ml-4">
+            
+                <div class="insurance-product p-3">
+                    <h4>Head Office</h4>
+                    <div class="product-hr"></div>
+                  
+                    <p class="text-dark pt-2">
+                        <i class="fa fa-location-arrow"></i> Lazimpat, Kathmandu Nepal
+                    </p>
+                    <p class="text-dark">
+                        <a href="tel:01-4442646">
+                            <i class="fa fa-phone"></i>
+                            Contact No. : 01-4442646, 01-4006648
+                        </a>
+                         
+                    </p>
+                    <p class="text-dark">
+                        <a href="mailto:info@nlgi.com.np">
+                            <i class="fa fa-envelope-square"></i> Email : info@nlgi.com.np
+                        </a>
+                        
+                    </p>
+                    <p class="text-dark">
+                        <i class="fa fa-fax"></i> Fax: 977-1-4416427
+                    </p>
+                  
+                </div>
+            </div>
+           
+        </div>
+        <!-- <div class="col-md-7 col-12 hideformob">
+            <div class="branch">
+                <img src="{%static 'images/pp.png'%}" alt="" srcset="">
+            </div>
+        </div> -->
+    </div>
+    <br><br>
+    <br><br>
+    <!-- <div class="container-fluid">
+        <div class="row">
+            <h3>Seach for your near <span class="text-danger"> Branches ?</span> </h3>
+            <form action="" method="post">
+                <select name="" id=""></select>
+            </form>
+            <hr>
+        </div>
+    </div> -->
+    
+    <!-- <div class="row searchback p-0 m-0">
+        <div class="col-md-10 col-12 m-auto" style="height: 500px;">
+            <br><br>
+            <h3>Seach for your near <span class="text-light"> Branches ?</span> </h3>
+            <form action="" method="post" class="m-auto">
+                <input type="text" name="branch" placeholder="Search branch" class="form-control">
+            </form>
+        </div>
+    </div> -->
+    <br>
+    
+    <div class="row p-2" style="margin-top: -115px;">
+        <div class="col-6">
+            <a href="/branches">
+                <h4 class="pt-2 d-inline">Our<span class="text-danger"> Branches</span> </h4> 
+                <div class="product-hr"></div>
+            </a>
+           
+        </div>
+        <div class="col-6">
+            <form action="" method="post">
+                <div class="input-group mb-3 mr-4" style="padding-right: 8;">
+                    <input style="border-radius: 20%;" type="text" name="branch" class="form-control" placeholder="Search Branches" aria-label="Search Branches" aria-describedby="basic-addon2">
+                    {% csrf_token %}
+                    <div class="input-group-append">
+                      <button class="btn btn-danger" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+            
+         
+        </div>
+       
+        {% if Nfound %}
+            <div class="col-12 text-center" >
+                <h4 class="text-center">No Result Found....</h4>
+            </div>
+            
+        {% endif %}
+
+        {% for b in branch  %}
+    
+            
+        <div class="col-md-4  col-lg-2 col-6 m-auto">
+            <div class="branchbox text-center mt-3" data-toggle="modal" data-target="#exampleModalCenter{{b.id}}">
+                <div class="headbranch">
+                    {{b.district}}
+                </div>
+            
+                <div class="below">
+                    <a href="tel:{{b.contact}}">
+                        <i class="fa fa-phone"></i> 
+                    </a>
+                    <a href="mailto:{{b.email}}">
+                        <i class="fa fa-envelope-o"></i>
+                    </a>
+                    <i class="fa fa-fax"></i>  
+                </div>
+                
+            </div>
+
+            <!-- Show Modal -->
+            <div class="modal fade" id="exampleModalCenter{{b.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{b.district}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="p-2">
+                            <div class="row">
+                                <div class="col-7">
+                                    <aside class="sidebyside">
+                                        <i class="fa fa-location-arrow"></i> {{b.street}}<br>
+                                        <a href="tel:{{b.contact}}">
+                                            <i class="fa fa-phone"></i> Contact No. : {{b.contact}}<br>
+                                        </a>
+                                        
+                                        <i class="fa fa-fax"></i> Fax : {{b.fax}}<br>
+                                        <a href="mailto:{{b.email}}">
+                                            <i class="fa fa-envelope-o"></i> Email : {{b.email}}<br>
+                                        </a>
+                                        
+                                        <i class="fa fa-user"></i> Focal Person : {{b.focal}}<br>
+                                        <a href="tel:{{b.number}}">
+                                            <i class="fa fa-mobile-phone"></i> Mobile No:&nbsp;{{b.number}}<br>
+                                        </a>
+                                        
+                                        &nbsp;               
+                                    </aside>
+                                </div>
+                                <div class="col-5 m-auto">
+                                    <img src="{{b.focal_img.url}}" alt="" srcset="" style="height: 130px;">
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+            
+
+    </div>
+
+    
+
+</div>
+<script>
+$('.popover-dismiss').popover({
+    trigger: 'focus'
+  })
+
+</script>
+{% endblock content %}

@@ -1,0 +1,745 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            NLG INSURANCE COMPANY LIMITED! BEST INSURANCE IN NEPAL
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{%static 'css/font-awesome.css'%}">
+
+    <link rel="stylesheet" href="{%static 'css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
+</head>
+<body>
+    {% block loader %}
+        <!-- ***** Preloader Start ***** -->
+    <!-- <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div> -->
+    <!-- ***** Preloader End ***** -->
+    {% endblock loader %}
+    <div class="allholder">
+
+        <!-- Navbar -->
+        <div class="topred p-1 pl-4 hideformob" >
+        
+            <div class="container-fluid ">
+                <div class="row m-auto">
+                    <div class="col-md-4 col-3" data-toggle="modal" data-target="#exampleModalCenterMap" style="cursor: pointer;">
+                        <div class="row">
+                            <div class="col-md-2 col-1 text-light m-0 p-0 pl-3 pt-2">
+                                <i class="fa fa-compass" style="font-size: 24px; margin-left: 20px;"></i> 
+                            </div>
+                            <div class="col-11 col-md-10 p-0 m-0 pl-2">
+                                <p class="text-light p-0 m-0 topline">Head Office</p>
+                                <p class="text-light p-0 m-0 topline">Lazimpat, Kathmandu Nepal</p>
+                            </div>
+                        </div>
+                        <!-- Map Modal -->
+                        <div class="modal fade" id="exampleModalCenterMap" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">NLG MAP LOCATION</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.6738474092735!2d85.32163321462698!3d27.727354731220206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1918204e6ded%3A0xff047d4302a7b0eb!2sNLG+INSURANCE+COMPANY+LIMITED!5e0!3m2!1sen!2snp!4v1467190472573" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+                        <!-- Map Modal End -->
+                    </div>
+                    <div class="col-md-4 col-3 pl-5">
+                        <div class="row" style="cursor: pointer;">
+                            <div class="col-1 col-md-2 text-light m-0 p-0 pl-3 pt-2">
+                                <i class="fa fa-clock-o" style="font-size: 24px; margin-left: 20px;"></i> 
+                            </div>
+                            <div class="col-11 col-md-10 p-0 m-0 pl-2">
+                                <p class="text-light p-0 m-0 topline">10 AM to 5 PM (Sunday-Thursday)</p>
+                                <p class="text-light p-0 m-0 topline">10 AM to 2 PM (Friday) </p>
+                            </div>
+                       
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-md-4 col-4 pl-5">
+                        <div class="row">
+                            <div class="col-2 col-md-2 aboutimg p-0 m-0 pl-4 mt-2 text-right">
+                                <a href="tel:01-4442646"> 
+                                <i class="fa fa-phone-square text-light" style="font-size: 24px; margin-left: 20px;"></i> 
+                               </a>
+                            </div>
+                            <div class="col-4 col-md-3 p-0 m-0 text-center">
+                                <p class="text-light p-0 m-0 topline">
+                                     <a href="tel:01-4442646" class="topline"> 01-4442646 </a></p>
+                                <p class="text-light p-0 m-0 topline"><a class ="topline"href="tel:01-4442646"> 01-4006648 </a></p>
+                            </div>
+                            <div class="col-6 col-md-6 p-0 m-0 pl-3">
+                                <p class="text-light p-0 m-0 topline"> Toll Free No - 16600199099</p>
+                                <p class="text-light p-0 m-0 topline"> Email- info@nlgi.com.np </p>
+                
+                                    <!-- <a href="" class="topline" data-toggle="modal" data-target="#exampleModalCenterLogin"> <i class="fa fa-user"></i> Login </a> -->
+                                
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <!-- login modal PP -->
+                    <div class="modal fade" id="exampleModalCenterLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center p-1">
+                                    <div class="errormsg">
+
+                                    </div>
+                                    <img src="" alt="" srcset="">
+                                <form action="" method="dialog">
+                                    <a href="/" class="footer-logo text-center">
+                                        <img src="/static/images/downlogo.PNG" alt="footer_logo" class="img-fluid" style="height: 145px;">
+                                    </a>
+                                    <br>
+                                        <label for="username" style="float: left;
+                                        margin-left: 10px;"> <b>USERNAME</b> </label>
+                                    <input class="form-control mt-2 mr-2 ml-1 mb-2" type="text" name="username" id="username" placeholder="Username">
+                                    <label for="password" style="float: left;
+                                    margin-left: 10px;"> <b>PASSWORD</b> </label>
+                                    <input class="form-control mt-2 mr-2 ml-1 mb-2" type="password" name="password" id="password" placeholder="********">
+                                    <input type="hidden" name="csrfmiddlewaretoken" value="0D1BwYGmBeEK0gB2Z8iNoqp8QNIAezMzyEZJbgnNHGz1lhhDZE43pbyoCb1tzMRw">
+                                    <button class="btn btn-danger btn-block" id="submit"> <i class="fa fa-key"></i> Login </button>
+                                </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Login Modal End -->
+                
+            
+                </div>
+            </div>
+            
+
+        </div>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" id="navbar" style="margin-bottom: 15px;">
+            <div class="navbar-brand">
+                <a href="{%url 'landing:landing'%}">
+                    <img src="{%static 'images/logo.png'%}" alt="" srcset="">
+                </a>
+                <p class="logoslogan text-danger">सबैको सुरक्षा, एनएलजीको ईच्छा</p>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto pr-5">
+                {%url 'landing:landing' as AD%}
+
+                <li class="nav-item  pr-3">
+                <a class="nav-link d-flex" href="{{AD}}"> 
+                    <i class="fa fa-home"></i>
+                        <span class="{%if request.path == AD %}isactive{%endif%}"> HOME</span>  
+                </a>
+                <div class="{%if request.path == AD %}active{%endif%}"></div>
+                </li>
+                <li class="nav-item pr-3">
+                    {%url 'landing:aboutUs' as AD%}
+                    <a class="nav-link d-flex" href="{{AD}}">
+                        <i class="fa fa-briefcase"></i>
+                        <pre class="{%if request.path == AD %}isactive{%endif%} p-0 m-0 pl-2" style="font-size: 14px;
+                        font-weight: 600;
+                        margin-left: 5px; color:rgba(0,0,0,.5)">ABOUT US</pre> 
+                    </a>
+                    <div class="{%if request.path == AD %}active{%endif%}"></div>
+                
+                </li>
+                <li class="nav-item pr-3">
+                    {%url 'landing:productPolicies' as AD%}
+                <a class="nav-link d-flex" href="{{AD}}">
+                    <i class="fa fa-umbrella"></i>
+                    
+                <span class="{%if request.path == AD %}isactive{%endif%}" >PRODUCTS</span> 
+                </a>
+                <div class="{%if request.path == AD %}active{%endif%}"></div>
+                </li>
+                <li class="nav-item pr-3">
+                    {%url 'landing:branch' as AD%}
+                    <a class="nav-link d-flex" href="{{AD}}">
+                        <i class="fa fa-bars"></i>
+                        <span class="{%if request.path == AD %}isactive{%endif%}">BRANCHES</span> 
+                    </a>
+                    <div class="{%if request.path == AD %}active{%endif%}"></div>
+                </li>
+                <li class="nav-item pr-3">
+                    {%url 'landing:finance' as AD%}
+                    <a class="nav-link d-flex" href="{{AD}}">
+                        <i class="fa fa-bar-chart"></i>
+                        <span class="{%if request.path == AD %}isactive{%endif%}">STATEMENT</span>
+                    </a>
+                    <div class="{%if request.path == AD %}active{%endif%}"></div>
+                
+                </li>
+                <!-- <li class="nav-item pr-3">
+                    {%url 'landing:gallary' as AD%}
+                    <a class="nav-link d-flex" href="{{AD}}">
+                        <i class="fa fa-angle-up"></i>
+                    <span class="{%if request.path == AD %}isactive{%endif%}">CAREER</span> 
+                    </a>
+                    <div class="{%if request.path == AD %}active{%endif%}"></div>
+                </li> -->
+                <!-- <li class="nav-item pr-3">
+                    {%url 'landing:gallary' as AD%}
+                    <a class="nav-link d-flex" href="{{AD}}">
+                        <i class="fa fa-photo"></i>
+                    <span class="{%if request.path == AD %}isactive{%endif%}">GALLERY</span> 
+                    </a>
+                    <div class="{%if request.path == AD %}active{%endif%}"></div>
+                </li> -->
+                
+                <li class="nav-item pr-3">
+                    {%url 'landing:contact' as AD%}
+                    <a class="nav-link d-flex" href="{{AD}}">
+                        <i class="fa fa-phone-square"></i>
+                        <span class="{%if request.path == AD %}isactive{%endif%}">CONTACT</span> 
+                    </a>
+                    <div class="{%if request.path == AD %}active{%endif%}"></div>
+                </li>
+            
+                <!-- <li class="nav-item dropdown pr-3">
+                    {%url 'landing:finance' as AD%}
+                    <a class="nav-link d-flex dropdown-toggle" href="{{AD}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-bar-chart"></i>
+                        <span class="{%if request.path == AD %}isactive{%endif%}">STATEMENT</span>
+                    </a>
+                    <div class="{%if request.path == AD %}active{%endif%}"></div>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{AD}}">Statement</a>
+                        <a class="dropdown-item" href="#">Annual Report</a>
+                        <a class="dropdown-item" href="#">Quarterly Report</a>
+                        <a class="dropdown-item" href="#">Minute Report</a>
+                        <a class="dropdown-item" href="#">Other Report</a>
+                    
+                    </div>
+                </li> -->
+
+                <li class="nav-item hidefordesktop">
+                    <hr>
+                    <div class="nav-link" href="">
+                        <div class="row">
+                            <div class="col-2 p-0 m-0" data-toggle="modal" data-target="#exampleModalCenterMap" style="cursor: pointer;">
+                                <i class="fa fa-compass" style="font-size: 24px; margin-left: 20px;"></i> 
+                            </div>
+                            <div class="col-10 m-0 p-0">
+                                <p class="text-dark p-0 m-0 topline">Head Office</p>
+                                <p class="text-dark p-0 m-0 topline">Lazimpat, Kathmandu Nepal</p>
+                            </div>
+        
+                            
+                            <!-- Map Modal -->
+                            <div class="modal fade" id="exampleModalCenterMap" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">NLG MAP LOCATION</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.6738474092735!2d85.32163321462698!3d27.727354731220206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1918204e6ded%3A0xff047d4302a7b0eb!2sNLG+INSURANCE+COMPANY+LIMITED!5e0!3m2!1sen!2snp!4v1467190472573" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                                    </div>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Map Modal End herenow-->
+
+                            <div class="col-2 p-0 m-0 pt-2" data-toggle="modal" data-target="#exampleModalCenterOpening" style="cursor: pointer;">
+                                <i class="fa fa-clock-o" style="font-size: 24px; margin-left: 20px;"></i> 
+                            </div>
+                            <div class="col-10 m-0 p-0 pt-2">
+                                <p class="text-dark p-0 m-0 topline">10 AM to 5 PM (Sunday-Thursday)</p>
+                                <p class="text-dark p-0 m-0 topline">10 AM to 2 PM (Friday)</p>
+                            </div>
+                            
+                            <!-- Opening Hours Modal -->
+                            <div class="modal fade" id="exampleModalCenterOpening" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">NLG Opening Hours</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4 class="text-center">
+                                            Magh 16th to Kartik 15th
+                                        </h4>
+                                        <hr>
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                <td>Sunday</td>
+                                                <td>10 AM to 5 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Monday</td>
+                                                <td>10 AM to 5 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Tuesday</td>
+                                                <td>10 AM to 5 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Wednesday</td>
+                                                <td>10 AM to 5 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Thursday</td>
+                                                <td>10 AM to 5 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Friday</td>
+                                                <td>10 AM to 2 PM</td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+        
+                                        <h4 class="text-center">
+                                            Kartik 16th to Magh 15th
+                                        </h4>
+                                        <hr>
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                <td>Sunday</td>
+                                                <td>10 AM to 4.30 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Monday</td>
+                                                <td>10 AM to 4.30 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Tuesday</td>
+                                                <td>10 AM to 4.30 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Wednesday</td>
+                                                <td>10 AM to 4.30 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Thursday</td>
+                                                <td>10 AM to 4.30 PM</td>
+                                                </tr>
+                                                <tr>
+                                                <td>Friday</td>
+                                                <td>10 AM to 2 PM</td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                    </div>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Opening Hours Modal End -->
+
+                            <div class="col-2 p-0 m-0 pt-2" >
+                                <a href="tel:01-4442646">
+                                    <i class="fa fa-phone-square" style="font-size: 24px; margin-left: 20px;"></i> 
+                                </a>
+                                
+                            </div>
+                            <div class="col-10 m-0 p-0 pt-2">
+                                <a href="tel:01-4442646"><p class="text-dark p-0 m-0 topline">01-4442646</p></a>
+                                
+                                <a href="tel:01-4442646"><p class="text-dark p-0 m-0 topline">01-4006648</p></a>
+                                
+                            </div>
+                            
+                            <div class="col-12 text-center pt-2">
+                                <hr>
+                                <p class="text-dark p-0 m-0 topline"> Toll Free No - 16600199099 </p>
+                                <a href="mailto:info@nlgi.com.np"><p class="text-dark p-0 m-0 topline"> Email- info@nlgi.com.np </p></a>
+                                
+                            </div>
+        
+                        </div>
+                    </div>
+                    
+                </li>
+            
+            
+            </ul>     
+            </div>
+
+        </nav>
+        
+        <div class="maintain">
+
+        </div>
+
+        <!-- <div class="shortcut" >
+            <div class="shortcut-pc text-center">
+            <a class="mr-3 p-2" href="{%url 'landing:calculator'%}"><i class="fa fa-calculator"></i> <span class="mb-2"> Calculator </span> </a>
+            
+                <a class="mr-3 p-2" href="{%url 'landing:download'%}"><i class="fa fa-download"></i> <span class="mb-2"> Download </span></a>
+                <a class="mr-3 p-2 hideformob" href="{%url 'landing:finance'%}"><i class="fa fa-file"></i> <span class="mb-2"> Statement </span></a>
+                <a class="mr-3 p-2 hideformob" href="{%url 'landing:landing'%}"><i class="fa fa-home"></i> <span class="mb-2"> Home </span></a>  
+                
+                {% if user.is_authenticated %}
+                <a class="mr-3 p-2" href="{%url 'manager:dashboard'%}"><i class="fa fa-home"></i> <span class="mb-2"> Dashboard </span></a>
+                {% endif %}
+                    
+            </div>
+        </div> -->
+       
+        <!-- End Navbar -->
+    
+        {% block content %}
+        
+        {% endblock content %}
+
+    
+        <br><br><br> 
+
+        <footer id="dk-footer" class="dk-footer">
+        <div class="container-fluid">
+            <br>
+            <div class="row">
+
+                <div class="col-md-12 col-lg-12">
+                    <div class="row">
+                        
+                        <div class="col-md-4">
+                            <div class="contact-us contact-us-last">
+                                <div class="contact-icon">
+                                    <i class="fa fa-location-arrow" ></i>
+                                </div>
+                                <!-- End contact Icon -->
+                                <div class="contact-info">
+                                    <h3>Lazimpat, Kathmandu Nepal</h3>
+                                    <p>Head Office</p>
+                                </div>
+                                <!-- End Contact Info -->
+                            </div>
+                            <!-- End Contact Us -->
+                        </div>
+                        <!-- End Col -->
+                        <div class="col-md-4">
+                            <div class="contact-us contact-us-last">
+                                <div class="contact-icon">
+                                    <i class="fa fa-phone-square"></i>
+                                </div>
+                                <!-- End contact Icon -->
+                                <div class="contact-info">
+                                    <a href="tel:01-4211122"> <h3>01-4211122</h3></a>
+                                   
+                                    <a href="tel:01-4006648"><h3>01-4006648</h3></a>
+                                    
+                                    <p>Give us a call</p>
+                                </div>
+                               
+                                <!-- End Contact Info -->
+                            </div>
+                            <!-- End Contact Us -->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-us contact-us-last">
+                                <!-- <div class="contact-icon">
+                                    <i class="fa fa-phone-square"></i>
+                                </div> -->
+                                <!-- End contact Icon -->
+                                <div class="contact-info">
+                                    <h3>Toll Free No - 16600199099</h3>
+                                    <a href="mailto:info@nlgi.com.np">
+                                        <h3>Email- info@nlgi.com.np</h3>
+                                    </a>
+                                    
+                                    
+                                </div>
+                               
+                                <!-- End Contact Info -->
+                            </div>
+                            <!-- End Contact Us -->
+                        </div>
+                        <!-- End Col -->
+                    </div>
+                    <!-- End Contact Row -->
+                    <div class="row">
+                        <div class="col-md-12 col-lg-8 col-12">
+                            <div class="footer-widget footer-left-widget">
+                                <div class="section-heading">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6 class="text-light">Quick Links</h6>
+                                            <span class="animate-border border-black"></span>
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="text-light">Useful Links</h6>
+                                            <span class="animate-border border-black"></span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <ul class="below-down pl-2">
+                                    <li>
+                                        <a href="{%url 'landing:landing'%}">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="{%url 'landing:aboutUs'%}">About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="{%url 'landing:productPolicies'%}">Policy / Products</a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="{%url 'landing:gallary'%}">Gallery</a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{%url 'landing:contact'%}">Contact Us</a>
+                                    </li>
+                                </ul>
+                                
+                                <ul class="below-down pl-3">
+                                    <li>
+                                        <a href="{%url 'landing:faq'%}">FAQs</a>
+                                    </li>
+                                    <li>
+                                        <a href="{%url 'landing:finance'%}">Quarter Report</a>
+                                    </li>
+                                    <li>
+                                        <a href="{%url 'landing:term'%}">Terms & Conditions</a>
+                                    </li>
+                                    <li>
+                                        <a href="{%url 'landing:aboutUs'%}">Board of Directors</a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="{%url 'landing:training'%}">Activities Training</a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{%url 'landing:sitemap'%}">Site Map</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Footer Widget -->
+                        </div>
+                        <!-- End col -->
+                        <div class="col-md-12 col-lg-4">
+                            <div class="footer-widget">
+                                <div class="section-heading">
+                                    <h6 class="text-light">Online Payment Partners</h6>
+                                    <span class="animate-border border-black"></span>
+                                </div>
+                                <div class="partnershow">
+                                    <div class="row">
+                                        <div class="col-12" >
+                                            <img class="partnerimg" src="{%static 'images/ips.png'%}" alt="">
+                                            <!-- <p>ConnectIPS</p> -->
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <img class="partnerimg" src="{%static 'images/fone.png'%}" alt="">
+                                            <!-- <p>FonePay</p> -->
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <img class="partnerimg" src="{%static 'images/esewa.png'%}" alt="">
+                                            <!-- <p>eSewa </p> -->
+                                        </div> 
+                                        <div class="col-12 mt-2">
+                                            <img class="partnerimg" src="{%static 'images/khalti.png'%}" alt="">
+                                            <!-- <p>Khalti</p> -->
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <img class="partnerimg" src="{%static 'images/ime.png'%}" alt="">
+                                            <!-- <p>IMEPay</p> -->
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <img class="partnerimg" src="{%static 'images/prabhu.png'%}" alt="">
+                                            <!-- <p>PrabhuPay</p> -->
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <img class="partnerimg" src="{%static 'images/cell.png'%}" alt="">
+                                            <!-- <p>CellPay</p> -->
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- End footer widget -->
+                        </div>
+                        <!-- End Col -->
+                    </div>
+                    <!-- End Row -->
+                </div>
+                <!-- End Col -->
+            </div>
+            <!-- End Widget Row -->
+        </div>
+        <!-- End Contact Container -->
+
+
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <span>Copyright © 2019, All Right Reserved Powered by- <a href="http://www.wakeandtech.com">Wake and Tech Nepal</a> </span>
+                    </div>
+                    <!-- End Col -->
+                    <div class="col-md-6">
+                        <div class="copyright-menu">
+                            <ul>
+                                <li>
+                                    <a href="{%url 'landing:landing'%}">Home</a>
+                                </li>
+                                <!-- <li>
+                                    <a href="{%url 'landing:term'%}">Terms and Conditions</a>
+                                </li> -->
+                                <li>
+                                    <a href="{%url 'landing:productPolicies'%}">Products</a>
+                                </li>
+                                <li>
+                                    <a href="{%url 'landing:contact'%}">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End col -->
+                </div>
+                <!-- End Row -->
+            </div>
+            <!-- End Copyright Container -->
+        </div>
+        <!-- End Copyright -->
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <button onclick="topFunction()" id="myBtn" class="btn btn-dark" title="Back to Top" style="display: none;">
+                <i class="fa fa-angle-up"></i>
+            </button>
+        </div>
+        <!-- End Back to top -->
+        </footer>
+
+
+
+        <script src="{%static 'js/jquery-2.1.0.min.js' %}"></script>
+
+        <!-- Bootstrap -->
+        
+        <script src="{%static 'js/bootstrap.min.js' %}"></script>
+        <script src="{%static 'js/custom.js' %}"></script>
+        <script src="{%static 'js/scrollreveal.min.js' %}"></script>
+        <script src="{%static 'js/splide.min.js'%}"></script>
+    </div>
+    <div class="sidebarofnlg pt-2 pl-1 pb-2">
+        <a class="mr-3 p-2" href="{%url 'landing:calculator'%}"><i class="fa fa-calculator"></i> <span class="mb-2 showathober"> Calculator </span> </a>
+        <hr>
+        <a class="mr-3 p-2" href="{%url 'landing:downloadFile'%}"><i class="fa fa-download"></i> <span class="mb-2 showathober"> Download </span></a>
+        <hr>
+
+      
+        <a class="mr-3 p-2" href="{%url 'landing:download'%}"><i class="fa fa-file"></i> <span class="mb-2 showathober"> News and Update </span></a>  
+        <hr>
+        {% if user.is_authenticated %}
+        <a class="mr-3 p-2" href="{%url 'manager:dashboard'%}"><i class="fa fa-home"></i> <span class="mb-2 showathober"> Dashboard </span></a>
+        <hr>
+        {% endif %}
+        
+        <a class="mr-3 p-2" href="https://www.facebook.com/nlginsurance" target="blank"> <i class="fa fa-facebook"></i> <span class="mb-2 showathober"> Facebook </span></a>
+        
+    </div>
+    <script>
+      //Get the button
+      var mybutton = document.getElementById("myBtn");
+      var navbar = document.getElementById("navbar")
+      
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function() {scrollFunction()};
+      
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          mybutton.style.display = "block";
+          navbar.style.top = "0px";
+          navbar.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
+        } else {
+            if ($(window).width() < 600) {
+                mybutton.style.display = "none";
+                navbar.style.top = "0px";
+                navbar.style.boxShadow = "";
+                navbar.style.transition = "0.3s top"
+            }
+            else {
+                mybutton.style.display = "none";
+                navbar.style.top = " 50px";
+                navbar.style.boxShadow = "";
+                navbar.style.transition = "0.3s top"
+  
+            }
+           
+        }
+      }
+      
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+
+      $("#submit").click(function () {
+          
+          var username = $('#username').val();
+          var password = $('#password').val()
+          console.log(username)
+  
+              $.ajax({
+                  url: '{%url "landing:checkLogin"%}',
+                  data: {
+                  'username': username,
+                  'password':password
+                  },
+                  dataType: 'json',
+                  success: function (data) {
+                      console.log(data.status)
+                      if(data.status == 'ok'){
+                        window.location.href = "{% url 'manager:dashboard' %}"
+                      }
+                      else{
+                          var msg = '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>User or Password Does not match</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
+                            $('.errormsg').append(msg)
+                        }
+                  }
+              });
+  
+          });
+    </script>
+
+</body>
+</html>

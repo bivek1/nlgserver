@@ -1,0 +1,310 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            NLG Dashboard
+        {% endblock title %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{%static 'dashboard/css/style.min.css'%}" rel="stylesheet">
+    <style>
+        .card{
+            box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)!important;
+        }
+        .formbox{
+            background-color: white;
+            padding: 15px;
+            box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)!important;
+        }
+        #main-wrapper[data-layout=horizontal] .left-sidebar[data-sidebarbg=skin6] .sidebar-nav ul .sidebar-item .sidebar-link.active, #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin6] .sidebar-nav ul .sidebar-item .sidebar-link.active {
+            background: #f2f7f8;
+            color: #fb0b3e;
+            font-weight: 400;
+            border-left: 3px
+            solid #fb0b3e;
+        }
+        #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin6] .sidebar-nav ul .sidebar-item .sidebar-link.active i {
+            color: #fb0b3e
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin6" >
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark" style="background-color: #FB0B3E!important;">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="/">
+                        <!-- Logo icon -->
+                        <b class="logo-icon">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="{%static 'images/logo.png'%}" alt="homepage" class="dark-logo" style="width: 220px;height: 45px;" />
+
+                        </b>
+                        <!--End Logo icon -->
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5" >
+                    
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav me-auto mt-md-0 ps-2 ">
+                      <h6 class="text-light"> DASHBOARD </h6> 
+                    </ul>
+
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav">
+                        <a href="{%url 'manager:logout'%}">
+                            <h6 class="text-light">LOGOUT</h6>
+                        </a>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        {%url 'manager:dashboard' as das%}
+
+                        <li class="sidebar-item active"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
+                                href="{{das}}" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
+                                    aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
+                        {%url 'manager:statementReport' 2 as das%}
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
+                                href="{%url 'manager:statementReport' 2 %}" aria-expanded="false">
+                                <i class="me-3 fa fa-user" aria-hidden="true"></i><span
+                                    class="hide-menu">View Quarterly  Report</span></a>
+                        </li>
+                        {%url 'manager:statementReport' 1 as das%}
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
+                                href="{%url 'manager:statementReport' 1 %}" aria-expanded="false"><i class="me-3 fa fa-table"
+                                    aria-hidden="true"></i><span class="hide-menu">View Annual Report</span></a></li>
+                        {%url 'manager:statementReport' 3 as das%}
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
+                                href="{%url 'manager:statementReport' 3 %}" aria-expanded="false"><i class="me-3 fa fa-font"
+                                    aria-hidden="true"></i><span class="hide-menu">View Minute Report</span></a></li>
+                        {%url 'manager:newUpdate' as das%}
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
+                                href="{%url 'manager:newUpdate'%}" aria-expanded="false"><i class="me-3 fa fa-globe"
+                                    aria-hidden="true"></i><span class="hide-menu">View News & Update</span></a></li>
+                        {%url 'manager:formReport' 1 as das%}
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
+                                href="{%url 'manager:formReport' 1 %}" aria-expanded="false"><i class="me-3 fa fa-columns"
+                                    aria-hidden="true"></i><span class="hide-menu">View KYC Forms</span></a></li>
+                        {%url 'manager:formReport' 2 as das%}
+                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
+                                        href="{%url 'manager:formReport' 2 %}" aria-expanded="false"><i class="me-3 fa fa-info-circle"
+                                            aria-hidden="true"></i><span class="hide-menu">View Proposal Forms</span></a></li>
+                        {%url 'manager:formReport' 3 as das%}
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}" 
+                            href="{%url 'manager:formReport' 3 %}" aria-expanded="false"><i class="me-3 fa fa-info-circle"
+                                aria-hidden="true"></i><span class="hide-menu">View Claim Forms</span></a></li>
+                        <li class="text-center p-20 upgrade-btn">
+                            <a href="{%url 'manager:logout'%}"
+                                class="btn btn-danger text-white mt-4">Logout
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper" style="background-color: white;">
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            
+            {% block inner %}
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Add Branch -->
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <a href="{%url 'manager:addBranch'%}">
+                                <div class="card-body">
+                                    <h4 class="card-title">Add Branch</h4>
+                                    <div class="text-end">
+                                        <h2 class="font-light mb-0"><i class="ti-arrow-up text-danger"></i> {{branch_count}}</h2>
+                                        <span class="text-muted">Branches</span>
+                                    </div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- B -->
+                    <!-- Add News -->
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <a href="{%url 'manager:addNews'%}">
+                            <div class="card-body">
+                                <h4 class="card-title">Add News</h4>
+                                <div class="text-end">
+                                    <h2 class="font-light mb-0"><i class="ti-arrow-up text-danger"></i>{{news_count}}</h2>
+                                    <span class="text-muted">Total News</span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                     <!-- Add Agent -->
+                     <div class="col-sm-6">
+                        <div class="card">
+                            <a href="{%url 'manager:addAgent'%}">
+                            <div class="card-body">
+                                <h4 class="card-title">Add Agent</h4>
+                                <div class="text-end">
+                                    <h2 class="font-light mb-0"><i class="ti-arrow-up text-danger"></i>{{agent_count}}</h2>
+                                    <span class="text-muted">Total Agent</span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                     <!-- Add Citizen -->
+                     <div class="col-sm-6">
+                        <div class="card">
+                            <a href="{%url 'manager:addCitizen'%}">
+                            <div class="card-body">
+                                <h4 class="card-title">Add Citizen</h4>
+                                <div class="text-end">
+                                    <h2 class="font-light mb-0"><i class="ti-arrow-up text-danger"></i>{{citizen_count}}</h2>
+                                    <span class="text-muted">Total Citizen</span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                     <!-- Add Surveryor -->
+                     <div class="col-sm-6">
+                        <div class="card">
+                            <a href="{%url 'manager:addSurveryor'%}">
+                            <div class="card-body">
+                                <h4 class="card-title">Add Surveryor</h4>
+                                <div class="text-end">
+                                    <h2 class="font-light mb-0"><i class="ti-arrow-up text-danger"></i>{{survey_count}}</h2>
+                                    <span class="text-muted">Total Surveryor</span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                     <!-- Add Report -->
+                     <div class="col-sm-6">
+                        <div class="card">
+                            <a href="{%url 'manager:addReport'%}">
+                            <div class="card-body">
+                                <h4 class="card-title">Add Report</h4>
+                                <div class="text-end">
+                                    <h2 class="font-light mb-0"><i class="ti-arrow-up text-danger"></i>{{report_count}}</h2>
+                                    <span class="text-muted">Total Report</span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+            </div>
+            {% endblock inner %}
+                
+           
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{%static 'dashboard/js/app-style-switcher.js'%}"></script>
+    <!--Wave Effects -->
+    <script src="{%static 'dashboard/js/waves.js'%}"></script>
+    <!--Menu sidebar -->
+    <script src="{%static 'dashboard/js/sidebarmenu.js'%}"></script>
+    <!--Custom JavaScript -->
+    <script src="{%static 'dashboard/js/custom.js'%}"></script>
+    <script src="{%static 'dashboard/js/pages/dashboards/dashboard1.js'%}"></script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        setTimeout(function(){
+            $(".alert .Close").click()
+            
+        }, 1300);
+    </script>
+</body>
+</html>
+

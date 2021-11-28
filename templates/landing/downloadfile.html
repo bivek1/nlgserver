@@ -1,0 +1,161 @@
+{% extends "pillar.html" %}
+{% block title %}
+  Download KYC, Forms and more NLG
+{% endblock title %}
+{% block content %}
+<style>
+    .download h6{
+        cursor: pointer;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row backandrollall">
+        <div class="col-md-12 col-12 p-0 m-0 senright">
+          <div class="firsthead p-3 ml-4">
+            <h3 class="ml-3">Download</h3>
+            <!-- <small class="ml-3 text-light">You can view and download our news and update</small> -->
+            <hr>
+            <div class="download p-2">
+                <h6 class="1 d-inline">
+                    <span class="11 onesel">
+                        KYC Form
+                    </span>
+                    
+                </h6>
+                <h6 class="pl-2 2 d-inline">
+                    <span class=" 22  ">
+                        Proposal Form
+                    </span>
+                </h6>
+                <h6 class="pl-2 3 d-inline">
+                    <span class="33  ">
+                        Claim Form
+                    </span>
+                </h6>
+              
+                <hr>
+
+                <div class="row" id="KYC">
+                    {%for i in files%}
+                        {%if i.dtype == 'KYC Form'%}
+                        <div class="col-12">
+                            <div class="products-show-download mt-3">
+                        
+                                <div class="text-center p-1 filesform">
+                                  
+                                    <h6 class="text-center p-0 m-0 pt-2 lowTextForName">{{i.name}}</h6>
+                                    <div class="report-item">
+                                    
+                                        <a href="{{i.pdf}}">
+                                            <i class="fa fa-eye p-2"></i>
+                                        </a>      
+                                       
+                                        <a href="{{i.download}}">
+                                            <i class="fa fa-download p-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                              
+                               </div>
+                        </div>
+                        {%endif%}
+                    {%endfor%}
+                   
+                </div>
+
+                <div class="row" id="proposal">
+                    {%for i in files%}
+                        {%if i.dtype == 'Proposal Form'%}
+                        <div class="col-12">
+                            <div class="products-show-download mt-3">
+                        
+                                <div class="text-center p-1 filesform">
+                                  
+                                    <h6 class="text-center p-0 m-0 pt-2 lowTextForName">{{i.name}}</h6>
+                                    <div class="report-item">
+                                    
+                                        <a href="{{i.pdf}}">
+                                            <i class="fa fa-eye p-2"></i>
+                                        </a>      
+                                       
+                                        <a href="{{i.download}}">
+                                            <i class="fa fa-download p-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                              
+                               </div>
+                        </div>
+                        {%endif%}
+                    {%endfor%}
+                </div>
+
+                <div class="row" id="claim">
+                    {%for i in files%}
+                        {%if i.dtype == 'Claim Form'%}
+                        <div class="col-12">
+                            <div class="products-show-download mt-3">
+                        
+                                <div class="text-center p-1 filesform">
+                                 
+                                    <h6 class="text-center p-0 m-0 pt-2 lowTextForName">{{i.name}}</h6>
+                                    <div class="report-item">
+                                    
+                                        <a href="{{i.pdf}}">
+                                            <i class="fa fa-eye p-2"></i>
+                                        </a>      
+                                       
+                                        <a href="{{i.download}}">
+                                            <i class="fa fa-download p-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                              
+                               </div>
+                        </div>
+                        {%endif%}
+                    {%endfor%}
+                </div>
+               
+              
+             </div>
+        </div>
+        </div>
+      
+    </div>
+</div>  
+
+<script>
+    $('#proposal').hide()
+    $('#claim').hide()
+    $(".1").click(function(){
+        $( ".11" ).addClass( "onesel" );
+        $( ".33" ).removeClass( "onesel" );
+        $( ".22" ).removeClass( "onesel" );
+        $( ".44" ).removeClass( "onesel" );
+        $('#proposal').hide()
+        $('#claim').hide()
+        $("#KYC").show()
+    });
+    $(".2").click(function(){
+        $( ".22" ).addClass( "onesel" );
+        $( ".33" ).removeClass( "onesel" );
+        $( ".44" ).removeClass( "onesel" );
+        $( ".11" ).removeClass( "onesel" );
+        $('#proposal').show()
+        $('#claim').hide()
+        $("#KYC").hide()
+    });
+    $(".3").click(function(){
+        $( ".33" ).addClass( "onesel" );
+        $( ".44" ).removeClass( "onesel" );
+        $( ".22" ).removeClass( "onesel" );
+        $( ".11" ).removeClass( "onesel" );
+        $('#proposal').hide()
+        $('#claim').show()
+        $("#KYC").hide()
+    });
+
+
+</script>
+{% endblock content %}

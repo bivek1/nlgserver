@@ -1,0 +1,111 @@
+{% extends "pillar.html" %}
+{% load static %}
+{% block title %}
+  Training  - NLG Insurance
+{% endblock title %}
+{% block content %}
+<div class="container-fluid" style="height:auto; padding-button:30px;">
+    <div class="row backandrollall">
+        <div class="col-md-7 col-12 p-0 m-0 head-right">
+            <div class="firsthead p-3 ml-4">
+                <h3>Training</h3>
+                
+                <hr>
+
+                <div class="d-block mt-2 moreabout" style="height: auto; padding-bottom: 10px;">
+                    <div class="moreelement pt-4 pl-3 mt-4 ml-3">
+                        <h5 class="text-dark">Training on  <span class="text-danger">Property Insurance Guideline</span> </h5>
+                        <p class="text-dark">
+                            A day inhouse training on "Property Insurance Guidelines" for the underwritting staffs  was conducted successfully on 25th Poush, 2075 (9 Jan, 2019) at Head Office of the company. The aim of the training was to educate underwritting staffs regarding the provision of Property Insurance Directive published by beema samiti.
+                        </p>
+                        <div class="btn btn-outline-danger roundbtn" data-toggle="modal" data-target="#exampleModalCenterTraining">
+                            <i class="fa fa-eye"></i> Read More
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenterTraining" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-dark"  id="exampleModalCenterTitle">Training on Property Insurance Guideline</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    A day inhouse training on "Property Insurance Guidelines" for the underwritting staffs  was conducted successfully on 25th Poush, 2075 (9 Jan, 2019) at Head Office of the company. The aim of the training was to educate underwritting staffs regarding the provision of Property Insurance Directive published by beema samiti.
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <!-- ENd -->
+                      
+                      
+                    </div>
+                   
+                </div>
+                <div class="d-block mt-2 moreabout" style="height: auto; padding-bottom: 10px;">
+                    <div class="moreelement pt-4 pl-3 mt-4 ml-3">
+                        <h5 class="text-dark">Krishi Beema <span class="text-danger">Agent Training</span> </h5>
+                        <p class="text-dark">
+                            One Day Krishi Beema Agent Training in Banke for Banke, Salyan, Rukum and Dolpa on 28th Chaitra 2071
+                        </p>
+                        <div class="btn btn-outline-danger roundbtn" data-toggle="modal" data-target="#exampleModalCenterKrishi">
+                            <i class="fa fa-eye"></i> Read More
+                        </div>
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModalCenterKrishi" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-dark" id="exampleModalCenterTitle">Krishi Beema Agent Training</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    One Day Krishi Beema Agent Training in Banke for Banke, Salyan, Rukum and Dolpa on 28th Chaitra 2071
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <!-- ENd -->
+                      
+                      
+                    </div>
+                   
+                </div>
+              
+            </div>
+           
+        </div>
+        <div class="col-md-5 col-12 hideformob">
+            <div class="branch">
+                <a href="{%url 'landing:landing'%}" class="footer-logo text-center">
+                    <img src="{%static 'images/downlogo.PNG'%}" alt="footer_logo" class="img-fluid" style="border-radius: 100px; border: 3px solid #fb0b3f;">
+                </a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+</div>
+<br><br><br>
+<br><br><br>
+
+<script>
+$('.popover-dismiss').popover({
+    trigger: 'focus'
+  })
+
+</script>
+{% endblock content %}

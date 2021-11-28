@@ -1,0 +1,369 @@
+{% extends "pillar.html" %}
+{% load static %}
+{% block title %}
+  NLG Financial Statement
+{% endblock title %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="container-fluid">
+    <div class="row backandrollall">
+        <div class="col-md-6 col-12 p-0 m-0 senright">
+          <div class="firsthead p-3 ml-4">
+            <h3 class="ml-3">NLG STATEMENT</h3>
+          
+            <!-- <small class="ml-3 text-light">Get our Financial Statement</small>
+            <hr>
+            <p class="ml-3">Get our Annual Report, Quarterly Report, Minute Report and other Report. You can either download the reports or view the reports </p>
+            <h6 class="text-light ml-3">You can download our latest News and Updates.</h6>
+            <a href="{%url 'landing:download'%}">
+                <button class="btn btn-light ml-3">
+                    Download From Here!
+                </button>
+            </a> -->
+           
+        </div>
+        </div>
+        <!-- <div class="col-md-6 col-12">
+            <div class="row p-0 m-0">
+                <div class="col-md-12 col-12">
+                    <div class="insurance-product p-3 mt-4">
+                        <h4>Statement  <span class="text-danger">Are Here</span></h4>
+                        <div class="product-hr"></div>
+                        <div class="row">
+                            <div class="col-md-6 col-12 text-center">
+                                <a href="#showReport">
+                                    <div class="statementamg pt-3 1">
+                                        <div class="row">
+                                            <div class="col-md-6 col-6 reportimg">
+                                                <img src="{%static 'images/annual.png'%}" alt="" srcset="">
+                                            </div>
+                                            <div class="col-md-6 col-6">
+                                                <h4 class="text-danger smallmob">Annual </h4>
+                                                <h6 class="">Report</h6>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                </a>
+                               
+                            </div>
+                            <div class="col-md-6 col-12 text-center">
+                                <a href="#showReport">
+                                    <div class="statementamg pt-3 2">
+                                        <div class="row">
+                                            <div class="col-md-6 col-6 reportimg">
+                                                <img src="{%static 'images/ann.png'%}" alt="" srcset="">
+                                            </div>
+                                            <div class="col-md-6 col-6">
+                                                <h4 class="text-danger smallmob">Quarterly</h4>
+                                                <h6 class="">Report</h6>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-12 text-center">
+                                <a href="#showReport">
+                                    <div class="statementamg pt-3 3">
+                                        <div class="row">
+                                            <div class="col-md-6 col-6 reportimg">
+                                                <img src="{%static 'images/ann1.png'%}" alt="" srcset="">
+                                            </div>
+                                            <div class="col-md-6 col-6">
+                                                <h4 class="text-danger smallmob">Minute</h4>
+                                                <h6 class="">Report</h6>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-12  text-center">
+                                <a href="#showReport">
+                                    <div class="statementamg pt-3 4">
+                                        <div class="row">
+                                            <div class="col-md-6 col-6 reportimg">
+                                                <img src="{%static 'images/ann2.png'%}" alt="" srcset="">
+                                            </div>
+                                            <div class="col-md-6 col-6">
+                                                <h4 class="text-danger smallmob">Other</h4>
+                                                <h6 class="">Report</h6>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </a>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            
+            </div>
+        </div> -->
+    </div>
+</div> 
+
+<div class="container-fluid " id="showReport">
+    <br>
+    <div class="row p-3" >
+        <div class="col-12 col-md-12">
+            <div class="moreinfo fordesktopInfo">
+                <h6 class="1">
+                    <span class="11 ">
+                        Annual Report
+                    </span>
+                    
+                </h6>
+                <h6 class="pl-4 2">
+                    <span class=" 22  onesel">
+                        Quarterly Report
+                    </span>
+                </h6>
+                <h6 class="pl-4 3">
+                    <span class="33  ">
+                        Minute Report
+                    </span>
+                </h6>
+                <h6 class="pl-4 4">
+                    <span class=" 44 ">
+                        Other Report
+                    </span>
+                </h6>
+               
+            </div>
+            <div class="moreinfo forphoneinfo">
+                <span class="1">
+                    <span class="11 onesel">
+                        Annual Report
+                    </span>
+                    
+                </span>
+                <span class="2 pl-2">
+                    <span class=" 22  ">
+                        Quarterly Report
+                    </span>
+                </span>
+                <span class="3 pl-2">
+                    <span class="33  ">
+                        Minute Report
+                    </span>
+                </span>
+                <span class="4 pl-2">
+                    <span class=" 44 ">
+                        Other Report
+                    </span>
+                </span>
+            </div>
+        </div>
+
+            
+            {% for i in rep %}
+                {%if i.rtype == 'Annual Report' %}
+
+                <div class="col-lg-2 col-md-3 col-12 showAnnual">
+                    <a href="{{i.pdf}}">
+                        <div class="products-show-satement mt-2">
+                            <div class="text-center p-1">
+                                <p class="text-center p-0 m-0 lowTextForName">{{i.name}}</p>
+                                <div class="report-item p-3">
+                                    <a href="{{i.pdf}}">
+                                        <i class="fa fa-eye p-2"></i>
+                                    </a>      
+                                
+                                    <a href="{{i.download}}">
+                                        <i class="fa fa-download p-2"></i>
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {%endif%}
+            {% endfor %}
+            
+            {%for i in fis%}
+                
+                <div class="col-lg-12 col-md-12 col-12 showQuarterly">
+
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                          <div class="card-header" id="heading{{i.id}}">
+                            <h5 class="mb-0">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
+                                {{i.fiscal}}
+                              </button>
+                            </h5>
+                          </div>
+                      
+                          <div id="collapse{{i.id}}" class="collapse collapsed" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="row">
+
+                                    {%for j in i.fiscalyear.all%}
+                                    <div class="col-md-3 col-12 col-lg-3">
+                                        <a href="{{j.pdf}}">
+                                            <div class="products-show-satement mt-2">
+                                                <div class="text-center p-1 forQuater">
+                                                    <p class="text-center p-0 m-0 pt-2 lowTextForName" >{{j.name}}</p>
+                                                    <div class="report-item">
+                                                        <a href="{{j.pdf}}">
+                                                            <i class="fa fa-eye p-2"></i>
+                                                        </a>      
+                                                    
+                                                        <a href="{{j.download}}">
+                                                            <i class="fa fa-download p-2"></i>
+                                                        </a>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {%endfor%}
+                                
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                    </div>
+
+
+                    <!-- {{i.fiscal}}
+                    <hr>
+                    <div class="row">
+
+                        {%for j in i.fiscalyear.all%}
+                        <div class="col-md-3 col-12 col-lg-3">
+                            <a href="{{j.pdf}}">
+                                <div class="products-show-satement mt-2">
+                                    <div class="text-center p-1 forQuater">
+                                        <p class="text-center p-0 m-0 pt-2 lowTextForName" >{{j.name}}</p>
+                                        <div class="report-item">
+                                            <a href="{{j.pdf}}">
+                                                <i class="fa fa-eye p-2"></i>
+                                            </a>      
+                                        
+                                            <a href="{{j.download}}">
+                                                <i class="fa fa-download p-2"></i>
+                                            </a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {%endfor%}
+                    
+                    </div> -->
+                                    
+                </div>
+            {%endfor%}
+        
+        {% for i in rep %}
+        {%if i.rtype == 'Minute Report' %}
+        <div class="col-lg-2 col-md-3 col-12 showMinute">
+            <a href="{{i.pdf}}">
+                <div class="products-show-satement mt-2">
+                    <div class="text-center p-1">
+                        <p class="text-center p-0 m-0 lowTextForName">{{i.name}}</p>
+                        <div class="report-item p-3">
+                            <a href="{{i.pdf}}">
+                                <i class="fa fa-eye p-2"></i>
+                            </a>      
+                        
+                            <a href="{{i.download}}">
+                                <i class="fa fa-download p-2"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {%endif%}
+    {% endfor %}
+
+    {% for i in rep %}
+    {%if i.rtype == 'Other Report' %}
+    <div class="col-lg-2 col-md-3 col-12 showOther">
+        <a href="{{i.pdf}}">
+            <div class="products-show-satement mt-2">
+                <div class="text-center p-1">
+                    <p class="text-center p-0 m-0 lowTextForName">{{i.name}}</p>
+                    <div class="report-item p-3">
+                        <a href="{{i.pdf}}">
+                            <i class="fa fa-eye p-2"></i>
+                        </a>      
+                    
+                        <a href="{{i.download}}">
+                            <i class="fa fa-download p-2"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {%endif%}
+{% endfor %}
+
+
+    </div>
+</div>
+<script>
+     $(".showAnnual").hide();
+    // $(".showQuarterly").hide();
+    $(".showMinute").hide();
+    $(".showOther").hide();
+    $(".1").click(function(){
+        $( ".11" ).addClass( "onesel" );
+        $( ".33" ).removeClass( "onesel" );
+        $( ".22" ).removeClass( "onesel" );
+        $( ".44" ).removeClass( "onesel" );
+        $(".showQuarterly").hide();
+        $(".showAnnual").show();
+        $(".showMinute").hide();
+        $(".showOther").hide();
+    });
+    $(".2").click(function(){
+        $( ".22" ).addClass( "onesel" );
+        $( ".33" ).removeClass( "onesel" );
+        $( ".44" ).removeClass( "onesel" );
+        $( ".11" ).removeClass( "onesel" );
+        $(".showQuarterly").show();
+        $(".showAnnual").hide();
+        $(".showMinute").hide();
+        $(".showOther").hide();
+    });
+    $(".3").click(function(){
+        $( ".33" ).addClass( "onesel" );
+        $( ".44" ).removeClass( "onesel" );
+        $( ".22" ).removeClass( "onesel" );
+        $( ".11" ).removeClass( "onesel" );
+        $(".showQuarterly").hide();
+        $(".showAnnual").hide();
+        $(".showMinute").show();
+        $(".showOther").hide();
+    });
+    $(".4").click(function(){
+        $( ".44" ).addClass( "onesel" );
+        $( ".33" ).removeClass( "onesel" );
+        $( ".22" ).removeClass( "onesel" );
+        $( ".11" ).removeClass( "onesel" );
+        
+        $(".showQuarterly").hide();
+        $(".showAnnual").hide();
+        $(".showMinute").hide();
+        $(".showOther").show();
+    });
+
+    function changedata(){
+
+    }
+   
+</script>
+{% endblock content %}

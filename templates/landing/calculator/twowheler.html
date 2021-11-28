@@ -1,0 +1,278 @@
+{% extends "landing/premium.html" %}
+{% load static %}
+{% block cal %}
+
+<div id="calc" class="calc">
+    <div class="row bgda p-2">
+        <div class="col-md-12 col-12 col-lg-12">
+            <div class="choose-between">
+                <div class="text-center">
+                    <h6 class="text-dark" id="calChange">Calculating Comprehensive</h6>
+                </div>
+                <div class="text-center" id ="vechile" onclick="changeVisionT()">
+                    <i class="fa fa-toggle-on"></i>
+                    <p class="d-inline" id="switchChange">Third Party</p>
+                </div>
+            </div>
+
+            <div class="radio-toolbar">
+                <input type="radio" id="radioOrange" name="radiovechile" value="Vehicle CC" checked oninput="aa(this)">
+                <label for="radioOrange">Vehicle CC | KW</label> 
+
+                <input type="radio" id="radioApple" name="radiovechile" value="Electric Vehicle"  oninput="aa(this)">
+                <label for="radioApple">Electric Vehicle</label>
+            
+                <input type="radio" id="radioBanana" name="radiovechile" value="Government Vehicle" oninput="aa(this)">
+                <label for="radioBanana">Government Vehicle</label>
+            
+              
+            </div>
+           
+            <div class="AllCalculatorC">
+                <!-- Comprehensive -->
+                        <form action="" id="bikeCform">
+                            <label for="CbikeCC">Select the CC of you motor</label>
+                            <select name="CbikeCC" id="CbikeCC" class="form-control">
+                                <option value="" selected>------------</option>
+                                <option value="Less than 150 CC" >Less than 150 CC</option>
+                                <option value="150 to 250 CC">150 to 250 CC</option>
+                                <option value="Above 250 CC"> Above 250 CC</option>
+                            </select>
+                            <label for="biksum">Sum Insured</label>
+                            <input class="form-control" type="number" id = 'bikeSum' placeholder="Sum Insured">
+                            <label for="oldbike">How Old is your Vehicle?</label>
+                            <select name="oldbike" id="oldbike" class="form-control">
+                                <option value="" selected>------------</option>
+                                <option value="Less than 5 year" >Less than 5 years</option>
+                                <option value="5 to 10 years">5 to 10 years</option>
+                                <option value="Above 10 years"> Above 10 years</option>
+                            </select>
+                    
+                            <label for="veBike">Voluntary Excess Amount</label>
+                            <select name="veBike" id="veBike" class="form-control">
+                                <option value="" selected>------------</option>
+                                <option value="0" >0%</option>
+                                <option value="500">Rs.500</option>
+                                <option value="1000"> Rs.1000</option>
+                                <option value="2000"> Rs.2000</option>
+                            </select>
+                    
+                            <label for="noclaimebike">No Claim Discount</label>
+                            <select name="noclaimebike" id="noclaimebike" class="form-control">
+                                <option value="" selected>------------</option>
+                                <option value="0 year @0%" >0 year @0%</option>
+                                <option value="1 year @15%">1 year @15%</option>
+                                <option value="2 years @25%"> 2 years @25%</option>
+                                <option value="3years or above @35%"> 3years or above @35%</option>
+                            </select>
+                            <div class="row p-0 m-0">
+                                <div class="col-4 p-0 m-0 pr-3" style="display: grid;">
+                                    <label for="rsdbike">RSD/ Terrorism Risk</label>
+                                    <select name="rsdbike" id="rsdbike">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-4 p-0 m-0 pr-3" style="display: grid;">
+                                    <label for="DirectDiscountBike">Direct Discount</label>
+                                    <select name="DirectDiscountBike" id="DirectDiscountBike">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-4 p-0 m-0 pr-3" style="display: grid;">
+                                    <label for="towingBike">Electric Discount</label>
+                                    <select name="towingBike" id="towingBike">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="btn btn-danger btn-block mt-3" onclick="CalculateCom()">
+                                    Calculate
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                <!-- Comprehensive End -->
+
+                <!-- Third Party -->
+
+                <form action="" id='bikeTPform'>
+                    <label for="cc">Select the CC of you motor</label>
+                    <select name="bikeCC" id="cc" class="form-control">
+                        <option value="" selected>------------</option>
+                        <option value="Less than 150 CC" >Less than 150 CC</option>
+                        <option value="150 to 250 CC">150 to 250 CC</option>
+                        <option value="Above 250 CC"> Above 250 CC</option>
+                    </select>
+                    <div class="btn btn-danger btn-block mt-3" onclick="calculateTP()">
+                        Calculate
+                    </div>
+                </form>
+
+                <!-- Third Party End -->
+            </div>
+          
+        </div>
+  
+        <!-- Report -->
+        <div class="col-md-12 col-12 col-lg-12 showcostp m-auto pt-4" id="reportC">
+            <table class="table table-striped" >
+                <thead>
+                  <tr>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Basic Premium</td>
+                    <td id="basicp">0</td>
+                  
+                  </tr>
+                  <tr>
+                    <td>Add: Year of Manifacuring(How old) Cost</td>
+                    <td id="yom">0</td>
+                
+                  </tr>
+                  <tr>
+                    <td>Less: Voluntary Excess</td>
+                    <td id="ve">0</td>
+                  </tr>
+
+                  <tr>
+                    <td>Less: No Claim Discount</td>
+                    <td id="ncd">0</td>
+          
+                  </tr>
+                  <tr>
+                    <td>Less: Electric Discount</td>
+                    <td id="ed">0</td>
+          
+                  </tr>
+                  <tr>
+                    <td>Less: Direct Discount</td>
+                    <td id="direct_d">0</td>
+          
+                  </tr>
+                  <tr>
+                    <td>Add: third Party Premium</td>
+                    <td id="tp_p">0</td>
+        
+                  </tr>
+
+                  <tr>
+                    <td>Add: RSD/ Terrorism Risk</td>
+                    <td id="rsd">0</td>
+        
+                  </tr>
+                  
+                  <tr>
+                    <td><b>Net Premium</b></td>
+                    <td id="net_premium">0</td>
+        
+                  </tr>
+                  <tr>
+                    <td>Add: Vat</td>
+                    <td id="vat_c">0</td>
+        
+                  </tr>
+                  <tr>
+                    <td>Add: Stamp</td>
+                    <td id="stamp_c">0</td>
+        
+                  </tr>
+                  <tr>
+                    <th scope="row">Total</th>
+                    <td>
+                        <h6 id="total_c" style="font-size:30px; color: black;">Rs.0</h6>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12 col-12 col-lg-12 showcostp m-auto pt-4" id="reportTP">
+            
+            <table class="table table-striped" >
+                <thead>
+                  <tr>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Third Party Basic Cost</td>
+                    <td id="basictp">0</td>
+                  
+                  </tr>
+
+                  <tr>
+                    <td>Add: Vat</td>
+                    <td id="vat_tp">0</td>
+        
+                  </tr>
+                  <tr>
+                    <td>Add: Stamp</td>
+                    <td id="stamp_tp">0</td>
+        
+                  </tr>
+                  <tr>
+                    <th scope="row">Total</th>
+                    <td>
+                        <h6 id="total_tp" style="font-size:30px; color: black;">Rs.0</h6>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+          
+        </div>
+        <!-- Report End -->
+    </div>
+</div>  
+<script>
+    var ty = "Vehicle CC"
+    count = 0
+    $('#bikeTPform').css('display', 'none')
+    $('#reportTP').css('display','none')
+    function changeVisionT(){
+       if(count == 0){
+        $('#bikeTPform').css('display', 'initial')
+        $('#bikeCform').css('display', 'none')
+        $('#reportTP').css('display','initial')
+        $('#reportC').css('display','none')
+        document.getElementById('calChange').innerHTML = "Calculating Third Party"
+        document.getElementById('switchChange').innerHTML = "Comprehensive"
+        count=1
+        calculateTP()
+       } else{
+        $('#bikeTPform').css('display', 'none')
+        $('#bikeCform').css('display', 'initial')
+        $('#reportC').css('display','initial')
+        $('#reportTP').css('display','none')
+        document.getElementById('calChange').innerHTML = "Calculating Comprehensive"
+        document.getElementById('switchChange').innerHTML = "Third Party"
+        count=0
+        CalculateCom()
+       }
+       
+    }
+    function aa(element){
+        ty = element.value
+        if(ty == 'Electric Vehicle'){
+            document.getElementById('cc1').innerHTML= 'Upto 20KW'
+            document.getElementById('cc2').innerHTML= 'Above 20 KW'
+
+            $('#cc3').css('display','none')
+        }
+    }
+
+</script>
+<script src="{%static 'js/calculator/twowheeler_tp.js'%}"></script>
+<script src="{%static 'js/calculator/twowheeler_c.js'%}"></script>
+{% endblock cal %}
+    
+
+
+

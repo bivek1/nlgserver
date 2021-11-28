@@ -1,0 +1,30 @@
+{% extends "manager/dashboard.html" %}
+{% block title %}
+    Add Agents
+{% endblock title %}
+
+{% block inner %}
+    <div class="text-center">
+        {% if messages %}
+        {% for m in messages  %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+   
+    
+    <form action="" method="post" style="width: 100%; padding: 30px;">
+        <div class="row formbox">
+            {{form}}
+        </div>
+    
+        {% csrf_token %}
+        <br>
+        <button class="btn btn-danger btn-block" id="submit"> <i class="fa fa-key"></i> ADD AGENTS </button>
+    </form>
+{% endblock inner %}

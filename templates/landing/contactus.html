@@ -1,0 +1,102 @@
+{% extends "pillar.html" %}
+{% load static %}
+{% block title %}
+  NLG Insurance Contact NLG
+{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row backandrollall">
+        <div class="col-md-7 col-12 p-0 m-0 head-right">
+            <div class="firsthead p-3 ml-4">
+                <h3>Contact Us</h3>
+                <hr>
+                <div class="contact-form">
+                    <form id="contact" action="" method="post">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <fieldset>
+                                    <input name="name" type="text" id="name" placeholder="Full Name" required=""
+                                        style="background-color: rgba(250,250,250,0.3);">
+                                </fieldset>
+                            </div>
+                            
+                            <div class="col-md-6 col-sm-12">
+                                <fieldset>
+                                    <input name="email" type="text" id="email" placeholder="E-Mail Address"
+                                        required="" style="background-color: rgba(250,250,250,0.3);">
+                                </fieldset>
+                            </div>
+                           
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <input name="number" rows="6" id="number" placeholder="Phone Number"
+                                        required="" style="background-color: rgba(250,250,250,0.3);"></input>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input name="subject" type="text" id="subject" placeholder="Subject"
+                                        required="" style="background-color: rgba(250,250,250,0.3);">
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <textarea name="message" rows="6" id="message" placeholder="Your Message"
+                                        required="" style="background-color: rgba(250,250,250,0.3);"></textarea>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="main-button-slider" style="border: none;">Send Message
+                                        Now</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                    <br><br>
+                  </div>
+            </div>
+           
+        </div>
+        <br><br>
+        <div class="col-md-5 col-12 pt-5">
+            <div class="row">
+                <div class="col-md-12 col-12 pt-1">
+                    <div class="insurance-product p-3" style="background-color: #fa0035;">
+                        <h4 class="text-light">Head Office </h4>
+                        <div class="product-hr" style="background-color: #fa0035;"></div>
+                  
+                        <p class="text-light">
+                            <i class="fa fa-location-arrow"></i> Lazimpat, Kathmandu Nepal
+                        </p>
+                        <p class="text-light">
+                            <i class="fa fa-phone"></i> Contact No. : 01-4442646, 01-4006648
+                        </p>
+                        <p class="text-light">
+                            <i class="fa fa-envelope-square"></i> Email : info@nlgi.com.np
+                        </p>
+                        <p class="text-light">
+                            <i class="fa fa-fax"></i> Fax: 977-1-4416427
+                        </p>
+                      
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-12 pt-1">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.6738474092735!2d85.32163321462698!3d27.727354731220206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1918204e6ded%3A0xff047d4302a7b0eb!2sNLG+INSURANCE+COMPANY+LIMITED!5e0!3m2!1sen!2snp!4v1467190472573" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                </div>
+            </div>
+            <br>
+           
+        </div>
+    </div>
+</div>
+<br><br><br>
+<br><br><br>
+<script>
+$('.popover-dismiss').popover({
+    trigger: 'focus'
+  })
+
+</script>
+{% endblock content %}

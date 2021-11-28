@@ -1,0 +1,41 @@
+{% extends "pillar.html" %}
+{% load static %}
+{% block title %}
+  Terms and Conditions - NLG Insurance
+{% endblock title %}
+{% block content %}
+
+<div class="container-fluid" style="height:auto; padding-button:30px;">
+    <div class="row backandrollall">
+        <div class="col-md-7 col-12 p-0 m-0 head-right">
+            <div class="firsthead p-3 ml-4">
+                <h3>Terms & Conditions</h3>
+                <small class="text-light">Read our Terms and Conditions</small>
+                <hr>
+              
+            </div>
+           
+        </div>
+        <div class="col-md-5 col-12 hideformob">
+            <div class="branch">
+                <a href="{%url 'landing:landing'%}" class="footer-logo text-center">
+                    <img src="{%static 'images/downlogo.PNG'%}" alt="footer_logo" class="img-fluid" style="border-radius: 100px; border: 3px solid #fb0b3f;">
+                </a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+</div>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br>
+<script>
+$('.popover-dismiss').popover({
+    trigger: 'focus'
+  })
+
+</script>
+{% endblock content %}
