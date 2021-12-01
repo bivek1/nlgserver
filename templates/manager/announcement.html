@@ -1,0 +1,152 @@
+{% extends "manager/dashboard.html" %}
+{% block title %}
+   Announcement
+{% endblock title %}
+
+{% block inner %}
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Dashboard</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{%url 'landing:landing'%}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{%url 'manager:dashboard'%}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Announcement</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+<div class="text-center pe-4 pe-4">
+    {% if messages %}
+        {% for m in messages  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+
+<form action="" method="post" style="width: 100%; padding: 30px;" enctype="multipart/form-data">
+    
+    <div class="row  formbox" >
+        <H3>Add Announcement</H3>
+        <hr>
+        <div class="col-12">
+            {{form.name.label_tag}}
+            {{form.name}}
+            {{form.name.errors}}
+        </div>
+        <div class="col-6">
+            {{form.image.label_tag}}
+            {{form.image}}
+            {{form.image.errors}}
+        </div>
+        <div class="col-6">
+            {{form.starting_date.label_tag}}
+            {{form.starting_date}}
+            {{form.starting_date.errors}}
+        </div>
+      
+        <div class="col-12">
+            {{form.ending_date.label_tag}}
+            {{form.ending_date}}
+            {{form.ending_date.errors}}
+        </div>
+       
+
+        {% csrf_token %}
+        <br>
+        <div class="p-2 d-grid">
+            <button class="btn btn-danger btn-block text-light mb-3" id="submit"> <i class="fa fa-key"></i> Add Announcement</button>
+        </div>
+       
+    </div>
+  
+</form>
+
+<br>
+<div class="row ps-2 pe-2">
+    <H3>Product List</H3>
+    <hr>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table stylish-table no-wrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Name</th>
+                                <th class="border-top-0">Image</th>
+                                <th class="border-top-0">......</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in bod %}
+                                <tr>
+                               
+                                    <td class="align-middle">
+                                        <h6> {{i.name}} </h6>
+                                       <small class="d-block">{{i.starting_date}}</small>
+                                       <small class="d-block">{{i.ending_date}}</small>
+                                    </td>
+                                    {% if i.image %}
+                                    <td class="align-middle">
+                                        <img src="{{i.image.url}}" alt="" srcset="" style="height: 50px; width: 50px; border-radius: 50%;">
+                                    </td>
+                                    {% endif %}
+                                    <td class="align-middle">
+                                        <!-- <a href="#">
+                                            <button class="text-light btn btn-sm btn-primary btn-danger">
+                                                <i class="fa fa-edit p-2"></i>
+                                                    Edit
+                                            </button>
+                                        </a>  -->
+                                        <button class=" text-light btn btn-sm  btn-danger btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
+                                            <i class="fa fa-trash p-2"></i>
+                                            Delete
+                                        </button>
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">Are you sure want to Delete {{i.district}}?</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                               
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                  <!-- <a href="{%url 'manager:deleteBranch' i.id%}"> -->
+                                                    <button type="button" class="btn btn-primary">Yes</button>
+                                                  <!-- </a> -->
+                                                
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        <!-- Delete Modal End -->
+   
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock inner %}

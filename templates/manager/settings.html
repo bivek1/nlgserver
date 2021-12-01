@@ -1,0 +1,102 @@
+{% extends "manager/dashboard.html" %}
+{% load static %}
+{% block title %}
+    Update Settings
+{% endblock title %}
+
+{% block inner %}
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Dashboard</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{%url 'landing:landing'%}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{%url 'manager:dashboard'%}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Settings</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="text-center">
+        {% if messages %}
+        {% for m in messages  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+   
+    <div class="row ps-4 pe-4 pt-2">
+        <h3>Update Settings</h3>
+        <hr>
+        <div class="col-lg-4 col-xlg-4 col-md-5 col-12">
+            <div class="card">
+                <div class="card-body profile-card">
+                    <div class="mt-4 text-center">
+                        <img src="
+                        {% if setting.logo %}
+                            setting.logo.url
+                            {%else%}
+                            {%static 'images/logo.png'%}
+                        {% endif %}
+                            " class="rounded-circle" width="150">
+                        <h4 class="card-title mt-2">Head Office - {{setting.location}}</h4>
+                        <h4 class="card-title mt-2">Email - {{setting.email}}</h4>
+                        <h5 class="card-subtitle">Number 1- {{setting.number1}}</h5>
+                        <h5 class="card-subtitle">Number 2- {{setting.number2}}</h5>
+                        <h5 class="card-subtitle">Toll Free Number- {{setting.toll_free_no}}</h5>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-xlg-8 col-md-7 col-12">
+            <form action="" method="post" style="width: 100%;">
+               
+                <div class="row formbox">
+                    <div class="col-6">
+                        {{form.email.label_tag}}
+                        {{form.email}}
+                        {{form.email.errors}}
+                    </div>
+                    <div class="col-6">
+                        {{form.number1.label_tag}}
+                        {{form.number1}}
+                        {{form.number1.errors}}
+                    </div>
+                    <div class="col-6">
+                        {{form.location.label_tag}}
+                        {{form.location}}
+                        {{form.location.errors}}
+                    </div>
+                    <div class="col-6">
+                        {{form.number2.label_tag}}
+                        {{form.number2}}
+                        {{form.number2.errors}}
+                    </div>
+                    <div class="col-12">
+                        {{form.toll_free_no.label_tag}}
+                        {{form.toll_free_no}}
+                        {{form.toll_free_no.errors}}
+                    </div>
+                    <div class="col-12">
+                        {{form.logo.label_tag}}
+                        {{form.logo}}
+                        {{form.logo.errors}}
+                    </div>
+                    {% csrf_token %}
+                    <br>
+                    <button class=" mt-4 mb-2 btn btn-danger btn-block d-block text-light" id="submit"> <i class="fa fa-key"></i> Update Settings </button>
+                </div>
+             
+            </form>
+        </div>
+    </div>
+    
+{% endblock inner %}

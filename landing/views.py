@@ -59,7 +59,7 @@ def filedownload(request, slug, id):
     rea_response = HttpResponse(file, content_type='application/pdf')
     rea_response['Content-Disposition'] = 'attachment; filename={}'.format(rep.name+'.pdf')
     return rea_response
-    return HttpResponseRedirect(reverse('landing:finance'))
+    # return HttpResponseRedirect(reverse('landing:finance'))
 
 def pdf_view(request,slug, id):
     media = settings.MEDIA_ROOT
@@ -124,7 +124,6 @@ def branch(request):
         return render(request, 'landing/branch.html', dist)
 
 def gallery(request):
-    
     return render(request, "landing/gallary.html")
 
 def download(request):

@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from .forms import AgentF, BranchF, SurveryorF, CitizenF, ReportF, newsF
-from landing.models import Branch, news, Surveryor, Agent, Citizen, Report, Download
+from .forms import AgentF, AnnouncementForm, BranchF, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
+from landing.models import Announcement, Branch, Setting, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
+
 # Create your views here.
 @login_required
 def dashboard(request):
@@ -50,20 +51,28 @@ def addAgent(request):
 
 
 def addBranch(request):
-    form = BranchF(request.POST or None)
+    form = BranchF()
+    branched = Branch.objects.all().order_by('district')
     dist = {
-        'form':form
+        'form':form,
+        'branch':branched,
     }
-
-    if form.is_valid():
+    if request.method == 'POST':
         form = BranchF(request.POST, request.FILES or None)
-        form.save()
-        messages.success(request, "Branch Saved Succesfully")
-        return HttpResponseRedirect(reverse('manager:addBranch'))
+        if form.is_valid():        
+            form.save()
+            messages.success(request, "Branch Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:addBranch'))
+        else:
+            return render(request, 'manager/addBranch.html',dist )
     else:
         return render(request, 'manager/addBranch.html',dist )
-       
-    return render(request, 'manager/addBranch.html',dist )
+
+def deleteBranch(request, id):
+    branch = Branch.objects.get(id = id)
+    branch.delete()
+    messages.success(request, "Successfully Deleted Branch")
+    return HttpResponseRedirect(reverse('manager:addBranch'))
 
 
 def addSurveryor(request):
@@ -96,34 +105,40 @@ def addCitizen(request):
     return render(request, 'manager/addCitizen.html',dist )
 
 def addNews(request):
-    form = newsF(request.POST, request.FILES or None)
+    form = newsF()
     dist = {
         'form':form
     }
-    if form.is_valid():
-    
-        form.save()
-        messages.success(request, "News Saved Succesfully")
-        return HttpResponseRedirect(reverse('manager:addNews'))
+    if request.method == 'POST':
+        forms = newsF(request.POST, request.FILES)
+        if forms.is_valid():
+            forms.save()
+            messages.success(request, "News Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:addNews'))
+        else:
+            messages.error(request, "Something went Wrong")
+            return HttpResponseRedirect(reverse('manager:addNews'))
     else:
         return render(request, 'manager/addNews.html',dist )
        
-    return render(request, 'manager/addNews.html',dist )
 
 def addReport(request):
-    form = ReportF(request.POST, request.FILES or None)
+    form = ReportF()
     dist = {
         'form':form
     }
-    if form.is_valid():
-    
-        form.save()
-        messages.success(request, "Report Saved Succesfully")
-        return HttpResponseRedirect(reverse('manager:addReport'))
+    if request.method == 'POST':
+        forms = ReportF(request.POST, request.FILES)
+        if forms.is_valid():
+        
+            forms.save()
+            messages.success(request, "Report Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:addReport'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return render(request, 'manager/addReport.html',dist )
     else:
         return render(request, 'manager/addReport.html',dist )
-       
-    return render(request, 'manager/addReport.html',dist )
 
 
 def formReport(request, id):
@@ -172,3 +187,145 @@ def newUpdate(request):
         'report':report
     }
     return render(request, 'manager/news.html', dist)
+
+def setting(request):
+    sett = Setting.objects.all()
+    setting = None
+    form = SettingForm(request.POST or None)
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+        form.fields['email'].initial = setting.email
+        form.fields['number1'].initial = setting.number1
+        form.fields['number2'].initial = setting.number2
+        form.fields['location'].initial = setting.location
+        form.fields['toll_free_no'].initial = setting.toll_free_no
+
+    dist = {
+        'setting':setting,
+        'form':form
+    }
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Successfully Updated Settings")
+        return HttpResponseRedirect(reverse("manager:setting"))
+    return render(request, "manager/settings.html", dist)
+
+
+def addBod(request):
+    form = BodForm()
+    branched = Bod.objects.all()
+    dist = {
+        'form':form,
+        'bod':branched,
+    }
+    if request.method == 'POST':
+        form = BodForm(request.POST, request.FILES or None)
+        if form.is_valid():        
+            form.save()
+            messages.success(request, "Bod Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:addBod'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return render(request, 'manager/addBod.html',dist )
+    else:
+        return render(request, 'manager/addBod.html',dist )
+
+def managementTeam(request):
+    form = ManagementForm()
+    branched = ManagementTeam.objects.all()
+    dist = {
+        'form':form,
+        'bod':branched,
+    }
+    if request.method == 'POST':
+        form = ManagementForm(request.POST, request.FILES or None)
+        if form.is_valid():        
+            form.save()
+            messages.success(request, "Management Team Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:managementTeam'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return render(request, 'manager/managementTean.html',dist )
+    else:
+        return render(request, 'manager/managementTean.html',dist )
+
+
+def ProductView(request):
+    form = ProductFrom()
+    branched = Product.objects.all()
+    dist = {
+        'form':form,
+        'bod':branched,
+    }
+    if request.method == 'POST':
+        form = ProductFrom(request.POST, request.FILES or None)
+        if form.is_valid():        
+            form.save()
+            messages.success(request, "Product Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:product'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return render(request, 'manager/product.html',dist )
+    else:
+        return render(request, 'manager/product.html',dist )
+    
+
+def SubProductView(request):
+    form = SubProductFrom()
+    branched = Sub_product.objects.all()
+    dist = {
+        'form':form,
+        'bod':branched,
+    }
+    if request.method == 'POST':
+        form = SubProductFrom(request.POST, request.FILES or None)
+        if form.is_valid():        
+            form.save()
+            messages.success(request, "Sub Product Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:subProduct'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return HttpResponseRedirect(reverse('manager:subProduct'))
+    else:
+        return render(request, 'manager/sub_product.html',dist )
+
+
+def QuestionAnswerView(request):
+    form = QuestionAnswerFrom()
+    branched = QuestionAnswer.objects.all()
+    dist = {
+        'form':form,
+        'bod':branched,
+    }
+    if request.method == 'POST':
+        form = QuestionAnswerFrom(request.POST)
+        if form.is_valid():        
+            form.save()
+            messages.success(request, "Question Answer Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:questionAnswer'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return HttpResponseRedirect(reverse('manager:questionAnswer'))
+    else:
+        return render(request, 'manager/questionAnswer.html',dist )
+
+def AnnouncementView(request):
+    form = AnnouncementForm()
+    branched = Announcement.objects.all()
+    dist = {
+        'form':form,
+        'bod':branched,
+    }
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST, request.FILES)
+        if form.is_valid():        
+            form.save()
+            messages.success(request, "Announcement Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:announcement'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return HttpResponseRedirect(reverse('manager:announcement'))
+    else:
+        return render(request, 'manager/announcement.html',dist )

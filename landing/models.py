@@ -1,7 +1,6 @@
 from django.db import models
-from django.db.models.fields import CharField, SlugField, related
 from django.urls import reverse
-
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Branch(models.Model):
@@ -21,16 +20,19 @@ class Branch(models.Model):
     focal = models.CharField(max_length=50, null = True, blank= True)
     number = models.CharField(max_length=50, null = True, blank= True)
     focal_img = models.ImageField(upload_to ="focalperson", default="/downlogo.PNG")
-
+    objects = models.Manager()
 
 
 class Surveryor(models.Model):
     name = models.CharField(max_length=200, null = True, blank= True)
     specilization = models.CharField(max_length=100, null = True, blank= True)
+    lience_no = models.BigIntegerField(null = True, blank = True)
+    issued_date = models.DateField(null = True, blank = True)
+    renew_date = models.DateField(null = True, blank=True)
     area = models.CharField(max_length=100, null = True, blank= True)
     contact = models.CharField(max_length=100, null = True, blank= True)
     email = models.CharField(max_length=100, null = True, blank= True)
-   
+    objects = models.Manager()
     
     def __str__(self):
         return self.name
@@ -41,7 +43,7 @@ class Agent(models.Model):
     address = models.CharField(max_length=100, null = True, blank= True)
     contact = models.CharField(max_length=100, null = True, blank= True)
     email = models.CharField(max_length=100, null = True, blank= True)
-   
+    objects = models.Manager()
     
     def __str__(self):
         return self.name
@@ -49,18 +51,18 @@ class Agent(models.Model):
 class Citizen(models.Model):
     name = models.CharField(max_length=500, null = True, blank= True)
     details = models.CharField(max_length=1000, null = True, blank= True)
-    
+    objects = models.Manager()
     
 class fiscalYear(models.Model):
     fiscal = models.CharField(max_length=200)
-
+    objects = models.Manager()
     def __str__(self):
         return self.fiscal
 
 class Report(models.Model):
     name = models.CharField(max_length = 200)
-    fiscal = models.ForeignKey(fiscalYear, null= True, related_name='fiscalyear', blank= True, on_delete=models.PROTECT)
     slug = models.SlugField(default='report')
+    fiscal = models.ForeignKey(fiscalYear, null= True, related_name='fiscalyear', blank= True, on_delete=models.PROTECT)
     rtype = models.CharField(max_length = 200, choices = (
         ('Annual Report', 'Annual Report'),
         ('Quarterly Report', 'Quarterly Report'),
@@ -68,7 +70,7 @@ class Report(models.Model):
         ('Other Report', 'Other Report'),
     ))
     files = models.FileField(upload_to='Report/')
-    
+    objects = models.Manager()
     def __str__(self):
         return self.name
     
@@ -82,12 +84,12 @@ class Report(models.Model):
     
 class news(models.Model):
     name = models.CharField(max_length = 200)
-    description = models.CharField(max_length=2000, null= True, blank= True)
     slug = models.SlugField(default='news')
+    description = models.CharField(max_length=2000, null= True, blank= True)
     dateof = models.DateField(auto_now_add=True, null= True, blank= True) 
     files = models.FileField(upload_to='News/',  null= True, blank= True)
     image = models.ImageField(upload_to="images/", null= True, blank= True)
-    
+    objects = models.Manager()
     def __str__(self):
         return self.name
 
@@ -107,6 +109,7 @@ class Download(models.Model):
         ('Claim Form', 'Claim Form'),
     ))
     files = models.FileField(upload_to='Report/')
+    objects = models.Manager()
     
     def __str__(self):
         return self.name
@@ -117,5 +120,86 @@ class Download(models.Model):
     def pdf(self):
         return reverse('landing:pdfview', args=[self.slug, self.id])
     
+class Bod(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to = "management/")
+    post = models.CharField(max_length=200)
+    type = models.CharField(max_length=100)
+    email = models.EmailField()
+    appointed_date = models.DateField()
+    re_appointed_date = models.DateField(null = True, blank=True)
+    phone = models.BigIntegerField(null = True, blank = True)
+    descriptipn = models.CharField(max_length=1000)
+    objects = models.Manager()
 
+    def __str__(self):
+        return self.name
+
+class ManagementTeam(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to = "management/")
+    post = models.CharField(max_length=200)
+    email = models.EmailField()
+    appointed_date = models.DateField()
+    re_appointed_date = models.DateField(null = True, blank=True)
+    phone = models.BigIntegerField(null = True, blank = True)
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to = "products/")
+    description = RichTextUploadingField()
+    objects = models.Manager
+    discontinue = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+class Sub_product(models.Model):
+    product = models.ForeignKey(Product, related_name="sub_product", on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to = "products/")
+    description = RichTextUploadingField()
+    discontinue = models.BooleanField(default=False)
+    objects = models.Manager
+    
+    def __str__(self):
+        return self.name
+
+class QuestionAnswer(models.Model):
+    question = models.CharField(max_length=500)
+    answer = models.CharField(max_length=2000)
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.question
+
+class Setting(models.Model):
+    logo = models.ImageField(upload_to ="logo/")
+    email = models.EmailField(default="info@nlgi.com.np")
+    number1 = models.BigIntegerField(default="01-4442646")
+    number2 = models.BigIntegerField(default="01-4006648", null = True, blank=True)
+    toll_free_no = models.BigIntegerField(default="16600199099", null = True, blank=True)
+    location = models.CharField(max_length=300)
+    objects = models.Manager()
+
+    def __str__(self):
+        return f"{self.email} -  {self.number1}"
+
+
+class Announcement(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to ="announcement")
+    starting_date = models.DateField()
+    ending_date = models.DateField()
+
+    def __str__(self) -> str:
+        return self.name
+
+
+
+    
     

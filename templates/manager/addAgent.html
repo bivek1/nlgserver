@@ -4,6 +4,22 @@
 {% endblock title %}
 
 {% block inner %}
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-8 align-self-center">
+                <h3 class="page-title mb-0 p-0">Dashboard</h3>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{%url 'landing:landing'%}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{%url 'manager:dashboard'%}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Agent</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="text-center">
         {% if messages %}
         {% for m in messages  %}
