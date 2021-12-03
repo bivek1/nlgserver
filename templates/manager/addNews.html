@@ -33,14 +33,16 @@
    
     
     <form action="" method="post" style="width: 100%; padding: 30px;" enctype="multipart/form-data">
-        <h3>Add News</h3>
-        <hr>
+       
         <div class="row formbox">
+            <h3>Add News</h3>
+            <hr>
             {{form}}
+            {% csrf_token %}
+           
+            <button class="btn btn-danger btn-block text-light mt-3" id="submit"> <i class="fa fa-key"></i> ADD NEWS </button>        
         </div>
    
-        {% csrf_token %}
-        <br>
-        <button class="btn btn-danger btn-block text-light" id="submit"> <i class="fa fa-key"></i> ADD NEWS </button>
+        
     </form>
 {% endblock inner %}

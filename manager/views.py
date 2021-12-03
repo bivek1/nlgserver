@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from .forms import AgentF, AnnouncementForm, BranchF, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
-from landing.models import Announcement, Branch, Setting, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
+from .forms import AgentF, AnnouncementForm, BranchF, DepartmentHeadForm, DownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
+from landing.models import Announcement, Branch, DepartmentHead, Setting, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
@@ -16,29 +16,42 @@ def dashboard(request):
     citizen_count = Citizen.objects.all().count()
     report_count = Report.objects.all().count()
     survey_count = Surveryor.objects.all().count()
-
+    product_count = Product.objects.all().count()
+    sub_product_count = Sub_product.objects.all().count()
+    faq_count = QuestionAnswer.objects.all().count()
+    form_count = Download.objects.all().count()
+    depart_count = DepartmentHead.objects.all().count()
+    bod_count = Bod.objects.all().count()
+    manage_count = ManagementTeam.objects.all().count()
     
     dist ={
         'news_count':news_count,
         'branch_count':branch_count,
         'agent_count':agent_count,
-        "citizen_count": citizen_count,
+        'citizen_count': citizen_count,
         'report_count':report_count,
         'survey_count':survey_count,
-
-    }
+        'product_count':product_count,
+        'sub_product_count':sub_product_count,
+        'faq_count':faq_count,
+        'form_count':form_count,
+        'depart_count':depart_count,
+        'bod_count':bod_count,
+        'manage_count':manage_count
+        }
     return render(request, "manager/dashboard.html", dist)
 
 def logoutUser(request):
     logout(request)
-    
-    return render(request, "landing/index.html")
+    return HttpResponseRedirect(reverse('landing:landing'))
     
     
 def addAgent(request):
     form = AgentF(request.POST or None)
+    agent = Agent.objects.all().order_by('-id')
     dist = {
-        'form':form
+        'form':form,
+        'data':agent
     }
     if form.is_valid():
         form.save()
@@ -77,8 +90,10 @@ def deleteBranch(request, id):
 
 def addSurveryor(request):
     form = SurveryorF(request.POST or None)
+    agent = Surveryor.objects.all().order_by('-id')
     dist = {
-        'form':form
+        'form':form,
+        'data':agent
     }
     if form.is_valid():
         form.save()
@@ -92,8 +107,10 @@ def addSurveryor(request):
 
 def addCitizen(request):
     form = CitizenF(request.POST or None)
+    agent = Citizen.objects.all().order_by('-id')
     dist = {
-        'form':form
+        'form':form,
+        'data':agent
     }
     if form.is_valid():
         form.save()
@@ -190,8 +207,8 @@ def newUpdate(request):
 
 def setting(request):
     sett = Setting.objects.all()
+    form = SettingForm()
     setting = None
-    form = SettingForm(request.POST or None)
     if sett:
         for i in sett:
             setting = i 
@@ -206,11 +223,27 @@ def setting(request):
         'setting':setting,
         'form':form
     }
-    if form.is_valid():
-        form.save()
-        messages.success(request, "Successfully Updated Settings")
-        return HttpResponseRedirect(reverse("manager:setting"))
-    return render(request, "manager/settings.html", dist)
+    if request.method == 'POST':
+        form = SettingForm(request.POST, request.FILES)
+        if form.is_valid():
+            
+            if sett:
+                setting.email = request.POST['email']
+                setting.number1 = request.POST['number1']
+                setting.number2 = request.POST['number2']
+                setting.location = request.POST['location']
+                setting.toll_free_no = request.POST['toll_free_no']
+                try:
+                   setting.logo = request.FILES['logo']
+                except:
+                    pass
+                setting.save()
+            else:
+                form.save()
+            messages.success(request, "Successfully Updated Settings")
+            return HttpResponseRedirect(reverse("manager:setting"))
+    else:
+        return render(request, "manager/settings.html", dist)
 
 
 def addBod(request):
@@ -329,3 +362,48 @@ def AnnouncementView(request):
             return HttpResponseRedirect(reverse('manager:announcement'))
     else:
         return render(request, 'manager/announcement.html',dist )
+
+
+def addForm(request):
+    form = DownloadForm()
+
+    dist = {
+        'form':form,
+    }
+    if request.method == 'POST':
+        forms = DownloadForm(request.POST, request.FILES)
+        if forms.is_valid():        
+            forms.save()
+            messages.success(request, "Forms Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:addForm'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return render(request, 'manager/addForm.html',dist )
+    else:
+        return render(request, 'manager/addForm.html',dist)
+
+
+def DepartmentView(request):
+    form = DepartmentHeadForm()
+    branched = DepartmentHead.objects.all()
+    dist = {
+        'form':form,
+        'bod':branched,
+    }
+    if request.method == 'POST':
+        forms = DepartmentHeadForm(request.POST, request.FILES or None)
+        if forms.is_valid():        
+            forms.save()
+            messages.success(request, "Department Team Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:departmentTeam'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return render(request, 'manager/departmentTeam.html',dist )
+    else:
+        return render(request, 'manager/departmentTeam.html',dist )
+
+def deleteAnn(request, id):
+    aa=  Announcement.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Announcement")
+    return HttpResponseRedirect(reverse('manager:announcement'))

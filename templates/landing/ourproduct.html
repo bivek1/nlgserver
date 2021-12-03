@@ -28,6 +28,51 @@
         <h5 class="text-center">Our Products</h5>
         <hr>
         <div class="row">
+            
+            {% for i in product  %}
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="products-show mt-3">
+                    <div class="text-center p-1">
+                        
+                        {% if i.image %}
+                        <img class="res-gif-prodcut" src="{{i.image.url}}" alt="" srcset="">
+                        {%else%}
+                        <img class="res-gif-prodcut" src="{%static 'assets/images/marine1.gif'%}" alt="" srcset="">
+                        {% endif %}
+                            
+                       
+                        <h5 class="text-center p-0 m-0">{{i.name}}</h5>
+                        <button class="btn btn-sm btn-outline-danger readPolicy m-2" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
+                            <i class="fa fa-eye"></i> Read Policy
+                        </button>
+
+                        <!-- modal -->
+                        <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>
+                                   {{i.description}}
+                                  </p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            {% endfor %}
+                
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="products-show mt-3">
                     <div class="text-center p-1">

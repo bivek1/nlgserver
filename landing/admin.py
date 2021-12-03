@@ -10,10 +10,11 @@ admin.site.register(news)
 admin.site.register(Download)
 admin.site.register(fiscalYear)
 
-from .models import Bod, ManagementTeam, Setting, QuestionAnswer, Product, Sub_product
+from .models import Bod, ManagementTeam, Setting, QuestionAnswer, Product, Sub_product, DepartmentHead
 admin.site.register(Bod)
 admin.site.register(ManagementTeam)
 admin.site.register(Setting)
 admin.site.register(QuestionAnswer)
 admin.site.register(Product)
 admin.site.register(Sub_product)
+admin.site.register(DepartmentHead)

@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Branch(models.Model):
@@ -130,6 +129,7 @@ class Bod(models.Model):
     re_appointed_date = models.DateField(null = True, blank=True)
     phone = models.BigIntegerField(null = True, blank = True)
     descriptipn = models.CharField(max_length=1000)
+    chairman = models.BooleanField(default=False)
     objects = models.Manager()
 
     def __str__(self):
@@ -139,8 +139,8 @@ class ManagementTeam(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to = "management/")
     post = models.CharField(max_length=200)
-    email = models.EmailField()
-    appointed_date = models.DateField()
+    email = models.EmailField(null = True, blank=True)
+    appointed_date = models.DateField(null = True, blank=True)
     re_appointed_date = models.DateField(null = True, blank=True)
     phone = models.BigIntegerField(null = True, blank = True)
     objects = models.Manager()
@@ -151,7 +151,8 @@ class ManagementTeam(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to = "products/")
-    description = RichTextUploadingField()
+    description = models.CharField(max_length=2000)
+    icons = models.CharField(max_length=20, null = True, blank=True)
     objects = models.Manager
     discontinue = models.BooleanField(default=False)
 
@@ -162,7 +163,7 @@ class Sub_product(models.Model):
     product = models.ForeignKey(Product, related_name="sub_product", on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to = "products/")
-    description = RichTextUploadingField()
+    description = models.CharField(max_length=2000)
     discontinue = models.BooleanField(default=False)
     objects = models.Manager
     
@@ -178,7 +179,7 @@ class QuestionAnswer(models.Model):
         return self.question
 
 class Setting(models.Model):
-    logo = models.ImageField(upload_to ="logo/")
+    logo = models.ImageField(upload_to ="logo/", null=True, blank=True)
     email = models.EmailField(default="info@nlgi.com.np")
     number1 = models.BigIntegerField(default="01-4442646")
     number2 = models.BigIntegerField(default="01-4006648", null = True, blank=True)
@@ -195,6 +196,17 @@ class Announcement(models.Model):
     image = models.ImageField(upload_to ="announcement")
     starting_date = models.DateField()
     ending_date = models.DateField()
+    objects = models.Manager()
+
+    def __str__(self) -> str:
+        return self.name
+
+class DepartmentHead(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to = "departmenthead/")
+    post = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    objects = models.Manager()
 
     def __str__(self) -> str:
         return self.name

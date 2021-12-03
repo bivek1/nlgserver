@@ -220,7 +220,7 @@
                 <!-- ============================================================== -->
                 <div class="row">
                     <!-- Page Visit -->
-                    <div class="col-3">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Total Page Visit</h4>
@@ -234,13 +234,13 @@
                     </div>
                     <!-- Page Visit count -->
                     <!-- add Products -->
-                    <div class="col-3">
+                    <div class="col-12 col-md">
                         <a href="{%url 'manager:product'%}">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Products</h4>
                                     <div class="text-end">
-                                        <h2 class="font-light mb-0"><i class="fas fa-list-ul text-danger"></i> 120</h2>
+                                        <h2 class="font-light mb-0"><i class="fas fa-list-ul text-danger"></i> {{product_count}}</h2>
                                         <span class="text-muted">Products</span>
                                     </div>
                                    
@@ -251,13 +251,13 @@
                     </div>
                     <!-- ENd Products -->
                      <!-- add  SUb Products -->
-                     <div class="col-3">
+                     <div class="col-12 col-md">
                         <a href="{%url 'manager:subProduct'%}">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Sub Products</h4>
                                     <div class="text-end">
-                                        <h2 class="font-light mb-0"><i class="fas fa-list-alt text-danger"></i> 120</h2>
+                                        <h2 class="font-light mb-0"><i class="fas fa-list-alt text-danger"></i> {{sub_product_count}}</h2>
                                         <span class="text-muted">Sub Products</span>
                                     </div>
                                 
@@ -268,13 +268,13 @@
                     <!-- ENd SUB Products -->
 
                     <!-- add  Answer Questions -->
-                    <div class="col-3">
+                    <div class="col-12 col-md">
                         <a href="{%url 'manager:questionAnswer'%}">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Answer Questions</h4>
                                     <div class="text-end">
-                                        <h2 class="font-light mb-0"><i class="fas fa-question text-danger"></i> 120</h2>
+                                        <h2 class="font-light mb-0"><i class="fas fa-question text-danger"></i>{{faq_count}}</h2>
                                         <span class="text-muted">Answer Questions</span>
                                     </div>
                                    
@@ -284,6 +284,43 @@
                        
                     </div>
                     <!-- ENd SUB Products -->
+                    <!-- add Form -->
+                    <div class="col-12 col-md">
+                        <a href="{%url 'manager:addForm'%}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Forms</h4>
+                                    <div class="text-end">
+                                        <h2 class="font-light mb-0"><i class="fas fa-file text-danger"></i> {{form_count}} </h2>
+                                        <span class="text-muted">Forms</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                    <!-- ENd Form -->
+
+                    <!-- add DH -->
+                    <div class="col-12 col-md">
+                        <a href="{%url 'manager:departmentTeam'%}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Department Team</h4>
+                                    <div class="text-end">
+                                        <h2 class="font-light mb-0"><i class="fas fa-users text-danger"></i>{{depart_count}}</h2>
+                                        <span class="text-muted">Department Team</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                    <!-- ENd DH -->
+
+
                     <!-- Annoumenet -->
                     <div class="col-12">
                         <div class="col-12">
@@ -404,7 +441,7 @@
                                 <i class="fas fa-globe mt-2" id ="addIcon" ></i>
                                 <div class="card-body">
                                     <ul class="list-inline d-flex align-items-center">
-                                        <li class="ps-0">{{report_count}}</li>
+                                        <li class="ps-0">{{bod_count}}</li>
                                         <li class="ms-auto"> Total BOD </li>
                                     </ul>
                                     <h3 class="font-normal"> Board of Director </h3>
@@ -420,7 +457,7 @@
                                 <i class="fas fa-users mt-2" id ="addIcon" ></i>
                                 <div class="card-body">
                                     <ul class="list-inline d-flex align-items-center">
-                                        <li class="ps-0">{{report_count}}</li>
+                                        <li class="ps-0">{{manage_count}}</li>
                                         <li class="ms-auto"> Total Team </li>
                                     </ul>
                                     <h3 class="font-normal"> Management Team </h3>

@@ -116,59 +116,20 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col-12 col-md-12 text-center mt-4">
-                                           
-                                                <div class="bod d-flex" >
-                                                    <img src="{%static 'images/ceo.jpeg'%}" alt="">
-                                                    <div class="p-2">
-                                                       <h6 class="">Mr. Sunil Ballav Pant</h6>
-                                                       <p class="text-danger m-0 p-0">C.E.O</p> 
-                                                       <small>Email: sunil.pant@nlgi.com.np</small><br>
-                                                       <small>Phone: 4442646</small>
-                                                    </div>
-                                                   
-                                                </div>
-                                    
-                                            
-                                        </div>
-                                        <div class="col-12 col-md-12 text-center mt-4">
-                                            <div class="bod d-flex">
-                                                <img src="{%static 'images/AGM.jpg'%}" alt="">
-                                                <div class="p-2">
-                                                   <h6 class="">Mr. Manoj Shrestha</h6>
-                                                   <p class="text-danger">Deputy General Manager / Company Secretary</p>
-                                                   <small>Email: manoj.shrestha@nlgi.com.np</small><br>
-                                                   <small>Phone: 4442646</small>
-                                                </div>
-                                             </div>
-                                        </div>
-                                        <div class="col-6 col-md-6 text-center  mt-4" >
-                                            <div class="bod d-flex">
-                                                <img src="{%static 'images/head.jpg'%}" alt="">
-                                                <div class="p-2">
-                                                   <h6 class="">Mr. Deepak Kumar Chand</h6>
-                                                   <small class="text-danger">Head- Underwritting</small> <br>
-                                                   <small>Email: deepak.chand@nlgi.com.np</small><br>
-                                                   <small>Phone: 4442646</small>
-                                                </div>
-                                               
-                                             </div>
-                                             <br><br>
-                                        </div>
-                                        <div class="col-6 col-md-6 text-center  mt-4">
-                                            <div class="bod d-flex">
-                                                <img src="{%static 'images/p.jpg'%}" alt="">
-                                                <div class="p-2">
-                                                   <h6 class="">Mr. Naumi Nath Adhikari</h6>
-                                                   <small class="text-danger">Head- Personnel & Establishment</small><br>
-                                                   <small>Email: naumi.adhikari@nlgi.com.np</small><br>
-                                                   <small>Phone: 4442646</small>
-                                                </div>
-                                               
-                                             </div>
-                                             <br><br>
-                                        </div>
                                         
+                                        {% for i in team  %}
+                                        <div class="col-12 col-md-6 text-center mt-4">
+                                            <div class="bod d-flex" >
+                                                <img src="{{i.image.url}}" alt="">
+                                                <div class="p-2">
+                                                    <h6 class="">{{i.name}}</h6>
+                                                    <p class="text-danger m-0 p-0">{{i.post}}</p> 
+                                                    <small>Email: {{i.email}}</small><br>
+                                                    <small>Phone: {{i.phone}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
                                     </div>
                              
                                     <div class="modal-footer">
@@ -204,69 +165,20 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
+                            
+                            {% for i in depart  %}
                             <div class="col-6 m-auto mt-3">
                                 <div class="mainman text-center " style="height: auto;">
-                                    <img src="{%static 'images/head.jpg'%}" alt="" srcset="">
-                                    <h6>Mr. Deepak Kumar Chand</h6>
-                                    <p class="text-danger p-0 m-0">Head-Underwriting</p>
-                                    <small class="d-block">deepak.chand@nlgi.com.np</small>
+                                    <img src="{{i.image.url}}" alt="" srcset="">
+                                    <h6>{{i.name}}</h6>
+                                    <p class="text-danger p-0 m-0">{{i.post}}</p>
+                                    <small class="d-block">{{i.email}}</small>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-6  mt-3">
-                                <div class="mainman text-center " style="height: auto;">
-                                    <img src="{%static 'images/p.jpg'%}" alt="" srcset="">
-                                    <h6>Mr. Naumi Nath Adhikari</h6>
-                                    <p class="text-danger p-0 m-0">Head-Personnel & Establishment</p>
-                                    <small class="d-block">naumi.adhikari@nlgi.com.np</small>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-6  mt-3">
-                                <div class="mainman text-center " style="height: auto;">
-                                    <img src="{%static 'images/birat.jpg'%}" alt="" srcset="">
-                                    <h6>Mr. Birat Nidhi Tiwari</h6>
-                                    <p class="text-danger p-0 m-0">Head-Re-Insurance</p>
-                                    <small class="d-block">birat.tiwari@nlgi.com.np</small>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-6 mt-3">
-                                <div class="mainman text-center " style="height: auto;">
-                                    <img src="{%static 'images/anil.jpg'%}" alt="" srcset="">
-                                    <h6>Mr. Anal Gautam</h6>
-                                    <p class="text-danger p-0 m-0">Head-Claim</p>
-                                    <small class="d-block">ak.gautam@nlgi.com.np</small>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-6  mt-3">
-                                <div class="mainman text-center " style="height: auto;">
-                                    <img src="{%static 'images/prabhat.jpg'%}" alt="" srcset="">
-                                    <h6>Mr. Prabhat A.C.</h6>
-                                    <p class="text-danger p-0 m-0">Head-Finance</p>
-                                    <small class="d-block">prabhat.ac@nlgi.com.np</small>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-6 mt-3">
-                                <div class="mainman text-center " style="height: auto;">
-                                    <img src="{%static 'images/promod.jpg'%}" alt="" srcset="">
-                                    <h6>Mr. Pramod Niraula</h6>
-                                    <p class="text-danger p-0 m-0">Head-IT</p>
-                                    <small class="d-block">pramod.niraula@nlgi.com.np</small>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-6 mt-3">
-                                <div class="mainman text-center " style="height: auto;">
-                                    <img src="{%static 'images/sunder.jpg'%}" alt="" srcset="">
-                                    <h6>Mr. Sundar Ghimire</h6>
-                                    <p class="text-danger p-0 m-0">Head-Marketing</p>
-                                    <small class="d-block">sundar.ghimire@nlgi.com.np</small>
-                                    <br>
-                                </div>
-                            </div>
+                            {% endfor %}
+                                
+
                         </div>
                  
                         <div class="modal-footer">
@@ -321,83 +233,58 @@
             <!-- <div class="product-hr"></div> -->
         </div>
         
-        <div class="col-md-12 col-12 p-3 m-auto">
-            <div class="mainman text-center ">
-                <img src="{%static 'images/bimal.jpg'%}" alt="" srcset="">
-                <h6>Mr. Bimal Prasad Wagle</h6>
-                <p class="text-danger p-0 m-0">Chairman</p>
-                <small class="d-block">Samuha(Ka)</small>
-                <!-- <button class="btn btn-outline-danger mt-2">
-                    View More
-                </button> -->
+        {% for i in bod %}
+            <div class="{% if i.chairman %} col-md-12 col-12 {%else%} col-md-4 col-6  {% endif %} p-3 m-auto">
+                <div class="mainman text-center ">
+                    <img src="{{i.image.url}}" alt="" srcset="">
+                    <h6>{{i.name}}</h6>
+                    <p class="text-danger p-0 m-0">{{i.post}}</p>
+                    <small class="d-block">{{i.type}}</small>
+                    <button class="btn btn-outline-danger mt-2" data-toggle="modal" data-target="#exampleModalCenterBOD{{i.id}}" >
+                        View More
+                    </button>
+                </div>
+                <!-- Modal PP -->
+                    <div class="modal fade" id="exampleModalCenterBOD{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center p-1">
+                                
+                                <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="height: 250px;">
+                                <small class="d-block">Email:{{i.descriptipn}}</small>
+                                <p>
+                                {{i.post}}
+                                </p>
+                                <p>{{i.type}}</p>
+                                <p>Email:{{i.email}}</p>
+                                <p>Phone:{{i.phone}}</p>
+                                
+                                {% if i.re_appointed_date %}
+                                    <h5>Re- Appointed Date : {{i.re_appointed_date}}</h5>
+                                    {%else%}
+                                    <h5>Appointed Date : {{i.appointed_date}}</h5>
+                                {% endif %}
+
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- PP Modal End -->
             </div>
-        </div>
-        <div class="col-md-4 col-6 p-3">
-            <div class="mainman text-center ">
-                <img src="{%static 'images/bharat.jpg'%}" alt="" srcset="">
-                <h6>Mr. Bharat Bahadur Basnet</h6>
-                <p class="text-danger p-0 m-0">Director</p>
-                <small class="d-block">Samuha(Ka)</small>
-                <!-- <button class="btn btn-outline-danger mt-2">
-                    View More
-                </button> -->
-            </div>
-        </div>
-        <div class="col-md-4 col-6 p-3">
-            <div class="mainman text-center ">
-                <img src="{%static 'images/sures.jpg'%}" alt="" srcset="">
-                <h6>Mr. Suresh Prasad Khatri</h6>
-                <p class="text-danger p-0 m-0">Director</p>
-                <small class="d-block">Samuha(Ka)</small>
-                <!-- <button class="btn btn-outline-danger mt-2">
-                    View More
-                </button> -->
-            </div>
-        </div>
-        <div class="col-md-4 col-6 p-3">
-            <div class="mainman text-center ">
-                <img src="{%static 'images/min.jpg'%}" alt="" srcset="">
-                <h6>Mr. Min Bahadur Samari</h6>
-                <p class="text-danger p-0 m-0">Director</p>
-                <small class="d-block">Samuha(Ga)</small>
-                <!-- <button class="btn btn-outline-danger mt-2">
-                    View More
-                </button> -->
-            </div>
-        </div>
-        <div class="col-md-4 col-6 p-3">
-            <div class="mainman text-center ">
-                <img src="{%static 'images/naren.jpg'%}" alt="" srcset="">
-                <h6>Mr. Narendra Singh Bista</h6>
-                <p class="text-danger p-0 m-0">Director</p>
-            
-                <!-- <button class="btn btn-outline-danger mt-2">
-                    View More
-                </button> -->
-            </div>
-        </div>
-        <div class="col-md-4 col-6 p-3">
-            <div class="mainman text-center ">
-                <img src="{%static 'images/sha.png'%}" alt="" srcset="">
-                <h6>Ms. Shalini Rana </h6>
-                <p class="text-danger p-0 m-0">Director</p>
-           
-                <!-- <button class="btn btn-outline-danger mt-2">
-                    View More
-                </button> -->
-            </div>
-        </div>
-        <div class="col-md-4 col-6 p-3">
-            <div class="mainman text-center ">
-                <img src="{%static 'images/bh.jpg'%}" alt="" srcset="">
-                <h6>Dr. Bharat Kumar Thapa</h6>
-                <p class="text-danger p-0 m-0">Independent Director</p>
-              
-                <!-- <button class="btn btn-outline-danger mt-2">
-                    View More
-                </button> -->
-            </div>
-        </div>
+        {% endfor %}
+
     </div>
   
 </div>

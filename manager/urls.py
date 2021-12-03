@@ -21,7 +21,10 @@ urlpatterns = [
     path('addproducts', views.ProductView, name="product"),
     path('subproduct', views.SubProductView, name="subProduct"),
     path('questionAnswer', views.QuestionAnswerView, name="questionAnswer"),
-    path('announcement', views.AnnouncementView, name="announcement")
+    path('announcement', views.AnnouncementView, name="announcement"),
+    path('addForms', views.addForm, name="addForm"),
+    path('departmentTeam', views.DepartmentView, name = "departmentTeam"),
+    path('deleteAnn/<int:id>', views.deleteAnn, name="deleteAnn")
  
 ]
 

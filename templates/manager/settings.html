@@ -41,8 +41,8 @@
                     <div class="mt-4 text-center">
                         <img src="
                         {% if setting.logo %}
-                            setting.logo.url
-                            {%else%}
+                            {{setting.logo.url}}
+                        {%else%}
                             {%static 'images/logo.png'%}
                         {% endif %}
                             " class="rounded-circle" width="150">
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="col-lg-8 col-xlg-8 col-md-7 col-12">
-            <form action="" method="post" style="width: 100%;">
+            <form action="" method="post" style="width: 100%;" enctype="multipart/form-data">
                
                 <div class="row formbox">
                     <div class="col-6">

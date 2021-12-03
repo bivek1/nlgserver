@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-11 col-md-10 p-0 m-0 pl-2">
                                 <p class="text-light p-0 m-0 topline">Head Office</p>
-                                <p class="text-light p-0 m-0 topline">Lazimpat, Kathmandu Nepal</p>
+                                <p class="text-light p-0 m-0 topline">{{setting.location}}</p>
                             </div>
                         </div>
                         <!-- Map Modal -->
@@ -84,18 +84,18 @@
                     <div class="col-md-4 col-4 pl-5">
                         <div class="row">
                             <div class="col-2 col-md-2 aboutimg p-0 m-0 pl-4 mt-2 text-right">
-                                <a href="tel:01-4442646"> 
+                                <a href="tel:{{setting.number1}}"> 
                                 <i class="fa fa-phone-square text-light" style="font-size: 24px; margin-left: 20px;"></i> 
                                </a>
                             </div>
                             <div class="col-4 col-md-3 p-0 m-0 text-center">
                                 <p class="text-light p-0 m-0 topline">
-                                     <a href="tel:01-4442646" class="topline"> 01-4442646 </a></p>
-                                <p class="text-light p-0 m-0 topline"><a class ="topline"href="tel:01-4442646"> 01-4006648 </a></p>
+                                     <a href="tel:{{setting.number1}}" class="topline"> {{setting.number2}} </a></p>
+                                <p class="text-light p-0 m-0 topline"><a class ="topline" href="tel:{{setting.number2}}"> {{setting.number2}} </a></p>
                             </div>
                             <div class="col-6 col-md-6 p-0 m-0 pl-3">
-                                <p class="text-light p-0 m-0 topline"> Toll Free No - 16600199099</p>
-                                <p class="text-light p-0 m-0 topline"> Email- info@nlgi.com.np </p>
+                                <p class="text-light p-0 m-0 topline"> Toll Free No - {{setting.toll_free_no}}</p>
+                                <p class="text-light p-0 m-0 topline"> Email- {{setting.email}} </p>
                 
                                     <!-- <a href="" class="topline" data-toggle="modal" data-target="#exampleModalCenterLogin"> <i class="fa fa-user"></i> Login </a> -->
                                 
@@ -151,7 +151,14 @@
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" id="navbar" style="margin-bottom: 15px;">
             <div class="navbar-brand">
                 <a href="{%url 'landing:landing'%}">
-                    <img src="{%static 'images/logo.png'%}" alt="" srcset="">
+                    
+                    {% if setting.logo %}
+                        <img src="{{setting.logo.url}}" alt="" srcset="" >
+                      {%else%}
+                        <img src="{%static 'images/logo.png'%}" alt="" srcset="">
+                    {% endif %}
+                        
+                    
                 </a>
                 <p class="logoslogan text-danger">सबैको सुरक्षा, एनएलजीको ईच्छा</p>
             </div>

@@ -11,6 +11,40 @@
     }
   </style>
   <div class="container-fluid">
+    
+    {% for i in ann  %}
+         <!-- Annoucement Link -->
+      <div class="modal fade" id="exampleModalCenterAnn{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-dark" id="exampleModalLongTitle">Annoucement - {{i.name}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+              <a href="{%url 'landing:landing'%}" class="footer-logo text-center">
+                
+                {% if i.image %}
+                <img src="{{i.image.url}}" class="img-fluid" style="height: 145px; width: 50%;">
+                {% endif %}
+
+              </a>
+          
+             </p>
+            </div>
+            <div class="modal-footer">
+
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+       </div>
+       <!-- End Annoucement -->
+    {% endfor %}
+   
+     
     <div class="row backandroll">
         <div class="col-md-5 col-12 p-0 m-0 head-right home-man">
           <div class="firsthead p-3 ml-4">
@@ -63,7 +97,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+             </div>
              <!-- End Description Link -->
             </p>
             <a href="{%url 'landing:download'%}">
@@ -765,5 +799,16 @@
       </div>
     </div>
   </div>
- 
+
+  
+  {% for i in ann  %}
+  <script type="text/javascript">
+    $(window).on('load', function() {
+        $('#exampleModalCenterAnn{{i.id}}').modal('show');
+    });
+  </script> 
+  {% endfor %}
+    
+    
+
 {% endblock content %}
