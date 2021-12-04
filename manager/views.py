@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .forms import AgentF, AnnouncementForm, BranchF, DepartmentHeadForm, DownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
-from landing.models import Announcement, Branch, DepartmentHead, Setting, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
+from landing.models import Announcement, Branch, DepartmentHead, PageVisit, Setting, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
+
 
 # Create your views here.
 @login_required
@@ -23,6 +24,8 @@ def dashboard(request):
     depart_count = DepartmentHead.objects.all().count()
     bod_count = Bod.objects.all().count()
     manage_count = ManagementTeam.objects.all().count()
+    page_count = PageVisit.objects.all().count()
+    
     
     dist ={
         'news_count':news_count,
@@ -37,7 +40,8 @@ def dashboard(request):
         'form_count':form_count,
         'depart_count':depart_count,
         'bod_count':bod_count,
-        'manage_count':manage_count
+        'manage_count':manage_count,
+        'count':page_count
         }
     return render(request, "manager/dashboard.html", dist)
 
@@ -171,7 +175,8 @@ def formReport(request, id):
 
     dist ={
         'name':name,
-        'report':report
+        'report':report,
+        'type':id
     }
     return render(request, 'manager/viewForm.html', dist)
 
@@ -191,7 +196,8 @@ def statementReport(request, id):
 
     dist ={
         'name':name,
-        'report':report
+        'report':report,
+        'type':id
     }
     return render(request, 'manager/viewReport.html', dist)
 
@@ -407,3 +413,76 @@ def deleteAnn(request, id):
     aa.delete()
     messages.success(request,"Sucessfully Deleted Announcement")
     return HttpResponseRedirect(reverse('manager:announcement'))
+
+def deleteProduct(request, id):
+    aa=  Product.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Product")
+    return HttpResponseRedirect(reverse('manager:product'))
+
+def deleteSubProduct(request, id):
+    aa =  Sub_product.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Sub-Product")
+    return HttpResponseRedirect(reverse('manager:subProduct'))
+
+def deleteQuestion(request, id):
+    aa =  QuestionAnswer.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Questions")
+    return HttpResponseRedirect(reverse('manager:questionAnswer'))
+
+def deleteDepartment(request, id):
+    aa =  DepartmentHead.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Department Team")
+    return HttpResponseRedirect(reverse('manager:departmentTeam'))
+
+
+def deleteAgent(request, id):
+    aa =  Agent.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Agent")
+    return HttpResponseRedirect(reverse('manager:addAgent'))
+
+def deleteCitizen(request, id):
+    aa =  Citizen.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Citizen")
+    return HttpResponseRedirect(reverse('manager:addCitizen'))
+
+def deleteSuveryor(request, id):
+    aa =  Surveryor.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Surveryor")
+    return HttpResponseRedirect(reverse('manager:addSurveryor'))
+
+def deleteBod(request, id):
+    aa =  Bod.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Bod")
+    return HttpResponseRedirect(reverse('manager:addBod'))
+
+def deleteManagement(request, id):
+    aa =  ManagementTeam.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Management Team")
+    return HttpResponseRedirect(reverse('manager:managementTeam'))
+
+def deleteReport(request, id, type):
+    aa =  Report.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Report")
+    return HttpResponseRedirect(reverse('manager:statementReport', args=[type]))
+
+def deleteForm(request, id, type):
+    aa =  Download.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted Forms")
+    return HttpResponseRedirect(reverse('manager:formReport', args=[type]))
+
+def deleteNews(request, id):
+    aa =  news.objects.get(id =id )
+    aa.delete()
+    messages.success(request,"Sucessfully Deleted News")
+    return HttpResponseRedirect(reverse('manager:newUpdate'))

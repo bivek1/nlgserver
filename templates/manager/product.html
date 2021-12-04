@@ -102,7 +102,7 @@
                                
                                     <td class="align-middle">
                                         <h6> {{i.name}} </h6>
-                                        {{i.description|safe}}
+                                        {{i.description|truncatewords:15}}
                                     </td>
                                   
                                     {% if i.image %}
@@ -118,10 +118,10 @@
                                                     Edit
                                             </button>
                                         </a>  -->
-                                        <!-- <button class=" text-light btn btn-sm  btn-danger btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
+                                        <button class=" text-light btn btn-sm  btn-danger btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
                                             <i class="fa fa-trash p-2"></i>
                                             Delete
-                                        </button> -->
+                                        </button>
                                         <!-- Delete Modal -->
                                         <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -133,9 +133,9 @@
                                                
                                                 <div class="modal-footer">
                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                                  <!-- <a href="{%url 'manager:deleteBranch' i.id%}"> -->
+                                                  <a href="{%url 'manager:deleteProduct' i.id%}">
                                                     <button type="button" class="btn btn-primary">Yes</button>
-                                                  <!-- </a> -->
+                                                  </a>
                                                 
                                                 </div>
                                               </div>

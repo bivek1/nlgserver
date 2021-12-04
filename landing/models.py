@@ -211,6 +211,14 @@ class DepartmentHead(models.Model):
     def __str__(self) -> str:
         return self.name
 
+class PageVisit(models.Model):
+    count = models.BigIntegerField()
+    objects = models.Manager()
+
+    def __str__(self) -> str:
+        return self.count
+
+
 
 
     

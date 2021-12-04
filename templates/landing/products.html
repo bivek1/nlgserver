@@ -57,6 +57,26 @@
                                       <p class="text-dark">
                                         {{i.description}}
                                       </p>
+                                      
+                                      {% if i.sub_product.all %}
+                                        <h4>Sub Products</h4>
+                                        
+                                        {% for j in i.sub_product.all%}
+                                        <div class="row" style="background-color: aliceblue;">
+                                            <div class="col-6">
+                                              <p>{{j.name}}</p>
+                                              <small>{{j.description}}</small>
+                                            </div>
+                                            <div class="col-6">
+                                              <img src="{{j.image.url}}" alt="" srcset="" style="height: 100px;width: 100px;">
+                                              
+                                            </div>
+                                        </div>
+                                   
+                                        {% endfor %}
+                                          
+                                      {% endif %}
+                                        
                                     
                                   </div>
                                   </div>

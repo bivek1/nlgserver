@@ -20,15 +20,13 @@
             </div>
         </div>
     </div>
-    <div class="text-center">
+    <div class="text-center ps-3 pe-3">
         {% if messages %}
         {% for m in messages  %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{m}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         {% endfor %}
         {% endif %}
     </div>
@@ -103,7 +101,7 @@
                                                    
                                                     <div class="modal-footer">
                                                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                                      <a href="{%url 'manager:deleteBranch' i.id%}">
+                                                      <a href="{%url 'manager:deleteAgent' i.id%}">
                                                         <button type="button" class="btn btn-primary">Yes</button>
                                                       </a>
                                                     

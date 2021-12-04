@@ -1,13 +1,19 @@
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Announcement, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, Product, QuestionAnswer, Setting, Surveryor, Citizen, Report, Download, fiscalYear, news
+from .models import Announcement, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, PageVisit, Product, QuestionAnswer, Setting, Surveryor, Citizen, Report, Download, fiscalYear, news
 from django.http import FileResponse, Http404, HttpResponse, HttpResponseRedirect, JsonResponse, request
 from django.urls import reverse
 from django.conf import settings
 from django.db.models import Q
 from django.contrib.auth import login, logout, authenticate
 # Create your views here.
+
+
+def PageVisitView():
+    PageVisit.objects.create(count = 1)
+
 def landing(request):
+    PageVisitView()
     sett = Setting.objects.all()
     ann = Announcement.objects.all()
     setting = None
@@ -22,6 +28,7 @@ def landing(request):
     return render(request, "landing/index.html", dist)
 
 def productPolicy(request):
+    PageVisitView()
     sett = Setting.objects.all()
     products = Product.objects.all()
     setting = None
@@ -36,6 +43,7 @@ def productPolicy(request):
     return render(request, 'landing/products.html', dist)
 
 def aboutUs(request):
+    PageVisitView()
     sett = Setting.objects.all()
     setting = None
     
@@ -52,6 +60,7 @@ def aboutUs(request):
     return render(request, "landing/about.html", dist)
 
 def contact(request):
+    PageVisitView()
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -64,6 +73,7 @@ def contact(request):
     return render(request, "landing/contactus.html", dist)
 
 def faq(request):
+    PageVisitView()
     sett = Setting.objects.all()
     faq = QuestionAnswer.objects.all()
     setting = None
@@ -78,6 +88,7 @@ def faq(request):
     return render(request, "landing/faq.html", dist)
 
 def term(request):
+    PageVisitView()
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -90,6 +101,7 @@ def term(request):
     return render(request, "landing/terms.html", dist)
 
 def training(request):
+    PageVisitView()
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -102,6 +114,7 @@ def training(request):
     return render(request, "landing/training.html", dist)
 
 def sitemap(request):
+    PageVisitView()
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -115,6 +128,7 @@ def sitemap(request):
 
 
 def finance(request):
+    PageVisitView()
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -171,6 +185,7 @@ def pdf_view(request,slug, id):
         raise Http404()
 
 def surveyor(request):
+    PageVisitView()
     s = Surveryor.objects.all()
     sett = Setting.objects.all()
     setting = None
@@ -185,6 +200,7 @@ def surveyor(request):
     return render(request, "landing/surveyor.html", dist)
 
 def agents(request):
+    PageVisitView()
     s = Agent.objects.all()
     sett = Setting.objects.all()
     setting = None
@@ -200,6 +216,7 @@ def agents(request):
     return render(request, "landing/agents.html", dist)
 
 def citizen(request):
+    PageVisitView()
     s = Citizen.objects.all()
     sett = Setting.objects.all()
     setting = None
@@ -215,6 +232,7 @@ def citizen(request):
     return render(request, "landing/citizen.html", dist)
 
 def branch(request):
+    PageVisitView()
     branch = Branch.objects.all().order_by('district')
     sett = Setting.objects.all()
     setting = None
@@ -245,6 +263,7 @@ def branch(request):
         return render(request, 'landing/branch.html', dist)
 
 def gallery(request):
+    PageVisitView()
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -258,6 +277,7 @@ def gallery(request):
     return render(request, "landing/gallary.html", dist)
 
 def download(request):
+    PageVisitView()
     d = news.objects.all()
     two = news.objects.all().order_by('-id')[:2]
     sett = Setting.objects.all()
@@ -274,6 +294,7 @@ def download(request):
     return render(request, "landing/download.html", dist)
 
 def calculator(request):
+    PageVisitView()
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -302,6 +323,7 @@ def checkLogin(request):
         return JsonResponse(data)
 
 def downloadFile(request):
+    PageVisitView()
     files = Download.objects.all()
     sett = Setting.objects.all()
     setting = None

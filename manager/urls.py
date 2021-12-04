@@ -24,7 +24,18 @@ urlpatterns = [
     path('announcement', views.AnnouncementView, name="announcement"),
     path('addForms', views.addForm, name="addForm"),
     path('departmentTeam', views.DepartmentView, name = "departmentTeam"),
-    path('deleteAnn/<int:id>', views.deleteAnn, name="deleteAnn")
- 
+    path('deleteAnn/<int:id>', views.deleteAnn, name="deleteAnn"),
+    path('deleteProduct/<int:id>', views.deleteProduct, name ="deleteProduct"),
+    path('deleteSubProduct/<int:id>', views.deleteSubProduct, name = "deleteSubProduct"),
+    path('deleteQuestion/<int:id>', views.deleteQuestion, name = "deleteQuestion"),
+    path('deleteDepartment/<int:id>', views.deleteDepartment, name="deleteDepartment"),
+    path('deleteAgent/<int:id>', views.deleteAgent, name="deleteAgent"),
+    path('deleteCitizen/<int:id>', views.deleteCitizen, name="deleteCitizen"),
+    path('deleteSuveryor/<int:id>', views.deleteSuveryor, name="deleteSuveryor"),
+    path('deleteBod/<int:id>', views.deleteBod, name="deleteBod"),
+    path('deleteManagement/<int:id>', views.deleteManagement, name="deleteManagement"),
+    path('deleteReport/<int:id>/<int:type>', views.deleteReport, name="deleteReport"),
+    path('deleteForm/<int:id>/<int:type>', views.deleteForm, name="deleteForm"),
+    path('deleteNews/<int:id>', views.deleteNews, name="deleteNews"),
 ]
 
