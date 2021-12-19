@@ -1,0 +1,74 @@
+{% extends "manager/dashboard.html" %}
+{% block title %}
+   Contact Us | Messages
+{% endblock title %}
+
+{% block inner %}
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Dashboard</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{%url 'landing:landing'%}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{%url 'manager:dashboard'%}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Messages| Contact Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .form-control {
+        width: 100%;
+    }
+   
+
+
+</style>
+
+<div class="row ps-2 pe-2">
+    <H3>Messages List</H3>
+    <hr>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table stylish-table no-wrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Name</th>
+                                <th class="border-top-0">Phone</th>
+                                <th class="border-top-0">Email</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in contact %}
+                                <tr>
+                               
+                                    <td class="align-middle">
+                                        <h6>Name: {{i.Name}} </h6>
+                                        <p class="d-block">Subject: {{i.subject}} </p>
+                                        <small>Messages: {{i.message}} </small>
+                                      
+                                    </td>
+                                    <td class="align-middle">{{i.phone}}</td>
+                                    
+                                    <td class="align-middle">{{i.email}}</td>
+                                        
+                                  
+                                </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock inner %}

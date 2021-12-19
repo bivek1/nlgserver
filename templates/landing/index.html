@@ -118,111 +118,55 @@
           <h4 class="ml-3 mr-3 text-center">Your Future Our Responsibilty</h4>
           <hr class="ml-3 mr-3">
           <div class="row p-3">
-                    <!-- Property -->
-                    <div class="col-md-3 col-6 p-2" data-scroll-reveal="enter left move 30px over 0.3s after 0.2s">
-                      <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterProperty">
-                          <div class="text-center p-1">
-                              <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="">
-                              <p class="text-center p-0 m-0">Property</p>
-                            
-                          </div>
-                            <!-- Modal PP -->
-                            <div class="modal fade" id="exampleModalCenterProperty" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Property Insurance</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div class="text-center p-1">
-                                      <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="" style="height: 250px;">
-                                      <p>
-                                        Your valuable properties (building, machine, furniture & fixtures, stock etc) take years to build and needs your careful planning in terms of its protection. It supports not just your livelihood, but that of all individuals and their families directly and indirectly connected with it. Good sense would dictate that it is adequately protected with a Property Insurance Policy from NLG. The Standard Property Insurance Policy covers loss or damage caused by Fire, Earthquake, Lightning, Riot, Strike and malicious damage, Terrorism etc. to the insured property, including computers and ancillary equipments.
-                                      </p>
-                                      <p>Started from 1st Magh, 2075 (15th Jan, 2019)</p>
-                                    
-                                  </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            
+            {% for i in products %}
+              <div class="col-md-3 col-6 p-2" data-scroll-reveal="enter left move 30px over 0.3s after 0.2s">
+                <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterProperty{{i.id}}">
+                    <div class="text-center p-1">
+                        <img class="res-gif" src="{{i.image.url}}" alt="" srcset="">
+                        <p class="text-center p-0 m-0">{{i.name|truncatewords:1|slice:"-2"}}</p>
+                      
+                    </div>
+                      <!-- Modal PP -->
+                      <div class="modal fade" id="exampleModalCenterProperty{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="text-center p-1">
+                                <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="height: 250px;">
+                                <p>
+                                {{i.description}}
+                                </p>
+                                {% if i.sub_product.all %}
+                                        <h5 class="text-dark">Sub Product</h5>
+                                        <hr>
+                                        {% for j in i.sub_product.all%}
+                                        <div class="row p-2">
+                                          <div class="col-12 col-md-12 text-center mt-4">
+                                            <div class="bod d-flex">
+                                                <img src="{{j.image.url}}" alt="{{j.name}}">
+                                                <div class="p-2 ml-5">
+                                                    <h4 class="text-dark">{{j.name}}</h4>
+                                                  
+                                                    <small>{{j.description}}</small><br>
+                                              
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
                                 
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- PP Modal End -->
-                      </div>
-                  </div>
-
-                   <!-- Marine -->
-              <div class="col-md-3 col-6 p-2">
-                <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterMarine">
-                    <div class="text-center p-1">
-                        <img class="res-gif" src="{%static 'assets/images/marine1.gif'%}" alt="" srcset="">
-                        <p class="text-center p-0 m-0">Marine</p>
-                        
-                    </div>
-                    <!-- Modal Marine -->
-                    <div class="modal fade" id="exampleModalCenterMarine" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Marine (Cargo) Insurance Policy</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="text-center p-1">
-                              <img class="res-gif" src="{%static 'assets/images/marine1.gif'%}" alt="" srcset="" style="height: 250px;">
-                              <p class="text-center p-0 m-0">Once your marine cargo lands you tend to take good care of it. But who does protect it whilst its on high seas? Your cargo can be damaged on exposure to a wide variety of risks, including accidents, stranding, grounding, sinking, burning, collisions, faults or errors in navigation, heavy weather, entry of sea or river water, improper stowage by the carrier, theft or pilferage, strikes or natural perils. Why expose it to such risks, when you can cover it with Marine Insurance Policy from NLG. Marine Insurance Policy covers against perils exposed in marine cargo (ICC), inland transit (ITC), and air cargo (ICC Air).</p>
-                              <p>Started from 21st Chaitra, 2062</p>
-                          </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Marine Modal End -->
-                </div>
-            </div>
-             <!-- motor -->
-             <div class="col-md-3 col-6 p-2">
-                <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterMotor">
-                    <div class="text-center p-1">
-                        <img class="res-gif" src="{%static 'assets/images/motor.gif'%}" alt="" srcset="">
-                        <p class="text-center p-0 m-0">Motor</p>
-                        
-                    </div>
-                      <!-- Modal PP -->
-                      <div class="modal fade" id="exampleModalCenterMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLongTitle">Motor Insurance Policy</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="text-center p-1">
-                                <img class="res-gif" src="{%static 'assets/images/motor.gif'%}" alt="" srcset="" style="height: 250px;">
-                                <p>
-                                  Your vehicle is one of your biggest pride of profession. Be it your own private vehicle used to commute to and for office, or public transport such as taxi or bus used to transport people, or a commercial vehicle used to transport goods between cities, whatever you insurance needs, NLG covers all types of vehicle insurance. Motor Insurance is perhaps the main class of insurance that covers your financial loss that can arise on virtually a daily basis, whether it is damaged to your own vehicle, damage to third party's vehicle or injury/death to a passenger or a member of the public as a result of a vehicle accident.
-                                </p>
-                                <p>Started from 21st Chaitra, 2062</p>
-                                <ul>
-                                  <li><a href="">Motor Cycle Insurance</a></li>
-                                  <li><a href="">Private Vehicle Insurance</a></li>
-                                  <li><a href="">Third Party Insurance</a></li>
+                                   
+                                        {% endfor %}
+                                          
+                                      {% endif %}
+                                
                               
-                                </ul>
                             </div>
                             </div>
                             <div class="modal-footer">
@@ -235,222 +179,7 @@
                       <!-- PP Modal End -->
                 </div>
               </div>
-           
-
-                <!-- Engineering -->
-                <div class="col-md-3 col-6 p-2">
-                  <div class="white-box">
-                      <div class="text-center p-1" data-toggle="modal" data-target="#exampleModalCenterEng">
-                          <img class="res-gif" src="{%static 'assets/images/eng.gif'%}" alt="" srcset="">
-                          <p class="text-center p-0 m-0">Engineering </p>
-                          
-                      </div>
-                      <!-- Modal PP -->
-                      <div class="modal fade" id="exampleModalCenterEng" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLongTitle">Engineering Insurance Policy</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="text-center p-1">
-                                <img class="res-gif" src="{%static 'assets/images/eng.gif'%}" alt="" srcset="" style="height: 250px;">
-                                <p>
-                                  Setting up a major manufacturing process involves heavy investment in a plant and machinery. While a fire policy can cover loss or damage caused by fire and numerous other perils, it does not cover breakdown of the plant and machinery. Such breakdown can prove to be extremely costly requiring import of parts and expertise in repair.
-                                  Moreover, machinery breakdown can halt your complete manufacturing process. Protect it with Machinery Breakdown policy from NLG. This covers machinery (electrical equipment, mechanical plant, process machinery) against unforeseen, sudden accidental physical loss or damage caused.
-                                </p>
-                                <p>Started from 21st Chaitra, 2062</p>
-                                <ul>
-                                  <li><a href="">Machinery Insurance</a></li>
-                                  <li><a href="">Contractor's All Risk Insurance</a></li>
-                                <ul>
-                          </ul></ul>
-                            </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                          
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- PP Modal End -->
-                  </div>
-                </div>
-              <!-- Miscellaneous -->
-              <div class="col-md-3 col-6 p-2">
-                  <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterLife">
-                      <div class="text-center p-1">
-                          <img class="res-gif" src="{%static 'assets/images/more.gif'%}" alt="" srcset="">
-                          <p class="text-center p-0 m-0">Miscellaneous</p>
-                          
-                      </div>
-                       <!-- Modal PP -->
-                       <div class="modal fade" id="exampleModalCenterLife" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLongTitle">Miscellaneous Insurance Policy</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="text-center p-1">
-                                <img class="res-gif" src="{%static 'assets/images/more.gif'%}" alt="" srcset="" style="height: 250px;">
-                                <p class="text-dark">
-                                  Apart from the above policies, NLG also provides the following products to protect your interest in various aspects of your Life ranging from Medical Insurance to Burglary Insurance, Public Liability Insurance to Fidelity Guarantee Insurance and many others as mentioned below:
-  
-                                </p>
-                                <p class="text-dark">Started from 21st Chaitra, 2062</p>
-                                <ul>
-                                  <li><a href="">Personal Accident and Group Personal Accident Insurance</a></li>
-                                  <li><a href="">House Hold Insurance</a></li>
-                                  <li><a href="">Medical Insurance</a></li>
-                                  <li><a href="">Banker's Indemnity Insurance</a></li>
-                                  <li><a href="">Fidelity Insurance</a></li>
-                                  <li><a href="">Burglary Insurance</a></li>
-                                  <li><a href="">Public Liability Insurance</a></li>
-                                  <li><a href="">Money Insurance</a></li>
-                                  <li><a href="">Workmen's Compensation Insurance</a></li>
-                                  <li><a href="">Student Safety Insurance</a></li>
-                                  <li><a href="">International Travel &amp; Medicare Insurance</a></li>
-              
-                                  <li><a href="">Duty Insurance</a></li>
-                                  <li><a href="">Professional Indemnity Insurance</a></li>
-                                  <li><a href="">Baggage Insurance</a></li>
-                              <ul>
-                          </ul></ul>
-                            </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                          
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- PP Modal End -->
-                  </div>
-              </div>
-
-                <!-- Agriculture -->
-                <div class="col-md-3 col-6 p-2">
-                  <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterCovid">
-                      <div class="text-center p-1">
-                          <img class="res-gif" src="{%static 'assets/images/agri.gif'%}" alt="" srcset="">
-                          <p class="text-center p-0 m-0">Agriculture</p>
-                        
-                      </div>
-                        <!-- Modal PP -->
-                        <div class="modal fade" id="exampleModalCenterCovid" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Agriculture Insurance Policy</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div class="text-center p-1">
-                                  <img class="res-gif" src="{%static 'assets/images/agri.gif'%}" alt="" srcset="" style="height: 250px;">
-                                 
-                                </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- PP Modal End -->
-                  </div>
-                </div>
-
-                  <!-- Micro -->
-              <div class="col-md-3 col-6 p-2">
-                <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterMic">
-                    <div class="text-center p-1">
-                        <img class="res-gif" src="{%static 'assets/images/mic.gif'%}" alt="" srcset="">
-                        <p class="text-center p-0 m-0">Micro </p>
-                        
-                    </div>
-                      <!-- Modal PP -->
-                      <div class="modal fade" id="exampleModalCenterMic" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLongTitle">Micro Insurance Policy</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="text-center p-1">
-                                <img class="res-gif" src="{%static 'assets/images/mic.gif'%}" alt="" srcset="" style="height: 250px;">
-                               
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                          
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- PP Modal End -->
-                </div>
-              </div>
-
-                <!-- Aviation -->
-                <div class="col-md-3 col-6 p-2">
-                  <div class="white-box">
-                      <div class="text-center p-1" data-toggle="modal" data-target="#exampleModalCenterAvaiation">
-                          <img class="res-gif" src="{%static 'assets/images/plane3.gif'%}" alt="" srcset="">
-                          <p class="text-center p-0 m-0">Aviation </p>
-                          
-                      </div>
-                        <!-- Modal PP -->
-                        <div class="modal fade" id="exampleModalCenterAvaiation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Aviation Insurance Policy</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div class="text-center p-1">
-                                  <img class="res-gif" src="{%static 'assets/images/plane3.gif'%}" alt="" srcset="" style="height: 250px;">
-                                  <p>
-                                    We live in a country full of rough and unforgiving terrain where aviation disasters have   headlined the newspapers far more frequently than we would have liked. Remote and far flung areas of the country have been brought closer by the expanding aviation business but this has also magnified the occurrence of aviation disasters.
-                                    Nobody is able to cover the emotional loss that these disasters wreck upon us but the financial damage caused by the loss of bread-winners can be minimized through Aviation Insurance.
-                                  </p>
-                                  <p>Started from 21st Chaitra, 2062</p>
-                              </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- PP Modal End -->
-                  </div>
-              </div>
-              
-             
-            
-            
-        
-            
+            {% endfor %}
           </div>
           <br>
           <a href="{%url 'landing:productPolicies'%}" class="main-button-slider ml-3">KNOW MORE</a>
@@ -770,6 +499,7 @@
                               required="" style="background-color: rgba(250,250,250,0.3);"></textarea>
                       </fieldset>
                   </div>
+                  {% csrf_token %}
                   <div class="col-lg-12">
                       <fieldset>
                           <button type="submit" id="form-submit" class="main-button-slider" style="border: none;">Send Message

@@ -50,7 +50,7 @@ class SurveryorF(forms.ModelForm):
             'name':forms.TextInput(attrs={'placeholder':'Name of the Surveryor', 'required':True}),
             'specilization':forms.TextInput(attrs={'placeholder':'Specilization of the Surveryor', 'required':True}),
             'lience_no':forms.TextInput(attrs={'placeholder':'Licence No. of the Surveryor', 'required':True}),
-            'issued_date':forms.DateInput(attrs={'type':'date', 'required':True}),
+            'issued_date':forms.DateInput(attrs={'type':'date'}),
             'renew_date':forms.DateInput(attrs={'type':'date'}),
             'area':forms.TextInput(attrs={'placeholder':'Area', 'required':True}),
             'contact':forms.TextInput(attrs={'placeholder':'Contact No. of the Surveryor', 'required':True}),
@@ -173,7 +173,7 @@ class ProductFrom(forms.ModelForm):
 
         widgets = {
             'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Name of the Product", 'required':True}),
-            'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line', 'required':True}),
+            'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'description': forms.Textarea(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Add a Description', 'required':True}),
             'icons': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"fa fa-motorcycle"}),
         }   
@@ -191,7 +191,7 @@ class SubProductFrom(forms.ModelForm):
 
         widgets = {
             'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Name of the Product", 'required':True}),
-            'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line', 'required':True}),
+            'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'product': forms.Select(attrs={'class':'form-control ps-0 form-control-line', 'required':True}),
             'description': forms.Textarea(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Add a Description', 'required':True}),
             'discontinue': forms.CheckboxInput()
@@ -252,3 +252,13 @@ class DepartmentHeadForm(forms.ModelForm):
             'post':forms.TextInput(attrs={'class':'form-control ps-0 form-control-line', 'placeholder':'Post of the Team'}),
             'email':forms.TextInput(attrs={'class':'form-control ps-0 form-control-line', 'placeholder':'Email@nlgi.com'}),
         }
+
+from django.contrib.auth.forms import PasswordChangeForm
+
+class FormChangePassword(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(FormChangePassword, self).__init__(*args, **kwargs)
+        for field in ('old_password', 'new_password1', 'new_password2'):
+            self.fields['old_password'].widget.attrs = {'class':'form-control ps-0 form-control-line', 'placeholder':"Old Password"}
+            self.fields['new_password1'].widget.attrs = {'class':'form-control ps-0 form-control-line', 'placeholder':"New Password"}
+            self.fields['new_password2'].widget.attrs = {'class':'form-control ps-0 form-control-line', 'placeholder':"Re New Password"}

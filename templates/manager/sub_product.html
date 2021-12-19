@@ -81,7 +81,7 @@
 
 <br>
 <div class="row ps-2 pe-2">
-    <H3>Product List</H3>
+    <H3>Sub Product List</H3>
     <hr>
     <div class="col-sm-12">
         <div class="card">
@@ -91,8 +91,9 @@
                         <thead>
                             <tr>
                                 <th class="border-top-0">Name</th>
-                                <th class="border-top-0">Image</th>
+                               
                                 <th class="border-top-0">Product</th>
+                                <th class="border-top-0">Image</th>
                                 <th class="border-top-0">......</th>
                             </tr>
                         </thead>
@@ -114,12 +115,27 @@
                                     {% endif %}
                                         
                                     <td class="align-middle">
-                                        <!-- <a href="#">
-                                            <button class="text-light btn btn-sm btn-primary btn-danger">
+                                        <a href="{%url 'manager:editSubProduct' i.id%}">
+                                            <button class="text-light btn btn-sm btn-primary">
                                                 <i class="fa fa-edit p-2"></i>
                                                     Edit
                                             </button>
-                                        </a>  -->
+                                        </a> 
+                                        {% if i.hide %}
+                                        <a href="{%url 'manager:hideSubProduct' i.id%}">
+                                            <button class="text-light btn btn-sm btn-secondary">
+                                                <i class="fa fa-eye p-2"></i>    
+                                                UnHide
+                                            </button>
+                                        </a> 
+                                         {%else%}
+                                         <a href="{%url 'manager:hideSubProduct' i.id%}">
+                                            <button class="text-light btn btn-sm btn-secondary">
+                                                <i class="fa fa-eye-slash p-2"></i>    
+                                                Hide
+                                            </button>
+                                        </a> 
+                                        {% endif %}
                                         <button class=" text-light btn btn-sm  btn-danger btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
                                             <i class="fa fa-trash p-2"></i>
                                             Delete

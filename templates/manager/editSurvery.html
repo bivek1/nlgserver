@@ -1,0 +1,88 @@
+{% extends "manager/dashboard.html" %}
+{% block title %}
+    Edit Surveryor
+{% endblock title %}
+
+{% block inner %}
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Dashboard</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{%url 'landing:landing'%}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{%url 'manager:dashboard'%}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{%url 'manager:addSurveryor'%}">Surveryor</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Surveryor</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="text-center ps-4 pe-4">
+        {% if messages %}
+        {% for m in messages  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+   
+    
+    <form action="" method="post" style="width: 100%; padding: 30px;">
+    
+        <div class="row formbox">
+            <h3>Edit Surveryor</h3>
+            <hr>
+            <div class="col-6">
+                {{form.name.label_tag}}
+                {{form.name}}
+                {{form.name.errors}}
+            </div>
+            <div class="col-6">
+                {{form.specilization.label_tag}}
+                {{form.specilization}}
+                {{form.specilization.errors}}
+            </div>
+            <div class="col-6">
+                {{form.area.label_tag}}
+                {{form.area}}
+                {{form.area.errors}}
+            </div>
+            <div class="col-6">
+                {{form.contact.label_tag}}
+                {{form.contact}}
+                {{form.contact.errors}}
+            </div>
+            <div class="col-12">
+                {{form.email.label_tag}}
+                {{form.email}}
+                {{form.email.errors}}
+            </div>
+            <div class="col-12">
+                {{form.lience_no.label_tag}}
+                {{form.lience_no}}
+                {{form.lience_no.errors}}
+            </div>
+            <div class="col-6">
+                <label for="id_issued_date">Issued date:</label>
+                <input type="date" class="form-control" name="issued_date" value="{{issue}}">
+              
+                
+            </div>
+            <div class="col-6">
+                <label for="id_renew_date">Renew date:</label>
+                <input type="date" name="renew_date" value="{{renew}}" class="form-control ps-0 form-control-line" id="id_renew_date">
+                
+            </div>
+            {% csrf_token %}
+            <br>
+            <button class=" mt-3 btn btn-danger btn-block text-light" id="submit"> <i class="fa fa-key"></i> EDIT SURVERYOR </button>
+        </div>
+       
+    </form>
+{% endblock inner %}

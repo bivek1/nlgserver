@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Announcement, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, PageVisit, Product, QuestionAnswer, Setting, Surveryor, Citizen, Report, Download, fiscalYear, news
+from .models import Announcement,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, PageVisit, Product, QuestionAnswer, Setting, Surveryor, Citizen, Report, Download, fiscalYear, news
 from django.http import FileResponse, Http404, HttpResponse, HttpResponseRedirect, JsonResponse, request
 from django.urls import reverse
 from django.conf import settings
@@ -16,6 +16,8 @@ def landing(request):
     PageVisitView()
     sett = Setting.objects.all()
     ann = Announcement.objects.all()
+    products = Product.objects.filter(hide=False)[:8]
+    
     setting = None
     if sett:
         for i in sett:
@@ -23,14 +25,26 @@ def landing(request):
             break
     dist ={
         'setting':setting,
-        'ann':ann
+        'ann':ann,
+        'products':products,
+        
     }
+    if request.method == 'POST':
+        Contact.objects.create(
+            name = request.POST['name'],
+            email = request.POST['email'],
+            phone = request.POST['number'],
+            subject = request.POST['subject'],
+            message = request.POST['message']
+        )
+        return HttpResponseRedirect(reverse('landing:landing'))
     return render(request, "landing/index.html", dist)
 
 def productPolicy(request):
     PageVisitView()
     sett = Setting.objects.all()
-    products = Product.objects.all()
+    products = Product.objects.filter(hide=False).filter(discontinue= False)
+    discontineu = Product.objects.filter(discontinue=True)
     setting = None
     if sett:
         for i in sett:
@@ -38,7 +52,8 @@ def productPolicy(request):
             break
     dist ={
         'setting':setting,
-        'product':products
+        'product':products,
+        'discon':discontineu
     }
     return render(request, 'landing/products.html', dist)
 
@@ -70,6 +85,16 @@ def contact(request):
     dist ={
         'setting':setting
     }
+    if request.method == 'POST':
+        Contact.objects.create(
+            name = request.POST['name'],
+            email = request.POST['email'],
+            phone = request.POST['number'],
+            subject = request.POST['subject'],
+            message = request.POST['message']
+        )
+        messages.success(request,"Successfully Sent Message")
+        return HttpResponseRedirect(reverse('landing:contact'))
     return render(request, "landing/contactus.html", dist)
 
 def faq(request):

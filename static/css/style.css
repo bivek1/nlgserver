@@ -1250,9 +1250,9 @@ preloader
       }
       .branchbox{
         height: 145px;
-        width: 145px;
+        width: 100%;
         background-color: #fa0035;
-        border-radius: 200px;
+        border-radius: 10px;
         cursor: pointer;
         transition: 1s background-color;
       }

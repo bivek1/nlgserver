@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from django.contrib.auth import logout, update_session_auth_hash
 from .forms import AgentF, AnnouncementForm, BranchF, DepartmentHeadForm, DownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
-from landing.models import Announcement, Branch, DepartmentHead, PageVisit, Setting, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
+from landing.models import Announcement, Branch, Contact, DepartmentHead, PageVisit, Setting, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
-
+import datetime
+from .forms import FormChangePassword
 
 # Create your views here.
 @login_required
@@ -486,3 +487,418 @@ def deleteNews(request, id):
     aa.delete()
     messages.success(request,"Sucessfully Deleted News")
     return HttpResponseRedirect(reverse('manager:newUpdate'))
+
+def editProduct(request, id):
+    form = ProductFrom()
+    bod = Product.objects.get(id = id)
+    form.fields['name'].initial = bod.name
+    form.fields['description'].initial = bod.description
+    form.fields['discontinue'].initial = bod.discontinue
+    form.fields['icons'].initial = bod.icons
+    form.fields['image'].initial = bod.image.url
+
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.description = request.POST['description']
+       
+        bod.icons = request.POST['icons']
+        continues = request.POST.get('discontinue', False)
+        if continues == 'on':
+            bod.discontinue = True
+        else:
+            bod.discontinue = False
+
+        try:
+            bod.image = request.FILES['image']
+        except:
+            pass
+            
+        bod.save()
+        messages.success(request, "Product Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editProduct', args=[bod.id]))
+    else:
+        return render(request, 'manager/editProduct.html',dist )
+
+
+def editSubProduct(request, id):
+    form = SubProductFrom()
+    bod = Sub_product.objects.get(id = id)
+    form.fields['product'].initial = bod.product
+    form.fields['name'].initial = bod.name
+    form.fields['description'].initial = bod.description
+    form.fields['discontinue'].initial = bod.discontinue
+    form.fields['image'].initial = bod.image.url
+
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.description = request.POST['description']
+        bod.product = Product.objects.get(id = request.POST['product']) 
+        continues = request.POST.get('discontinue', False)
+        if continues == 'on':
+            bod.discontinue = True
+        else:
+            bod.discontinue = False
+
+        try:
+            bod.image = request.FILES['image']
+        except:
+            pass
+            
+        bod.save()
+        messages.success(request, "Sub Product Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editSubProduct', args=[bod.id]))
+    else:
+        return render(request, 'manager/editSubProduct.html',dist )
+
+def editQuestion(request, id):
+    form = QuestionAnswerFrom()
+    bod = QuestionAnswer.objects.get(id = id)
+    form.fields['question'].initial = bod.question
+    form.fields['answer'].initial = bod.answer
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.question = request.POST['question']
+        bod.answer = request.POST['answer']
+        bod.save()
+        messages.success(request, "FAQ Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editQuestionAns', args=[bod.id]))
+    else:
+        return render(request, 'manager/editQuestionAns.html',dist )
+
+def editDepartment(request, id):
+    form = DepartmentHeadForm()
+    bod = DepartmentHead.objects.get(id = id)
+    form.fields['name'].initial = bod.name
+    form.fields['post'].initial = bod.post
+    # form.fields['type'].initial = bod.type
+    form.fields['email'].initial = bod.email
+    form.fields['image'].initial = bod.image.url
+
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.post = request.POST['post']
+    
+        bod.email = request.POST['email']
+        try:
+            bod.image = request.FILES['image']
+        except:
+            pass
+            
+        bod.save()
+        messages.success(request, "Department Team Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editDepartment', args=[bod.id]))
+    else:
+        return render(request, 'manager/editDepartment.html',dist )
+
+def editBranch(request, id):
+    form = BranchF()
+    bod = Branch.objects.get(id = id)
+    form.fields['district'].initial = bod.district
+    form.fields['street'].initial = bod.street
+    form.fields['contact'].initial = bod.contact
+    form.fields['fax'].initial = bod.fax
+    form.fields['email'].initial = bod.email
+    form.fields['focal'].initial = bod.focal
+    form.fields['provience'].initial = bod.provience
+    form.fields['number'].initial = bod.number
+    form.fields['focal_img'].initial = bod.focal_img.url
+
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.district = request.POST['district']
+        bod.street = request.POST['street']
+        bod.contact = request.POST['contact']
+        bod.fax = request.POST['fax']
+        bod.email = request.POST['email']
+        bod.focal = request.POST['focal']
+        bod.provience = request.POST['provience']
+        bod.number = request.POST['number']
+    
+        try:
+            bod.focal_img = request.FILES['focal_img']
+        except:
+            pass
+            
+        bod.save()
+        messages.success(request, "Branch Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editBranch', args=[bod.id]))
+    else:
+        return render(request, 'manager/editBranch.html',dist )
+
+def editAgent(request, id):
+    form = AgentF()
+    bod = Agent.objects.get(id = id)
+    form.fields['name'].initial = bod.name
+    form.fields['address'].initial = bod.address
+    form.fields['contact'].initial = bod.contact
+    form.fields['email'].initial = bod.email
+
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.address = request.POST['address']
+        bod.contact = request.POST['contact']
+        bod.email = request.POST['email']
+      
+        bod.save()
+        messages.success(request, "Agent Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editAgent', args=[bod.id]))
+    else:
+        return render(request, 'manager/editAgent.html',dist )
+
+def editCitizen(request, id):
+    form = CitizenF()
+    bod = Citizen.objects.get(id = id)
+    form.fields['name'].initial = bod.name
+    form.fields['details'].initial = bod.details
+
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.details = request.POST['details']
+    
+        bod.save()
+        messages.success(request, "Citizen Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editCitizen', args=[bod.id]))
+    else:
+        return render(request, 'manager/editCitizen.html',dist )
+
+def editSurvey(request, id):
+    form = SurveryorF()
+    bod = Surveryor.objects.get(id = id)
+    form.fields['name'].initial = bod.name
+    form.fields['specilization'].initial = bod.specilization
+    form.fields['area'].initial = bod.area
+    form.fields['contact'].initial = bod.contact
+    form.fields['email'].initial = bod.email
+    form.fields['lience_no'].initial = bod.lience_no
+    form.fields['issued_date'].initial = bod.issued_date
+    form.fields['renew_date'].initial = bod.renew_date
+    issue = bod.issued_date
+    renew = bod.renew_date
+    if issue: 
+        start_date = datetime.datetime.strptime(str(issue), "%Y-%m-%d").date()
+    else:
+        start_date = None
+    if renew:
+        end_date = datetime.datetime.strptime(str(renew), "%Y-%m-%d").date()
+    else:
+        end_date = None
+    print(start_date)
+    print(end_date)
+    dist = {
+        'form':form,
+        'bod':bod,
+        'issue':str(start_date),
+        'renew':str(end_date),
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.area = request.POST['area']
+        bod.specilization = request.POST['specilization']
+        bod.contact = request.POST['contact']
+        bod.email = request.POST['email']
+        bod.lience_no = request.POST['lience_no']
+        first_date = request.POST['issued_date']
+        last_date = request.POST['renew_date']
+        if first_date:
+            start_date = datetime.datetime.strptime(first_date, "%Y-%m-%d").date()
+            bod.issued_date =  first_date
+        if last_date:
+            end_date = datetime.datetime.strptime(last_date, "%Y-%m-%d").date()
+            bod.renew_date = last_date
+    
+        bod.save()
+        messages.success(request, "Surveryor Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editSurvey', args=[bod.id]))
+    else:
+        return render(request, 'manager/editSurvery.html',dist )
+
+
+def editBod(request, id):
+    form = BodForm()
+    bod = Bod.objects.get(id = id)
+    form.fields['name'].initial = bod.name
+    form.fields['post'].initial = bod.post
+    form.fields['type'].initial = bod.type
+    form.fields['email'].initial = bod.email
+    form.fields['phone'].initial = bod.phone
+    form.fields['descriptipn'].initial = bod.descriptipn
+    form.fields['image'].initial = bod.image.url
+    form.fields['chairman'].initial = bod.chairman
+    issue = bod.appointed_date
+    renew = bod.re_appointed_date
+    if issue: 
+        start_date = datetime.datetime.strptime(str(issue), "%Y-%m-%d").date()
+    else:
+        start_date = None
+    if renew:
+        end_date = datetime.datetime.strptime(str(renew), "%Y-%m-%d").date()
+    else:
+        end_date = None
+    print(start_date)
+    print(end_date)
+    dist = {
+        'form':form,
+        'bod':bod,
+        'issue':str(start_date),
+        'renew':str(end_date),
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.post = request.POST['post']
+        bod.type = request.POST['type']
+        bod.email = request.POST['email']
+        bod.phone = request.POST['phone']
+        bod.descriptipn = request.POST['descriptipn']
+        continues = request.POST.get('chairman', False)
+        if continues == 'on':
+            bod.chairman = True
+        else:
+            bod.chairman = False
+
+        try:
+            bod.image = request.FILES['image']
+        except:
+            pass
+        first_date = request.POST['appointed_date']
+        last_date = request.POST['re_appointed_date']
+        if first_date:
+            start_date = datetime.datetime.strptime(first_date, "%Y-%m-%d").date()
+            bod.appointed_date =  first_date
+        if last_date:
+            end_date = datetime.datetime.strptime(last_date, "%Y-%m-%d").date()
+            bod.re_appointed_date = last_date
+    
+        bod.save()
+        messages.success(request, "Surveryor Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editBod', args=[bod.id]))
+    else:
+        return render(request, 'manager/editBod.html',dist )
+
+
+def editManagement(request, id):
+    form =ManagementForm()
+    bod = ManagementTeam.objects.get(id = id)
+    form.fields['name'].initial = bod.name
+    form.fields['post'].initial = bod.post
+    form.fields['email'].initial = bod.email
+    form.fields['phone'].initial = bod.phone
+    form.fields['image'].initial = bod.image.url
+    issue = bod.appointed_date
+    renew = bod.re_appointed_date
+    if issue: 
+        start_date = datetime.datetime.strptime(str(issue), "%Y-%m-%d").date()
+    else:
+        start_date = None
+    if renew:
+        end_date = datetime.datetime.strptime(str(renew), "%Y-%m-%d").date()
+    else:
+        end_date = None
+    print(start_date)
+    print(end_date)
+    dist = {
+        'form':form,
+        'bod':bod,
+        'issue':str(start_date),
+        'renew':str(end_date),
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.post = request.POST['post']
+        bod.email = request.POST['email']
+        bod.phone = request.POST['phone']
+
+        try:
+            bod.image = request.FILES['image']
+        except:
+            pass
+        first_date = request.POST['appointed_date']
+        last_date = request.POST['re_appointed_date']
+        if first_date:
+            start_date = datetime.datetime.strptime(first_date, "%Y-%m-%d").date()
+            bod.appointed_date =  first_date
+        if last_date:
+            end_date = datetime.datetime.strptime(last_date, "%Y-%m-%d").date()
+            bod.re_appointed_date = last_date
+    
+        bod.save()
+        messages.success(request, "Surveryor Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editManagement', args=[bod.id]))
+    else:
+        return render(request, 'manager/editManagement.html',dist )
+
+def changePassword(request):
+    if request.method == 'POST':
+        form = FormChangePassword(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('manager:changePassword')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = FormChangePassword(request.user)
+    return render(request, 'manager/changePassword.html', {
+        'form': form,
+    })
+
+def hideProduct(request, id):
+    pro = Product.objects.get(id = id)
+    print(pro.hide)
+    if pro.hide: 
+        pro.hide = False
+        pro.save()
+        messages.success(request, "Successfully Unhide the Product")
+    else:
+        pro.hide = True
+        pro.save()
+        messages.success(request, "Successfully Hidden the Product")
+
+    return HttpResponseRedirect(reverse('manager:product'))
+
+def hideSubProduct(request, id):
+    pro = Sub_product.objects.get(id = id)
+    print(pro.hide)
+    if pro.hide: 
+        pro.hide = False
+        pro.save()
+        messages.success(request, "Successfully Unhide the Sub Product")
+    else:
+        pro.hide = True
+        pro.save()
+        messages.success(request, "Successfully Hidden the Sub Product")
+
+    return HttpResponseRedirect(reverse('manager:subProduct'))
+
+def contact(request):
+    cont = Contact.objects.all()
+    dist = {
+        'contact': cont
+    }
+    return render(request, "manager/contact.html", dist)

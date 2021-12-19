@@ -155,7 +155,7 @@ class Product(models.Model):
     icons = models.CharField(max_length=20, null = True, blank=True)
     objects = models.Manager
     discontinue = models.BooleanField(default=False)
-
+    hide = models.BooleanField(default=False)
     def __str__(self):
         return self.name
 
@@ -165,6 +165,7 @@ class Sub_product(models.Model):
     image = models.ImageField(upload_to = "products/")
     description = models.CharField(max_length=2000)
     discontinue = models.BooleanField(default=False)
+    hide = models.BooleanField(default=False)
     objects = models.Manager
     
     def __str__(self):
@@ -218,6 +219,16 @@ class PageVisit(models.Model):
     def __str__(self) -> str:
         return self.count
 
+class Contact(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField(blank=True, null = True)
+    phone = models.BigIntegerField(blank=True, null = True)
+    subject = models.CharField(max_length=200)
+    message = models.CharField(max_length=1000)
+    objects = models.Manager()
+
+    def __str__(self) -> str:
+        return self.name
 
 
 

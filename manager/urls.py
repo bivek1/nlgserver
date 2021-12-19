@@ -37,5 +37,19 @@ urlpatterns = [
     path('deleteReport/<int:id>/<int:type>', views.deleteReport, name="deleteReport"),
     path('deleteForm/<int:id>/<int:type>', views.deleteForm, name="deleteForm"),
     path('deleteNews/<int:id>', views.deleteNews, name="deleteNews"),
+    path('editProduct/<int:id>', views.editProduct, name = "editProduct"),
+    path('editSubProduct/<int:id>', views.editSubProduct, name = "editSubProduct"),
+    path('editQuestionAnswer/<int:id>', views.editQuestion, name = "editQuestionAns"),
+    path('editDepartmentteam/<int:id>', views.editDepartment, name ="editDepartment"),
+    path('editBranch/<int:id>', views.editBranch, name ="editBranch"),
+    path('editAgent/<int:id>', views.editAgent, name ="editAgent"),
+    path('editCitizen/<int:id>', views.editCitizen, name ="editCitizen"),
+    path('editSurveryor/<int:id>', views.editSurvey, name ="editSurvey"),
+    path('editBod/<int:id>', views.editBod, name ="editBod"),
+    path('editManagement/<int:id>', views.editManagement, name="editManagement"),
+    path('changePassword', views.changePassword, name = "changePassword"),
+    path('hideProduct/<int:id>', views.hideProduct, name="hideProduct"),
+    path('hideSubProduct/<int:id>', views.hideSubProduct, name="hideSubProduct"),
+    path('messages', views.contact, name="contact")
 ]
 

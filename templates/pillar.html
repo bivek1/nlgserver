@@ -73,8 +73,8 @@
                                 <i class="fa fa-clock-o" style="font-size: 24px; margin-left: 20px;"></i> 
                             </div>
                             <div class="col-11 col-md-10 p-0 m-0 pl-2">
-                                <p class="text-light p-0 m-0 topline">10 AM to 5 PM (Sunday-Thursday)</p>
-                                <p class="text-light p-0 m-0 topline">10 AM to 2 PM (Friday) </p>
+                                <p class="text-light p-0 m-0 topline" id="sunday">10 AM to 5 PM (Sunday-Thursday)</p>
+                                <p class="text-light p-0 m-0 topline" id="friday">10 AM to 2 PM (Friday) </p>
                             </div>
                        
                         </div>
@@ -720,32 +720,14 @@
         document.documentElement.scrollTop = 0;
       }
 
-      $("#submit").click(function () {
-          
-          var username = $('#username').val();
-          var password = $('#password').val()
-          console.log(username)
-  
-              $.ajax({
-                  url: '{%url "landing:checkLogin"%}',
-                  data: {
-                  'username': username,
-                  'password':password
-                  },
-                  dataType: 'json',
-                  success: function (data) {
-                      console.log(data.status)
-                      if(data.status == 'ok'){
-                        window.location.href = "{% url 'manager:dashboard' %}"
-                      }
-                      else{
-                          var msg = '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>User or Password Does not match</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
-                            $('.errormsg').append(msg)
-                        }
-                  }
-              });
-  
-          });
+    var g1 = new Date();
+
+    if((parseInt(g1.getMonth()) > 9) && (parseInt(g1.getDate())> 15)){
+        sun = document.getElementById("sunday");
+        fir = document.getElementById("friday");
+        sun.innerHTML = "10 AM to 4 PM (Sunday-Thursday)"
+        fir.innerHTML = "10 AM to 1 PM (Friday)"
+    }
     </script>
 
 </body>

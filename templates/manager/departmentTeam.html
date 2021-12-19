@@ -55,11 +55,7 @@
             {{form.post}}
             {{form.post.errors}}
         </div>
-        <div class="col-6">
-            {{form.type.label_tag}}
-            {{form.type}}
-            {{form.type.errors}}
-        </div>
+   
         <div class="col-12">
             {{form.email.label_tag}}
             {{form.email}}
@@ -117,12 +113,12 @@
                                         
                                    
                                     <td class="align-middle">
-                                        <!-- <a href="#">
-                                            <button class="text-light btn btn-sm btn-primary btn-danger">
+                                        <a href="{%url 'manager:editDepartment' i.id%}">
+                                            <button class="text-light btn btn-sm btn-primary">
                                                 <i class="fa fa-edit p-2"></i>
                                                     Edit
                                             </button>
-                                        </a>  -->
+                                        </a> 
                                         <button class=" text-light btn btn-sm  btn-danger btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
                                             <i class="fa fa-trash p-2"></i>
                                             Delete
