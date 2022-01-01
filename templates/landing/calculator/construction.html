@@ -7,7 +7,7 @@
         <div class="col-md-12 col-12 col-lg-12">
             <div class="choose-between">
                 <div class="text-center">
-                    <h6 class="text-dark" id="calChange">Calculating Comprehensive Passenger Carrying Vehicle</h6>
+                    <h6 class="text-dark" id="calChange">Calculating Comprehensive Contruction Equipment</h6>
                 </div>
                 <div class="text-center" id ="vechile" onclick="changeVisionT()">
                     <i class="fa fa-toggle-on"></i>
@@ -31,6 +31,11 @@
             <div class="AllCalculatorC">
                 <!-- Comprehensive -->
                         <form action="" id="bikeCform">
+                          <div id = "vechileCC">
+      
+                            <label for="cccCar">Carrying Capacity in Ton</label>
+                            <input name = "cccCar" type="number" id="cccCar" class="form-control" value="0" placeholder="3">
+                          </div>
                            
                             <label for="biksum">Sum Insured</label>
                             <input class="form-control" type="number" id = 'bikeSum' placeholder="Sum Insured">
@@ -46,11 +51,7 @@
                                 <option value="Above 10 years">Above 10 years</option>
                                 
                             </select>
-                            <label for="ownCC">Own Carrying</label>
-                            <select name="ownCC" id="ownCC" class="form-control">
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
+
                             <label for="veBike">Voluntary Excess Amount</label>
                             <select name="veBike" id="veBike" class="form-control">
                                 <option value="" selected>------------</option>
@@ -60,16 +61,13 @@
                                 <option value="5000"> Rs.5000</option>
                                 <option value="10000"> Rs.10000</option>
                             </select>
-                           
-                            <label for="seatC">No. of Seat with driver</label>
-                            <input type="number" name="seatC" class="form-control" id="seatC">
-                            
-                            <label for="conductorCC">Conductor</label>
-                            <select name="helperCC" id="conductorCC" class="form-control">
+                            <label for="ownCC">Own Carrying</label>
+                            <select name="ownCC" id="ownCC" class="form-control">
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
-
+                            <label for="seatC">No. of Seat</label>
+                            <input type="number" name="seatC" class="form-control" id="seatC">
                             <label for="helperCC">Helper</label>
                             <select name="helperCC" id="helperCC" class="form-control">
                                 <option value="Yes">Yes</option>
@@ -81,7 +79,7 @@
                                 <option value="0 year @0%" >0 year @0%</option>
                                 <option value="1 year @20%">1 year @15%</option>
                                 <option value="2 years @30%"> 2 years @25%</option>
-                                <option value="3years @40%"> Above 2 years @30%</option>
+                                <option value="3years @40%"> 3 years or above@30%</option>
                               
                             </select>
                             <div class="row p-0 m-0">
@@ -100,6 +98,13 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-3 p-0 m-0 pr-3" style="display: grid;">
+                                  <label for="DirectDiscountBike">Helper</label>
+                                  <select name="DirectDiscountBike" id="helper">
+                                      <option value="Yes">Yes</option>
+                                      <option value="No">No</option>
+                                  </select>
+                              </div>
+                                <div class="col-lg-3 p-0 m-0 pr-3" style="display: grid;">
                                     <label for="towingBike">Towing Charge</label>
                                     <select name="towingBike" id="towingBike">
                                         <option value="Yes">Yes</option>
@@ -107,7 +112,7 @@
                                     </select>
                                 </div>
                               
-                                <div class="btn btn-danger btn-block mt-3" onclick="CalculateCarCom()">
+                                <div class="btn btn-danger btn-block mt-3" onclick="CalculateContCom()">
                                     Calculate
                                 </div>
                             </div>
@@ -120,17 +125,10 @@
                 <!-- Third Party -->
 
                 <form action="" id='bikeTPform'>
-                    <label for="ccCar">Total No. of Seat</label>
+                    <label for="ccCar">Carrying Capacity in Ton</label>
                     <input type="number" id="ccCar" class="form-control" value="0" placeholder="3">
-                    <label for="seatTP">No. of Seat with driver</label>
+                    <label for="seatTP">No. of Seat</label>
                     <input type="number" name="seatTP" class="form-control" id="seatTP">
-                    
-                    
-                    <label for="helperTP">Conductor</label>
-                    <select name="helperTP" id="conductorTP" class="form-control">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
 
                     <label for="helperTP">Helper</label>
                     <select name="helperTP" id="helperTP" class="form-control">
@@ -181,7 +179,7 @@
                   </tr>
 
                   <tr>
-                    <td>Less: Own Carrying</td>
+                    <td>Add: Own Carrying</td>
                     <td id="own_c">0</td>
                   </tr>
                   <tr>
@@ -194,11 +192,6 @@
                   <tr>
                     <td>Add: Helper Charge</td>
                     <td id="helper_c">0</td>
-        
-                  </tr>
-                  <tr>
-                    <td>Add: Conductor Charge</td>
-                    <td id="conductor_c">0</td>
         
                   </tr>
 
@@ -276,7 +269,7 @@
                   
                   </tr>
                   <tr>
-                    <td>Add: No.of Seat with driver</td>
+                    <td>Add: No.of Seat</td>
                     <td id="seat_tp">0</td>
         
                   </tr>
@@ -284,11 +277,6 @@
                   <tr>
                     <td>Add: Helper Charge</td>
                     <td id="helper_tp">0</td>
-        
-                  </tr>
-                  <tr>
-                    <td>Add: Conductor Charge</td>
-                    <td id="conductor_tps">0</td>
         
                   </tr>
 
@@ -326,7 +314,7 @@
         $('#bikeCform').css('display', 'none')
         $('#reportTP').css('display','initial')
         $('#reportC').css('display','none')
-        document.getElementById('calChange').innerHTML = "Calculating Third Party Passenger Carrying Vehicle"
+        document.getElementById('calChange').innerHTML = "Calculating Third Party Contruction Equipment"
         document.getElementById('switchChange').innerHTML = "Comprehensive"
         count=1
         calculateCarTP()
@@ -335,10 +323,10 @@
         $('#bikeCform').css('display', 'initial')
         $('#reportC').css('display','initial')
         $('#reportTP').css('display','none')
-        document.getElementById('calChange').innerHTML = "Calculating Comprehensive Passenger Carrying Vehicle"
+        document.getElementById('calChange').innerHTML = "Calculating Comprehensive Contruction Equipment"
         document.getElementById('switchChange').innerHTML = "Third Party"
         count=0
-        CalculateCarCom()
+        CalculateContCom()
        }
        
     }
@@ -354,8 +342,8 @@
     }
 
 </script>
-<script src="{%static 'js/calculator/passenger_tp.js'%}"></script>
-<script src="{%static 'js/calculator/passenger_c.js'%}"></script>
+<script src="{%static 'js/calculator/con_tp.js'%}"></script>
+<script src="{%static 'js/calculator/con_c.js'%}"></script>
 {% endblock cal %}
     
 

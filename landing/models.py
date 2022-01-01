@@ -182,8 +182,8 @@ class QuestionAnswer(models.Model):
 class Setting(models.Model):
     logo = models.ImageField(upload_to ="logo/", null=True, blank=True)
     email = models.EmailField(default="info@nlgi.com.np")
-    number1 = models.BigIntegerField(default="01-4442646")
-    number2 = models.BigIntegerField(default="01-4006648", null = True, blank=True)
+    number1 = models.CharField(max_length = 12, default="01-4442646")
+    number2 = models.CharField(max_length = 12, default="01-4006648", null = True, blank=True)
     toll_free_no = models.BigIntegerField(default="16600199099", null = True, blank=True)
     location = models.CharField(max_length=300)
     objects = models.Manager()

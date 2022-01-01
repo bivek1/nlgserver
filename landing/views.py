@@ -451,6 +451,44 @@ def passenger(request):
     return render(request, 'landing/calculator/passenger.html', dist)
 
 
+def tractor(request):
+    setting = None
+    sett = Setting.objects.all()
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist = {
+        'setting':setting
+    }
+    return render(request, 'landing/calculator/tractor.html', dist)
+
+
+def productCal(request):
+    setting = None
+    sett = Setting.objects.all()
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist = {
+        'setting':setting
+    }
+    return render(request, 'landing/productCal.html', dist)
+
+
+def con(request):
+    setting = None
+    sett = Setting.objects.all()
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist = {
+        'setting':setting
+    }
+    return render(request, 'landing/calculator/construction.html', dist)
+
 def logIn(request):
     setting = None
     sett = Setting.objects.all()

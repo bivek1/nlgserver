@@ -1,4 +1,4 @@
-function CalculateCarCom(){
+function CalculateContCom(){
     var sumInsured = parseInt($('#bikeSum').val());
     var yom = $('#oldbike :selected').val();
     var voluntary_excess = $('#veBike :selected').val();
@@ -28,59 +28,48 @@ function CalculateCarCom(){
     var new_sum_insured = 0
     var discount_premium = 0 
     total_sum_insured = sumInsured+extra
-    if(ty == "Electric Vehicle"){
+    if(ty == "Electric Vehicle" || ty == "Vehicle CC"){
         helper_cost = 700
-        if(valBikeC <= 3){
-            cost = 6750
-            discount_premium = 3000
+        if(valBikeC > 0 && valBikeC <= 3){
+            cost = 7500
+            discount_premium = 1500
             new_sum_insured = 1.25/100*total_sum_insured
         }
         else if(valBikeC > 3){
-            cost = 10500
-            discount_premium = 2500
+            cost = 10000
+            discount_premium = 3000
             no_of_p = (valBikeC-3)*500 
             new_sum_insured = 1.25/100*total_sum_insured + no_of_p
         }
-        
+        else if(valBikeC == 0){
+            cost = 12000
+            discount_premium = 4000
+            new_sum_insured = 1.25/100*total_sum_insured
+        }
         else{
             cost = 0
             new_sum_insured = 0
         }
      
     }
-    else if(ty == "Vehicle CC"){
-        helper_cost = 700
-        if(valBikeC <= 3){
-            cost = 6750
-            discount_premium = 3000
-            new_sum_insured = 1.25/100*total_sum_insured
-        }
-        else if(valBikeC > 3){
-            cost = 10500
-            no_of_p = (valBikeC-3)*500 
-            new_sum_insured = 1.25/100*total_sum_insured + no_of_p
-            discount_premium = 2500
-        }
-    
-        else{
-            cost = 0
-            new_sum_insured = 0
-        }
-
-    }
+   
     else{
         helper_cost = 600
-        if(valBikeC <= 3){
-            cost = 5700
-            discount_premium = 3000
+        if(valBikeC > 0 && valBikeC <= 3){
+            cost = 6500
+            discount_premium = 1500
             new_sum_insured = 0.75/100*total_sum_insured
-            
         }
         else if(valBikeC > 3){
-            cost = 9000
-            discount_premium = 2500
+            cost = 8500
+            discount_premium = 3000
             no_of_p = (valBikeC-3)*500 
-            new_sum_insured = 0.87/100*total_sum_insured + no_of_p
+            new_sum_insured = 0.75/100*total_sum_insured + no_of_p
+        }
+        else if(valBikeC == 0){
+            cost = 10000
+            discount_premium = 4000
+            new_sum_insured = 1.25/100*total_sum_insured
         }
         else{
             cost = 0
@@ -190,25 +179,14 @@ function CalculateCarCom(){
     console.log('Total with Direct Discount',  total)
     // setting RSD Risk
     if(rsd == 'Yes'){
-        if(ty == "Electric Vehicle" || ty == "Vehicle CC"){
-            rsd_cost = 125
-            rsd_cost_sum = 0.2/100*new_sum_insured
-            rsd_passenger = (seat-1)*125
-           
-            if (helper == "Yes"){
-                var rsd_helper = 126
-            }
-            rsd_seat_cost = rsd_cost +rsd_cost_sum+rsd_passenger+rsd_helper
-        }else{
-            rsd_cost = 126
-            rsd_cost_sum = 0.2/100*new_sum_insured
-            rsd_passenger = (seat-1)*126
-            if (helper == "Yes"){
-                var rsd_helper = 126
-            }
-            rsd_seat_cost = rsd_cost +rsd_cost_sum+rsd_passenger+rsd_helper
+        rsd_cost = 125
+        rsd_cost_sum = 0.2/100*new_sum_insured
+        rsd_passenger = (seat-1)*125
+        
+        if (helper == "Yes"){
+            var rsd_helper = 125
         }
-      
+        rsd_seat_cost = rsd_cost +rsd_cost_sum+rsd_passenger+rsd_helper
        
     }else{
         rsd_cost = 0

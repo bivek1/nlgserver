@@ -33,5 +33,10 @@ urlpatterns = [
     path('agricalculator', views.agriCal, name="agriCal"),
     path('fuelcalculator', views.fuelTank, name ="fuelCal"),
     path('passengercalculator', views.passenger, name = "passengerCal"),
+    path('tractorcalculator', views.tractor, name = "tractorcal"),
+    path('constructioncalculator', views.con, name = "con"),
+    
+
+    path('productCalculatot', views.productCal, name ="productCal"),
     path('login', views.logIn, name= "login"),
 ]

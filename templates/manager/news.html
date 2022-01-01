@@ -73,46 +73,43 @@
                                                     
                                                 </a>    
                                                {% endif %}
-                                               
+                                              
                                                {% if i.image %}
-                                               <p class="d-inline">
-                                                <button class="btn btn-sm btn-danger text-light" data-toggle="modal" data-target="#exampleModalCenterView{{i.id}}" style="cursor: pointer;">
-                                                    <i class="fa fa-eye p-2"></i>
-                                                    View
+                                               <button class=" text-light btn btn-sm  btn-danger btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalTest{{i.id}}">
+                                                <i class="fa fa-trash p-2"></i>
+                                                View Image
                                                 </button>
-                                                <div class="modal fade" id="exampleModalCenterView{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                      <div class="modal-content">
-                                                        <div class="modal-header">
-                                                         
-                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                          </button>
-                                                        </div>
-                                                        <div class="modal-body text-center">
-                                                          
-                                                        <img src="{{i.image.url}}" alt="footer_logo" class="img-fluid" style="height: 145px; width: 50%;">
-                                                         
-                                                         <hr>
-                                                         
-                                                        </div>
-                                                        <div class="modal-footer">
-                                           
-                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                      </div>
+                                                <!-- View Image Modal -->
+                                                <div class="modal fade" id="exampleModalTest{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Image</h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                   </div>
-
-                                                </p>
-
+                                                    <div class="modal-body">
+                                                        
+ 
+                                                        <img src="{{i.image.url}}" alt="" srcset="" style="width: 100%;">
+                                                    
+                                                       
+                                                    </div>
+                                                   
+                                                    <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                               </div>
+                                                <!-- View Image Modal End --> 
                                                {% endif %}
                                                <button class=" text-light btn btn-sm  btn-danger btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
                                                 <i class="fa fa-trash p-2"></i>
                                                 Delete
                                                 </button>
-                                            <!-- Delete Modal -->
-                                            <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <!-- Delete Modal -->
+                                                <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                   <div class="modal-content">
                                                     <div class="modal-header">
@@ -129,8 +126,8 @@
                                                     </div>
                                                   </div>
                                                 </div>
-                                              </div>
-                                            <!-- Delete Modal End --> 
+                                               </div>
+                                                <!-- Delete Modal End --> 
                                               
                                             </td>
                                         </tr>

@@ -59,24 +59,22 @@
                                       </p>
                                       
                                       {% if i.sub_product.all %}
-                                        <h5 class="text-dark">Sub Product</h5>
+                                        <h6 class="text-dark">SUB PRODUCTS</h6>
                                         <hr>
                                         {% for j in i.sub_product.all%}
-                                        <div class="row p-2">
-                                          <div class="col-12 col-md-12 text-center mt-4">
-                                            <div class="bod d-flex">
-                                                <img src="{{j.image.url}}" alt="{{j.name}}">
+                                        <div class="row mt-1">
+                                          <div class="col-12 col-md-12 text-center">
+                                            <div class="bod d-flex P-2" style="height: auto;">
+                                                <img src="{{j.image.url}}" class="my-auto" alt="{{j.name}}">
                                                 <div class="p-2 ml-5">
-                                                    <h4 class="text-dark">{{j.name}}</h4>
-                                                  
+                                                    <h6 class="text-dark">{{j.name}}</h6>
                                                     <small>{{j.description}}</small><br>
                                               
                                                 </div>
                                             </div>
                                           </div>
                                         </div>
-                                
-                                   
+                              
                                         {% endfor %}
                                           
                                       {% endif %}
