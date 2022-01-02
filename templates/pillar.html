@@ -21,15 +21,7 @@
 </head>
 <body>
     {% block loader %}
-        <!-- ***** Preloader Start ***** -->
-    <!-- <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div> -->
-    <!-- ***** Preloader End ***** -->
+  
     {% endblock loader %}
     <div class="allholder">
 
@@ -293,8 +285,8 @@
                                 <i class="fa fa-clock-o" style="font-size: 24px; margin-left: 20px;"></i> 
                             </div>
                             <div class="col-10 m-0 p-0 pt-2">
-                                <p class="text-dark p-0 m-0 topline">10 AM to 5 PM (Sunday-Thursday)</p>
-                                <p class="text-dark p-0 m-0 topline">10 AM to 2 PM (Friday)</p>
+                                <p class="text-dark p-0 m-0 topline" id = "sundayS">10 AM to 5 PM (Sunday-Thursday)</p>
+                                <p class="text-dark p-0 m-0 topline" id = "fridayS">10 AM to 2 PM (Friday)</p>
                             </div>
                             
                             <!-- Opening Hours Modal -->
@@ -722,12 +714,45 @@
 
     var g1 = new Date();
 
-    if((parseInt(g1.getMonth()) > 9) && (parseInt(g1.getDate())> 15)){
-        sun = document.getElementById("sunday");
-        fir = document.getElementById("friday");
-        sun.innerHTML = "10 AM to 4 PM (Sunday-Thursday)"
-        fir.innerHTML = "10 AM to 1 PM (Friday)"
+    date = parseInt(g1.getMonth()) + 1
+    day = parseInt(g1.getDate())
+    if(( date == 11) || (date == 12) || (date == 1)){
+        if (date == 11){
+            if(day >= 1){
+                sun = document.getElementById("sunday");
+                fir = document.getElementById("friday");
+                sunS = document.getElementById("sundayS");
+                firS = document.getElementById("fridayS");
+                sun.innerHTML = "10 AM to 4 PM (Sunday-Thursday)"
+                fir.innerHTML = "10 AM to 1 PM (Friday)"
+                sunS.innerHTML = "10 AM to 4 PM (Sunday-Thursday)"
+                firS.innerHTML = "10 AM to 1 PM (Friday)"
+            }
+        }
+        else if(date == 1){
+            if(day <= 29){
+                sun = document.getElementById("sunday");
+                fir = document.getElementById("friday");
+                sunS = document.getElementById("sundayS");
+                firS = document.getElementById("fridayS");
+                sun.innerHTML = "10 AM to 4 PM (Sunday-Thursday)"
+                fir.innerHTML = "10 AM to 1 PM (Friday)"
+                sunS.innerHTML = "10 AM to 4 PM (Sunday-Thursday)"
+                firS.innerHTML = "10 AM to 1 PM (Friday)"
+            }
+        }else{
+            sun = document.getElementById("sunday");
+                fir = document.getElementById("friday");
+                sunS = document.getElementById("sundayS");
+                firS = document.getElementById("fridayS");
+                sun.innerHTML = "10 AM to 4 PM (Sunday-Thursday)"
+                fir.innerHTML = "10 AM to 1 PM (Friday)"
+                sunS.innerHTML = "10 AM to 4 PM (Sunday-Thursday)"
+                firS.innerHTML = "10 AM to 1 PM (Friday)"
+        }
+        
     }
+   
     </script>
 
 </body>

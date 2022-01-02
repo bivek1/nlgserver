@@ -984,6 +984,18 @@ preloader
         border-radius: 30px;
         box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2), 0 16px 20px 0 rgba(0, 0, 0, 0.19);
       }
+      .bods{
+        height: 160px;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2), 0 16px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+      .bods img{
+        height: 100%;
+        width: 150px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+      }
       .bod img {
         height: 100%;
         width: 150px;
@@ -1000,10 +1012,8 @@ preloader
       .mainman{
         height: 300px;
         width: 100%;
-        border: 2px solid #fb0b3f;
-        border-top-right-radius: 40px;
-        border-top-left-radius: 40px;
-        box-shadow: 0 10px 18px 0 rgba(238, 163, 163, 0.2), 0 16px 20px 0 rgba(184, 184, 184, 0.19);
+      
+        box-shadow: 0 10px 18px 0 rgba(37, 37, 37, 0.2), 0 16px 20px 0 rgba(112, 112, 112, 0.19);
       }
       .mainman img{
         border-radius: 700px;

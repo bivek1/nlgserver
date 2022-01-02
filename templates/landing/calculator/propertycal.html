@@ -1,0 +1,114 @@
+{% extends "landing/productCal.html" %}
+{% load static %}
+{% block cal %}
+
+<div id="calc" class="calc">
+    <div class="row bgda p-2">
+        <div class="col-md-12 col-12 col-lg-12">
+            <div class="choose-between">
+                <div class="text-center">
+                    <h6 class="text-dark" id="calChange">Property Calculation </h6>
+                </div>
+            </div>
+
+            
+            <div class="AllCalculatorC">
+
+                <form action="" id='bikeTPform'>
+                    <label for="helperTP">Select Type</label>
+                    <select name="helperTP" id="type" class="form-control">
+                        <option value="first">First Class</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="seatTP">Sum Insured</label>
+                    <input type="number" name="seatTP" class="form-control" id="sumInsured">
+
+                    <label for="helperTP">Direct Discount</label>
+                    <select name="helperTP" id="discount" class="form-control">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+
+                    <label for="helperTP">RSD/ Terrorism Risk</label>
+                    <select name="helperTP" id="rsd" class="form-control">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                  
+                    <div class="btn btn-danger btn-block mt-3" onclick="calculateHome()">
+                        Calculate
+                    </div>
+                </form>
+                <!-- Third Party End -->
+            </div>
+          
+        </div>
+  
+        <!-- Report -->
+        <div class="col-md-12 col-12 col-lg-12 showcostp m-auto pt-4" id="reportC">
+            <table class="table table-striped" >
+                <thead>
+                  <tr>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Basic Premium</td>
+                    <td id="basicp">0</td>
+                  
+                  </tr>
+
+                  <tr>
+                    <td>Direct Discount</td>
+                    <td id="discount_c">0</td>
+                  
+                  </tr>
+                
+                  <tr>
+                    <td> Minimum Premium</td>
+                    <td id="minimum_c">0</td>
+                
+                  </tr>
+                  <tr>
+                    <td>Add: RSD/Terrorism Premium</td>
+                    <td id="rsd_c">0</td>
+                  </tr>
+
+                  
+                  <tr>
+                    <td><b>Net Premium</b></td>
+                    <td id="net_premium">0</td>
+        
+                  </tr>
+                  <tr>
+                    <td>Add: Vat</td>
+                    <td id="vat_c">0</td>
+        
+                  </tr>
+                  <tr>
+                    <td>Add: Stamp</td>
+                    <td id="stamp_c">0</td>
+        
+                  </tr>
+                  <tr>
+                    <th scope="row">Total</th>
+                    <td>
+                        <h6 id="total_c" style="font-size:30px; color: black;">Rs.0</h6>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Report End -->
+    </div>
+</div>  
+<script src="{%static 'js/calculator/property.js'%}"></script>
+
+{% endblock cal %}
+    
+
+
+

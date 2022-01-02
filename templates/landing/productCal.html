@@ -62,24 +62,26 @@
                 <hr>
                 <div class="row">
                     <ul class="col-md-3 col-12 listtheVechile">
-                        {%url 'landing:calculator' as bash %}
+                        {%url 'landing:productCal' as bash %}
                         <a href="{{bash}}">
                           <li {%if request.path == bash %} class="calActive"{%endif%}>Home Insurance</li>
                         </a>
                        
-                        {%url 'landing:carCalculator' as car %}
+                        <!-- {%url 'landing:propertyCal' as car %}
                         <a href="{{car}}">
                           <li {%if request.path == car %} class="calActive"{%endif%}>Property Insurance</li>
+                        </a> -->
+                     
+                        {%url 'landing:agriCal' as goods %}
+                        <a href="{{goods}}">
+                          <li {%if request.path == goods %} class="calActive"{%endif%}>Agriculture Insurance</li>
                         </a>
-                        {%url 'landing:tempoCal' as tempo %}
+
+                        {%url 'landing:personalCal' as tempo %}
                         <a href="{{tempo}}">
                           <li {%if request.path == tempo %} class="calActive"{%endif%}>Personal Accident</li>
                         </a>
                       
-                        {%url 'landing:goodCal' as goods %}
-                        <a href="{{goods}}">
-                          <li {%if request.path == goods %} class="calActive"{%endif%}>Agriculture Insurance</li>
-                        </a>
 
                     </ul>
                     <div class="col-md-9 col-12">

@@ -3,7 +3,17 @@
 {% block title %}
     NLG Insurance Best Insurance in Nepal
 {% endblock title %}
-
+{% block loader %}
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+{% endblock loader %}
 {% block content %}
   <style>
     .below h6{
@@ -150,7 +160,7 @@
                                         {% for j in i.sub_product.all%}
                                         <div class="row mt-1">
                                           <div class="col-12 col-md-12 text-center">
-                                            <div class="bod d-flex P-2" style="height: auto;">
+                                            <div class="bods d-flex P-2" style="height: auto;">
                                                 <img src="{{j.image.url}}" class="my-auto" alt="{{j.name}}">
                                                 <div class="p-2 ml-5">
                                                     <h6 class="text-dark">{{j.name}}</h6>

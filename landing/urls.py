@@ -37,6 +37,9 @@ urlpatterns = [
     path('constructioncalculator', views.con, name = "con"),
     
 
-    path('productCalculatot', views.productCal, name ="productCal"),
+    path('productCalculator', views.productCal, name ="productCal"),
+    path('PropertyCalculator', views.propertyCal, name ="propertyCal"),
+    path('PersonalAccidentCalculator', views.personal, name ="personalCal"),
+    path('agriculterCalculator', views.agriCal, name = 'agriCal'),
     path('login', views.logIn, name= "login"),
 ]

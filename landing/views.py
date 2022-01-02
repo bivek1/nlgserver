@@ -464,19 +464,6 @@ def tractor(request):
     return render(request, 'landing/calculator/tractor.html', dist)
 
 
-def productCal(request):
-    setting = None
-    sett = Setting.objects.all()
-    if sett:
-        for i in sett:
-            setting = i 
-            break
-    dist = {
-        'setting':setting
-    }
-    return render(request, 'landing/productCal.html', dist)
-
-
 def con(request):
     setting = None
     sett = Setting.objects.all()
@@ -488,6 +475,56 @@ def con(request):
         'setting':setting
     }
     return render(request, 'landing/calculator/construction.html', dist)
+
+def productCal(request):
+    setting = None
+    sett = Setting.objects.all()
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist = {
+        'setting':setting
+    }
+    return render(request, 'landing/calculator/homecal.html', dist)
+
+
+def propertyCal(request):
+    setting = None
+    sett = Setting.objects.all()
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist = {
+        'setting':setting
+    }
+    return render(request, 'landing/calculator/propertycal.html', dist)
+
+
+def personal(request):
+    setting = None
+    sett = Setting.objects.all()
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist = {
+        'setting':setting
+    }
+    return render(request, 'landing/calculator/personal.html', dist)
+
+def agriCal(request):
+    setting = None
+    sett = Setting.objects.all()
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist = {
+        'setting':setting
+    }
+    return render(request, 'landing/calculator/agri.html', dist)
 
 def logIn(request):
     setting = None

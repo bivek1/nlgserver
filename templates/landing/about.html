@@ -55,13 +55,13 @@
 
                 <div class="row">
               
-                    <div class="col-md-4 col-12 p-0 m-0 mr-4" data-toggle="modal" data-target="#exampleModalCenter1">
+                    <div class="col-md-4 col-12 p-0 m-0 mr-4 mt-2" data-toggle="modal" data-target="#exampleModalCenter1">
                         <div class="bod p-0 m-0" style="height: 61px;cursor: pointer;">
                           <p class="text-center p-0 m-0 pt-2">   <i class="fa fa-envelope" ></i>  </p>
                           <h6 class="text-center">CEO <span class="text-danger"> Messages </span> </h6>
                         </div>
                     </div>
-                    <div class="col-md-4 col-12 p-0 m-0" data-toggle="modal" data-target="#exampleModalCenter">
+                    <div class="col-md-4 col-12 p-0 m-0 mt-2" data-toggle="modal" data-target="#exampleModalCenter">
                         <div class="bod p-0 m-0" style="height: 61px;cursor: pointer;">
                           <p class="text-center p-0 m-0 pt-2">   <i class="fa fa-diamond" ></i>  </p>
                           <h6 class="text-center">Corporated <span class="text-danger"> Goal </span> </h6>
@@ -234,7 +234,7 @@
         </div>
         
         {% for i in bod %}
-            <div class="{% if i.chairman %} col-md-12 col-12 {%else%} col-md-4 col-6  {% endif %} p-3 m-auto">
+            <div class="{% if i.chairman %} col-md-4 col-12 {%else%} col-md-4 col-12  {% endif %} p-3 m-auto">
                 <div class="mainman text-center ">
                     <img src="{{i.image.url}}" alt="" srcset="">
                     <h6>{{i.name}}</h6>
@@ -260,7 +260,7 @@
                               </div>
                               
                               <div class="row pl-2 mt-2">
-                                <div class="col-10 m-auto bod p-2" style="height: auto;">
+                                <div class="col-10 m-auto bods p-2" style="height: auto;">
                                     <div class="row p-3">
                                       <div class="col-5">
                                         <b>Email:</b>
