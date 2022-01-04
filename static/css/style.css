@@ -1015,6 +1015,9 @@ preloader
       
         box-shadow: 0 10px 18px 0 rgba(37, 37, 37, 0.2), 0 16px 20px 0 rgba(112, 112, 112, 0.19);
       }
+      .active-desc{
+        border-bottom: 7px solid #e10030;
+      }
       .mainman img{
         border-radius: 700px;
         margin-top: 15px;

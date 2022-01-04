@@ -795,7 +795,7 @@ def editBod(request, id):
             bod.re_appointed_date = last_date
     
         bod.save()
-        messages.success(request, "Surveryor Edited Succesfully")
+        messages.success(request, "Bod Edited Succesfully")
         return HttpResponseRedirect(reverse('manager:editBod', args=[bod.id]))
     else:
         return render(request, 'manager/editBod.html',dist )

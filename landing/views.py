@@ -44,6 +44,7 @@ def productPolicy(request):
     PageVisitView()
     sett = Setting.objects.all()
     products = Product.objects.filter(hide=False).filter(discontinue= False)
+    lens = products.count()
     discontineu = Product.objects.filter(discontinue=True)
     setting = None
     if sett:
@@ -53,7 +54,8 @@ def productPolicy(request):
     dist ={
         'setting':setting,
         'product':products,
-        'discon':discontineu
+        'discon':discontineu,
+        'lens':lens
     }
     return render(request, 'landing/products.html', dist)
 
@@ -304,7 +306,7 @@ def gallery(request):
 def download(request):
     PageVisitView()
     d = news.objects.all()
-    two = news.objects.all().order_by('-id')[:2]
+    two = news.objects.all().order_by('-id')[:3]
     sett = Setting.objects.all()
     setting = None
     if sett:

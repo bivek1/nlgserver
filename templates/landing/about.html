@@ -118,7 +118,7 @@
                                     <div class="row">
                                         
                                         {% for i in team  %}
-                                        <div class="col-12 col-md-6 text-center mt-4">
+                                        <div class="col-12 {%if i.post == 'C.E.O'%} col-md-12 {%elif i.post ==  'Deputy General Manager / Company Secretary'%} col-md-12 {%else%} col-md-6 {%endif%}text-center mt-4">
                                             <div class="bod d-flex" >
                                                 <img src="{{i.image.url}}" alt="">
                                                 <div class="p-2">
@@ -261,53 +261,27 @@
                               
                               <div class="row pl-2 mt-2">
                                 <div class="col-10 m-auto bods p-2" style="height: auto;">
-                                    <div class="row p-3">
-                                      <div class="col-5">
-                                        <b>Email:</b>
-                                      </div>
-                                      <div class="col-7">
-                                        <p>{{i.descriptipn}}</p>
-                                      </div>
-                                      <div class="col-5">
-                                        <b>Post:</b>
-                                      </div>
-                                      <div class="col-7">
-                                        <p>{{i.post}}</p>
-                                      </div>
-                                      <div class="col-5">
-                                        <b>Type:</b>
-                                      </div>
-                                      <div class="col-7">
-                                        <p>{{i.type}}</p>
-                                      </div>
-                                      <div class="col-5">
-                                        <b>Phone:</b>
-                                      </div>
-                                      <div class="col-7">
-                                        <p>{{i.phone}}</p>
-                                      </div>
-                                      {% if i.re_appointed_date %}
-                                      <div class="col-5">
-                                        <b>Re- Appointed Date:</b>
-                                      </div>
-                                      <div class="col-7">
-                                        <p>{{i.re_appointed_date}}</p>
-                                      </div>
-                                      
-                                      {%else%}
-                                      <div class="col-5">
-                                        <b>Appointed Date:</b>
-                                      </div>
-                                      <div class="col-7">
-                                        <p>{{i.appointed_date}}</p>
-                                      </div>
-                          
-                                  
-                                    {% endif %}
-                               
-                                    </div>
-                                </div>
+                                  <h4 class="text-center">{{i.name}}</h4>
+                                  <p class="text-center" style="font-size: 14px;">{{i.descriptipn}}</p>
+                                  <p class="text-center"> <b>{{i.post}}</b></p>
+                                  <p class="text-center text-danger">{{i.type}}</p>
+                                  <div class="text-center" style="display: flex;justify-content: space-between;background-color: whitesmoke;padding: 2px;align-items: center;padding-top: 14px;">
+                                    
+                                    {% if i.re_appointed_date %}
+                                    <p><b>Re- Appointed Date:</b></p>
+                                    <p>{{i.re_appointed_date}}</p>
                                 
+                                    {%else%}
+
+                                    <p><b>Appointed Date:</b></p>
+                                    <p>{{i.appointed_date}}</p>
+                                  
+                          
+                                    {% endif %}
+                          
+                                    
+                                  </div>                
+                                </div>                          
                               </div>
                               <h1 class="mt-2">
 

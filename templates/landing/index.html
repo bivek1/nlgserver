@@ -153,31 +153,12 @@
                                 <p>
                                 {{i.description}}
                                 </p>
-                                {% if i.sub_product.all %}
-                                        <hr>
-                                          <h6 class="text-dark">SUB PRODUCTS</h6>
-                                        <hr>
-                                        {% for j in i.sub_product.all%}
-                                        <div class="row mt-1">
-                                          <div class="col-12 col-md-12 text-center">
-                                            <div class="bods d-flex P-2" style="height: auto;">
-                                                <img src="{{j.image.url}}" class="my-auto" alt="{{j.name}}">
-                                                <div class="p-2 ml-5">
-                                                    <h6 class="text-dark">{{j.name}}</h6>
-                                                    <small>{{j.description}}</small><br>
-                                              
-                                                </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                
-                                   
-                                        {% endfor %}
-                                          
-                                      {% endif %}
-                                
-                              
-                            </div>
+                              </div>
+                              <div class="text-center">
+                                <a href="{%url 'landing:productPolicies'%}">
+                                  <button class="btn btn-outline-danger">See More</button>
+                                </a>
+                              </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

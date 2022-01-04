@@ -9,9 +9,15 @@
         width:90px;
         height: 60px;
     }
+    .mainman{
+      height: 400px; 
+    }
     @media screen and (max-width:600px){
         .backandrollProduct{
-            height: 700px;
+            height: auto;
+        }
+        .mainman{
+          height: auto!important;
         }
     }
 </style>
@@ -20,13 +26,11 @@
           <div class="col-md-12 col-12 p-0 m-0 head-right">
             <div class="firsthead p-3 ml-3">
               <h3>Insurance Products </h3>
-              <div class="insurance-product p-3">
-              
-               
+              <div class="p-3" style="box-shadow: 0 10px 18px 0 rgb(0 0 0 / 20%), 0 16px 20px 0 rgb(0 0 0 / 19%);width: 100%; background-color: white;">
                 <div class="row p-3">
                   {% for i in product  %}
-                    <div class="col">
-                      <div class="white-box" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
+                    <div class="col p-2">
+                      <div class="white-box" id="{{i.id}}" onclick="showandchange(this);">
                           <div class="text-center p-1">
                             {% if i.image %}
                             <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="width: 90px; height:60px;">
@@ -36,6 +40,7 @@
                               <p class="text-center p-0 m-0 text-dark">{{i.name|truncatewords:1|slice:"-2"}}</p>
                             
                           </div>
+                        
                             <!-- Modal PP -->
                             <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered" role="document">
@@ -57,29 +62,7 @@
                                       <p class="text-dark">
                                         {{i.description}}
                                       </p>
-                                      
-                                      {% if i.sub_product.all %}
-                                        <h6 class="text-dark">SUB PRODUCTS</h6>
-                                        <hr>
-                                        {% for j in i.sub_product.all%}
-                                        <div class="row mt-1">
-                                          <div class="col-12 col-md-12 text-center">
-                                            <div class="bods d-flex P-2" style="height: auto;">
-                                                <img src="{{j.image.url}}" class="my-auto" alt="{{j.name}}">
-                                                <div class="p-2 ml-5">
-                                                    <h6 class="text-dark">{{j.name}}</h6>
-                                                    <small>{{j.description}}</small><br>
-                                              
-                                                </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                              
-                                        {% endfor %}
-                                          
-                                      {% endif %}
-                                        
-                                    
+
                                   </div>
                                   </div>
                                   <div class="modal-footer">
@@ -93,8 +76,73 @@
                       </div>
                     </div>
                   {% endfor %}
-
                 </div>
+                
+                {% for i in  product %}
+                    <!-- Description Box -->
+                    <div class="row pl-4 pr-4 hideAll" id="description{{i.id}}">
+                      
+                      
+                      {% if i.sub_product.all %}
+                      <div class="col-md-4 col-12" style="background-color: white;border-radius: 20px;">
+                        
+                        <div class="text-center">
+                          {% if i.image %}
+                          <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="width: 110px; height:110px;">
+                          {%else%}
+                          <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="" style="width: 110px; height:110px;">
+                          {% endif %}
+                          <h5 class="text-dark">{{i.name}}</h5>
+                          <p class="text-dark" style="font-size: 15px;">{{i.description}}</p>
+                        </div>
+                       
+                      </div>
+                      <div class="col-md-8 col-12">
+                        <h6 class="text-dark" style="background-color: rgb(255, 255, 255);
+                        padding: 12px;
+                        border-radius: 20px;border-bottom: 2px solid #ff577a;">SUB PRODUCTS</h6>
+                         <div class="row" >
+                          {% for j in i.sub_product.all  %}
+                          <div class=" col-md-6 col-12  p-3 m-auto">
+                            <div class="mainman text-center" style="background-color: white;">
+                              <div class="text-center">
+                                {% if j.image %}
+                                <img class="res-gif" src="{{j.image.url}}" alt="" srcset="" style="width: 110px; height:110px;">
+                                {%else%}
+                                <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="" style="width: 110px; height:110px;">
+                                {% endif %}
+                                <h5 class="text-dark">{{j.name}}</h5>
+                                <small class="text-dark">{{j.description}}</small>
+                                </div>
+                               
+                            </div>
+                         
+                          </div>
+                          {% endfor %}
+  
+                        </div>
+                       
+                      </div>
+                      {%else%}
+                      <div class="col-md-12 col-12" style="background-color: white;border-radius: 20px;">
+                        
+                        <div class="text-center">
+                          {% if i.image %}
+                          <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="width: 110px; height:110px;">
+                          {%else%}
+                          <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="" style="width: 110px; height:110px;">
+                          {% endif %}
+                          <h5 class="text-dark">{{i.name}}</h5>
+                          <p class="text-dark" style="font-size: 15px;">{{i.description}}</p>
+                        </div>
+                       
+                      </div>
+                      {% endif %}
+                        
+                     
+                    </div>
+                {% endfor %}
+                  
 
               </div>
             </div>
@@ -103,114 +151,142 @@
         </div>
 
   </div>
-    
-    <div class="container">
+
+</div>
+<div class="container">
        
-        <div class="row">
+  <div class="row">
+    
+    {% for i in product  %}
+    <div class="col-md-3 col-12  col-sm-4 mt-3">
+      <div class="lawandpol text-center p-2" style="height: 340px;">
+        
+        {% if i.icons %}
+        <i class="{{i.icons}} mt-4"></i>
+        {%else%}
+        <i class="fa fa-key mt-4"></i>
+        {% endif %}
           
-          {% for i in product  %}
-          <div class="col-md-3 col-12  col-sm-4 mt-3">
-            <div class="lawandpol text-center p-2" style="height: 340px;">
-              
-              {% if i.icons %}
-              <i class="{{i.icons}} mt-4"></i>
-              {%else%}
-              <i class="fa fa-key mt-4"></i>
-              {% endif %}
-                
-                
-              <h5>{{i.name}} </h5>
-              <small class="d-block">
-                {{i.description|truncatewords:40}}
-              </small>
-              <div class="btn btn-outline-danger mt-2" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
-                  View Details
+          
+        <h5>{{i.name}} </h5>
+        <small class="d-block">
+          {{i.description|truncatewords:40}}
+        </small>
+        <div class="btn btn-outline-danger mt-2" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
+            View Details
+        </div>
+      <!-- Modal PP -->
+      <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
               </div>
+              <div class="modal-body">
+                  <div class="text-center p-1">
+                    {% if i.image %}
+                    <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="height: 250px;">
+                    {%else%}
+                    <img class="res-gif" src="/static/assets/images/house.gif" alt="" srcset="" style="height: 250px;">
+                    {% endif %}
+                  <p>
+                    {{i.description}}
+                  </p>
+                  
+              </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              
+              </div>
+              </div>
+          </div>
+      </div>
+      <!-- PP Modal End -->
+      </div>
+    </div>
+    {% endfor %}
+
+
+  </div>
+  <br>
+  <h4 class="text-danger">Discontinued <span class="text-dark">Products</span></h4>
+  <hr>
+  <div class="row">
+    
+    {% for i in discon  %}
+    <div class="col-md-3 col-6 p-2">
+      <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterCovidaa{{i.id}}">
+          <div class="text-center p-1">
+              <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="width: 90px; height:60px;">
+              <p class="text-center text-dark p-0 m-0">{{i.name}}</p>
+            
+          </div>
             <!-- Modal PP -->
-            <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="text-center p-1">
-                          {% if i.image %}
-                          <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="height: 250px;">
-                          {%else%}
-                          <img class="res-gif" src="/static/assets/images/house.gif" alt="" srcset="" style="height: 250px;">
-                          {% endif %}
-                        <p>
-                          {{i.description}}
-                        </p>
-                        
-                    </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    
-                    </div>
-                    </div>
+            <div class="modal fade" id="exampleModalCenterCovidaa{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterCovidaa" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLongTitle">Covid 19 Insurance Policy</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="text-center p-1">
+                      <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="height: 250px;">
+                      <p>
+                        {{i.description}}
+                      </p>
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                
+                  </div>
                 </div>
+              </div>
             </div>
             <!-- PP Modal End -->
-            </div>
-          </div>
-          {% endfor %}
-
-
-        </div>
-        <br>
-        <h4 class="text-danger">Discontinued <span class="text-dark">Products</span></h4>
-        <hr>
-        <div class="row">
-          
-          {% for i in discon  %}
-          <div class="col-md-3 col-6 p-2">
-            <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterCovidaa{{i.id}}">
-                <div class="text-center p-1">
-                    <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="width: 90px; height:60px;">
-                    <p class="text-center text-dark p-0 m-0">{{i.name}}</p>
-                  
-                </div>
-                  <!-- Modal PP -->
-                  <div class="modal fade" id="exampleModalCenterCovidaa{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterCovidaa" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title text-dark" id="exampleModalLongTitle">Covid 19 Insurance Policy</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="text-center p-1">
-                            <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="height: 250px;">
-                            <p>
-                              {{i.description}}
-                            </p>
-                        </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                      
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- PP Modal End -->
-            </div>
-          </div>
-          {% endfor %}
-            
-        </div>
-
+      </div>
     </div>
-    
+    {% endfor %}
+      
+  </div>
+
 </div>
+
+<script>
+  $(".hideAll").hide()
+  function showandchange(obj){
+    
+    
+    for (let i = 0; i < 20; i++) {
+      if(i == parseInt(obj.id)){
+        ob = $('#'+obj.id)
+        ob.addClass('active-desc')
+        showc = $('#description'+obj.id)
+        showc.show()
+      }else{
+        
+        try{
+          ob = $('#'+i)
+          ob.removeClass('active-desc')
+          showc = $('#description'+i)
+          showc.hide()
+        }
+        catch{
+          console.log(i)
+        }
+      }
+    }
+    // showc.removeClass('hideAll')
+    alert(current)
+  }
+</script>
 
 
 {% endblock content %}
