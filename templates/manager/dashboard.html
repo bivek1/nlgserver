@@ -224,7 +224,7 @@
                 <!-- ============================================================== -->
                 <div class="row">
                     <!-- Page Visit -->
-                    <div class="col-12">
+                    <div class="col-12 col-md-9">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Total Page Visit</h4>
@@ -237,6 +237,23 @@
                         </div>
                     </div>
                     <!-- Page Visit count -->
+                    <!-- Add Fiscal Year Date -->
+                    <div class="col-md-3 col-12">
+                        <a href="{%url 'manager:addFiscal'%}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Fiscal Year</h4>
+                                    <div class="text-end">
+                                        <h2 class="font-light mb-0"><i class="ti-time text-danger"></i>{{fiscal}}</h2>
+                                        <span class="text-muted">Page Visit</span>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </a>
+                       
+                    </div>
+                    <!-- End Fiscal Year Date -->
                     <!-- add Products -->
                     <div class="col-12 col-md">
                         <a href="{%url 'manager:product'%}">

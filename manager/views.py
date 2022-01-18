@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, update_session_auth_hash
-from .forms import AgentF, AnnouncementForm, BranchF, DepartmentHeadForm, DownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
-from landing.models import Announcement, Branch, Contact, DepartmentHead, PageVisit, Setting, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
+from .forms import AgentF, AnnouncementForm, BranchF, DepartmentHeadForm, DownloadForm, FiscalForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
+from landing.models import Announcement, Branch, Contact, DepartmentHead, PageVisit, Setting, fiscalYear, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
@@ -26,6 +26,7 @@ def dashboard(request):
     bod_count = Bod.objects.all().count()
     manage_count = ManagementTeam.objects.all().count()
     page_count = PageVisit.objects.all().count()
+    fiscal = fiscalYear.objects.all().count()
     
     
     dist ={
@@ -42,7 +43,8 @@ def dashboard(request):
         'depart_count':depart_count,
         'bod_count':bod_count,
         'manage_count':manage_count,
-        'count':page_count
+        'count':page_count,
+        'fiscal':fiscal
         }
     return render(request, "manager/dashboard.html", dist)
 
@@ -408,6 +410,40 @@ def DepartmentView(request):
             return render(request, 'manager/departmentTeam.html',dist )
     else:
         return render(request, 'manager/departmentTeam.html',dist )
+
+
+def fiscalView(request):
+    form = FiscalForm()
+    branched = fiscalYear.objects.all()
+    dist = {
+        'form':form,
+        'fiscal':branched,
+    }
+    if request.method == 'POST':
+        forms = FiscalForm(request.POST)
+        for i in branched:
+            if i.fiscal == request.POST['fiscal']:
+                messages.success(request, "Fiscal Year has been added Already")
+                return HttpResponseRedirect(reverse('manager:addFiscal'))
+            else:
+                pass
+        if forms.is_valid():
+            forms.save()
+            messages.success(request, "Fiscal Year Saved Succesfully")
+            return HttpResponseRedirect(reverse('manager:addFiscal'))
+        else:
+            messages.success(request, "Something went Wrong")
+            return render(request, 'manager/addFiscalYear.html',dist )
+    else:
+        return render(request, 'manager/addFiscalYear.html',dist )
+
+
+def deleteFiscal(request, id):
+    aa = fiscalYear.objects.get(id = id)
+    aa.delete()
+    messages.success(request, "Sucessfully Delete Fiscal Year")
+
+    return HttpResponseRedirect(reverse('manager:addFiscal'))
 
 def deleteAnn(request, id):
     aa=  Announcement.objects.get(id =id )

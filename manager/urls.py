@@ -50,6 +50,8 @@ urlpatterns = [
     path('changePassword', views.changePassword, name = "changePassword"),
     path('hideProduct/<int:id>', views.hideProduct, name="hideProduct"),
     path('hideSubProduct/<int:id>', views.hideSubProduct, name="hideSubProduct"),
-    path('messages', views.contact, name="contact")
+    path('messages', views.contact, name="contact"),
+    path('addFiscalYear', views.fiscalView, name ="addFiscal"),
+    path('deleteFiscal/<int:id>', views.deleteFiscal, name = "deleteFiscal")
 ]
 

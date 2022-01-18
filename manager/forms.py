@@ -1,6 +1,22 @@
 from django import forms
 from django.forms import fields, widgets
-from landing.models import Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
+from landing.models import fiscalYear, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
+
+class FiscalForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        super(FiscalForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control ps-0 form-control-line'
+    class Meta:
+        model= fiscalYear
+        fields = ('__all__')
+
+        widgets = {
+            'fiscal': forms.TextInput(attrs={'placeholder':'write in this format 2078/2079', 'required':True}),
+
+        }
+    
 class BranchF(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
