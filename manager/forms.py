@@ -1,6 +1,25 @@
+from pyexpat import model
+from tkinter import Widget
 from django import forms
-from django.forms import fields, widgets
-from landing.models import fiscalYear, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
+from landing.models import OtherDownload, fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+class CeoMessageForm(forms.ModelForm):
+    class Meta:
+        model = CeoMessage
+        fields = ('__all__')
+
+
+class OtherDownloadForm(forms.ModelForm):
+    class Meta:
+        model = OtherDownload
+        fields = ('__all__')
+
+        exclude = ('slug',)
+        widgets = {
+            'name':forms.TextInput(attrs={'class':'form-control form-control-line','placeholder':'File Title'}),
+            'files':forms.FileInput(attrs={'class':'form-control form-control-line'})
+        }
 
 class FiscalForm(forms.ModelForm):
     
@@ -13,7 +32,7 @@ class FiscalForm(forms.ModelForm):
         fields = ('__all__')
 
         widgets = {
-            'fiscal': forms.TextInput(attrs={'placeholder':'write in this format 2078/2079', 'required':True}),
+            'fiscal': forms.TextInput(attrs={'placeholder':'write in this format 2078/2079'}),
 
         }
     
@@ -31,14 +50,15 @@ class BranchF(forms.ModelForm):
         fields = ('__all__')
 
         widgets = {
-            'district': forms.TextInput(attrs={'placeholder':'Kathmandu', 'required':True}),
-            'provience': forms.Select(attrs={'placeholder':'1', 'required':True}),
-            'street': forms.TextInput(attrs={'placeholder':'Lazimpat, Kathmandu Nepal', 'required':True}),
-            'contact': forms.TextInput(attrs={'placeholder':'01442541', 'required':True}),
+            'BranchName':forms.TextInput(attrs={'placeholder':'Branch Name'}),
+            'district': forms.TextInput(attrs={'placeholder':'Kathmandu'}),
+            'provience': forms.Select(attrs={'placeholder':'1'}),
+            'street': forms.TextInput(attrs={'placeholder':'Lazimpat, Kathmandu Nepal'}),
+            'contact': forms.TextInput(attrs={'placeholder':'01442541'}),
             'fax': forms.TextInput(attrs={'placeholder':'010101210'}),
-            'email': forms.TextInput(attrs={'placeholder':'info@nlgi.com', 'required':True}),
-            'focal': forms.TextInput(attrs={'placeholder':'Person Name', 'required':True}),
-            'number': forms.TextInput(attrs={'placeholder':'Focal Number', 'required':True}),
+            'email': forms.TextInput(attrs={'placeholder':'info@nlgi.com'}),
+            'focal': forms.TextInput(attrs={'placeholder':'Person Name'}),
+            'number': forms.TextInput(attrs={'placeholder':'Focal Number'}),
         }
 
 class SettingForm(forms.ModelForm):
@@ -63,14 +83,14 @@ class SurveryorF(forms.ModelForm):
         fields = ('__all__')   
 
         widgets ={
-            'name':forms.TextInput(attrs={'placeholder':'Name of the Surveryor', 'required':True}),
-            'specilization':forms.TextInput(attrs={'placeholder':'Specilization of the Surveryor', 'required':True}),
-            'lience_no':forms.TextInput(attrs={'placeholder':'Licence No. of the Surveryor', 'required':True}),
+            'name':forms.TextInput(attrs={'placeholder':'Name of the Surveryor'}),
+            'specilization':forms.TextInput(attrs={'placeholder':'Specilization of the Surveryor'}),
+            'lience_no':forms.TextInput(attrs={'placeholder':'Licence No. of the Surveryor'}),
             'issued_date':forms.DateInput(attrs={'type':'date'}),
             'renew_date':forms.DateInput(attrs={'type':'date'}),
-            'area':forms.TextInput(attrs={'placeholder':'Area', 'required':True}),
-            'contact':forms.TextInput(attrs={'placeholder':'Contact No. of the Surveryor', 'required':True}),
-            'email':forms.EmailInput(attrs={'placeholder':'surveryor@nlgi.com', 'required':True}),
+            'area':forms.TextInput(attrs={'placeholder':'Area'}),
+            'contact':forms.TextInput(attrs={'placeholder':'Contact No. of the Surveryor'}),
+            'email':forms.EmailInput(attrs={'placeholder':'surveryor@nlgi.com'}),
         } 
        
 class AgentF(forms.ModelForm):
@@ -84,10 +104,10 @@ class AgentF(forms.ModelForm):
         fields = ('__all__')
 
         widgets = {
-            'name':forms.TextInput(attrs={'placeholder':'Name of the Agents', 'required':True}),
-            'address':forms.TextInput(attrs={'placeholder':'Address of the Agent', 'required':True}),
-            'contact':forms.TextInput(attrs={'placeholder':'Contact of the Agents', 'required':True}),
-            'email':forms.TextInput(attrs={'placeholder':'Email@email.com', 'required':True}),
+            'name':forms.TextInput(attrs={'placeholder':'Name of the Agents'}),
+            'address':forms.TextInput(attrs={'placeholder':'Address of the Agent'}),
+            'contact':forms.TextInput(attrs={'placeholder':'Contact of the Agents'}),
+            'email':forms.TextInput(attrs={'placeholder':'Email@email.com'}),
         }
         
 class CitizenF(forms.ModelForm):
@@ -102,8 +122,8 @@ class CitizenF(forms.ModelForm):
         fields = ('__all__')   
 
         widgets={
-            'name':forms.TextInput(attrs={'placeholder':'Name of the Citizen', 'required':True}),
-            'details':forms.TextInput(attrs={'placeholder':'Details of the Citizen', 'required':True}),
+            'name':forms.TextInput(attrs={'placeholder':'Name of the Citizen'}),
+            'details':forms.TextInput(attrs={'placeholder':'Details of the Citizen'}),
         }
 
 class ReportF(forms.ModelForm):
@@ -118,23 +138,24 @@ class ReportF(forms.ModelForm):
         fields = ('__all__')   
         exclude= ('slug',)
         widgets = {
-            'name':forms.TextInput(attrs={'placeholder':'Name of the Report', 'required':True})
+            'name':forms.TextInput(attrs={'placeholder':'Name of the Report'})
         }
         
 class newsF(forms.ModelForm):
     
-    def __init__(self, *args, **kwargs):
-        super(newsF, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control ps-0 form-control-line'
-    
+   
     class Meta:
         model = news
         fields = ('__all__')   
         exclude = ('slug',)
+
+        labels = {
+            'dateof':'Date'
+        }
         widgets = {
-            'name':forms.TextInput(attrs={'placeholder':'Name of the News', 'required':True}),
-            'description':forms.TextInput(attrs={'placeholder':'Description of the News', 'required':True})
+            'name':forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Name of the News'}),
+            'dateof':forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','type':'date'}),
+            'description':CKEditorUploadingWidget()
         }
 
 class BodForm(forms.ModelForm):
@@ -148,16 +169,16 @@ class BodForm(forms.ModelForm):
         fields = ('__all__')   
 
         widgets =  {
-            'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Name of the Bod', 'required':True}),
+            'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Name of the Bod'}),
             'image': forms.FileInput(),
-            'post': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Post of Bod', 'required':True}),
+            'post': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Post of Bod'}),
             'type' :forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Samuka Ka'}),
             'email' : forms.EmailInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'user@nlgi.com'}),
             'appointed_date': forms.DateInput(attrs={'class':'form-control ps-0 form-control-line','type':'date'}),
             'chairman':forms.CheckboxInput(),
             're_appointed_date':forms.DateInput(attrs={'class':'form-control ps-0 form-control-line','type':'date'}),
             'phone': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Phone Number'}),
-            'descriptipn' : forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Short Description'}),
+            'description' : CKEditorUploadingWidget()
         }
 
 class ManagementForm(forms.ModelForm):
@@ -172,9 +193,9 @@ class ManagementForm(forms.ModelForm):
         fields = ('__all__')  
 
         widgets =  {
-            'name': forms.TextInput(attrs={'placeholder':'Name of the Team', 'required':True}),
+            'name': forms.TextInput(attrs={'placeholder':'Name of the Team'}),
             'image': forms.FileInput(),
-            'post': forms.TextInput(attrs={'placeholder':'Post of the Team', 'required':True}),
+            'post': forms.TextInput(attrs={'placeholder':'Post of the Team'}),
             'email' : forms.EmailInput(attrs={'placeholder':'user@nlgi.com'}),
             'appointed_date': forms.DateInput(attrs={'type':'date'}),
             're_appointed_date':forms.DateInput(attrs={'type':'date'}),
@@ -188,9 +209,9 @@ class ProductFrom(forms.ModelForm):
         fields = ('__all__')    
 
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Name of the Product", 'required':True}),
+            'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Name of the Product"}),
             'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line'}),
-            'description': forms.Textarea(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Add a Description', 'required':True}),
+            'description': CKEditorUploadingWidget(),
             'icons': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"fa fa-motorcycle"}),
         }   
 
@@ -206,27 +227,23 @@ class SubProductFrom(forms.ModelForm):
         fields = ('__all__') 
 
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Name of the Product", 'required':True}),
+            'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Name of the Product"}),
             'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line'}),
-            'product': forms.Select(attrs={'class':'form-control ps-0 form-control-line', 'required':True}),
-            'description': forms.Textarea(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Add a Description', 'required':True}),
+            'product': forms.Select(attrs={'class':'form-control ps-0 form-control-line'}),
+            'description': CKEditorUploadingWidget(),
             'discontinue': forms.CheckboxInput()
         }
 
 class QuestionAnswerFrom(forms.ModelForm):
     
-    def __init__(self, *args, **kwargs):
-        super(QuestionAnswerFrom, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control ps-0 form-control-line'
-    
+
     class Meta:
         model = QuestionAnswer
         fields = ('__all__') 
 
         widgets = {
-            'question': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Add a Questions", 'required':True}),
-            'answer':forms.Textarea(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Add a Descriptions", 'required':True}),
+            'question': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Add a Questions"}),
+            'answer':CKEditorUploadingWidget(),
            
         }
         
@@ -237,10 +254,11 @@ class AnnouncementForm(forms.ModelForm):
         fields=('__all__')
 
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Announcement Name", 'required':True}),
-            'image': forms.FileInput(attrs={'class':'form-control ps-0', 'required':True}),
-            'starting_date': forms.DateInput(attrs={'type':'date','class':'form-control ps-0 form-control-line', 'required':True}),
-            'ending_date': forms.DateInput(attrs={'type':'date', 'class':'form-control ps-0 form-control-line', 'required':True}),
+            'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Announcement Name"}),
+            'image': forms.FileInput(attrs={'class':'form-control ps-0'}),
+            'starting_date': forms.DateInput(attrs={'type':'date','class':'form-control ps-0 form-control-line'}),
+            'ending_date': forms.DateInput(attrs={'type':'date', 'class':'form-control ps-0 form-control-line' }),
+            'description': CKEditorUploadingWidget(),
         }
 
 class DownloadForm(forms.ModelForm):

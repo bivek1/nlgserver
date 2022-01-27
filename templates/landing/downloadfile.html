@@ -32,17 +32,23 @@
                         Claim Form
                     </span>
                 </h6>
+
+                <h6 class="pl-2 4 d-inline">
+                    <span class="44  ">
+                        Other 
+                    </span>
+                </h6>
               
                 <hr>
 
                 <div class="row" id="KYC">
                     {%for i in files%}
                         {%if i.dtype == 'KYC Form'%}
-                        <div class="col-12">
+                        <div class="col-12 col-md-6">
                             <div class="products-show-download mt-3">
                         
                                 <div class="text-center p-1 filesform">
-                                  
+                                    <i class="fa fa-file pt-2" style="font-size:20px"></i>
                                     <h6 class="text-center p-0 m-0 pt-2 lowTextForName">{{i.name}}</h6>
                                     <div class="report-item">
                                     
@@ -66,11 +72,11 @@
                 <div class="row" id="proposal">
                     {%for i in files%}
                         {%if i.dtype == 'Proposal Form'%}
-                        <div class="col-12">
+                        <div class="col-12 col-md-6">
                             <div class="products-show-download mt-3">
-                        
+                                
                                 <div class="text-center p-1 filesform">
-                                  
+                                    <i class="fa fa-file pt-2" style="font-size:20px"></i>
                                     <h6 class="text-center p-0 m-0 pt-2 lowTextForName">{{i.name}}</h6>
                                     <div class="report-item">
                                     
@@ -93,11 +99,11 @@
                 <div class="row" id="claim">
                     {%for i in files%}
                         {%if i.dtype == 'Claim Form'%}
-                        <div class="col-12">
+                        <div class="col-12 col-md-6">
                             <div class="products-show-download mt-3">
                         
                                 <div class="text-center p-1 filesform">
-                                 
+                                    <i class="fa fa-file pt-2" style="font-size:20px"></i>
                                     <h6 class="text-center p-0 m-0 pt-2 lowTextForName">{{i.name}}</h6>
                                     <div class="report-item">
                                     
@@ -116,6 +122,30 @@
                         {%endif%}
                     {%endfor%}
                 </div>
+
+
+                <div class="row" id="otherss">
+                    {%for i in other%}
+ 
+                    <div class="col-6 col-md-3">
+                        <div class="products-show-download mt-3">
+                    
+                            <div class="text-center p-1 filesform">
+                                <i class="fa fa-file pt-2" style="font-size:20px"></i>
+                                <h6 class="text-center p-0 m-0 pt-2 lowTextForName">{{i.name}}</h6>
+                                <div class="report-item">
+                                    <a href="{{i.files.url}}" download>
+                                        <i class="fa fa-download p-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            </div>
+                    </div>
+
+                    {%endfor%}
+                   
+                </div>
                
               
              </div>
@@ -128,6 +158,7 @@
 <script>
     $('#proposal').hide()
     $('#claim').hide()
+    $('#otherss').hide()
     $(".1").click(function(){
         $( ".11" ).addClass( "onesel" );
         $( ".33" ).removeClass( "onesel" );
@@ -136,6 +167,7 @@
         $('#proposal').hide()
         $('#claim').hide()
         $("#KYC").show()
+        $('#otherss').hide()
     });
     $(".2").click(function(){
         $( ".22" ).addClass( "onesel" );
@@ -145,6 +177,7 @@
         $('#proposal').show()
         $('#claim').hide()
         $("#KYC").hide()
+        $('#otherss').hide()
     });
     $(".3").click(function(){
         $( ".33" ).addClass( "onesel" );
@@ -154,6 +187,17 @@
         $('#proposal').hide()
         $('#claim').show()
         $("#KYC").hide()
+        $('#otherss').hide()
+    });
+    $(".4").click(function(){
+        $( ".33" ).removeClass( "onesel" );
+        $( ".44" ).addClass( "onesel" );
+        $( ".22" ).removeClass( "onesel" );
+        $( ".11" ).removeClass( "onesel" );
+        $('#proposal').hide()
+        $('#claim').hide()
+        $("#KYC").hide()
+        $('#otherss').show()
     });
 
 

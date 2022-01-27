@@ -73,9 +73,9 @@
                         
                     </div>
 
-                    <div class="col-md-4 col-4 pl-5">
+                    <div class="col-md-4 col-4">
                         <div class="row">
-                            <div class="col-2 col-md-2 aboutimg p-0 m-0 pl-4 mt-2 text-right">
+                            <div class="col-2 col-md-2 aboutimg p-0 pl-3 m-0 mt-2 text-right">
                                 <a href="tel:{{setting.number1}}"> 
                                 <i class="fa fa-phone-square text-light" style="font-size: 24px; margin-left: 20px;"></i> 
                                </a>
@@ -533,6 +533,16 @@
                                     <li>
                                         <a href="{%url 'landing:contact'%}">Contact Us</a>
                                     </li>
+                                    <li>
+                                        <p class="text-light m-0 p-0">Social Site</p>
+                                            <a href="{%url 'landing:contact'%}" class="">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                            <a href="{%url 'landing:contact'%}" class="p-2">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                           
+                                    </li>
                                 </ul>
                                 
                                 <ul class="below-down pl-3">
@@ -546,7 +556,7 @@
                                         <a href="{%url 'landing:term'%}">Terms & Conditions</a>
                                     </li>
                                     <li>
-                                        <a href="{%url 'landing:aboutUs'%}">Board of Directors</a>
+                                        <a href="/aboutus#boardofD">Board of Directors</a>
                                     </li>
                                     <!-- <li>
                                         <a href="{%url 'landing:training'%}">Activities Training</a>
@@ -616,11 +626,11 @@
         <div class="copyright">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <span>Copyright © 2019, All Right Reserved Powered by- <a href="http://www.wakeandtech.com">Wake and Tech Nepal</a> </span>
+                    <div class="col-md-7">
+                        <span>Copyright © 2021, All Right Reserved Powered by- <a href="http://www.wakeandtech.com">NLG INSURANCE COMPANY LIMITED</a> </span>
                     </div>
                     <!-- End Col -->
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="copyright-menu">
                             <ul>
                                 <li>
@@ -635,6 +645,7 @@
                                 <li>
                                     <a href="{%url 'landing:contact'%}">Contact</a>
                                 </li>
+                               
                             </ul>
                         </div>
                     </div>
@@ -673,15 +684,17 @@
 
       
         <a class="mr-3 p-2" href="{%url 'landing:download'%}"><i class="fa fa-file"></i> <span class="mb-2 showathober"> News and Update </span></a>  
-        <hr>
+       
         {% if user.is_authenticated %}
-        <a class="mr-3 p-2" href="{%url 'manager:dashboard'%}"><i class="fa fa-home"></i> <span class="mb-2 showathober"> Dashboard </span></a>
         <hr>
+        <a class="mr-3 p-2" href="{%url 'manager:dashboard'%}"><i class="fa fa-home"></i> <span class="mb-2 showathober"> Dashboard </span></a>
+      
         {% endif %}
         
-        <a class="mr-3 p-2" href="https://www.facebook.com/nlginsurance" target="blank"> <i class="fa fa-facebook"></i> <span class="mb-2 showathober"> Facebook </span></a>
+    
         
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script>
       //Get the button
       var mybutton = document.getElementById("myBtn");

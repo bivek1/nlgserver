@@ -45,6 +45,11 @@
     <div class="row  formbox" >
         <H3>Add Branch</H3>
         <hr>
+        <div class="col-12">
+            {{form.BranchName.label_tag}}
+            {{form.BranchName}}
+            {{form.BranchName.errors}}
+        </div>
         <div class="col-6">
             {{form.district.label_tag}}
             {{form.district}}
@@ -112,6 +117,7 @@
                     <table class="table stylish-table no-wrap">
                         <thead>
                             <tr>
+                                <th class="border-top-0">Branch Name</th>
                                 <th class="border-top-0">District</th>
                                 <th class="border-top-0">Street</th>
                                 <th class="border-top-0">Focal Image</th>
@@ -123,6 +129,7 @@
                                 <tr>
                                
                                     <td class="align-middle">
+                                        <h6>{{i.BranchName}}</h6>
                                         <h6> {{i.district}} </h6>
                                         <small class="d-block">Email: {{i.email}} </small>
                                         <small>Contact: {{i.contact}} </small>

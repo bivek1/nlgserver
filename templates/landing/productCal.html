@@ -55,13 +55,64 @@
             <div class="download m-auto p-2" style="width: 100%;">
                 <h5 class="text-dark">Product Calculator Service</h5>
                 <small class="text-dark">You can calculate your own premium interest</small>
-                <a href="{%url 'landing:calculator'%}">
-                    <button class="btn btn-sm btn-secondary">Switch to Motor Calculator</button>
-                </a>
+               
               
                 <hr>
                 <div class="row">
                     <ul class="col-md-3 col-12 listtheVechile">
+                      <div class="d-flex">
+                        <li class="calActive m-2 w-50">Motor</li>
+                        <li id="product" class="m-2 w-50">Product</li>
+                      </div>
+                      
+                      <hr>
+                      {%url 'landing:calculator' as bash %}
+                      <a href="{{bash}}">
+                        <li {%if request.path == bash %} class="calActive"{%endif%}>Two Wheelers</li>
+                      </a>
+                    
+                      {%url 'landing:carCalculator' as car %}
+                      <a href="{{car}}">
+                        <li {%if request.path == car %} class="calActive"{%endif%}>Private Car</li>
+                      </a>
+                      {%url 'landing:tempoCal' as tempo %}
+                      <a href="{{tempo}}">
+                        <li {%if request.path == tempo %} class="calActive"{%endif%}>Tempo</li>
+                      </a>
+                      {%url 'landing:taxiCal' as taxi %}
+                      <a href="{{taxi}}">
+                        <li {%if request.path == taxi %} class="calActive"{%endif%}>Taxi</li>
+                      </a>
+                      {%url 'landing:goodCal' as goods %}
+                      <a href="{{goods}}">
+                        <li {%if request.path == goods %} class="calActive"{%endif%}>Goods Carrying Vehicle</li>
+                      </a>
+                      {%url 'landing:agriCal' as agri %}
+                      <a href="{{agri}}">
+                        <li {%if request.path == agri %} class="calActive"{%endif%}>Agriculture/Foresty Vehicle</li>
+                      </a>
+                      {%url 'landing:fuelCal' as fuel %}
+                      <a href="{{fuel}}">
+                        <li {%if request.path == fuel %} class="calActive"{%endif%}>Fuel Tanker</li>
+                      </a>
+                      {%url 'landing:passengerCal' as passe %}
+                      <a href="{{passe}}">
+                        <li {%if request.path == passe %} class="calActive"{%endif%}>Passenger Carrying Vehicles</li>
+                      </a>
+                      {%url 'landing:tractorcal' as pas %}
+                      <a href="{{pas}}">
+                        <li {%if request.path == pas %} class="calActive"{%endif%}>Tractor</li>
+                      </a>
+                      {%url 'landing:con' as pas %}
+                      <a href="{{pas}}">
+                        <li {%if request.path == pas %} class="calActive"{%endif%}>Construction Equipment</li>
+                      </a>
+                    </ul>
+                    <ul class="col-md-3 col-12 listtheMotor">
+                      <div class="d-flex">
+                        <li id="vechile" class="m-2 w-50">Motor</li>
+                        <li class="calActive m-2 w-50">Product</li>
+                      </div>
                         {%url 'landing:productCal' as bash %}
                         <a href="{{bash}}">
                           <li {%if request.path == bash %} class="calActive"{%endif%}>Home Insurance</li>
@@ -98,5 +149,17 @@
 
 
 </div>  
-
+<script>
+  $('.listtheVechile').hide()
+  $('#product').click(function(){
+    $('.listtheMotor').show()
+    $('.listtheVechile').hide()
+  
+  })
+  $('#vechile').click(function(){
+    $('.listtheMotor').hide()
+    $('.listtheVechile').show()
+  
+  })
+</script>
 {% endblock content %}

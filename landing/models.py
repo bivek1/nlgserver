@@ -1,8 +1,10 @@
+from ckeditor.fields import RichTextField 
 from django.db import models
 from django.urls import reverse
-
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Branch(models.Model):
+    BranchName = models.CharField(max_length=100, null = True, blank= True)
     district = models.CharField(max_length=70, null = True, blank= True)
     provience = models.CharField(max_length=20, choices=(
         ('1','1'),
@@ -11,6 +13,7 @@ class Branch(models.Model):
         ('4','4'),
         ('5','5'),
         ('6','6'),
+        ('7','7'),
     ), null= True, blank= True)
     street = models.CharField(max_length=50, null = True, blank= True)
     contact = models.CharField(max_length=50, null = True, blank= True)
@@ -42,6 +45,7 @@ class Agent(models.Model):
     address = models.CharField(max_length=100, null = True, blank= True)
     contact = models.CharField(max_length=100, null = True, blank= True)
     email = models.CharField(max_length=100, null = True, blank= True)
+  
     objects = models.Manager()
     
     def __str__(self):
@@ -57,7 +61,7 @@ class fiscalYear(models.Model):
     objects = models.Manager()
     def __str__(self):
         return self.fiscal
-
+   
 class Report(models.Model):
     name = models.CharField(max_length = 200)
     slug = models.SlugField(default='report')
@@ -72,6 +76,8 @@ class Report(models.Model):
     objects = models.Manager()
     def __str__(self):
         return self.name
+
+   
     
     def download(self):
         return reverse('landing:filedownload', args=[self.slug, self.id])
@@ -84,8 +90,9 @@ class Report(models.Model):
 class news(models.Model):
     name = models.CharField(max_length = 200)
     slug = models.SlugField(default='news')
-    description = models.CharField(max_length=2000, null= True, blank= True)
-    dateof = models.DateField(auto_now_add=True, null= True, blank= True) 
+    # description = models.CharField(max_length=2000, null= True, blank= True)
+    description = RichTextUploadingField(null = True, blank = True)
+    dateof = models.DateField(auto_now_add=False, null= True, blank= True) 
     files = models.FileField(upload_to='News/',  null= True, blank= True)
     image = models.ImageField(upload_to="images/", null= True, blank= True)
     objects = models.Manager()
@@ -121,14 +128,14 @@ class Download(models.Model):
     
 class Bod(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to = "management/")
-    post = models.CharField(max_length=200)
-    type = models.CharField(max_length=100)
-    email = models.EmailField()
-    appointed_date = models.DateField()
+    image = models.ImageField(upload_to = "management/", null = True, blank= True)
+    post = models.CharField(max_length=200,null = True, blank= True)
+    type = models.CharField(max_length=100, null = True, blank= True)
+    email = models.EmailField(null = True, blank= True)
+    appointed_date = models.DateField(null = True, blank= True)
     re_appointed_date = models.DateField(null = True, blank=True)
     phone = models.BigIntegerField(null = True, blank = True)
-    descriptipn = models.CharField(max_length=1000)
+    description = RichTextUploadingField(null = True, blank = True)
     chairman = models.BooleanField(default=False)
     objects = models.Manager()
 
@@ -137,8 +144,8 @@ class Bod(models.Model):
 
 class ManagementTeam(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to = "management/")
-    post = models.CharField(max_length=200)
+    image = models.ImageField(upload_to = "management/", null = True, blank= True)
+    post = models.CharField(max_length=200, null = True, blank= True)
     email = models.EmailField(null = True, blank=True)
     appointed_date = models.DateField(null = True, blank=True)
     re_appointed_date = models.DateField(null = True, blank=True)
@@ -151,37 +158,47 @@ class ManagementTeam(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to = "products/")
-    description = models.CharField(max_length=2000)
+    description = RichTextUploadingField(null = True, blank = True)
     icons = models.CharField(max_length=20, null = True, blank=True)
-    objects = models.Manager
+    
     discontinue = models.BooleanField(default=False)
     hide = models.BooleanField(default=False)
+    objects = models.Manager()
     def __str__(self):
         return self.name
 
 class Sub_product(models.Model):
     product = models.ForeignKey(Product, related_name="sub_product", on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to = "products/")
-    description = models.CharField(max_length=2000)
+    image = models.ImageField(upload_to = "products/",null = True, blank = True)
+    description = RichTextUploadingField(null = True, blank = True)
     discontinue = models.BooleanField(default=False)
     hide = models.BooleanField(default=False)
-    objects = models.Manager
+    objects = models.Manager()
     
     def __str__(self):
         return self.name
 
 class QuestionAnswer(models.Model):
     question = models.CharField(max_length=500)
-    answer = models.CharField(max_length=2000)
+    answer = RichTextUploadingField(null = True, blank = True)
     objects = models.Manager()
 
     def __str__(self):
         return self.question
 
+class CeoMessage(models.Model):
+    message = RichTextUploadingField()
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.message
+
 class Setting(models.Model):
     logo = models.ImageField(upload_to ="logo/", null=True, blank=True)
     email = models.EmailField(default="info@nlgi.com.np")
+    product_email = models.EmailField(default="underwriting@nlgi.com.np")
     number1 = models.CharField(max_length = 12, default="01-4442646")
     number2 = models.CharField(max_length = 12, default="01-4006648", null = True, blank=True)
     toll_free_no = models.BigIntegerField(default="16600199099", null = True, blank=True)
@@ -193,10 +210,11 @@ class Setting(models.Model):
 
 
 class Announcement(models.Model):
-    name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to ="announcement")
-    starting_date = models.DateField()
-    ending_date = models.DateField()
+    name = models.CharField(max_length=200,null = True, blank = True)
+    image = models.ImageField(upload_to ="announcement",null = True, blank = True)
+    description = RichTextUploadingField(null = True, blank = True)
+    starting_date = models.DateField(null = True, blank = True)
+    ending_date = models.DateField(null = True, blank = True)
     objects = models.Manager()
 
     def __str__(self) -> str:
@@ -204,9 +222,9 @@ class Announcement(models.Model):
 
 class DepartmentHead(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to = "departmenthead/")
-    post = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    image = models.ImageField(upload_to = "departmenthead/",null = True, blank = True)
+    post = models.CharField(max_length=100,null = True, blank = True)
+    email = models.EmailField(max_length=100,null = True, blank = True)
     objects = models.Manager()
 
     def __str__(self) -> str:
@@ -223,13 +241,28 @@ class Contact(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField(blank=True, null = True)
     phone = models.BigIntegerField(blank=True, null = True)
-    subject = models.CharField(max_length=200)
-    message = models.CharField(max_length=1000)
+    subject = models.CharField(max_length=200,null = True, blank = True)
+    message = models.CharField(max_length=1000,null = True, blank = True)
     objects = models.Manager()
 
     def __str__(self) -> str:
         return self.name
 
+class OtherDownload(models.Model):
+    name = models.CharField(max_length=200, null = True, blank = True)
+    slug = models.SlugField(default='others')
+    files = models.FileField(upload_to='other/')
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.name
+
+    def download(self):
+        return reverse('landing:filedownload', args=[self.slug, self.id])
+
+    def pdf(self):
+        return reverse('landing:pdfview', args=[self.slug, self.id])
 
 
     

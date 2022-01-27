@@ -11,27 +11,31 @@
         text-decoration: none;
     }
 </style>
-<div class="container-fluid" style="height:auto; padding-button:30px;">
+<div class="container-fluid" style="height:auto;">
     <div class="row backandrollall">
         <div class="col-md-7 col-12 p-0 m-0 head-right">
-            <div class="firsthead p-3 ml-4">
-                <h3>FAQs</h3>
+            <div class=" p-3 ml-4">
+                <h3 class="text-light">FAQs</h3>
                 <hr>
                 <div class="accordion" id="accordionExample">
                   
                   {% for i in faq %}
                   <div class="card">
-                    <div class="card-header" id="heading{{i.id}}">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
-                           {{i.question}} 
+                    <div class="card-header" id="heading{{i.id}}" style="display: flex; justify-content: space-between;">
+                      <h5 class="mb-0" >
+                        <h6 class="text-dark">
+                          {{i.question}} 
+                        </h6>
+                        <button class="btn text-danger" type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
+                          <i class="fa fa-plus"></i>
                         </button>
                       </h5>
                     </div>
                 
-                    <div id="collapse{{i.id}}" class="collapse" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
+                    <div id="collapse{{i.id}}" class="collapse {%if i.id == show%} show {%else%} collapsed {%endif%}" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
                       <div class="card-body">
-                          {{i.answer}}
+                        {{i.answer|safe}}
+                          
                       </div>
                     </div>
                   </div>

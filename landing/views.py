@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Announcement,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, PageVisit, Product, QuestionAnswer, Setting, Surveryor, Citizen, Report, Download, fiscalYear, news
+from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, Setting, Sub_product, Surveryor, Citizen, Report, Download, fiscalYear, news
 from django.http import FileResponse, Http404, HttpResponse, HttpResponseRedirect, JsonResponse, request
 from django.urls import reverse
 from django.conf import settings
@@ -43,10 +43,15 @@ def landing(request):
 def productPolicy(request):
     PageVisitView()
     sett = Setting.objects.all()
+    topP = Product.objects.filter(hide=False).filter(discontinue= False)[:8]
     products = Product.objects.filter(hide=False).filter(discontinue= False)
+    allSub = Sub_product.objects.filter(hide=False).filter(discontinue= False)
     lens = products.count()
     discontineu = Product.objects.filter(discontinue=True)
     setting = None
+    for i in topP:
+        showm = i.id
+        break
     if sett:
         for i in sett:
             setting = i 
@@ -55,7 +60,10 @@ def productPolicy(request):
         'setting':setting,
         'product':products,
         'discon':discontineu,
-        'lens':lens
+        'lens':lens,
+        'topP':topP,
+        'showm':showm,
+        'allSub':allSub
     }
     return render(request, 'landing/products.html', dist)
 
@@ -63,7 +71,12 @@ def aboutUs(request):
     PageVisitView()
     sett = Setting.objects.all()
     setting = None
-    
+    msg = None
+    message = CeoMessage.objects.all()
+    if messages:
+        for i in message:
+            msg = i.message
+            break
     if sett:
         for i in sett:
             setting = i 
@@ -71,6 +84,7 @@ def aboutUs(request):
     dist ={
         'setting':setting,
         'bod':Bod.objects.all(),
+        'msg':msg,
         'team':ManagementTeam.objects.all(),
         'depart':DepartmentHead.objects.all()
     }
@@ -99,6 +113,61 @@ def contact(request):
         return HttpResponseRedirect(reverse('landing:contact'))
     return render(request, "landing/contactus.html", dist)
 
+def thisProduct(request,id):
+    PageVisitView()
+    sett = Setting.objects.all()
+    setting = None
+    product = Product.objects.get(id = id)
+    all = Product.objects.all()
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist ={
+        'setting':setting,
+        'product':product,
+        'all':all
+    }
+    if request.method == 'POST':
+        Contact.objects.create(
+            name = request.POST['name'],
+            email = request.POST['email'],
+            phone = request.POST['number'],
+            subject = request.POST['subject'],
+            message = request.POST['message']
+        )
+        messages.success(request,"Successfully Sent Message")
+        return HttpResponseRedirect(reverse('landing:thisProduct',args=[product.id]))
+    return render(request, "landing/thisproduct.html", dist)
+
+
+def subProduct(request, id):
+    PageVisitView()
+    sett = Setting.objects.all()
+    setting = None
+    product = Sub_product.objects.get(id = id)
+    all = Sub_product.objects.filter(product = product.product)
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist ={
+        'setting':setting,
+        'product':product,
+        'all':all
+    }
+    if request.method == 'POST':
+        Contact.objects.create(
+            name = request.POST['name'],
+            email = request.POST['email'],
+            phone = request.POST['number'],
+            subject = request.POST['subject'],
+            message = request.POST['message']
+        )
+        messages.success(request,"Successfully Sent Message")
+        return HttpResponseRedirect(reverse('landing:thisProduct',args=[product.id]))
+    return render(request, "landing/subproduct.html", dist)
+
 def faq(request):
     PageVisitView()
     sett = Setting.objects.all()
@@ -108,9 +177,13 @@ def faq(request):
         for i in sett:
             setting = i 
             break
+    for i in faq:
+        show = i.id
+        break
     dist ={
         'setting':setting,
-        'faq':faq
+        'faq':faq,
+        'show':show
     }
     return render(request, "landing/faq.html", dist)
 
@@ -165,11 +238,16 @@ def finance(request):
 
     report = Report.objects.all()
     Yeara = fiscalYear.objects.all()
+    for i in report:
+        bb = i.id
+        break
+
     media = settings.MEDIA_ROOT
     aa = media.replace('\\media',"")
     dist = {
         'rep':report,
         'aa':aa,
+        'bb':bb,
         'fis':Yeara,
         'setting':setting
     }
@@ -177,20 +255,22 @@ def finance(request):
 
 def filedownload(request, slug, id):
     media = settings.MEDIA_ROOT
-    # aa = media.replace('\\media',"")
-    aa = media.replace('/media/',"")
+    aa = media.replace('\\media',"")
+    # aa = media.replace('/media/',"")
     if slug == 'report':
         rep = Report.objects.get(id=id)
     elif slug=="news":
         rep = news.objects.get(id=id)
+    elif slug=="others":
+        rep = OtherDownload.objects.get(id=id)
     else:
         rep = Download.objects.get(id = id)
-    # file = open(aa+"/"+rep.files.url, "rb").read()
-    file = open(aa+rep.files.url, "rb").read()
+    file = open(aa+"/"+rep.files.url, "rb").read()
+    # file = open(aa+rep.files.url, "rb").read()
     rea_response = HttpResponse(file, content_type='application/pdf')
     rea_response['Content-Disposition'] = 'attachment; filename={}'.format(rep.name+'.pdf')
     return rea_response
-    # return HttpResponseRedirect(reverse('landing:finance'))
+
 
 def pdf_view(request,slug, id):
     media = settings.MEDIA_ROOT
@@ -200,6 +280,8 @@ def pdf_view(request,slug, id):
         rep = Report.objects.get(id=id)
     elif slug=="news":
         rep = news.objects.get(id=id)
+    elif slug=="others":
+        rep = OtherDownload.objects.get(id=id)
     else:
         rep = Download.objects.get(id = id)
     print(media+"/"+rep.files.url)
@@ -308,6 +390,7 @@ def download(request):
     d = news.objects.all()
     two = news.objects.all().order_by('-id')[:3]
     sett = Setting.objects.all()
+   
     setting = None
     if sett:
         for i in sett:
@@ -316,7 +399,7 @@ def download(request):
     dist = {
         'd':d,
         'two': two,
-        'setting':setting
+        'setting':setting,
     }
     return render(request, "landing/download.html", dist)
 
@@ -353,6 +436,7 @@ def downloadFile(request):
     PageVisitView()
     files = Download.objects.all()
     sett = Setting.objects.all()
+    other = OtherDownload.objects.all()
     setting = None
     if sett:
         for i in sett:
@@ -360,7 +444,8 @@ def downloadFile(request):
             break
     dist = {
         'files':files,
-        'setting':setting
+        'setting':setting,
+        'other':other
     }
     return render(request, "landing/downloadfile.html", dist)
 

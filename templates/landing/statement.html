@@ -72,51 +72,28 @@
         </div>
         <br><br>
 
-            
-            {% for i in rep %}
-                {%if i.rtype == 'Annual Report' %}
 
-                <div class="col-lg-2 col-md-3 col-12 showAnnual">
-                    <a href="{{i.pdf}}">
-                        <div class="products-show-satement mt-2">
-                            <div class="text-center p-1">
-                                <p class="text-center p-0 m-0 lowTextForName">{{i.name}}</p>
-                                <div class="report-item p-3">
-                                    <a href="{{i.pdf}}">
-                                        <i class="fa fa-eye p-2"></i>
-                                    </a>      
-                                
-                                    <a href="{{i.download}}">
-                                        <i class="fa fa-download p-2"></i>
-                                    </a>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                {%endif%}
-            {% endfor %}
-            
             {%for i in fis%}
-                
-                <div class="col-lg-12 col-md-12 col-12 showQuarterly">
+            
+                <div class="col-lg-12 col-md-12 col-12 showAnnual">
 
                     <div class="accordion" id="accordionExample">
-                        <div class="card">
+                        <div class="card arcorcard" style="background-color: #fcfcfc;">
                           <div class="card-header" id="heading{{i.id}}">
-                            <h5 class="mb-0">
-                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
-                                {{i.fiscal}}
-                              </button>
-                            </h5>
+                            <div class="mb-0" style="display: flex;justify-content: space-between;">
+                                <h6 class="text-dark">{{i.fiscal}}</h6>
+                                <p class="btn text-danger " type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
+                                    <i class="fa fa-plus"></i>
+                                </p>
+                            </div>
                           </div>
                       
-                          <div id="collapse{{i.id}}" class="collapse collapsed" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
+                          <div id="collapse{{i.id}}" class="collapse {%if bb == i.id %}show {%else%}collapsed {%endif%}" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
                             <div class="card-body">
                                 <div class="row">
 
                                     {%for j in i.fiscalyear.all%}
+                                    {%if j.rtype == 'Annual Report' %}
                                     <div class="col-md-3 col-12 col-lg-3">
                                         <a href="{{j.pdf}}">
                                             <div class="products-show-satement mt-2">
@@ -136,6 +113,7 @@
                                             </div>
                                         </a>
                                     </div>
+                                    {%endif%}
                                     {%endfor%}
                                 
                                 </div>
@@ -175,6 +153,89 @@
                     </div> -->
                                     
                 </div>
+           
+            {%endfor%}
+            {%for i in fis%}
+            
+                <div class="col-lg-12 col-md-12 col-12 showQuarterly">
+
+                    <div class="accordion" id="accordionExample">
+                        <div class="card arcorcard" style="background-color: #fcfcfc;">
+                          <div class="card-header" id="heading{{i.id}}">
+                            <div class="mb-0" style="display: flex;justify-content: space-between;">
+                                <h6 class="text-dark">{{i.fiscal}}</h6>
+                                <p class="btn text-danger " type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
+                                    <i class="fa fa-plus"></i>
+                                </p>
+                            </div>
+                          </div>
+                      
+                          <div id="collapse{{i.id}}" class="collapse {%if bb == i.id %}show {%else%}collapsed {%endif%}" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="row">
+
+                                    {%for j in i.fiscalyear.all%}
+                                    {%if j.rtype == 'Quarterly Report' %}
+                                    <div class="col-md-3 col-12 col-lg-3">
+                                        <a href="{{j.pdf}}">
+                                            <div class="products-show-satement mt-2">
+                                                <div class="text-center p-1 forQuater">
+                                                    <p class="text-center p-0 m-0 pt-2 lowTextForName" >{{j.name}}</p>
+                                                    <div class="report-item">
+                                                        <a href="{{j.pdf}}">
+                                                            <i class="fa fa-eye p-2"></i>
+                                                        </a>      
+                                                    
+                                                        <a href="{{j.download}}">
+                                                            <i class="fa fa-download p-2"></i>
+                                                        </a>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {%endif%}
+                                    {%endfor%}
+                                
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                    </div>
+
+
+                    <!-- {{i.fiscal}}
+                    <hr>
+                    <div class="row">
+
+                        {%for j in i.fiscalyear.all%}
+                        <div class="col-md-3 col-12 col-lg-3">
+                            <a href="{{j.pdf}}">
+                                <div class="products-show-satement mt-2">
+                                    <div class="text-center p-1 forQuater">
+                                        <p class="text-center p-0 m-0 pt-2 lowTextForName" >{{j.name}}</p>
+                                        <div class="report-item">
+                                            <a href="{{j.pdf}}">
+                                                <i class="fa fa-eye p-2"></i>
+                                            </a>      
+                                        
+                                            <a href="{{j.download}}">
+                                                <i class="fa fa-download p-2"></i>
+                                            </a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {%endfor%}
+                    
+                    </div> -->
+                                    
+                </div>
+           
             {%endfor%}
         
         {% for i in rep %}

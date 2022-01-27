@@ -52,6 +52,9 @@ urlpatterns = [
     path('hideSubProduct/<int:id>', views.hideSubProduct, name="hideSubProduct"),
     path('messages', views.contact, name="contact"),
     path('addFiscalYear', views.fiscalView, name ="addFiscal"),
-    path('deleteFiscal/<int:id>', views.deleteFiscal, name = "deleteFiscal")
+    path('deleteFiscal/<int:id>', views.deleteFiscal, name = "deleteFiscal"),
+    path('editNews/<int:id>', views.editNews, name = "editNews"),
+    path('ceoMessage', views.addCeoMessage, name = 'addCeoMessage'),
+    path('otherDownload', views.otherDownload, name="otherDownload")
 ]
 

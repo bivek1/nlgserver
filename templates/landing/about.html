@@ -234,7 +234,7 @@
         </div>
         
         {% for i in bod %}
-            <div class="{% if i.chairman %} col-md-4 col-12 {%else%} col-md-4 col-12  {% endif %} p-3 m-auto">
+            <div class="{% if i.chairman %} col-md-12 col-12 {%else%} col-md-4 col-12  {% endif %} p-3 m-auto">
                 <div class="mainman text-center ">
                     <img src="{{i.image.url}}" alt="" srcset="">
                     <h6>{{i.name}}</h6>
@@ -260,22 +260,34 @@
                               </div>
                               
                               <div class="row pl-2 mt-2">
-                                <div class="col-10 m-auto bods p-2" style="height: auto;">
-                                  <h4 class="text-center">{{i.name}}</h4>
-                                  <p class="text-center" style="font-size: 14px;">{{i.descriptipn}}</p>
-                                  <p class="text-center"> <b>{{i.post}}</b></p>
-                                  <p class="text-center text-danger">{{i.type}}</p>
-                                  <div class="text-center" style="display: flex;justify-content: space-between;background-color: whitesmoke;padding: 2px;align-items: center;padding-top: 14px;">
+                                <div class="col-10 m-auto p-2" style="height: auto;">
+                                  <h6 class="text-center text-dark">{{i.name}}</h6>
+                                  <p class="text-center text-danger p-0 m-0"> {{i.post}}</p>
+                                  <p class="text-center p-0 m-0">
+                                    <small >{{i.type}}</small>
+                                  </p>
+                                 
+                                  <div class="text-center p-0 m-0" style="font-size: 14px;">{{i.description|safe}}</div>
+                                  <div class="text-center">
                                     
                                     {% if i.re_appointed_date %}
-                                    <p><b>Re- Appointed Date:</b></p>
-                                    <p>{{i.re_appointed_date}}</p>
+                                    <div style="display: flex;justify-content:space-around;align-items: center;">
+                                      <p>Appointed Date:</p>
+                                      <p>{{i.appointed_date}}</p>
+                                    </div>
+                                    <div style="display: flex;justify-content: space-around;align-items: center;">
+                                      <p>Re- Appointed Date:</p>
+                                      <p>{{i.re_appointed_date}}</p>
+                                    </div>
+                                    
                                 
                                     {%else%}
-
-                                    <p><b>Appointed Date:</b></p>
-                                    <p>{{i.appointed_date}}</p>
-                                  
+                                    <div style="display: flex;justify-content: space-around;align-items: center;">
+                                      <p>Appointed Date:</p>
+                                      <p>{{i.appointed_date}}</p>
+                                    
+                                    </div>
+                                 
                           
                                     {% endif %}
                           
@@ -355,14 +367,7 @@
                 </div>
                 
                 <p>
-                    Though we have 60 years of history in insurance sector in Nepal, its growth seems to be very low. Although the importance of insurance is high, people here in Nepal are not quite aware of the features of insurance. The reason behind this can be crisis in political, economic and industrial sectors. We, all general insurance companies along with participation of Insurance Board have been trying to raise public awareness among people by forming marketing committee, but we found it as a challenging job.
-                    The devastating earthquake that shook Nepal on 2015/04/25 and continuous aftershocks occurring after it has badly affected all the financial sectors including general insurance. For the damages done by the devastative earthquake, NLG has discharged Rs. 19 Crore to the victims. Out of the total 16,700 number of claims lodged with all the general insurance companies, 1,353 claims were lodged against NLG among which 892 claims were settled.
-                </p>
-
-                <p>
-                    There was an alarming belief that insurance companies would have to face high amount of claims leading to failure of many insurance companies due to the devastating earthquake, however NLG has been successful in converting these challenges into opportunities and simultaneously achieved profit, though less than in previous years due to the increase in claim expenses than in previous years.
-                    NLG has been working towards discharging pending claims as soon as possible with an aim that such payments would be of great help for the victims in reconstructing the destructions done by the massive earthquake. In fulfilling this aim, NLG has arranged a separate desk for the victims of earthquake and has brought easiness in discharging claims of small amount. However, the insured having huge claims in amount cannot be settled immediately as some time is required for evaluation of loss but arrangements were made to provide claim advances to such insured.
-                    Despite such devastating event, insurance companies have been able to properly manage themselves. Talking about NLG, it is not only active in insurance business but also is an active participant in social welfare events. Professional discipline and transparency are its assets. It has also been honored by awards such as National BPA Award which has added even more responsibilities to the company. We have been working so as to be the top insurance company conducting business in Nepal.
+                   {{msg|safe}}
                 </p>
 
              

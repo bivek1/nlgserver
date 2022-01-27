@@ -77,17 +77,13 @@
                     <input type="date" name="re_appointed_date" value="{{renew}}" class="form-control ps-0 form-control-line">
                     {{form.re_appointed_date.errors}}
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     {{form.phone.label_tag}}
                     {{form.phone}}
                     {{form.phone.errors}}
                 </div>
-                <div class="col-6">
-                    {{form.descriptipn.label_tag}}
-                    {{form.descriptipn}}
-                    {{form.descriptipn.errors}}
-                </div>
-                <div class="col-12">
+               
+                <div class="col-12 pt-2">
                     {{form.image.label_tag}}
                     {{form.image}}
                     {{form.image.errors}}
@@ -96,6 +92,13 @@
                     {{form.chairman.label_tag}}
                     {{form.chairman}}
                     {{form.chairman.errors}}
+                </div>
+                <div class="col-12">
+                    {{form.description.label_tag}}
+                    {{form.media}}
+                    {{form.description}}
+        
+                    {{form.description.errors}}
                 </div>
                 
                 {% csrf_token %}

@@ -23,6 +23,8 @@ urlpatterns = [
     path("training", views.training, name ="training"),
     path('sitemaps', views.sitemap, name ="sitemap"),
     path('downloadfile', views.downloadFile, name="downloadFile"),
+    path('productDetails/<int:id>', views.thisProduct, name="thisProduct"),
+    path('subproductDetails/<int:id>', views.subProduct, name="subProduct"),
 
     # Calculator
     path('premiumcalculator', views.calculator, name="calculator"),

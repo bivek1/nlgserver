@@ -1,0 +1,49 @@
+{% extends "manager/dashboard.html" %}
+{% block title %}
+    Edit News
+{% endblock title %}
+
+{% block inner %}
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Dashboard</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{%url 'landing:landing'%}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{%url 'manager:dashboard'%}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit News</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="text-center ps-4 pe-4">
+        {% if messages %}
+        {% for m in messages  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+   
+    
+    <form action="" method="post" style="width: 100%; padding: 30px;" enctype="multipart/form-data">
+       
+        <div class="row formbox">
+            <h3>Edit News</h3>
+            <hr>
+            {{form.media}}
+            {{form}}
+            {% csrf_token %}
+           
+            <button class="btn btn-danger btn-block text-light mt-3" id="submit"> <i class="fa fa-key"></i> UPDATE NEWS </button>        
+        </div>
+   
+        
+    </form>
+{% endblock inner %}

@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'landing.apps.LandingConfig',
     'manager.apps.ManagerConfig',
     'ckeditor',
-    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -126,7 +125,7 @@ USE_TZ = True
 
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
 
-CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_UPLOAD_PATH = 'products/'
 CKEDITOR_IMAGE_BACKEND = "pillow"
 
 CKEDITOR_CONFIGS = {
@@ -134,7 +133,6 @@ CKEDITOR_CONFIGS = {
         'toolbar': None,
         'width': 'auto',
     },
-
 }
 
 ###################################

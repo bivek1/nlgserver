@@ -1,0 +1,171 @@
+{% extends "pillar.html" %}
+{% load static %}
+{% block title %}
+  {{product.name}}
+{% endblock title %}
+{% block content %}
+<style>
+  .form-control{
+  border: rgb(170, 170, 170) solid 1px!important;
+  border-radius: 50px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="container-fluid">
+    <div class="row backandrollall">
+        <div class="col-md-12 col-12 p-0 m-0 senright">
+          <div class="m-0 p-3 ml-4">
+            <h4 class="text-light">{{product.name}}</h4>
+           
+            <!-- <small class="ml-3 text-light">Comming Soon.....</small> -->
+            <div class="download m-auto p-2" style="width: 100%;">
+        
+                <div class="row">
+                    <ul class="col-md-3 col-12 listtheVechile">
+                      <h6 class="text-center">Products</h6>
+                      <hr class="m-0 p-0">
+                      {% for i in all %}
+                        {%url 'landing:thisProduct' i.id as bash %}
+                        <a href="{{bash}}">
+                          <li {%if request.path == bash %} class="calActive"{%endif%}>
+                            <i class="{%if i.icons%}{{i.icons}}{%else%}fa fa-circle-o-notch {%endif%}" aria-hidden="true" style="font-size: 14px;"></i>
+                            <span>
+                              {{i.name}}
+                            </span>
+                            
+                          </li>
+                        </a>
+                      {% endfor %}
+                        
+                       
+                      
+                    </ul>
+                    <div class="col-md-9 col-12">
+                      <div class="row pl-4 pr-4">
+                      
+                      
+                        {% if product.sub_product.all %}
+                        <div class="col-md-12 col-12 p-2" style="background-color: white;border-radius: 20px;">
+                          <div class="col-md-12 col-12 d-flex justify-content-center">
+                              
+                            {% if product.image %}
+                            <img class="res-gif" src="{{product.image.url}}" alt="" srcset="" style="width: auto; height:200px;">
+                            {%else%}
+                            <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="" style="width: auto; height:200px;">
+                            {% endif %}
+                          </div>
+                          <h5 class="text-dark text-center">{{product.name}}</h5>
+                          <hr class="m-0 p-0">
+                          <div class="row">
+                         
+                          
+                            <div class="col-md-12 col-12" style="background-color: white;">
+                              <!-- <p style="font-weight: 500;"> Description:</p> -->
+                              <p class="text-dark" style="font-size: 15px;">{{product.description|safe}}</p>
+                            </div>
+                           
+                          </div>
+  
+                        </div>
+                        <div class="col-md-12 col-12 m-auto">
+                          <hr class="m-0 p-0">
+                          <h6 class="text-dark text-center" style="background-color: rgb(255, 255, 255);
+                          padding: 12px;">SUB PRODUCTS</h6>
+                           <div class="row text-center" >
+                            {% for j in product.sub_product.all  %}
+                            <div class=" col-md-3 col-12  p-3">
+                              <a href="{%url 'landing:subProduct' j.id%}">
+                                  <div class="mainman text-center p-3" style="background-color: white;">
+                                    <div class="text-center">
+                                      {% if j.image %}
+                                      <img class="res-gif" src="{{j.image.url}}" alt="" srcset="" style="width: 60px; height:60px;">
+                                      {%else%}
+                                      <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="" style="width: 60px; height:60px;">
+                                      {% endif %}
+                                      <h6 class="text-dark">{{j.name}}</h6>
+                                    
+                                      </div>
+                                    
+                                  </div>
+                              </a>
+                            
+                           
+                            </div>
+                            {% endfor %}
+    
+                          </div>
+                         
+                        </div>
+                        {%else%}
+                        <div class="col-md-12 col-12 p-2" style="background-color: white;border-radius: 20px;">
+                          <div class="col-md-12 col-12 d-flex justify-content-center">
+                              
+                            {% if product.image %}
+                            <img class="res-gif" src="{{product.image.url}}" alt="" srcset="" style="width: auto; height:200px;">
+                            {%else%}
+                            <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="" style="width: auto; height:200px;">
+                            {% endif %}
+                          </div>
+                          <h5 class="text-dark text-center">{{product.name}}</h5>
+                          <hr class="m-0 p-0">
+                          <div class="row">
+                           
+                            <div class="col-md-12 col-12" style="background-color: white;">
+                              <!-- <p style="font-weight: 500;"> Description:</p> -->
+                              <p class="text-dark" style="font-size: 15px;">{{product.description|safe}}</p>
+                            </div>
+                           
+                          </div>
+  
+                        </div>
+                        {% endif %}
+                          
+                       
+                      </div>
+                      <hr>
+                      <div class="row pl-4 pr-4" >
+                        <div class="col-12 col-md-12 m-auto p-2" style="border:rgb(202, 202, 202) solid 1px; border-radius: 20px;">
+                          <p class="pl-2">Are you wiling to know more about {{product.name}} feel free to connect with us.</p>
+                          <hr class="m-0 p-0">
+                          <form action="" method="post">
+                            <div class="pt-2">
+                              <label for="name">Product Name</label>
+                              <input type="text" name="productname" id="" value="{{product.name}}" class="form-control form-control-line" readonly>
+                            </div>
+                            <div class="pt-2">
+                              <label for="name">Your Full Name</label>
+                              <input type="text" name="name" id="" placeholder="Enter your Full Name" class="form-control  form-control-line">
+                            </div>
+                            <div class="pt-2">
+                              <label for="name">Your valid Email Address</label>
+                              <input type="text" name="email" id="" placeholder="Enter your valid Email Address" class="form-control  form-control-line">
+                            </div>
+                            <div class="pt-2">
+                              <label for="name">Your Mobile Number</label>
+                              <input type="text" name="name" id="" placeholder="Enter your valid Mobile Number" class="form-control  form-control-line">
+                            </div>
+                            <div class="pt-2">
+                              <label for="name">Your Message</label>
+                              <textarea type="text" name="message" id="" placeholder="Enter your message" class="form-control  form-control-line" style="height: 150px;"></textarea>
+                            </div>
+                            <div class="pt-2">
+                              <button class="btn btn-danger d-block btn-block">
+                                <i class="fa fa-envelope"></i>
+                                Send</button>
+                            </div>
+                          </form>
+                        </div>
+                       
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+
+
+</div>  
+
+{% endblock content %}

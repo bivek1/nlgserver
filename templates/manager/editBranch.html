@@ -47,6 +47,11 @@
             <div class="row  formbox" >
                 <H3>Edit Branch</H3>
                 <hr>
+                <div class="col-12">
+                    {{form.BranchName.label_tag}}
+                    {{form.BranchName}}
+                    {{form.BranchName.errors}}
+                </div>
                 <div class="col-6">
                     {{form.district.label_tag}}
                     {{form.district}}

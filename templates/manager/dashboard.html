@@ -223,20 +223,53 @@
                 <!-- Sales chart -->
                 <!-- ============================================================== -->
                 <div class="row">
+
                     <!-- Page Visit -->
-                    <div class="col-12 col-md-9">
+                        
+                        <div class="text-center" style="display: flex;justify-content: space-between;align-items: center;">
+                            <h4 class="card-title">Total Page Visit</h4>
+                            <h2 class="font-light mb-0 "><i class="ti-arrow-up text-danger p-2"></i>{{count}}</h2>
+                            
+                        </div>
+                        <hr>
+                    <!-- Page Visit count -->
+                    <!-- Add FIlee -->
+                    <div class="col-md-5 col-12">
+                        <a href="{%url 'manager:otherDownload'%}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Add File</h4>
+                                    <div class="text-end">
+                                        <h2 class="font-light mb-0"><i class="fa fa-file text-danger"></i></h2>
+                                        <span class="text-muted">Add Files/Fonts/ZIP to your download</span>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                    <!-- End File -->
+                    <!-- Add Ceo Message -->
+                    <div class="col-md-4 col-12">
+                    <a href="{%url 'manager:addCeoMessage'%}">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Total Page Visit</h4>
+                                <h4 class="card-title">CEO Message</h4>
                                 <div class="text-end">
-                                    <h2 class="font-light mb-0"><i class="ti-arrow-up text-danger"></i>{{count}}</h2>
-                                    <span class="text-muted">Page Visit</span>
+                                    <h2 class="font-light mb-0"><i class="fa fa-user text-danger"></i></h2>
+                                    <span class="text-muted">Manipulate CEO Message</span>
                                 </div>
-                               
+                                
+                                
                             </div>
                         </div>
+                    </a>
+                    
                     </div>
-                    <!-- Page Visit count -->
+                    <!-- End Ceo Message -->
+                     
                     <!-- Add Fiscal Year Date -->
                     <div class="col-md-3 col-12">
                         <a href="{%url 'manager:addFiscal'%}">

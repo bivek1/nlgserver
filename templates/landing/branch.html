@@ -74,12 +74,39 @@
     
             
         <div class="col-md-4  col-lg-4 col-6 m-auto">
-            <div class="branchbox text-center mt-3" data-toggle="modal" data-target="#exampleModalCenter{{b.id}}">
-                <div class="headbranch">
+            <div class="branchbox text-center mt-3 p-3" data-toggle="modal" data-target="#exampleModalCenter{{b.id}}">
+                <div class="headbranch text-left">
+                    <h6>{{b.BranchName}}</h6>
                     {{b.district}}
+                    <p class="p-0 m-0">
+                       {{b.street}}
+                       
+                    </p>
+                    <p class="p-0 m-0">
+                        <a href="tel:{{b.contact}}">
+                            Contact No. : {{b.contact}}
+                        </a>
+                    </p>
+                    <p class="p-0 m-0">
+                        <a href="mailto:{{b.email}}">
+                            Email : {{b.email}}
+                        </a>
+                    </p>
+                    <p class="p-0 m-0">
+                        Focal Person : {{b.focal}}<br>
+                    </p>
+                    <p class="p-0 m-0">
+                        <a href="tel:{{b.number}}">
+                            Mobile No:&nbsp;{{b.number}}<br>
+                        </a>
+                    </p>
                 </div>
             
                 <div class="below">
+                    <div class="p-2">
+                        <img src="{{b.focal_img.url}}" alt="" srcset="" style="height: 90px; width: 100%;border-radius: 50%;">
+                    </div>
+                   
                     <a href="tel:{{b.contact}}">
                         <i class="fa fa-phone"></i> 
                     </a>

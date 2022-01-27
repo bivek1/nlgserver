@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, update_session_auth_hash
-from .forms import AgentF, AnnouncementForm, BranchF, DepartmentHeadForm, DownloadForm, FiscalForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
-from landing.models import Announcement, Branch, Contact, DepartmentHead, PageVisit, Setting, fiscalYear, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
+from .forms import AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
+from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, Setting, fiscalYear, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
@@ -72,7 +72,7 @@ def addAgent(request):
 
 def addBranch(request):
     form = BranchF()
-    branched = Branch.objects.all().order_by('district')
+    branched = Branch.objects.all().order_by('-id')
     dist = {
         'form':form,
         'branch':branched,
@@ -144,7 +144,41 @@ def addNews(request):
             return HttpResponseRedirect(reverse('manager:addNews'))
     else:
         return render(request, 'manager/addNews.html',dist )
-       
+
+
+
+def editNews(request, id):
+    form = newsF()
+    new = news.objects.get(id = id)
+    form.fields['name'].initial = new.name
+    form.fields['description'].initial = new.description
+    form.fields['dateof'].initial = new.dateof
+
+    dist = {
+        'form':form,
+        'news':new
+    }
+    if request.method == 'POST':
+        forms = newsF(request.POST, request.FILES)
+        if forms.is_valid():
+            cd = forms.cleaned_data
+            new.name = cd['name']
+            new.description = cd['description']
+            new.dateof = cd['dateof']
+            if cd['files'] != None:
+                new.files = cd['files']
+            if cd['image'] != None:
+                new.image = cd['image']
+            new.save()
+            messages.success(request, "News Updated Succesfully")
+            return HttpResponseRedirect(reverse('manager:editNews',args=[new.id]))
+        else:
+            messages.error(request, "Something went Wrong")
+            return HttpResponseRedirect(reverse('manager:editNews'))
+    else:
+        return render(request, 'manager/editNews.html',dist )
+
+
 
 def addReport(request):
     form = ReportF()
@@ -223,6 +257,7 @@ def setting(request):
             setting = i 
             break
         form.fields['email'].initial = setting.email
+        form.fields['product_email'].initial = setting.product_email
         form.fields['number1'].initial = setting.number1
         form.fields['number2'].initial = setting.number2
         form.fields['location'].initial = setting.location
@@ -240,6 +275,7 @@ def setting(request):
                 setting.email = request.POST['email']
                 setting.number1 = request.POST['number1']
                 setting.number2 = request.POST['number2']
+                setting.product_email = request.POST['product_email']
                 setting.location = request.POST['location']
                 setting.toll_free_no = request.POST['toll_free_no']
                 try:
@@ -644,6 +680,7 @@ def editDepartment(request, id):
 def editBranch(request, id):
     form = BranchF()
     bod = Branch.objects.get(id = id)
+    form.fields['BranchName'].initial = bod.BranchName
     form.fields['district'].initial = bod.district
     form.fields['street'].initial = bod.street
     form.fields['contact'].initial = bod.contact
@@ -659,6 +696,7 @@ def editBranch(request, id):
         'bod':bod,
     }
     if request.method == 'POST':
+        bod.BranchName = request.POST['BranchName'] 
         bod.district = request.POST['district']
         bod.street = request.POST['street']
         bod.contact = request.POST['contact']
@@ -783,7 +821,7 @@ def editBod(request, id):
     form.fields['type'].initial = bod.type
     form.fields['email'].initial = bod.email
     form.fields['phone'].initial = bod.phone
-    form.fields['descriptipn'].initial = bod.descriptipn
+    form.fields['description'].initial = bod.description
     form.fields['image'].initial = bod.image.url
     form.fields['chairman'].initial = bod.chairman
     issue = bod.appointed_date
@@ -810,7 +848,7 @@ def editBod(request, id):
         bod.type = request.POST['type']
         bod.email = request.POST['email']
         bod.phone = request.POST['phone']
-        bod.descriptipn = request.POST['descriptipn']
+        bod.description = request.POST['description']
         continues = request.POST.get('chairman', False)
         if continues == 'on':
             bod.chairman = True
@@ -938,3 +976,52 @@ def contact(request):
         'contact': cont
     }
     return render(request, "manager/contact.html", dist)
+
+
+def otherDownload(request):
+    form = OtherDownloadForm()
+    files = OtherDownload.objects.all()
+    dist = {
+        'form':form,
+        'files':files
+    }
+    if request.method == 'POST':
+        form = OtherDownloadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Uploaded Files")
+            return HttpResponseRedirect(reverse('manager:otherDownload'))
+        else:
+            messages.error(request, "Sorry your file Could not be uploaded")
+            return HttpResponseRedirect(reverse('manager:otherDownload'))
+    return render(request, 'manager/addOther.html', dist)
+    
+def addCeoMessage(request):
+    form = CeoMessageForm()
+    message = CeoMessage.objects.all()
+    
+    if not message:
+        dist = {
+            'form':form
+        }
+        if request.method == 'POST':
+            fom = CeoMessageForm(request.POST, request.FILES)
+            if fom.is_valid():
+                fom.save()
+                messages.success(request, "Successfully Added Ceo Message") 
+                return HttpResponseRedirect(reverse('manager:addCeoMessage'))
+        return render(request, 'manager/addCeoMessage.html', dist)
+    else:
+        for i in message:
+            msg = i
+            break
+        form.fields['message'].initial = msg.message
+        dist = {
+            'form':form
+        }
+        if request.method == 'POST':
+            msg.message = request.POST['message']
+            msg.save()
+            messages.success(request, "Successfully Updated Ceo Message") 
+            return HttpResponseRedirect(reverse('manager:addCeoMessage'))
+        return render(request, 'manager/addCeoMessage.html', dist)

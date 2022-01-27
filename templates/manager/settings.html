@@ -48,6 +48,7 @@
                             " class="rounded-circle" width="150">
                         <h4 class="card-title mt-2">Head Office - {{setting.location}}</h4>
                         <h4 class="card-title mt-2">Email - {{setting.email}}</h4>
+                        <h6 class="card-title mt-2">Email for Product Query - {{setting.product_email}}</h6>
                         <h5 class="card-subtitle">Number 1- {{setting.number1}}</h5>
                         <h5 class="card-subtitle">Number 2- {{setting.number2}}</h5>
                         <h5 class="card-subtitle">Toll Free Number- {{setting.toll_free_no}}</h5>
@@ -80,10 +81,15 @@
                         {{form.number2}}
                         {{form.number2.errors}}
                     </div>
-                    <div class="col-12">
+                    <div class="col-6">
                         {{form.toll_free_no.label_tag}}
                         {{form.toll_free_no}}
                         {{form.toll_free_no.errors}}
+                    </div>
+                    <div class="col-6">
+                        {{form.product_email.label_tag}}
+                        {{form.product_email}}
+                        {{form.product_email.errors}}
                     </div>
                     <div class="col-12">
                         {{form.logo.label_tag}}

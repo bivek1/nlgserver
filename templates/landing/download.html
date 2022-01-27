@@ -14,89 +14,65 @@
         <div class="col-md-12 col-12">
             <div class="download  p-2" style="width: 100%;">
                 <div class="row">
-                    {%for i in two%}
-                    <div class="col-md-4 col-12">
+                    {%for i in d %}
+                        <div class="col-md-4 col-12">
                             {%if i.files%}
                             <a href="{{i.pdf}}">
                             {%endif%}
                             {%if i.image%}
                             <a href="" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
                             {%endif%}
-                            <div class="products-show-satement mt-3 mr-4" style="height: 150px;">
-                                    <div class="text-center p-1">
-                                        <small>{{i.dateof}}</small>
-                                        <hr>
-                                        <h6 class="text-center p-0 m-0" style="font-size: 14px;">{{i.name}}</h6>
-                                        <small>{{i.description|truncatewords:10}}</small>
+                            <div class="products-show-satement mt-3">
+                                <div class="text-center p-1">
+                                    <small>{{i.dateof}}</small>
+                                    <hr>
+                                    <h6 class="text-center p-0 m-0">{{i.name}}</h6>
+                                    <small>{{i.description|safe}}</small>
+                                    <div class="report-item p-3">
+                                        <!-- <i class="fa fa-file-pdf-o p-2"></i> -->
+            
+                                        {%if i.image%}
+            
+                                            <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
+                                                        
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <img src="{{i.image.url}}" alt="" srcset="" style=" height:100%; width:100%;" >
+                                                    </div>
+                                                    
+                                                
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>   
+                
+                                        {%endif%}
                                     
+                                        
                                     </div>
+                                </div>
+                            
                             </div>
                             </a>
-                    </div>
+                        </div>
                     {%endfor%}
-                  
                 </div>
             </div>
         </div>
       
     </div>
 </div>  
-<div class="container">
-    <br><br>
-    <h4 class="text-center">View News and update </h4>
-    <hr>
-    <div class="row">
-        {%for i in d %}
-            <div class="col-md-4 col-12">
-                {%if i.files%}
-                <a href="{{i.pdf}}">
-                {%endif%}
-                {%if i.image%}
-                <a href="" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
-                {%endif%}
-                <div class="products-show-satement mt-3">
-                    <div class="text-center p-1">
-                        <small>{{i.dateof}}</small>
-                        <hr>
-                        <h6 class="text-center p-0 m-0">{{i.name}}</h6>
-                        <small>{{i.description|truncatewords:11}}</small>
-                        <div class="report-item p-3">
-                            <!-- <i class="fa fa-file-pdf-o p-2"></i> -->
 
-                            {%if i.image%}
-
-                                <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>
-                                        <div class="modal-body">
-                                        <img src="{{i.image.url}}" alt="" srcset="" style=" height:100%; width:100%;" >
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>   
-    
-                            {%endif%}
-                        
-                            
-                        </div>
-                    </div>
-                
-                </div>
-                </a>
-            </div>
-        {%endfor%}
-    </div>
-</div>
 
 
 {% endblock content %}
