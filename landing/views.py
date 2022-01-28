@@ -1,3 +1,4 @@
+from turtle import st
 from django.contrib import messages
 from django.shortcuts import render
 from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, Setting, Sub_product, Surveryor, Citizen, Report, Download, fiscalYear, news
@@ -6,6 +7,8 @@ from django.urls import reverse
 from django.conf import settings
 from django.db.models import Q
 from django.contrib.auth import login, logout, authenticate
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 
@@ -30,13 +33,25 @@ def landing(request):
         
     }
     if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['number']
+        subject = request.POST['subject']
+        message = request.POST['message']
         Contact.objects.create(
-            name = request.POST['name'],
-            email = request.POST['email'],
-            phone = request.POST['number'],
-            subject = request.POST['subject'],
-            message = request.POST['message']
+            name = name,
+            email = email,
+            phone = phone,
+            subject = subject,
+            message = message,
         )
+        email_from = settings.EMAIL_HOST_USER
+        real_msg = "Name: "+str(name)+ " I would like to get contact  "+ ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " + str(message)
+        try:
+            send_mail(subject, real_msg, email_from, [setting.email] , fail_silently=False,)
+            messages.success(request,"Successfully Sent Message")
+        except:
+            messages.success(request,"Fail Sending Mail")
         return HttpResponseRedirect(reverse('landing:landing'))
     return render(request, "landing/index.html", dist)
 
@@ -102,14 +117,25 @@ def contact(request):
         'setting':setting
     }
     if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['number']
+        subject = request.POST['subject']
+        message = request.POST['message']
         Contact.objects.create(
-            name = request.POST['name'],
-            email = request.POST['email'],
-            phone = request.POST['number'],
-            subject = request.POST['subject'],
-            message = request.POST['message']
+            name = name,
+            email = email,
+            phone = phone,
+            subject = subject,
+            message = message,
         )
-        messages.success(request,"Successfully Sent Message")
+        email_from = settings.EMAIL_HOST_USER
+        real_msg = "Name: "+str(name)+ " I would like to get contact  "+ ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " + str(message)
+        try:
+            send_mail(subject, real_msg, email_from, [setting.email] , fail_silently=False,)
+            messages.success(request,"Successfully Sent Message")
+        except:
+            messages.success(request,"Fail Sending Mail")
         return HttpResponseRedirect(reverse('landing:contact'))
     return render(request, "landing/contactus.html", dist)
 
@@ -129,14 +155,17 @@ def thisProduct(request,id):
         'all':all
     }
     if request.method == 'POST':
-        Contact.objects.create(
-            name = request.POST['name'],
-            email = request.POST['email'],
-            phone = request.POST['number'],
-            subject = request.POST['subject'],
-            message = request.POST['message']
-        )
-        messages.success(request,"Successfully Sent Message")
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['number']
+        message = request.POST['message']
+        email_from = settings.EMAIL_HOST_USER
+        real_msg = "Name: "+name+ " I would like to query on "+ str(product.name) + ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " +message
+        try:
+            send_mail(name+' queries on '+str(product.name), real_msg, email_from, [setting.product_email] , fail_silently=False,)
+            messages.success(request,"Successfully Sent Message")
+        except:
+            messages.success(request,"Fail Sending Mail")
         return HttpResponseRedirect(reverse('landing:thisProduct',args=[product.id]))
     return render(request, "landing/thisproduct.html", dist)
 
@@ -157,14 +186,17 @@ def subProduct(request, id):
         'all':all
     }
     if request.method == 'POST':
-        Contact.objects.create(
-            name = request.POST['name'],
-            email = request.POST['email'],
-            phone = request.POST['number'],
-            subject = request.POST['subject'],
-            message = request.POST['message']
-        )
-        messages.success(request,"Successfully Sent Message")
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['number']
+        message = request.POST['message']
+        email_from = settings.EMAIL_HOST_USER
+        real_msg = "Name: "+name+ " I would like to query on "+ str(product.name) + ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " +message
+        try:
+            send_mail(name+' queries on '+str(product.name), real_msg, email_from, [setting.product_email] , fail_silently=False,)
+            messages.success(request,"Successfully Sent Message")
+        except:
+            messages.success(request,"Fail Sending Mail")
         return HttpResponseRedirect(reverse('landing:thisProduct',args=[product.id]))
     return render(request, "landing/subproduct.html", dist)
 

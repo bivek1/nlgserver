@@ -66,9 +66,16 @@
                                                     
                                                 </a>    
                                                 <a href="{{i.download}}">
-                                                    <button class="btn btn-sm btn-light btn-danger btn-danger">
+                                                    <button class="btn btn-sm btn-light">
                                                         <i class="fa fa-download p-2"></i>
                                                         Download
+                                                    </button>
+                                                    
+                                                </a>     
+                                                <a href="{%url 'manager:editReport' i.id%}">
+                                                    <button class="btn btn-sm btn-warning ">
+                                                        <i class="fa fa-edit p-2"></i>
+                                                        Edit
                                                     </button>
                                                     
                                                 </a>      

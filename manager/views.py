@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, update_session_auth_hash
-from .forms import AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom
-from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, Setting, fiscalYear, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer
+from .forms import AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom, socialSiteForm
+from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, Setting, fiscalYear, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer, socialSite
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
@@ -198,6 +198,30 @@ def addReport(request):
     else:
         return render(request, 'manager/addReport.html',dist )
 
+def editReport(request, id):
+    form = ReportF()
+    bod = Report.objects.get(id = id)
+    form.fields['name'].initial = bod.name
+    form.fields['rtype'].initial = bod.rtype
+    form.fields['fiscal'].initial = bod.fiscal
+
+
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.rtype = request.POST['rtype']
+        bod.fiscal = fiscalYear.objects.get(id = request.POST['fiscal'])
+        if request.FILES:
+            bod.files = request.FILES['files']
+    
+        bod.save()
+        messages.success(request, "Report Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editReport', args=[bod.id]))
+    else:
+        return render(request, 'manager/editReport.html',dist )
 
 def formReport(request, id):
     if id == 1:
@@ -724,6 +748,8 @@ def editAgent(request, id):
     form.fields['address'].initial = bod.address
     form.fields['contact'].initial = bod.contact
     form.fields['email'].initial = bod.email
+    form.fields['lience_no'].initial = bod.lience_no
+    form.fields['issue_date'].initial = bod.issue_date
 
     dist = {
         'form':form,
@@ -734,12 +760,37 @@ def editAgent(request, id):
         bod.address = request.POST['address']
         bod.contact = request.POST['contact']
         bod.email = request.POST['email']
+        bod.lience_no = request.POST['lience_no']
+        bod.issue_date = request.POST['issue_date']
       
         bod.save()
         messages.success(request, "Agent Edited Succesfully")
         return HttpResponseRedirect(reverse('manager:editAgent', args=[bod.id]))
     else:
         return render(request, 'manager/editAgent.html',dist )
+
+
+def editForm(request, id):
+    form = DownloadForm()
+    bod = Download.objects.get(id = id)
+    form.fields['name'].initial = bod.name
+    form.fields['dtype'].initial = bod.dtype
+
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.name = request.POST['name']
+        bod.dtype = request.POST['dtype']
+        if request.FILES:
+            bod.files = request.FILES['files']
+    
+        bod.save()
+        messages.success(request, "Form Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editForm', args=[bod.id]))
+    else:
+        return render(request, 'manager/editForm.html',dist )
 
 def editCitizen(request, id):
     form = CitizenF()
@@ -983,7 +1034,7 @@ def otherDownload(request):
     files = OtherDownload.objects.all()
     dist = {
         'form':form,
-        'files':files
+        'site':files
     }
     if request.method == 'POST':
         form = OtherDownloadForm(request.POST, request.FILES)
@@ -995,7 +1046,29 @@ def otherDownload(request):
             messages.error(request, "Sorry your file Could not be uploaded")
             return HttpResponseRedirect(reverse('manager:otherDownload'))
     return render(request, 'manager/addOther.html', dist)
-    
+
+def deleteOther(request, id):
+    it = OtherDownload.objects.get(id = id)
+    it.delete()
+    messages.success(request,"Successfully deleted files")
+    return HttpResponseRedirect(reverse('manager:otherDownload'))
+
+def editOther(request, id):
+    site = OtherDownload.objects.get(id = id)
+    form = OtherDownloadForm()
+    form.fields['name'].initial = site.name
+    dist = {
+        'form':form,
+        'site':site
+    }
+    if request.method == 'POST':
+        site.name = request.POST['name']
+        if request.FILES:
+            site.files = request.FILES['files']
+        site.save()
+        messages.success(request,"Successfully Updated Files")
+        HttpResponseRedirect(reverse('manager:editOther', args=[site.id]))
+    return render(request, "manager/editOther.html", dist)
 def addCeoMessage(request):
     form = CeoMessageForm()
     message = CeoMessage.objects.all()
@@ -1025,3 +1098,47 @@ def addCeoMessage(request):
             messages.success(request, "Successfully Updated Ceo Message") 
             return HttpResponseRedirect(reverse('manager:addCeoMessage'))
         return render(request, 'manager/addCeoMessage.html', dist)
+
+def addSocialSite(request):
+    form = socialSiteForm()
+    site = socialSite.objects.all()
+
+    dist = {
+        'form':form,
+        'site':site
+    }
+
+    if request.method == 'POST':
+        form = socialSiteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Successfully Saved Social Site")
+        else:
+            messages.error(request, "Failed to add Social Site")
+        return HttpResponseRedirect(reverse('manager:addSocial'))
+    return render(request, "manager/addSocial.html", dist)
+
+def editSocial(request, id):
+    site = socialSite.objects.get(id = id)
+    form = socialSiteForm()
+    form.fields['name'].initial = site.name
+    form.fields['link'].initial = site.link
+    form.fields['icon'].initial = site.icon
+    dist ={
+        'form':form,
+        'site':site
+    }
+    if request.method == 'POST':
+        site.name = request.POST['name']
+        site.link = request.POST['link']
+        site.icon = request.POST['icon']
+        site.save()
+        messages.success(request,"Successfully Updated Social Site")
+        return HttpResponseRedirect(reverse('manager:editSocial', args=[site.id]))
+    return render(request, "manager/editSocial.html", dist)
+
+def deleteSocial(request, id):
+    site = socialSite.objects.get(id = id)
+    site.delete()
+    messages.success(request, "Sucessfully delete site")
+    return HttpResponseRedirect(reverse('manager:addSocial'))

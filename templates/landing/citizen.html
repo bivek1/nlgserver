@@ -15,7 +15,7 @@
             {% for sa in s  %}
             <tr>
                 <th scope="row">{{sa.name}}</th>
-                <td>{{sa.details}}</td>
+                <td>{{sa.details|safe}}</td>
                
             </tr>
             {% endfor %}

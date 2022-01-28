@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
+import django
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +29,7 @@ SECRET_KEY = '^1*#x$8qy2hq#rujlxjv^3#r2s#m!t69*g(dvoy07v*@_5n0-6'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['nlginsurance.herokuapp.com']
-ALLOWED_HOSTS = ['192.168.18.7','localhost','182.93.78.43','www.nlgi.com.np', 'nlgi.com.np']
+ALLOWED_HOSTS = ['192.168.1.21','localhost','182.93.78.43','www.nlgi.com.np', 'nlgi.com.np']
 
 # Application definition
 
@@ -151,4 +153,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
+# Email Send Manipulation
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'querieswat@gmail.com'
+EMAIL_HOST_PASSWORD = 'Heyiknow777'
 

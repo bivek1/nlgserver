@@ -124,7 +124,21 @@
                       </div>
                       <hr>
                       <div class="row pl-4 pr-4" >
+
                         <div class="col-12 col-md-12 m-auto p-2" style="border:rgb(202, 202, 202) solid 1px; border-radius: 20px;">
+                          <div class="text-center ps-4 pe-4">
+                            {% if messages %}
+                            {% for m in messages  %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                              {{m}}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                          
+                            {% endfor %}
+                            {% endif %}
+                          </div>
                           <p class="pl-2">Are you wiling to know more about {{product.name}} feel free to connect with us.</p>
                           <hr class="m-0 p-0">
                           <form action="" method="post">
@@ -142,12 +156,13 @@
                             </div>
                             <div class="pt-2">
                               <label for="name">Your Mobile Number</label>
-                              <input type="text" name="name" id="" placeholder="Enter your valid Mobile Number" class="form-control  form-control-line">
+                              <input type="text" name="number" id="" placeholder="Enter your valid Mobile Number" class="form-control  form-control-line">
                             </div>
                             <div class="pt-2">
                               <label for="name">Your Message</label>
                               <textarea type="text" name="message" id="" placeholder="Enter your message" class="form-control  form-control-line" style="height: 150px;"></textarea>
                             </div>
+                            {% csrf_token %}
                             <div class="pt-2">
                               <button class="btn btn-danger d-block btn-block">
                                 <i class="fa fa-envelope"></i>

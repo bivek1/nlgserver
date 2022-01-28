@@ -1,7 +1,7 @@
 from pyexpat import model
 from tkinter import Widget
 from django import forms
-from landing.models import OtherDownload, fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
+from landing.models import OtherDownload, socialSite,fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class CeoMessageForm(forms.ModelForm):
@@ -9,6 +9,15 @@ class CeoMessageForm(forms.ModelForm):
         model = CeoMessage
         fields = ('__all__')
 
+class socialSiteForm(forms.ModelForm):
+    class Meta:
+        model = socialSite
+        fields = ('__all__')
+        widgets =  {
+            'name':forms.TextInput(attrs={'class':'form-control form-control-line', 'placeholder':'name of the site'}),
+            'icon':forms.TextInput(attrs={'class':'form-control form-control-line', 'placeholder':'fa fa-facebook/youtube/twitter'}),
+            'link':forms.TextInput(attrs={'class':'form-control form-control-line', 'placeholder':'Link of your social Site'}),
+        }
 
 class OtherDownloadForm(forms.ModelForm):
     class Meta:
@@ -108,6 +117,8 @@ class AgentF(forms.ModelForm):
             'address':forms.TextInput(attrs={'placeholder':'Address of the Agent'}),
             'contact':forms.TextInput(attrs={'placeholder':'Contact of the Agents'}),
             'email':forms.TextInput(attrs={'placeholder':'Email@email.com'}),
+            'lience_no':forms.TextInput(attrs={'placeholder':'Lience Number'}),
+            'issue_date':forms.TextInput(attrs={'type':'date','placeholder':'Issue Date'}),
         }
         
 class CitizenF(forms.ModelForm):
@@ -123,7 +134,7 @@ class CitizenF(forms.ModelForm):
 
         widgets={
             'name':forms.TextInput(attrs={'placeholder':'Name of the Citizen'}),
-            'details':forms.TextInput(attrs={'placeholder':'Details of the Citizen'}),
+            'details':CKEditorUploadingWidget()
         }
 
 class ReportF(forms.ModelForm):

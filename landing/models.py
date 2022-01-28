@@ -44,6 +44,8 @@ class Agent(models.Model):
     name = models.CharField(max_length=500, null = True, blank= True)
     address = models.CharField(max_length=100, null = True, blank= True)
     contact = models.CharField(max_length=100, null = True, blank= True)
+    lience_no = models.CharField(max_length=100, null = True, blank= True)
+    issue_date = models.DateField(null = True, blank= True)
     email = models.CharField(max_length=100, null = True, blank= True)
   
     objects = models.Manager()
@@ -53,8 +55,11 @@ class Agent(models.Model):
     
 class Citizen(models.Model):
     name = models.CharField(max_length=500, null = True, blank= True)
-    details = models.CharField(max_length=1000, null = True, blank= True)
+    details = RichTextUploadingField(null = True, blank= True)
     objects = models.Manager()
+
+    def __str__(self):
+        return self.name
     
 class fiscalYear(models.Model):
     fiscal = models.CharField(max_length=200)
@@ -63,7 +68,7 @@ class fiscalYear(models.Model):
         return self.fiscal
    
 class Report(models.Model):
-    name = models.CharField(max_length = 200)
+    name = models.CharField(max_length = 200, null = True, blank = True)
     slug = models.SlugField(default='report')
     fiscal = models.ForeignKey(fiscalYear, null= True, related_name='fiscalyear', blank= True, on_delete=models.PROTECT)
     rtype = models.CharField(max_length = 200, choices = (
@@ -72,7 +77,7 @@ class Report(models.Model):
         ('Minute Report', 'Minute Report'),
         ('Other Report', 'Other Report'),
     ))
-    files = models.FileField(upload_to='Report/')
+    files = models.FileField(upload_to='Report/', null = True, blank = True)
     objects = models.Manager()
     def __str__(self):
         return self.name
@@ -107,14 +112,14 @@ class news(models.Model):
 
 
 class Download(models.Model):
-    name = models.CharField(max_length = 200)
+    name = models.CharField(max_length = 200, null = True, blank = True)
     slug = models.SlugField(default='download')
     dtype = models.CharField(max_length = 200, choices = (
         ('KYC Form', 'KYC Form'),
         ('Proposal Form', 'Proposal Form'),
         ('Claim Form', 'Claim Form'),
     ))
-    files = models.FileField(upload_to='Report/')
+    files = models.FileField(upload_to='Report/', null = True, blank = True)
     objects = models.Manager()
     
     def __str__(self):
@@ -251,7 +256,7 @@ class Contact(models.Model):
 class OtherDownload(models.Model):
     name = models.CharField(max_length=200, null = True, blank = True)
     slug = models.SlugField(default='others')
-    files = models.FileField(upload_to='other/')
+    files = models.FileField(upload_to='other/', null = True, blank = True)
 
     objects = models.Manager()
 
@@ -265,5 +270,12 @@ class OtherDownload(models.Model):
         return reverse('landing:pdfview', args=[self.slug, self.id])
 
 
-    
+class socialSite(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
+    icon = models.CharField(max_length=20, null=True, blank= True)
+    link = models.CharField(max_length=1000, null=True, blank= True)
+
+    def __str__(self):
+        return self.name
+
     

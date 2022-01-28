@@ -55,6 +55,13 @@ urlpatterns = [
     path('deleteFiscal/<int:id>', views.deleteFiscal, name = "deleteFiscal"),
     path('editNews/<int:id>', views.editNews, name = "editNews"),
     path('ceoMessage', views.addCeoMessage, name = 'addCeoMessage'),
-    path('otherDownload', views.otherDownload, name="otherDownload")
+    path('otherDownload', views.otherDownload, name="otherDownload"),
+    path('editOther/<int:id>', views.editOther, name="editOther"),
+    path('deleteOther/<int:id>', views.deleteOther, name="deleteOther"),
+    path('addSocial', views.addSocialSite, name="addSocial"),
+    path('editSocial/<int:id>', views.editSocial, name="editSocial"),
+    path('deleteSocial/<int:id>', views.deleteSocial, name="deleteSocial"),
+    path('editReport/<int:id>', views.editReport, name="editReport"),
+    path('editForm/<int:id>', views.editForm, name="editForm"),
 ]
 
