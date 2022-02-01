@@ -44,4 +44,6 @@ urlpatterns = [
     path('PersonalAccidentCalculator', views.personal, name ="personalCal"),
     path('agriculterCalculator', views.agriCal, name = 'agriCal'),
     path('login', views.logIn, name= "login"),
+
+    path('helpCenter', views.helpCen, name="helpCenter")
 ]

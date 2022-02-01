@@ -93,46 +93,17 @@
                             Policy & Products 
                         </a>
                     </li>
+                    
+                    {% for i in  product%}
                     <li class="headDowm">
-                        <a href="/products">
-                            Property Insurance Policy (Modal) 
+                        <a href="{%url 'landing:thisProduct' i.id%}">
+                            {{i.name}}
                         </a>
                     </li>
-                    <li class="headDowm">
-                        <a href="/products">
-                            Marine Insurance Policy (Modal) 
-                        </a>
-                    </li>
-                    <li class="headDowm">
-                        <a href="/products">
-                            Motor Insurance Policy (Modal) 
-                        </a>
-                    </li>
-                    <li class="headDowm">
-                        <a href="/products">
-                            Engineering Insurance Policy (Modal) 
-                        </a>
-                    </li>
-                    <li class="headDowm">
-                        <a href="/products">
-                            Miscellaneous Insurance Policy (Modal) 
-                        </a>
-                    </li>
-                    <li class="headDowm">
-                        <a href="/products">
-                            Agriculture Insurance Policy (Modal) 
-                        </a>
-                    </li>
-                    <li class="headDowm">
-                        <a href="/products">
-                            Micro Insurance Policy (Modal) 
-                        </a>
-                    </li>
-                    <li class="headDowm">
-                        <a href="/products">
-                            Aviation Insurance Policy(Modal) 
-                        </a>
-                    </li>
+                    {% endfor %}
+                        
+                  
+
                     <li class="headTop">
                         <a href="/branches">
                             Branches 

@@ -266,18 +266,22 @@
                                   <p class="text-center p-0 m-0">
                                     <small >{{i.type}}</small>
                                   </p>
-                                 
+                                  
+                                  {% if i.description %}
                                   <div class="text-center p-0 m-0" style="font-size: 14px;">{{i.description|safe}}</div>
+                                  {% endif %}
+                                    
+                                
                                   <div class="text-center">
                                     
                                     {% if i.re_appointed_date %}
-                                    <div style="display: flex;justify-content:space-around;align-items: center;">
-                                      <p>Appointed Date:</p>
-                                      <p>{{i.appointed_date}}</p>
+                                    <div  style="display: flex;justify-content:space-around;align-items: center;">
+                                      <p class="p-0 m-0">Appointed Date:</p>
+                                      <p class="p-0 m-0">{{i.appointed_date}}</p>
                                     </div>
-                                    <div style="display: flex;justify-content: space-around;align-items: center;">
-                                      <p>Re- Appointed Date:</p>
-                                      <p>{{i.re_appointed_date}}</p>
+                                    <div  style="display: flex;justify-content: space-around;align-items: center;">
+                                      <p class="p-0 m-0">Re- Appointed Date:</p>
+                                      <p class="p-0 m-0">{{i.re_appointed_date}}</p>
                                     </div>
                                     
                                 

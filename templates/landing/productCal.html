@@ -59,18 +59,29 @@
               
                 <hr>
                 <div class="row">
-                    <ul class="col-md-3 col-12 listtheVechile">
-                      <div class="d-flex">
-                        <li class="calActive m-2 w-50">Motor</li>
-                        <li id="product" class="m-2 w-50">Product</li>
-                      </div>
+                  <ul class="col-md-3 col-12 listtheVechile">
                       
-                      <hr>
-                      {%url 'landing:calculator' as bash %}
-                      <a href="{{bash}}">
-                        <li {%if request.path == bash %} class="calActive"{%endif%}>Two Wheelers</li>
-                      </a>
+                    {%url 'landing:calculator' as bash %}
+                    <a href="{{bash}}">
+                      <li {%if request.path == bash %} class="calActive"{%endif%}>Two Wheelers</li>
+                    </a>
+                    {%url 'landing:productCal' as bash %}
+                    <a href="{{bash}}">
+                      <li {%if request.path == bash %} class="calActive"{%endif%}>Home Insurance</li>
+                    </a>
+                    {%url 'landing:agriCal' as bash %}
+                    <a href="{{bash}}">
+                      <li {%if request.path == bash %} class="calActive"{%endif%}>Agriculture Insurance</li>
+                    </a>
+                    {%url 'landing:personalCal' as bash %}
+                    <a href="{{bash}}">
+                      <li {%if request.path == bash %} class="calActive"{%endif%}>Personal Insurance</li>
+                    </a>
                     
+                    <li id="seeMore">Show More</li>
+                  
+                    
+                    <div class="hidethis">
                       {%url 'landing:carCalculator' as car %}
                       <a href="{{car}}">
                         <li {%if request.path == car %} class="calActive"{%endif%}>Private Car</li>
@@ -107,34 +118,12 @@
                       <a href="{{pas}}">
                         <li {%if request.path == pas %} class="calActive"{%endif%}>Construction Equipment</li>
                       </a>
-                    </ul>
-                    <ul class="col-md-3 col-12 listtheMotor">
-                      <div class="d-flex">
-                        <li id="vechile" class="m-2 w-50">Motor</li>
-                        <li class="calActive m-2 w-50">Product</li>
-                      </div>
-                        {%url 'landing:productCal' as bash %}
-                        <a href="{{bash}}">
-                          <li {%if request.path == bash %} class="calActive"{%endif%}>Home Insurance</li>
-                        </a>
-                       
-                        <!-- {%url 'landing:propertyCal' as car %}
-                        <a href="{{car}}">
-                          <li {%if request.path == car %} class="calActive"{%endif%}>Property Insurance</li>
-                        </a> -->
-                     
-                        {%url 'landing:agriCal' as goods %}
-                        <a href="{{goods}}">
-                          <li {%if request.path == goods %} class="calActive"{%endif%}>Agriculture Insurance</li>
-                        </a>
+                      <li id="seeLess">Show Less</li>
+                    </div>
+                   
+                    
+                </ul>
 
-                        {%url 'landing:personalCal' as tempo %}
-                        <a href="{{tempo}}">
-                          <li {%if request.path == tempo %} class="calActive"{%endif%}>Personal Accident</li>
-                        </a>
-                      
-
-                    </ul>
                     <div class="col-md-9 col-12">
                         {% block cal %}
                             
@@ -150,16 +139,15 @@
 
 </div>  
 <script>
-  $('.listtheVechile').hide()
-  $('#product').click(function(){
-    $('.listtheMotor').show()
-    $('.listtheVechile').hide()
-  
+  $('.hidethis').hide()
+  $('#seeMore').click(function(){
+    $('.hidethis').show()
+    $('#seeMore').hide()
+    
   })
-  $('#vechile').click(function(){
-    $('.listtheMotor').hide()
-    $('.listtheVechile').show()
-  
+  $('#seeLess').click(function(){
+    $('.hidethis').hide()
+    $('#seeMore').show()
   })
 </script>
 {% endblock content %}

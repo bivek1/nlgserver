@@ -1,13 +1,14 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, update_session_auth_hash
-from .forms import AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom, socialSiteForm
-from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, Setting, fiscalYear, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer, socialSite
+from .forms import AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, helpForm, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom, socialSiteForm
+from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, Setting, TopBar, fiscalYear, helpCenter, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer, socialSite
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 from .forms import FormChangePassword
+import openpyxl
 
 # Create your views here.
 @login_required
@@ -52,7 +53,69 @@ def logoutUser(request):
     logout(request)
     return HttpResponseRedirect(reverse('landing:landing'))
     
+
+
+def loadData(request):
+    if request.method == 'POST':
+        csvFiles = request.FILES.get('excelfile')
+        wb = openpyxl.load_workbook(csvFiles, data_only=True)
+        worksheet = wb["Sheet1"]
+        print(worksheet)
+        # try:
+        for row in worksheet.iter_rows(min_row=2):
+            print(row)
+            full_data = []
+            for cell in row:
+                full_data.append(cell.value)
+
+            if not full_data[0] == None:
+                name = full_data[0]
+                address = full_data[1]
+                contact = full_data[2]
+                lience = full_data[3]
+                issue = full_data[4]
+                print(issue)
+                email = full_data[5]
+                iss = datetime.datetime.strftime
+                # Agent.objects.create(name=name, address=address, contact= contact, lience_no= lience,  email=email, issue_date= issue)
+        messages.success(request, "Successfully Uploaded From excel File")
+        # except:
+        #     messages.success(request, "No data to Load. Something went wrong")
+        return HttpResponseRedirect(reverse('manager:addAgent'))
+
+
+
+def loadDataSuv(request):
+    if request.method == 'POST':
+        csvFiles = request.FILES.get('excelfile')
+        wb = openpyxl.load_workbook(csvFiles, data_only=True)
+        print(wb)
+        # getting a particular sheet by name out of many sheets
+        worksheet = wb["Sheet1"]
+        print(worksheet)
+        # try:
+        for row in worksheet.iter_rows(min_row=2):
+            print(row)
+            full_data = []
+            for cell in row:
+                full_data.append(cell.value)
     
+            if not full_data[0] == None:
+                name = full_data[0]
+                specilization = full_data[1]
+                lience = full_data[2]
+                issue = full_data[3]
+                renew = full_data[4]
+                area = full_data[5]
+                contact = full_data[6]
+                email = full_data[7]
+                Surveryor.objects.create(name=name, specilization=specilization, contact= contact, lience_no= lience,  email=email, issued_date= issue, area=area, renew_date=renew)
+        messages.success(request, "Successfully Uploaded From excel File")
+        # except:
+        #     messages.success(request, "No data to Load. Something went wrong")
+        return HttpResponseRedirect(reverse('manager:addSurveryor'))
+
+
 def addAgent(request):
     form = AgentF(request.POST or None)
     agent = Agent.objects.all().order_by('-id')
@@ -1142,3 +1205,66 @@ def deleteSocial(request, id):
     site.delete()
     messages.success(request, "Sucessfully delete site")
     return HttpResponseRedirect(reverse('manager:addSocial'))
+
+
+def addHelp(request):
+    form = helpForm()
+    site = helpCenter.objects.all()
+
+    dist = {
+        'form':form,
+        'data':site
+    }
+
+    if request.method == 'POST':
+        form = helpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Successfully Saved Item")
+        else:
+            messages.error(request, "Failed to add Item")
+        return HttpResponseRedirect(reverse('manager:addHelp'))
+    return render(request, "manager/help.html", dist)
+
+def editHelp(request, id):
+    site = helpCenter.objects.get(id = id)
+    form = helpForm()
+    form.fields['title'].initial = site.title
+    form.fields['description'].initial = site.description
+
+    dist ={
+        'form':form,
+        'data':site
+    }
+    if request.method == 'POST':
+        site.title = request.POST['title']
+        site.description = request.POST['description']
+        site.save()
+        messages.success(request,"Successfully Updated Item")
+        return HttpResponseRedirect(reverse('manager:editHelp', args=[site.id]))
+    return render(request, "manager/editHelp.html", dist)
+
+def deleteHelp(request, id):
+    site = helpCenter.objects.get(id = id)
+    site.delete()
+    messages.success(request, "Sucessfully deleted Item")
+    return HttpResponseRedirect(reverse('manager:addHelp'))
+
+
+def topBar(request):
+    top = TopBar.objects.all()
+    dist = {
+        'data':top
+    }
+    return render(request, "manager/topbar.html", dist)
+
+def hideBar(request, id):
+    site = TopBar.objects.get(id = id)
+    if site.hide:
+        site.hide = False
+    else:
+        site.hide = True
+    site.save()
+    messages.success(request, "Successfully Changed Status of the Bar")
+    return HttpResponseRedirect(reverse('manager:topBar'))
+    

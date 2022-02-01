@@ -31,7 +31,22 @@
         {% endif %}
     </div>
    
-    
+    <div class="p-3">
+        
+        <form action="{%url 'manager:loadDataSuv'%}" method="post" enctype="multipart/form-data">
+            <div class="row formbox">
+                <div class="col-md-9 col-12 text-center">
+                    <h6>Upload Bulk Data for Surveryor</h6>
+                    <input type="file" name="excelfile" class="form-control form-control-line" required>
+                </div>
+                {% csrf_token %}
+                <div class="col-md-3 col-12 d-flex justify-content-center">
+                    <button class="btn btn-warning"> <i class="fa fa-file"></i>Load From Excel</button>
+                </div>
+            </div>
+        </form>
+       
+    </div>
     <form action="" method="post" style="width: 100%; padding: 30px;">
     
         <div class="row formbox">

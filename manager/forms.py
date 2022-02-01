@@ -1,13 +1,24 @@
 from pyexpat import model
 from tkinter import Widget
 from django import forms
-from landing.models import OtherDownload, socialSite,fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
+from landing.models import OtherDownload, helpCenter, socialSite,fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class CeoMessageForm(forms.ModelForm):
     class Meta:
         model = CeoMessage
         fields = ('__all__')
+
+
+class helpForm(forms.ModelForm):
+    class Meta:
+        model = helpCenter
+        fields = ('__all__')
+        widgets =  {
+            'title':forms.TextInput(attrs={'class':'form-control form-control-line', 'placeholder':'Title'}),
+            'description':CKEditorUploadingWidget(),
+          
+        }
 
 class socialSiteForm(forms.ModelForm):
     class Meta:

@@ -15,14 +15,14 @@
             <div class="download  p-2" style="width: 100%;">
                 <div class="row">
                     {%for i in d %}
-                        <div class="col-md-4 col-12">
+                        <div class="col-md-4 col-12" >
                             {%if i.files%}
                             <a href="{{i.pdf}}">
                             {%endif%}
                             {%if i.image%}
                             <a href="" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
                             {%endif%}
-                            <div class="products-show-satement mt-3">
+                            <div class="products-show-satement mt-3" style="height: 200px; overflow: hidden;">
                                 <div class="text-center p-1">
                                     <small>{{i.dateof}}</small>
                                     <hr>

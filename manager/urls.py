@@ -63,5 +63,12 @@ urlpatterns = [
     path('deleteSocial/<int:id>', views.deleteSocial, name="deleteSocial"),
     path('editReport/<int:id>', views.editReport, name="editReport"),
     path('editForm/<int:id>', views.editForm, name="editForm"),
+    path('loadData', views.loadData, name="loadData"),
+    path('loadDataSuv', views.loadDataSuv, name="loadDataSuv"),
+    path('addHelp', views.addHelp, name="addHelp"),
+    path('editHelp/<int:id>', views.editHelp, name="editHelp"),
+    path('deleteHelp/<int:id>', views.deleteHelp, name="deleteHelp"),
+    path('topBarMenu', views.topBar, name="topBar"),
+    path('topBarMenu/<int:id>', views.hideBar, name="topHide"),
 ]
 

@@ -1,3 +1,4 @@
+from statistics import mode
 from ckeditor.fields import RichTextField 
 from django.db import models
 from django.urls import reverse
@@ -274,8 +275,31 @@ class socialSite(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     icon = models.CharField(max_length=20, null=True, blank= True)
     link = models.CharField(max_length=1000, null=True, blank= True)
+    objects = models.Manager()
+
+   
+    def __str__(self):
+        return self.name
+
+class helpCenter(models.Model):
+    title = models.CharField(max_length=200, null = True, blank = True)
+    description = RichTextUploadingField(null = True, blank = True)
+
+    objects = models.Manager()
+
+   
+    def __str__(self):
+        return self.title
+
+
+class TopBar(models.Model):
+    name = models.CharField(max_length=200)
+    icon = models.CharField(max_length=200)
+    hide = models.BooleanField(default=False)
+    objects = models.Manager()
 
     def __str__(self):
         return self.name
 
-    
+
+

@@ -21,8 +21,8 @@
             <div class="download m-auto p-2" style="width: 100%;">
         
                 <div class="row">
-                    <ul class="col-md-3 col-12 listtheVechile">
-                      <h6 class="text-center">Products</h6>
+                    <ul class="col-md-3 col-12 order-last listtheVechile">
+              
                       <hr class="m-0 p-0">
                       {% for i in all %}
                         {%url 'landing:thisProduct' i.id as bash %}
@@ -36,14 +36,32 @@
                           </li>
                         </a>
                       {% endfor %}
+
+                      {% for i in allSub %}
+                      {%url 'landing:subProduct' i.id as bashs %}
+                      <a href="{{bashs}}">
+                        <li {%if request.path == bashs %} class="calActive" {%endif%}>
+                          <i class="{%if i.icons%}{{i.icons}}{%else%}fa fa-circle-o-notch {%endif%}" aria-hidden="true" style="font-size: 14px;"></i>
+                          <span>
+                            {{i.name}}
+                          </span>
+                          
+                        </li>
+                      </a>
+                    {% endfor %}
                         
                        
                       
                     </ul>
-                    <div class="col-md-9 col-12">
+                    <div class="col-md-9 col-12 order-first">
                       <div class="row pl-4 pr-4">
-                      
-                      
+                        
+                        {% if product.discontinue %}
+               
+                        <div class="badge badge-danger m-auto"> <i class="fa fa-exclamation"></i>  This Product is discontinued for a while</div>
+                        {% endif %}
+                          
+                        
                         {% if product.sub_product.all %}
                         <div class="col-md-12 col-12 p-2" style="background-color: white;border-radius: 20px;">
                           <div class="col-md-12 col-12 d-flex justify-content-center">
@@ -62,40 +80,31 @@
                             <div class="col-md-12 col-12" style="background-color: white;">
                               <!-- <p style="font-weight: 500;"> Description:</p> -->
                               <p class="text-dark" style="font-size: 15px;">{{product.description|safe}}</p>
+                              <div>
+                                <ul>
+                                  {% for j in product.sub_product.all  %}
+      
+                                  <li>
+                                    <a href="{%url 'landing:subProduct' j.id%}">
+                                      <!-- {% if j.image %}
+                                      <img class="res-gif" src="{{j.image.url}}" alt="" srcset="" style="width: 60px; height:60px;">
+                                      {%else%}
+                                      <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="" style="width: 60px; height:60px;">
+                                      {% endif %} -->
+                                      {{j.name}}
+                                    </a>
+                                 
+                                  </li>
+                                  {% endfor %}
+      
+                                </ul>
+                              </div>
                             </div>
                            
                           </div>
   
                         </div>
-                        <div class="col-md-12 col-12 m-auto">
-                          <hr class="m-0 p-0">
-                          <h6 class="text-dark text-center" style="background-color: rgb(255, 255, 255);
-                          padding: 12px;">SUB PRODUCTS</h6>
-                           <div class="row text-center" >
-                            {% for j in product.sub_product.all  %}
-                            <div class=" col-md-3 col-12  p-3">
-                              <a href="{%url 'landing:subProduct' j.id%}">
-                                  <div class="mainman text-center p-3" style="background-color: white;">
-                                    <div class="text-center">
-                                      {% if j.image %}
-                                      <img class="res-gif" src="{{j.image.url}}" alt="" srcset="" style="width: 60px; height:60px;">
-                                      {%else%}
-                                      <img class="res-gif" src="{%static 'assets/images/house.gif'%}" alt="" srcset="" style="width: 60px; height:60px;">
-                                      {% endif %}
-                                      <h6 class="text-dark">{{j.name}}</h6>
-                                    
-                                      </div>
-                                    
-                                  </div>
-                              </a>
-                            
-                           
-                            </div>
-                            {% endfor %}
-    
-                          </div>
-                         
-                        </div>
+
                         {%else%}
                         <div class="col-md-12 col-12 p-2" style="background-color: white;border-radius: 20px;">
                           <div class="col-md-12 col-12 d-flex justify-content-center">

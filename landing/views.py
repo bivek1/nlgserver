@@ -1,7 +1,7 @@
 from turtle import st
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, Setting, Sub_product, Surveryor, Citizen, Report, Download, fiscalYear, news
+from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, Setting, Sub_product, Surveryor, Citizen, Report, Download, fiscalYear, helpCenter, news
 from django.http import FileResponse, Http404, HttpResponse, HttpResponseRedirect, JsonResponse, request
 from django.urls import reverse
 from django.conf import settings
@@ -138,13 +138,23 @@ def contact(request):
             messages.success(request,"Fail Sending Mail")
         return HttpResponseRedirect(reverse('landing:contact'))
     return render(request, "landing/contactus.html", dist)
-
+def helpCen(request):
+    data = helpCenter.objects.all()
+    for i in data:
+        show = i.id
+        break
+    dist = {
+        'data':data,
+        'show':show
+    }
+    return render(request, "landing/helpCenter.html", dist)
 def thisProduct(request,id):
     PageVisitView()
     sett = Setting.objects.all()
     setting = None
     product = Product.objects.get(id = id)
-    all = Product.objects.all()
+    all = Product.objects.filter(hide=False)
+    allSub = Sub_product.objects.filter(hide=False)
     if sett:
         for i in sett:
             setting = i 
@@ -152,7 +162,8 @@ def thisProduct(request,id):
     dist ={
         'setting':setting,
         'product':product,
-        'all':all
+        'all':all,
+        'allSub':allSub
     }
     if request.method == 'POST':
         name = request.POST['name']
@@ -175,7 +186,8 @@ def subProduct(request, id):
     sett = Setting.objects.all()
     setting = None
     product = Sub_product.objects.get(id = id)
-    all = Sub_product.objects.filter(product = product.product)
+    all = Sub_product.objects.filter(hide=False)
+    allPro = Product.objects.filter(hide=False)
     if sett:
         for i in sett:
             setting = i 
@@ -183,7 +195,8 @@ def subProduct(request, id):
     dist ={
         'setting':setting,
         'product':product,
-        'all':all
+        'all':all,
+        'allPro':allPro
     }
     if request.method == 'POST':
         name = request.POST['name']
@@ -249,12 +262,14 @@ def sitemap(request):
     PageVisitView()
     sett = Setting.objects.all()
     setting = None
+    product = Product.objects.all()
     if sett:
         for i in sett:
             setting = i 
             break
     dist ={
-        'setting':setting
+        'setting':setting,
+        'product':product,
     }
     return render(request, "landing/sitemap.html", dist)
 

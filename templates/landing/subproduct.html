@@ -22,8 +22,20 @@
         
                 <div class="row">
                     <ul class="col-md-3 col-12 listtheVechile">
-                      <h6 class="text-center">Sub Products</h6>
+                  
                       <hr class="m-0 p-0">
+                      {% for i in allPro %}
+                      {%url 'landing:thisProduct' i.id as bash %}
+                      <a href="{{bash}}">
+                        <li {%if request.path == bash %} class="calActive"{%endif%}>
+                          <i class="{%if i.icons%}{{i.icons}}{%else%}fa fa-circle-o-notch {%endif%}" aria-hidden="true" style="font-size: 14px;"></i>
+                          <span>
+                            {{i.name}}
+                          </span>
+                          
+                        </li>
+                      </a>
+                    {% endfor %}
                       {% for i in all %}
                         {%url 'landing:subProduct' i.id as bashs %}
                         <a href="{{bashs}}">
@@ -36,9 +48,7 @@
                           </li>
                         </a>
                       {% endfor %}
-                        
-                       
-                      
+
                     </ul>
                     <div class="col-md-9 col-12">
                       <div class="row pl-4 pr-4">

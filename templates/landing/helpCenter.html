@@ -1,7 +1,7 @@
 {% extends "pillar.html" %}
 {% load static %}
 {% block title %}
-  FAQs NLG Insurance
+  Help Center NLG Insurance
 {% endblock title %}
 {% block content %}
 <style>
@@ -13,18 +13,18 @@
 </style>
 <div class="container-fluid" style="height:auto;">
     <div class="row backandrollall">
-        <div class="col-md-7 col-12 p-0 m-0 head-right">
+        <div class="col-md-12 col-12 p-0 m-0 head-right">
             <div class=" p-3 ml-4">
-                <h3 class="text-light">FAQs</h3>
+                <h3 class="text-light">Help Center</h3>
                 <hr>
                 <div class="accordion" id="accordionExample">
                   
-                  {% for i in faq %}
+                  {% for i in data %}
                   <div class="card">
                     <div class="card-header" id="heading{{i.id}}" style="display: flex; justify-content: space-between;">
                       <h5 class="mb-0" >
                         <h6 class="text-dark">
-                          {{i.question}} 
+                          {{i.title}} 
                         </h6>
                         <button class="btn text-danger" type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
                           <i class="fa fa-plus"></i>
@@ -34,7 +34,7 @@
                 
                     <div id="collapse{{i.id}}" class="collapse {%if i.id == show%} show {%else%} collapsed {%endif%}" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
                       <div class="card-body">
-                        {{i.answer|safe}}
+                        {{i.description|safe}}
                           
                       </div>
                     </div>
@@ -45,15 +45,8 @@
             </div>
            
         </div>
-        <div class="col-md-5 col-12 hideformob">
-            <div class="branch text-center">
-                <a href="{%url 'landing:landing'%}" class="footer-logo text-center">
-                    <img src="{%static 'images/downlogo.PNG'%}" alt="footer_logo" class="img-fluid" style="border-radius: 50%; border: 3px solid #fb0b3f;">
-                </a>
-            </div>
-        </div>
+    
     </div>
-    <br><br>
 
 </div>
 
