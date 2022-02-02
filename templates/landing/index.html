@@ -4,6 +4,8 @@
     NLG Insurance Best Insurance in Nepal
 {% endblock title %}
 {% block loader %}
+
+
 <!-- ***** Preloader Start ***** -->
 <div id="preloader">
     <div class="jumper">
@@ -23,8 +25,8 @@
   <div class="container-fluid">
     
     {% for i in ann  %}
-         <!-- Annoucement Link -->
-      <div class="modal fade" id="exampleModalCenterAnn{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Annoucement Link -->
+      <div class="modal fade in" id="exampleModalCenterAnn{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterAnn1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -34,15 +36,28 @@
               </button>
             </div>
             <div class="modal-body text-center">
-              <a href="{%url 'landing:landing'%}" class="footer-logo text-center">
+              
+              {% if i.link %}
+              <a href="{{i.link}}" class="footer-logo text-center" target="_blank">
                 
                 {% if i.image %}
                 <img src="{{i.image.url}}" class="img-fluid" style="height: 145px; width: 50%;">
                 {% endif %}
 
               </a>
+              {%else%}
+              {% if i.image %}
+              <img src="{{i.image.url}}" class="img-fluid" style="height: 145px; width: 50%;">
+              {% endif %}
+              
+
+              {% endif %}
+              
+                
+             
           
              </p>
+             <p>{{i.description|safe}}</p>
             </div>
             <div class="modal-footer">
 
@@ -393,7 +408,7 @@
                   <img src="assets/images/about-icon-02.png" alt="">
                   <div class="text">
                       <h4>CEO Messages</h4>
-                      <p class="mb-2">Though we have 60 years of history in insurance sector in Nepal, its growth seems to be very low. Although the importance of insurance is high, people here in Nepal are not quite . . . .</p>
+                      <p class="mb-2">{{msg|safe|truncatewords:30}}</p>
                       <div class="btn btn-outline-danger p-2 " data-toggle="modal" data-target="#exampleModalLong1">
                           <i class="fa fa-eye"></i> Read More
                       </div>
@@ -411,11 +426,7 @@
                       </div>
                       <div class="modal-body">
                         <p>
-                          Though we have 60 years of history in insurance sector in Nepal, its growth seems to be very low. Although the importance of insurance is high, people here in Nepal are not quite aware of the features of insurance. The reason behind this can be crisis in political, economic and industrial sectors. We, all general insurance companies along with participation of Insurance Board have been trying to raise public awareness among people by forming marketing committee, but we found it as a challenging job.
-                          The devastating earthquake that shook Nepal on 2015/04/25 and continuous aftershocks occurring after it has badly affected all the financial sectors including general insurance. For the damages done by the devastative earthquake, NLG has discharged Rs. 19 Crore to the victims. Out of the total 16,700 number of claims lodged with all the general insurance companies, 1,353 claims were lodged against NLG among which 892 claims were settled.
-                          There was an alarming belief that insurance companies would have to face high amount of claims leading to failure of many insurance companies due to the devastating earthquake, however NLG has been successful in converting these challenges into opportunities and simultaneously achieved profit, though less than in previous years due to the increase in claim expenses than in previous years.
-                          NLG has been working towards discharging pending claims as soon as possible with an aim that such payments would be of great help for the victims in reconstructing the destructions done by the massive earthquake. In fulfilling this aim, NLG has arranged a separate desk for the victims of earthquake and has brought easiness in discharging claims of small amount. However, the insured having huge claims in amount cannot be settled immediately as some time is required for evaluation of loss but arrangements were made to provide claim advances to such insured.
-                          Despite such devastating event, insurance companies have been able to properly manage themselves. Talking about NLG, it is not only active in insurance business but also is an active participant in social welfare events. Professional discipline and transparency are its assets. It has also been honored by awards such as National BPA Award which has added even more responsibilities to the company. We have been working so as to be the top insurance company conducting business in Nepal.
+                          {{msg|safe}}
                         </p>
                        
                       </div>
@@ -520,16 +531,15 @@
       </div>
     </div>
   </div>
-
-  
   {% for i in ann  %}
+    
   <script type="text/javascript">
     $(window).on('load', function() {
         $('#exampleModalCenterAnn{{i.id}}').modal('show');
     });
   </script> 
+   
   {% endfor %}
-    
-    
+
 
 {% endblock content %}

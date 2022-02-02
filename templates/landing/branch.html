@@ -73,10 +73,10 @@
         {% for b in branch  %}
     
             
-        <div class="col-md-4  col-lg-4 col-6 m-auto">
+        <div class="col-md-4  col-lg-4 col-12 m-auto">
             <div class="branchbox text-center mt-3 p-3" data-toggle="modal" data-target="#exampleModalCenter{{b.id}}">
                 <div class="headbranch text-left">
-                    <h6>{{b.BranchName}}</h6>
+                    <h6 class="text-dark">{{b.BranchName}}</h6>
                     {{b.district}}
                     <p class="p-0 m-0">
                        {{b.street}}
@@ -84,20 +84,20 @@
                     </p>
                     <p class="p-0 m-0">
                         <a href="tel:{{b.contact}}">
-                            Contact No. : {{b.contact}}
+                            <i class="fa fa-phone"></i> Contact No. : {{b.contact}}
                         </a>
                     </p>
                     <p class="p-0 m-0">
                         <a href="mailto:{{b.email}}">
-                            Email : {{b.email}}
+                            <i class="fa fa-envelope-o"></i> Email : {{b.email}}
                         </a>
                     </p>
                     <p class="p-0 m-0">
-                        Focal Person : {{b.focal}}<br>
+                        <i class="fa fa-user"></i> Focal Person : {{b.focal}}<br>
                     </p>
                     <p class="p-0 m-0">
                         <a href="tel:{{b.number}}">
-                            Mobile No:&nbsp;{{b.number}}<br>
+                            <i class="fa fa-mobile"></i>   Mobile No:&nbsp;{{b.number}}<br>
                         </a>
                     </p>
                 </div>
@@ -117,55 +117,6 @@
                 </div>
                 
             </div>
-
-            <!-- Show Modal -->
-            <div class="modal fade" id="exampleModalCenter{{b.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">{{b.district}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="p-2">
-                            <div class="row">
-                                <div class="col-7">
-                                    <aside class="sidebyside">
-                                        <i class="fa fa-location-arrow"></i> {{b.street}}<br>
-                                        <a href="tel:{{b.contact}}">
-                                            <i class="fa fa-phone"></i> Contact No. : {{b.contact}}<br>
-                                        </a>
-                                        
-                                        <i class="fa fa-fax"></i> Fax : {{b.fax}}<br>
-                                        <a href="mailto:{{b.email}}">
-                                            <i class="fa fa-envelope-o"></i> Email : {{b.email}}<br>
-                                        </a>
-                                        
-                                        <i class="fa fa-user"></i> Focal Person : {{b.focal}}<br>
-                                        <a href="tel:{{b.number}}">
-                                            <i class="fa fa-mobile-phone"></i> Mobile No:&nbsp;{{b.number}}<br>
-                                        </a>
-                                        
-                                        &nbsp;               
-                                    </aside>
-                                </div>
-                                <div class="col-5 m-auto">
-                                    <img src="{{b.focal_img.url}}" alt="" srcset="" style="height: 130px;">
-                                </div>
-                            </div>
-                        
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    
-                    </div>
-                </div>
-                </div>
-            </div>
-
         </div>
 
         {% endfor %}

@@ -124,8 +124,8 @@
                                                 <div class="p-2">
                                                     <h6 class="">{{i.name}}</h6>
                                                     <p class="text-danger m-0 p-0">{{i.post}}</p> 
-                                                    <small>Email: {{i.email}}</small><br>
-                                                    <small>Phone: {{i.phone}}</small>
+                                                    <small style="font-size: 13px;">Email: {{i.email}}</small><br>
+                                                    <small style="font-size: 13px;">Phone: {{i.phone}}</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -167,7 +167,7 @@
                         <div class="row">
                             
                             {% for i in depart  %}
-                            <div class="col-6 m-auto mt-3">
+                            <div class="col-md-6 col-12 m-auto p-2">
                                 <div class="mainman text-center " style="height: auto;">
                                     <img src="{{i.image.url}}" alt="" srcset="">
                                     <h6>{{i.name}}</h6>
@@ -266,7 +266,7 @@
                                   <p class="text-center p-0 m-0">
                                     <small >{{i.type}}</small>
                                   </p>
-                                  
+              
                                   {% if i.description %}
                                   <div class="text-center p-0 m-0" style="font-size: 14px;">{{i.description|safe}}</div>
                                   {% endif %}

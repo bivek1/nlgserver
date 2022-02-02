@@ -104,7 +104,7 @@
                                
                                     <td class="align-middle">
                                         <h6> {{i.name}} </h6>
-                                        {{i.description|truncatewords:10}}
+                                        {{i.description|safe|truncatewords:10}}
                                     </td>
                                     <td class="align-middle">
                                         {{i.product.name}}

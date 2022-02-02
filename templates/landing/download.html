@@ -17,10 +17,12 @@
                     {%for i in d %}
                         <div class="col-md-4 col-12" >
                             {%if i.files%}
-                            <a href="{{i.pdf}}">
+                            <a href="{{i.pdf}}" target="_blank">
                             {%endif%}
                             {%if i.image%}
-                            <a href="" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
+                            <a href="http://localhost:8000{{i.image.url}}" target="_blank">
+                              
+                            <!-- <a href="" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}"> -->
                             {%endif%}
                             <div class="products-show-satement mt-3" style="height: 200px; overflow: hidden;">
                                 <div class="text-center p-1">
@@ -32,8 +34,8 @@
                                         <!-- <i class="fa fa-file-pdf-o p-2"></i> -->
             
                                         {%if i.image%}
-            
-                                            <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <!-- <img src="{{i.image.url}}" alt="" srcset="" style=" height:100%; width:100%;" > -->
+                                            <!-- <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -54,7 +56,7 @@
                                                     </div>
                                                 </div>
                                                 </div>
-                                            </div>   
+                                            </div>    -->
                 
                                         {%endif%}
                                     

@@ -11,12 +11,13 @@
             NLG INSURANCE COMPANY LIMITED! BEST INSURANCE IN NEPAL
         {% endblock title %}
     </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.min.css' %}">
 
     <link rel="stylesheet" type="text/css" href="{%static 'css/font-awesome.css'%}">
 
     <link rel="stylesheet" href="{%static 'css/style.css' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
    
 </head>
 <body>
@@ -150,76 +151,23 @@
         
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto pr-5">
-                {%url 'landing:landing' as AD%}
-
-                <li class="nav-item  pr-3">
-                <a class="nav-link d-flex" href="{{AD}}"> 
-                    <i class="fa fa-home"></i>
-                        <span class="{%if request.path == AD %}isactive{%endif%}"> HOME</span>  
-                </a>
-                <div class="{%if request.path == AD %}active{%endif%}"></div>
-                </li>
-                <li class="nav-item pr-3">
-                    {%url 'landing:aboutUs' as AD%}
-                    <a class="nav-link d-flex" href="{{AD}}">
-                        <i class="fa fa-briefcase"></i>
-                        <span class="{%if request.path == AD %}isactive{%endif%} p-0 m-0 pl-2">ABOUTUS</span> 
-                    </a>
-                    <div class="{%if request.path == AD %}active{%endif%}"></div>
                 
-                </li>
-                <li class="nav-item pr-3">
-                    {%url 'landing:productPolicies' as AD%}
-                <a class="nav-link d-flex" href="{{AD}}">
-                    <i class="fa fa-umbrella"></i>
+                {% for i in bar %}
                     
-                <span class="{%if request.path == AD %}isactive{%endif%}" >PRODUCTS</span> 
-                </a>
-                <div class="{%if request.path == AD %}active{%endif%}"></div>
-                </li>
-                <li class="nav-item pr-3">
-                    {%url 'landing:branch' as AD%}
-                    <a class="nav-link d-flex" href="{{AD}}">
-                        <i class="fa fa-bars"></i>
-                        <span class="{%if request.path == AD %}isactive{%endif%}">BRANCHES</span> 
-                    </a>
-                    <div class="{%if request.path == AD %}active{%endif%}"></div>
-                </li>
-                <li class="nav-item pr-3">
-                    {%url 'landing:finance' as AD%}
-                    <a class="nav-link d-flex" href="{{AD}}">
-                        <i class="fa fa-bar-chart"></i>
-                        <span class="{%if request.path == AD %}isactive{%endif%}">STATEMENT</span>
-                    </a>
-                    <div class="{%if request.path == AD %}active{%endif%}"></div>
+                    {% if not i.hide %}
                 
-                </li>
-                <!-- <li class="nav-item pr-3">
-                    {%url 'landing:gallary' as AD%}
-                    <a class="nav-link d-flex" href="{{AD}}">
-                        <i class="fa fa-angle-up"></i>
-                    <span class="{%if request.path == AD %}isactive{%endif%}">CAREER</span> 
-                    </a>
-                    <div class="{%if request.path == AD %}active{%endif%}"></div>
-                </li> -->
-                <li class="nav-item pr-3">
-                    {%url 'landing:helpCenter' as AD%}
-                    <a class="nav-link d-flex " href="{{AD}}">
-                        <i class="fa fa-question-circle"></i>
-                    <span class="{%if request.path == AD %}isactive{%endif%}">HELPCENTER</span> 
-                    </a>
-                    <div class="{%if request.path == AD %}active{%endif%}"></div>
-                </li>
-                
-                <li class="nav-item pr-3">
-                    {%url 'landing:contact' as AD%}
-                    <a class="nav-link d-flex" href="{{AD}}">
-                        <i class="fa fa-phone-square"></i>
-                        <span class="{%if request.path == AD %}isactive{%endif%}">CONTACT</span> 
-                    </a>
-                    <div class="{%if request.path == AD %}active{%endif%}"></div>
-                </li>
-            
+                    {%url i.link as AD%}
+                    <li class="nav-item  pr-3">
+                        <a class="nav-link d-flex" href="{%url i.link%}"> 
+                            <i class="{{i.icon}}"></i>
+                                <span class="{%if request.path == AD %}isactive{%endif%}"> {{i.name}}</span>  
+                        </a>
+                        <div class="{%if request.path == AD %}active{%endif%}"></div>
+                    </li>   
+                    {% endif %}
+                        
+                   
+                {% endfor %}
             
 
                 <li class="nav-item hidefordesktop">
@@ -501,12 +449,14 @@
                                     </li>
                                     <li>
                                         <p class="text-light m-0 p-0">Social Site</p>
-                                            <a href="{%url 'landing:contact'%}" class="">
-                                                <i class="fa fa-facebook"></i>
+                                        
+                                        {% for i in social  %}
+                                            <a href="{{i.link}}" target="_blank" class="pr-2">
+                                                <i class="{{i.icon}}"></i>
                                             </a>
-                                            <a href="{%url 'landing:contact'%}" class="p-2">
-                                                <i class="fa fa-instagram"></i>
-                                            </a>
+                                        {% endfor %}
+                                            
+                                    
                                            
                                     </li>
                                 </ul>
@@ -668,7 +618,7 @@
     
         
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  
     <script>
       //Get the button
       var mybutton = document.getElementById("myBtn");
@@ -748,6 +698,7 @@
     }
    
     </script>
+
 
 </body>
 </html>

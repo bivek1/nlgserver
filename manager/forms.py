@@ -1,6 +1,7 @@
 from pyexpat import model
 from tkinter import Widget
 from django import forms
+from django.contrib.auth.models import User
 from landing.models import OtherDownload, helpCenter, socialSite,fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
@@ -9,6 +10,37 @@ class CeoMessageForm(forms.ModelForm):
         model = CeoMessage
         fields = ('__all__')
 
+class AdminForm(forms.Form):
+    email = forms.EmailField(label = 'Email', max_length = 200, widget = forms.TextInput(attrs={'class':'form-control', 'placeholder' : 'Email'}))
+    password1 = forms.CharField(label = 'Password', widget = forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Password'}))
+    password2 = forms.CharField(label = 'Repeat Password', widget = forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Repeat Password'}))
+   
+    
+    fields = ('email', 'password1','password2')
+  
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        try:
+            match = User.objects.get(email=email)
+        except User.DoesNotExist:
+            # Unable to find a user, this is fine
+            return email
+        # A user was found with this as a username, raise an error.
+        raise forms.ValidationError('This email address is already in use.')
+   
+    def clean_password1(self):
+        data = self.cleaned_data['password1']
+        d = str(data)
+        if len(d) < 6:
+            raise forms.ValidationError("Password must be greater than 6 digits")
+        return data
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError('Password Did not Match')
+        return password2
 
 class helpForm(forms.ModelForm):
     class Meta:
@@ -71,7 +103,7 @@ class BranchF(forms.ModelForm):
 
         widgets = {
             'BranchName':forms.TextInput(attrs={'placeholder':'Branch Name'}),
-            'district': forms.TextInput(attrs={'placeholder':'Kathmandu'}),
+            'district': forms.Select(attrs={'placeholder':'Kathmandu'}),
             'provience': forms.Select(attrs={'placeholder':'1'}),
             'street': forms.TextInput(attrs={'placeholder':'Lazimpat, Kathmandu Nepal'}),
             'contact': forms.TextInput(attrs={'placeholder':'01442541'}),
@@ -278,8 +310,7 @@ class AnnouncementForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Announcement Name"}),
             'image': forms.FileInput(attrs={'class':'form-control ps-0'}),
-            'starting_date': forms.DateInput(attrs={'type':'date','class':'form-control ps-0 form-control-line'}),
-            'ending_date': forms.DateInput(attrs={'type':'date', 'class':'form-control ps-0 form-control-line' }),
+            'link': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line', 'placeholder':'Enter Redirect Link' }),
             'description': CKEditorUploadingWidget(),
         }
 

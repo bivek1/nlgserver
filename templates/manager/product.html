@@ -102,7 +102,7 @@
                                
                                     <td class="align-middle">
                                         <h6> {{i.name}} </h6>
-                                        {{i.description|truncatewords:12}}
+                                        {{i.description|safe|truncatewords:12}}
                                     </td>
                                   
                                     {% if i.image %}

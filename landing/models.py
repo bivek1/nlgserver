@@ -4,9 +4,91 @@ from django.db import models
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
 
+
+district = (
+    ('Taplejung','Taplejung'),
+    ('Panchthar','Panchthar'),
+    ('Ilam','Ilam'),
+    ('Jhapa','Jhapa'),
+    ('Sankhuwasabha','Sankhuwasabha'),
+    ('Bhojpur','Bhojpur'),
+    ('Terhathum','Terhathum'),
+    ('Dhankuta','Dhankuta'),
+    ('Morang','Morang'),
+    ('Sunsari','Sunsari'),
+    ('Solukhumbu','Solukhumbu'),
+    ('Okhaldhunga','Okhaldhunga'),
+    ('Khotang','Khotang'),
+    ('Udayapur','Udayapur'),
+    ('Siraha','Siraha'),
+    ('Saptari','Saptari'),
+    ('Dolakha','Dolakha'),
+    ('Ramechhap','Ramechhap'),
+    ('Sindhuli','Sindhuli'),
+    ('Sarlahi','Sarlahi'),
+    ('Mahottari','Mahottari'),
+    ('Dhanusha','Dhanusha'),
+    ('Sindhupalchowk','Sindhupalchowk'),
+    ('Rasuwa','Rasuwa'),
+    ('Kavrepalanchowk','Kavrepalanchowk'),
+    ('Dhading','Dhading'),
+    ('Kathmandu','Kathmandu'),
+    ('Lalitpur','Lalitpur'),
+    ('Bhaktapur','Bhaktapur'),
+    ('Nuwakot','Nuwakot'),
+    ('Parsa','Parsa'),
+    ('Bara','Bara'),
+    ('Makwanpur','Makwanpur'),
+    ('Chitwan','Chitwan'),
+    ('Rautahat','Rautahat'),
+    ('Gorkha','Gorkha'),
+    ('Lamjung','Lamjung'),
+    ('Tanahun','Tanahun'),
+    ('Kaski','Kaski'),
+    ('Syangja','Syangja'),
+    ('Manang','Manang'),
+    ('Nawalpur','Nawalpur'),
+    ('Gulmi','Gulmi'),
+    ('Kapilbastu','Kapilbastu'),
+    ('Palpa','Palpa'),
+    ('Rupandehi','Rupandehi'),
+    ('Arghakhachi','Arghakhachi'),
+    ('Mustang','Mustang'),
+    ('Parbat','Parbat'),
+    ('Myagdi','Myagdi'),
+    ('Baglung','Baglung'),
+    ('Eastern Rukum','Eastern Rukum'),
+    ('Salyan','Salyan'),
+    ('Rolpa','Rolpa'),
+    ('Pyuthan','Pyuthan'),
+    ('Dang','Dang'),
+    ('Dolpa','Dolpa'),
+    ('Humla','Humla'),
+    ('Mugu','Mugu'),
+    ('Jumla','Jumla'),
+    ('Kalikot','Kalikot'),
+    ('Jajarkot','Jajarkot'),
+    ('Banke','Banke'),
+    ('Dhailekh','Dhailekh'),
+    ('Surkhet','Surkhet'),
+    ('Bardiya','Bardiya'),
+    ('Achham','Achham'),
+    ('Bajhang','Bajhang'),
+    ('Kailali','Kailali'),
+    ('Doti','Doti'),
+    ('Bajura','Bajura'),
+    ('Kanchanpur','Kanchanpur'),
+    ('Baitadi','Baitadi'),
+    ('Dadeldhura','Dadeldhura'),
+    ('Darchula','Darchula'),
+    ('Western Rukum','Western Rukum'),
+    ('Parasi','Parasi')
+)
+
+
 class Branch(models.Model):
     BranchName = models.CharField(max_length=100, null = True, blank= True)
-    district = models.CharField(max_length=70, null = True, blank= True)
+    district = models.CharField(max_length=70, choices=district, null = True, blank= True)
     provience = models.CharField(max_length=20, choices=(
         ('1','1'),
         ('2','2'),
@@ -63,6 +145,7 @@ class Citizen(models.Model):
         return self.name
     
 class fiscalYear(models.Model):
+    id = models.AutoField(primary_key=True, editable=True)
     fiscal = models.CharField(max_length=200)
     objects = models.Manager()
     def __str__(self):
@@ -219,8 +302,7 @@ class Announcement(models.Model):
     name = models.CharField(max_length=200,null = True, blank = True)
     image = models.ImageField(upload_to ="announcement",null = True, blank = True)
     description = RichTextUploadingField(null = True, blank = True)
-    starting_date = models.DateField(null = True, blank = True)
-    ending_date = models.DateField(null = True, blank = True)
+    link = models.CharField(max_length = 300, null = True, blank = True)
     objects = models.Manager()
 
     def __str__(self) -> str:
@@ -296,6 +378,7 @@ class TopBar(models.Model):
     name = models.CharField(max_length=200)
     icon = models.CharField(max_length=200)
     hide = models.BooleanField(default=False)
+    link = models.CharField(max_length=200, null=True, blank=True)
     objects = models.Manager()
 
     def __str__(self):

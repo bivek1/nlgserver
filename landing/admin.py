@@ -6,10 +6,24 @@ admin.site.register(OtherDownload)
 admin.site.register(Surveryor)
 admin.site.register(Agent)
 admin.site.register(Citizen)
-admin.site.register(Report)
+class CustomReport(admin.ModelAdmin):
+    list_display = ('id','name','fiscal', 'rtype')
+    list_display_links =None
+    # readonly_fields = ('id',)
+    list_editable =('id','name','fiscal', 'rtype')
+
+admin.site.register(Report, CustomReport)
+
 admin.site.register(news)
 admin.site.register(Download)
-admin.site.register(fiscalYear)
+
+class CustomFiscalYear(admin.ModelAdmin):
+    list_display = ('id','fiscal')
+    list_display_links =None
+    # readonly_fields = ('id',)
+    list_editable =('id','fiscal')
+
+admin.site.register(fiscalYear,CustomFiscalYear)
 admin.site.register(CeoMessage)
 from .models import Bod, ManagementTeam, Setting, QuestionAnswer, Product, Sub_product, DepartmentHead
 admin.site.register(Bod)

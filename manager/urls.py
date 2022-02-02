@@ -70,5 +70,7 @@ urlpatterns = [
     path('deleteHelp/<int:id>', views.deleteHelp, name="deleteHelp"),
     path('topBarMenu', views.topBar, name="topBar"),
     path('topBarMenu/<int:id>', views.hideBar, name="topHide"),
+    path('addAdmin', views.addAdmin, name="addAdmin"),
+    path('deleteAdmin/<int:id>', views.deleteAdmin, name="deleteAdmin")
 ]
 

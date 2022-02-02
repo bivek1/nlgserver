@@ -25,6 +25,7 @@ urlpatterns = [
     path('downloadfile', views.downloadFile, name="downloadFile"),
     path('productDetails/<int:id>', views.thisProduct, name="thisProduct"),
     path('subproductDetails/<int:id>', views.subProduct, name="subProduct"),
+    path('carrer', views.career, name="carrer"),
 
     # Calculator
     path('premiumcalculator', views.calculator, name="calculator"),
@@ -45,5 +46,6 @@ urlpatterns = [
     path('agriculterCalculator', views.agriCal, name = 'agriCal'),
     path('login', views.logIn, name= "login"),
 
-    path('helpCenter', views.helpCen, name="helpCenter")
+    path('helpCenter', views.helpCen, name="helpCenter"),
+    path('changedistrictname', views.changedis),
 ]

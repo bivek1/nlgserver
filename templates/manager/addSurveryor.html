@@ -1,4 +1,5 @@
 {% extends "manager/dashboard.html" %}
+{% load static %}
 {% block title %}
     Add Surveryor
 {% endblock title %}
@@ -42,6 +43,9 @@
                 {% csrf_token %}
                 <div class="col-md-3 col-12 d-flex justify-content-center">
                     <button class="btn btn-warning"> <i class="fa fa-file"></i>Load From Excel</button>
+                </div>
+                <div class="col-12 text-center pt-2">
+                    <a href="{%static 'surveryor.xlsx'%}" download>Click here to download a Sample</a>
                 </div>
             </div>
         </form>

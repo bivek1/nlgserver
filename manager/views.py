@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, update_session_auth_hash
-from .forms import AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, helpForm, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom, socialSiteForm
+from .forms import AdminForm, AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, helpForm, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom, socialSiteForm
 from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, Setting, TopBar, fiscalYear, helpCenter, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer, socialSite
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
@@ -9,6 +9,7 @@ from django.urls import reverse
 import datetime
 from .forms import FormChangePassword
 import openpyxl
+from django.contrib.auth.models import User
 
 # Create your views here.
 @login_required
@@ -76,8 +77,8 @@ def loadData(request):
                 issue = full_data[4]
                 print(issue)
                 email = full_data[5]
-                iss = datetime.datetime.strftime
-                # Agent.objects.create(name=name, address=address, contact= contact, lience_no= lience,  email=email, issue_date= issue)
+                # iss = datetime.datetime.strftime
+                Agent.objects.create(name=name, address=address, contact= contact, lience_no= lience,  email=email, issue_date= issue)
         messages.success(request, "Successfully Uploaded From excel File")
         # except:
         #     messages.success(request, "No data to Load. Something went wrong")
@@ -326,7 +327,7 @@ def statementReport(request, id):
     return render(request, 'manager/viewReport.html', dist)
 
 def newUpdate(request):
-    report = news.objects.all().order_by("-id")
+    report = news.objects.all().order_by("-dateof")
     name = "News and Update"
 
     dist ={
@@ -380,7 +381,7 @@ def setting(request):
 
 def addBod(request):
     form = BodForm()
-    branched = Bod.objects.all()
+    branched = Bod.objects.all().order_by('-id')
     dist = {
         'form':form,
         'bod':branched,
@@ -399,7 +400,7 @@ def addBod(request):
 
 def managementTeam(request):
     form = ManagementForm()
-    branched = ManagementTeam.objects.all()
+    branched = ManagementTeam.objects.all().order_by('-id')
     dist = {
         'form':form,
         'bod':branched,
@@ -419,7 +420,7 @@ def managementTeam(request):
 
 def ProductView(request):
     form = ProductFrom()
-    branched = Product.objects.all()
+    branched = Product.objects.all().order_by('-id')
     dist = {
         'form':form,
         'bod':branched,
@@ -439,7 +440,7 @@ def ProductView(request):
 
 def SubProductView(request):
     form = SubProductFrom()
-    branched = Sub_product.objects.all()
+    branched = Sub_product.objects.all().order_by('-id')
     dist = {
         'form':form,
         'bod':branched,
@@ -459,7 +460,7 @@ def SubProductView(request):
 
 def QuestionAnswerView(request):
     form = QuestionAnswerFrom()
-    branched = QuestionAnswer.objects.all()
+    branched = QuestionAnswer.objects.all().order_by('-id')
     dist = {
         'form':form,
         'bod':branched,
@@ -478,7 +479,7 @@ def QuestionAnswerView(request):
 
 def AnnouncementView(request):
     form = AnnouncementForm()
-    branched = Announcement.objects.all()
+    branched = Announcement.objects.all().order_by('-id')
     dist = {
         'form':form,
         'bod':branched,
@@ -517,7 +518,7 @@ def addForm(request):
 
 def DepartmentView(request):
     form = DepartmentHeadForm()
-    branched = DepartmentHead.objects.all()
+    branched = DepartmentHead.objects.all().order_by('-id')
     dist = {
         'form':form,
         'bod':branched,
@@ -537,7 +538,7 @@ def DepartmentView(request):
 
 def fiscalView(request):
     form = FiscalForm()
-    branched = fiscalYear.objects.all()
+    branched = fiscalYear.objects.all().order_by('-id')
     dist = {
         'form':form,
         'fiscal':branched,
@@ -1085,7 +1086,7 @@ def hideSubProduct(request, id):
     return HttpResponseRedirect(reverse('manager:subProduct'))
 
 def contact(request):
-    cont = Contact.objects.all()
+    cont = Contact.objects.all().order_by('-id')
     dist = {
         'contact': cont
     }
@@ -1094,7 +1095,7 @@ def contact(request):
 
 def otherDownload(request):
     form = OtherDownloadForm()
-    files = OtherDownload.objects.all()
+    files = OtherDownload.objects.all().order_by('-id')
     dist = {
         'form':form,
         'site':files
@@ -1164,7 +1165,7 @@ def addCeoMessage(request):
 
 def addSocialSite(request):
     form = socialSiteForm()
-    site = socialSite.objects.all()
+    site = socialSite.objects.all().order_by('-id')
 
     dist = {
         'form':form,
@@ -1209,7 +1210,7 @@ def deleteSocial(request, id):
 
 def addHelp(request):
     form = helpForm()
-    site = helpCenter.objects.all()
+    site = helpCenter.objects.all().order_by('-id')
 
     dist = {
         'form':form,
@@ -1268,3 +1269,28 @@ def hideBar(request, id):
     messages.success(request, "Successfully Changed Status of the Bar")
     return HttpResponseRedirect(reverse('manager:topBar'))
     
+def addAdmin(request):
+    form = AdminForm(request.POST or None)
+    use = User.objects.all().order_by('-id')
+    dist = {
+        'form':form,
+        'data':use
+    }
+    if request.method == 'POST':
+        if form.is_valid():
+            cd = form.cleaned_data
+            email = cd['email']
+            password1 = cd['password1']
+            User.objects.create_user(email = email, username= email, password = password1)
+            messages.success(request,"Successfully Added new Admin")
+            return HttpResponseRedirect(reverse('manager:addAdmin'))
+        else:
+            messages.error(request,"Pease Check the Error Below")
+            return render(request, "manager/addAdmin.html", dist)
+    return render(request, "manager/addAdmin.html", dist)
+
+def deleteAdmin(request, id):
+    use = User.objects.get(id = id)
+    use.delete()
+    messages.success(request, "Successfully Deleted Admin")
+    return HttpResponseRedirect(reverse('manager:addAdmin'))

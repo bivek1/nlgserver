@@ -29,7 +29,7 @@ SECRET_KEY = '^1*#x$8qy2hq#rujlxjv^3#r2s#m!t69*g(dvoy07v*@_5n0-6'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['nlginsurance.herokuapp.com']
-ALLOWED_HOSTS = ['192.168.1.21','localhost','182.93.78.43','www.nlgi.com.np', 'nlgi.com.np']
+ALLOWED_HOSTS = ['192.168.1.25','localhost','182.93.78.43','www.nlgi.com.np', 'nlgi.com.np']
 
 # Application definition
 

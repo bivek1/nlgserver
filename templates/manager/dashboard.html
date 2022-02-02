@@ -140,7 +140,7 @@
                         {%url 'manager:statementReport' 2 as das%}
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
                                 href="{%url 'manager:statementReport' 2 %}" aria-expanded="false">
-                                <i class="me-3 fa fa-user" aria-hidden="true"></i><span
+                                <i class="me-3 fa fa-table" aria-hidden="true"></i><span
                                     class="hide-menu">View Quarterly  Report</span></a>
                         </li>
                         {%url 'manager:statementReport' 1 as das%}
@@ -149,7 +149,7 @@
                                     aria-hidden="true"></i><span class="hide-menu">View Annual Report</span></a></li>
                         {%url 'manager:statementReport' 3 as das%}
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
-                                href="{%url 'manager:statementReport' 3 %}" aria-expanded="false"><i class="me-3 fa fa-font"
+                                href="{%url 'manager:statementReport' 3 %}" aria-expanded="false"><i class="me-3 fa fa-table"
                                     aria-hidden="true"></i><span class="hide-menu">View Minute Report</span></a></li>
                         {%url 'manager:newUpdate' as das%}
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
@@ -157,7 +157,7 @@
                                     aria-hidden="true"></i><span class="hide-menu">View News & Update</span></a></li>
                         {%url 'manager:topBar' as das%}
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
-                                href="{%url 'manager:topBar'%}" aria-expanded="false"><i class="me-3 fa fa-globe"
+                                href="{%url 'manager:topBar'%}" aria-expanded="false"><i class="me-3 fa fa-font"
                                     aria-hidden="true"></i><span class="hide-menu">Top bar Menu</span></a></li>
                         
                         {%url 'manager:formReport' 1 as das%}
@@ -166,15 +166,15 @@
                                     aria-hidden="true"></i><span class="hide-menu">View KYC Forms</span></a></li>
                         {%url 'manager:formReport' 2 as das%}
                          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
-                                        href="{%url 'manager:formReport' 2 %}" aria-expanded="false"><i class="me-3 fa fa-info-circle"
+                                        href="{%url 'manager:formReport' 2 %}" aria-expanded="false"><i class="me-3 fa fa-columns"
                                             aria-hidden="true"></i><span class="hide-menu">View Proposal Forms</span></a></li>
                         {%url 'manager:formReport' 3 as das%}
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}" 
-                            href="{%url 'manager:formReport' 3 %}" aria-expanded="false"><i class="me-3 fa fa-info-circle"
+                            href="{%url 'manager:formReport' 3 %}" aria-expanded="false"><i class="me-3 fa fa-columns"
                                 aria-hidden="true"></i><span class="hide-menu">View Claim Forms</span></a></li>
-                        {%url 'manager:changePassword' as das%}
+                        {%url 'manager:addAdmin' as das%}
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}" 
-                            href="{%url 'manager:changePassword'%}" aria-expanded="false"><i class="me-3 fa fa-info-circle"
+                            href="{%url 'manager:addAdmin'%}" aria-expanded="false"><i class="me-3 fa fa-user-circle"
                                 aria-hidden="true"></i><span class="hide-menu">Add Admin</span></a></li>
                         {%url 'manager:changePassword' as das%}
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}" 

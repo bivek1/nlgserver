@@ -48,13 +48,13 @@
             </div>
             <div class="moreinfo forphoneinfo">
                 <span class="1">
-                    <span class="11 onesel">
+                    <span class="11 ">
                         Annual Report
                     </span>
                     
                 </span>
-                <span class="2 pl-2">
-                    <span class=" 22  ">
+                <span class="2 pl-2 ">
+                    <span class=" 22 onesel ">
                         Quarterly Report
                     </span>
                 </span>
@@ -95,12 +95,12 @@
                                     {%for j in i.fiscalyear.all%}
                                     {%if j.rtype == 'Annual Report' %}
                                     <div class="col-md-3 col-12 col-lg-3">
-                                        <a href="{{j.pdf}}">
+                                        <a href="{{j.pdf}}" target="_blank">
                                             <div class="products-show-satement mt-2">
                                                 <div class="text-center p-1 forQuater">
                                                     <p class="text-center p-0 m-0 pt-2 lowTextForName" >{{j.name}}</p>
                                                     <div class="report-item">
-                                                        <a href="{{j.pdf}}">
+                                                        <a href="{{j.pdf}}" target="_blank">
                                                             <i class="fa fa-eye p-2"></i>
                                                         </a>      
                                                     
@@ -182,7 +182,7 @@
                                                 <div class="text-center p-1 forQuater">
                                                     <p class="text-center p-0 m-0 pt-2 lowTextForName" >{{j.name}}</p>
                                                     <div class="report-item">
-                                                        <a href="{{j.pdf}}">
+                                                        <a href="{{j.pdf}}" target="_blank">
                                                             <i class="fa fa-eye p-2"></i>
                                                         </a>      
                                                     
@@ -241,12 +241,12 @@
         {% for i in rep %}
         {%if i.rtype == 'Minute Report' %}
         <div class="col-lg-2 col-md-3 col-12 showMinute">
-            <a href="{{i.pdf}}">
+            <a href="{{i.pdf}}" target="_blank">
                 <div class="products-show-satement mt-2">
                     <div class="text-center p-1">
                         <p class="text-center p-0 m-0 lowTextForName">{{i.name}}</p>
                         <div class="report-item p-3">
-                            <a href="{{i.pdf}}">
+                            <a href="{{i.pdf}}" target="_blank">
                                 <i class="fa fa-eye p-2"></i>
                             </a>      
                         
@@ -265,12 +265,12 @@
     {% for i in rep %}
     {%if i.rtype == 'Other Report' %}
     <div class="col-lg-2 col-md-3 col-12 showOther">
-        <a href="{{i.pdf}}">
+        <a href="{{i.pdf}}" target="_blank">
             <div class="products-show-satement mt-2">
                 <div class="text-center p-1">
                     <p class="text-center p-0 m-0 lowTextForName">{{i.name}}</p>
                     <div class="report-item p-3">
-                        <a href="{{i.pdf}}">
+                        <a href="{{i.pdf}}" target="_blank">
                             <i class="fa fa-eye p-2"></i>
                         </a>      
                     

@@ -1,7 +1,7 @@
 from turtle import st
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, Setting, Sub_product, Surveryor, Citizen, Report, Download, fiscalYear, helpCenter, news
+from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, Setting, Sub_product, Surveryor, Citizen, Report, Download, TopBar, fiscalYear, helpCenter, news, socialSite
 from django.http import FileResponse, Http404, HttpResponse, HttpResponseRedirect, JsonResponse, request
 from django.urls import reverse
 from django.conf import settings
@@ -20,8 +20,12 @@ def landing(request):
     sett = Setting.objects.all()
     ann = Announcement.objects.all()
     products = Product.objects.filter(hide=False)[:8]
-    
     setting = None
+    message = CeoMessage.objects.all()
+    if messages:
+        for i in message:
+            msg = i.message
+            break
     if sett:
         for i in sett:
             setting = i 
@@ -30,7 +34,9 @@ def landing(request):
         'setting':setting,
         'ann':ann,
         'products':products,
-        
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all(),
+        'msg':msg
     }
     if request.method == 'POST':
         name = request.POST['name']
@@ -78,7 +84,9 @@ def productPolicy(request):
         'lens':lens,
         'topP':topP,
         'showm':showm,
-        'allSub':allSub
+        'allSub':allSub,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/products.html', dist)
 
@@ -101,7 +109,9 @@ def aboutUs(request):
         'bod':Bod.objects.all(),
         'msg':msg,
         'team':ManagementTeam.objects.all(),
-        'depart':DepartmentHead.objects.all()
+        'depart':DepartmentHead.objects.all(),
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/about.html", dist)
 
@@ -114,7 +124,9 @@ def contact(request):
             setting = i 
             break
     dist ={
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     if request.method == 'POST':
         name = request.POST['name']
@@ -139,13 +151,23 @@ def contact(request):
         return HttpResponseRedirect(reverse('landing:contact'))
     return render(request, "landing/contactus.html", dist)
 def helpCen(request):
-    data = helpCenter.objects.all()
+    data = helpCenter.objects.all().order_by('-id')
+    setting = None
+    sett = Setting.objects.all()
+    show = None
+    if sett:
+        for i in sett:
+            setting = i 
+            break
     for i in data:
         show = i.id
         break
     dist = {
         'data':data,
-        'show':show
+        'show':show,
+        'bar':TopBar.objects.all(),
+        'setting':setting,
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/helpCenter.html", dist)
 def thisProduct(request,id):
@@ -163,7 +185,9 @@ def thisProduct(request,id):
         'setting':setting,
         'product':product,
         'all':all,
-        'allSub':allSub
+        'allSub':allSub,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     if request.method == 'POST':
         name = request.POST['name']
@@ -196,7 +220,9 @@ def subProduct(request, id):
         'setting':setting,
         'product':product,
         'all':all,
-        'allPro':allPro
+        'allPro':allPro,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     if request.method == 'POST':
         name = request.POST['name']
@@ -216,7 +242,7 @@ def subProduct(request, id):
 def faq(request):
     PageVisitView()
     sett = Setting.objects.all()
-    faq = QuestionAnswer.objects.all()
+    faq = QuestionAnswer.objects.all().order_by('-id')
     setting = None
     if sett:
         for i in sett:
@@ -228,7 +254,9 @@ def faq(request):
     dist ={
         'setting':setting,
         'faq':faq,
-        'show':show
+        'show':show,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/faq.html", dist)
 
@@ -241,7 +269,9 @@ def term(request):
             setting = i 
             break
     dist ={
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/terms.html", dist)
 
@@ -254,7 +284,9 @@ def training(request):
             setting = i 
             break
     dist ={
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/training.html", dist)
 
@@ -270,6 +302,8 @@ def sitemap(request):
     dist ={
         'setting':setting,
         'product':product,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/sitemap.html", dist)
 
@@ -283,9 +317,9 @@ def finance(request):
             setting = i 
             break
 
-    report = Report.objects.all()
-    Yeara = fiscalYear.objects.all()
-    for i in report:
+    report = Report.objects.all().order_by('-id')
+    Yeara = fiscalYear.objects.all().order_by('-id')
+    for i in Yeara:
         bb = i.id
         break
 
@@ -296,7 +330,9 @@ def finance(request):
         'aa':aa,
         'bb':bb,
         'fis':Yeara,
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/statement.html", dist)
 
@@ -336,13 +372,13 @@ def pdf_view(request,slug, id):
     file = open(aa+rep.files.url, "rb").read()
     try:
         # return FileResponse(open(aa+"/"+rep.files.url, 'rb'), content_type='application/pdf')
-        return FileResponse(open(aa+rep.files.url, 'rb'), content_type='application/pdf')
+        return FileResponse(open(aa+rep.files.url, 'rb'), content_type='application/pdf', target='_newtab')
     except FileNotFoundError:
         raise Http404()
 
 def surveyor(request):
     PageVisitView()
-    s = Surveryor.objects.all()
+    s = Surveryor.objects.all().order_by('-id')
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -351,13 +387,15 @@ def surveyor(request):
             break
     dist = {
         's':s,
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/surveyor.html", dist)
 
 def agents(request):
     PageVisitView()
-    s = Agent.objects.all()
+    s = Agent.objects.all().order_by('-id')
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -366,14 +404,16 @@ def agents(request):
             break
     dist = {
         's':s,
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
 
     return render(request, "landing/agents.html", dist)
 
 def citizen(request):
     PageVisitView()
-    s = Citizen.objects.all()
+    s = Citizen.objects.all().order_by('-id')
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -382,7 +422,9 @@ def citizen(request):
             break
     dist = {
         's':s,
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
 
     return render(request, "landing/citizen.html", dist)
@@ -399,11 +441,13 @@ def branch(request):
     dist = {
         'branch':branch,
         'Nfound':False,
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     if request.method == 'POST':
         name = request.POST['branch']
-        branch = Branch.objects.filter(Q(district__icontains=name) | Q(street__icontains=name))
+        branch = Branch.objects.filter(Q(district__icontains=name) | Q(street__icontains=name)| Q(BranchName__icontains=name))
         if branch:
             found= False
         else:
@@ -411,7 +455,9 @@ def branch(request):
         distS = {
             'branch':branch,
             'Nfound':found,
-            'setting':setting
+            'setting':setting,
+            'bar':TopBar.objects.all(),
+            'social':socialSite.objects.all()
         }
 
         return render(request, 'landing/branch.html', distS)
@@ -428,14 +474,15 @@ def gallery(request):
             break
     dist = {
   
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/gallary.html", dist)
 
 def download(request):
     PageVisitView()
-    d = news.objects.all()
-    two = news.objects.all().order_by('-id')[:3]
+    d = news.objects.all().order_by('-dateof')
     sett = Setting.objects.all()
    
     setting = None
@@ -445,8 +492,9 @@ def download(request):
             break
     dist = {
         'd':d,
-        'two': two,
         'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/download.html", dist)
 
@@ -459,7 +507,9 @@ def calculator(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     # return render(request, "landing/calculator/two_wheleer/twowheler_c.html")
     return render(request, "landing/calculator/twowheler.html", dist)
@@ -481,9 +531,9 @@ def checkLogin(request):
 
 def downloadFile(request):
     PageVisitView()
-    files = Download.objects.all()
+    files = Download.objects.all().order_by('-id')
     sett = Setting.objects.all()
-    other = OtherDownload.objects.all()
+    other = OtherDownload.objects.all().order_by('-id')
     setting = None
     if sett:
         for i in sett:
@@ -492,7 +542,9 @@ def downloadFile(request):
     dist = {
         'files':files,
         'setting':setting,
-        'other':other
+        'other':other,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, "landing/downloadfile.html", dist)
 
@@ -508,7 +560,9 @@ def carCalculator(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/carCalculator.html', dist)
 
@@ -520,7 +574,9 @@ def tempoCal(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/tempoCal.html', dist)
 
@@ -532,7 +588,9 @@ def taxiCal(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/taxi.html', dist)
 
@@ -544,7 +602,9 @@ def goodCal(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/goods.html', dist)
 
@@ -556,7 +616,9 @@ def agriCal(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/agriculture.html', dist)
 
@@ -568,7 +630,9 @@ def fuelTank(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/fuel.html', dist)
 
@@ -580,7 +644,9 @@ def passenger(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/passenger.html', dist)
 
@@ -593,7 +659,9 @@ def tractor(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/tractor.html', dist)
 
@@ -606,7 +674,9 @@ def con(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/construction.html', dist)
 
@@ -618,7 +688,9 @@ def productCal(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/homecal.html', dist)
 
@@ -631,7 +703,9 @@ def propertyCal(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/propertycal.html', dist)
 
@@ -644,7 +718,9 @@ def personal(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/personal.html', dist)
 
@@ -656,7 +732,9 @@ def agriCal(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     return render(request, 'landing/calculator/agri.html', dist)
 
@@ -668,7 +746,9 @@ def logIn(request):
             setting = i 
             break
     dist = {
-        'setting':setting
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
     }
     if request.method == 'POST':
         username = request.POST['username']
@@ -684,3 +764,23 @@ def logIn(request):
 
     return render(request, "landing/login.html", dist)
 
+def career(request):
+    setting = None
+    sett = Setting.objects.all()
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist = {
+        'bar':TopBar.objects.all(),
+        'setting':setting,
+        'social':socialSite.objects.all()
+    }
+    return render(request, "landing/carrer.html", dist)
+
+def changedis(request):
+    br = Branch.objects.all()
+    for i in br:
+        i.BranchName = i.district
+        i.save()
+    return HttpResponse('/')
