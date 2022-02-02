@@ -338,8 +338,8 @@ def finance(request):
 
 def filedownload(request, slug, id):
     media = settings.MEDIA_ROOT
-    aa = media.replace('\\media',"")
-    # aa = media.replace('/media/',"")
+    # aa = media.replace('\\media',"")
+    aa = media.replace('/media/',"")
     if slug == 'report':
         rep = Report.objects.get(id=id)
     elif slug=="news":
@@ -348,8 +348,8 @@ def filedownload(request, slug, id):
         rep = OtherDownload.objects.get(id=id)
     else:
         rep = Download.objects.get(id = id)
-    file = open(aa+"/"+rep.files.url, "rb").read()
-    # file = open(aa+rep.files.url, "rb").read()
+    # file = open(aa+"/"+rep.files.url, "rb").read()
+    file = open(aa+rep.files.url, "rb").read()
     rea_response = HttpResponse(file, content_type='application/pdf')
     rea_response['Content-Disposition'] = 'attachment; filename={}'.format(rep.name+'.pdf')
     return rea_response
