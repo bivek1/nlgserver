@@ -20,47 +20,35 @@
                             <a href="{{i.pdf}}" target="_blank">
                             {%endif%}
                             {%if i.image%}
-                            <a href="http://localhost:8000{{i.image.url}}" target="_blank">
+                            <a href="http://182.93.78.43/{{i.image.url}}" target="_blank" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
                               
-                            <!-- <a href="" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}"> -->
+                          
                             {%endif%}
-                            <div class="products-show-satement mt-3" style="height: 200px; overflow: hidden;">
+                            <div class="products-show-satement mt-3" style="height: 15px; overflow: hidden;">
                                 <div class="text-center p-1">
                                     <small>{{i.dateof}}</small>
                                     <hr>
                                     <h6 class="text-center p-0 m-0">{{i.name}}</h6>
-                                    <small>{{i.description|safe}}</small>
+                                    <small>{{i.description|safe|truncatewords:10}}</small>
                                     <div class="report-item p-3">
-                                        <!-- <i class="fa fa-file-pdf-o p-2"></i> -->
-            
-                                        {%if i.image%}
-                                            <!-- <img src="{{i.image.url}}" alt="" srcset="" style=" height:100%; width:100%;" > -->
-                                            <!-- <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
-                                                        
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                    <img src="{{i.image.url}}" alt="" srcset="" style=" height:100%; width:100%;" >
-                                                    </div>
-                                                    
+                                        <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
+                                                <p>{{i.description|safe}}</p>  
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                            
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 
-                                                    <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    
-                                                    </div>
                                                 </div>
-                                                </div>
-                                            </div>    -->
-                
-                                        {%endif%}
-                                    
-                                        
+                                            </div>
+                                            </div>
+                                        </div>   
                                     </div>
                                 </div>
                             
