@@ -31,19 +31,101 @@
         {% endif %}
     </div>
    
-    
-    <form action="" method="post" style="width: 100%; padding: 30px;" enctype="multipart/form-data">
+    <div class="row">
+      
+        <div class="col-12 col-md-9">
+            <form action="" method="post" style="width: 100%;" enctype="multipart/form-data">
        
-        <div class="row formbox">
-            <h3>Edit News</h3>
-            <hr>
-            {{form.media}}
-            {{form}}
-            {% csrf_token %}
+                <div class="row formbox">
+                    <h3>Edit News</h3>
+                    <hr>
+                    {{form.media}}
+                    {{form}}
+                    {% csrf_token %}
+                   
+                    <button class="btn btn-danger btn-block text-light mt-3" id="submit"> <i class="fa fa-key"></i> UPDATE NEWS </button>        
+                </div>
            
-            <button class="btn btn-danger btn-block text-light mt-3" id="submit"> <i class="fa fa-key"></i> UPDATE NEWS </button>        
+                
+            </form>
         </div>
-   
-        
-    </form>
+        <div class="col-12 col-md-3 pl-2">
+          
+            <div class="card p-2">
+                
+                {% if news.image %}
+                    <p>Image Available:</p>
+                 
+                    <img src="{{news.image.url}}" alt="" srcset="" style="height: auto; width: 100%;" >
+
+                    <button class="btn btn-danger text-center text-light mt-2 w-100" data-bs-toggle="modal" data-bs-target="#exampleModalImage">
+                        Clear Image
+                    </button>
+ 
+                     <!-- Delete Modal -->
+                     <div class="modal fade" id="exampleModalImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Are you sure want to Delete Image?</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                           
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                              <a href="{{news.clear}}">
+                                <button type="button" class="btn btn-primary">Yes</button>
+                              </a>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <!-- Delete Modal End --> 
+                {%else%}
+                    <p>No Image Uploded</p>
+                {% endif %}
+                <hr>
+                {% if news.files %}
+                    <p>Files Available:</p>
+                    <a href="{{news.pdf}}" target="_blank">
+                        <button class="btn btn-primary w-100">
+                            View File
+                        </button>
+                    </a>
+                    <a class="btn btn-danger text-center text-light mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-trash"></i>Delete File
+                    </a>
+                      <!-- Delete Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Are you sure want to Delete File?</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                           
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                              <a href="{{news.clearfiles}}">
+                                <button type="button" class="btn btn-primary">Yes</button>
+                              </a>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <!-- Delete Modal End --> 
+                    
+                {%else%}
+                    <p>No File Uploded</p>
+                {% endif %}
+                    
+                    
+                
+            </div>
+
+        </div>
+    </div>
+  
 {% endblock inner %}

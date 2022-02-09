@@ -14,6 +14,7 @@ urlpatterns = [
     path('citizenscharter', views.citizen , name ="citizen"),
     path('gallary', views.gallery, name ="gallary"),
     path('downloadNews', views.download, name="download"),
+    path('news/<int:id>', views.Thenews, name="news"),
     path('filedownload/<slug:slug>/<int:id>/', views.filedownload, name="filedownload"),
     path('viewDocument/<slug:slug>/<int:id>', views.pdf_view, name ="pdfview"),
     path('checklogin', views.checkLogin, name = 'checkLogin'),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('productDetails/<int:id>', views.thisProduct, name="thisProduct"),
     path('subproductDetails/<int:id>', views.subProduct, name="subProduct"),
     path('carrer', views.career, name="carrer"),
+
 
     # Calculator
     path('premiumcalculator', views.calculator, name="calculator"),

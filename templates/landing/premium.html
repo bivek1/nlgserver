@@ -62,10 +62,7 @@
                     
                     <ul class="col-md-3 col-12 listtheVechile">
                       
-                        {%url 'landing:calculator' as bash %}
-                        <a href="{{bash}}">
-                          <li {%if request.path == bash %} class="calActive"{%endif%}>Two Wheelers</li>
-                        </a>
+                       
                         {%url 'landing:productCal' as bash %}
                         <a href="{{bash}}">
                           <li {%if request.path == bash %} class="calActive"{%endif%}>Home Insurance</li>
@@ -79,10 +76,14 @@
                           <li {%if request.path == bash %} class="calActive"{%endif%}>Personal Insurance</li>
                         </a>
                         
-                        <li id="seeMore">Show More</li>
+                        <li id="seeMore">Motor Calculator</li>
                       
                         
                         <div class="hidethis">
+                          {%url 'landing:calculator' as bash %}
+                          <a href="{{bash}}">
+                            <li {%if request.path == bash %} class="calActive"{%endif%}>Two Wheelers</li>
+                          </a>
                           {%url 'landing:carCalculator' as car %}
                           <a href="{{car}}">
                             <li {%if request.path == car %} class="calActive"{%endif%}>Private Car</li>

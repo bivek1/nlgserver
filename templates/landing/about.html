@@ -120,7 +120,7 @@
                                         {% for i in team  %}
                                         <div class="col-12 {%if i.post == 'C.E.O'%} col-md-12 {%elif i.post ==  'Deputy General Manager / Company Secretary'%} col-md-12 {%else%} col-md-6 {%endif%}text-center mt-4">
                                             <div class="bod d-flex" >
-                                                <img src="{{i.image.url}}" alt="">
+                                                <img src="{%if i.image%}{{i.image.url}}{%else%}{%static 'images/downlogo.PNG'%} {%endif%}" alt="">
                                                 <div class="p-2">
                                                     <h6 class="">{{i.name}}</h6>
                                                     <p class="text-danger m-0 p-0">{{i.post}}</p> 
@@ -169,7 +169,7 @@
                             {% for i in depart  %}
                             <div class="col-md-6 col-12 m-auto p-2">
                                 <div class="mainman text-center " style="height: auto;">
-                                    <img src="{{i.image.url}}" alt="" srcset="">
+                                    <img src="{%if i.image%}{{i.image.url}}{%else%}{%static 'images/downlogo.PNG'%} {%endif%}" alt="" srcset="">
                                     <h6>{{i.name}}</h6>
                                     <p class="text-danger p-0 m-0">{{i.post}}</p>
                                     <small class="d-block">{{i.email}}</small>
@@ -192,7 +192,7 @@
                 </div>
                 </div>
 
-                    <div class="col-md-4 col-12 p-3">
+                    <div class="col-md-4 col-12 p-3" data-toggle="modal" data-target="#exampleModalRIPartner">
                         <div class="bod" style="height: 76px; cursor: pointer;">
                             <p class="text-center p-0 m-0 pt-2">   <i class="fa fa-user-plus" style="font-size: 30px;"></i>  </p>
                     
@@ -236,7 +236,7 @@
         {% for i in bod %}
             <div class="{% if i.chairman %} col-md-12 col-12 {%else%} col-md-4 col-12  {% endif %} p-3 m-auto">
                 <div class="mainman text-center ">
-                    <img src="{{i.image.url}}" alt="" srcset="">
+                    <img src="{%if i.image%}{{i.image.url}}{%else%}{%static 'images/downlogo.PNG'%} {%endif%}" alt="" srcset="">
                     <h6>{{i.name}}</h6>
                     <p class="text-danger p-0 m-0">{{i.post}}</p>
                     <small class="d-block">{{i.type}}</small>
@@ -256,7 +256,7 @@
                             </div>
                             <div class="modal-body p-0 m-0">
                               <div class="text-center mt-3">
-                                <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="height: 250px; width: 250px; border-radius: 50%;">
+                                <img class="res-gif" src="{%if i.image%}{{i.image.url}}{%else%}{%static 'images/downlogo.PNG'%} {%endif%}" alt="" srcset="" style="height: 250px; width: 250px; border-radius: 50%;">
                               </div>
                               
                               <div class="row pl-2 mt-2">
@@ -384,7 +384,27 @@
             </div>
 
           </div>
-    </div>   
+    </div>  
+    {% if ri %}
+    <div class="modal fade" id="exampleModalRIPartner" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">RI Partner</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {{ri.description|safe}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock content %}
 

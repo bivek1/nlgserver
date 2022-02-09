@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, update_session_auth_hash
-from .forms import AdminForm, AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, SettingForm, SurveryorF, CitizenF, ReportF, helpForm, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom, socialSiteForm
-from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, Setting, TopBar, fiscalYear, helpCenter, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer, socialSite
+from .forms import AdminForm, AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, RIForm, SettingForm, SurveryorF, CitizenF, ReportF, helpForm, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom, socialSiteForm
+from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, RIpartner, Setting, TopBar, fiscalYear, helpCenter, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer, socialSite
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
@@ -77,8 +77,9 @@ def loadData(request):
                 issue = full_data[4]
                 print(issue)
                 email = full_data[5]
+                agent_code = full_data[6]
                 # iss = datetime.datetime.strftime
-                Agent.objects.create(name=name, address=address, contact= contact, lience_no= lience,  email=email, issue_date= issue)
+                Agent.objects.create(name=name, agent_code=agent_code, address=address, contact= contact, lience_no= lience,  email=email, issue_date= issue)
         messages.success(request, "Successfully Uploaded From excel File")
         # except:
         #     messages.success(request, "No data to Load. Something went wrong")
@@ -280,7 +281,6 @@ def editReport(request, id):
         bod.fiscal = fiscalYear.objects.get(id = request.POST['fiscal'])
         if request.FILES:
             bod.files = request.FILES['files']
-    
         bod.save()
         messages.success(request, "Report Edited Succesfully")
         return HttpResponseRedirect(reverse('manager:editReport', args=[bod.id]))
@@ -308,16 +308,16 @@ def formReport(request, id):
 def statementReport(request, id):
     if id == 1:
         report = Report.objects.filter(rtype = 'Annual Report').order_by("-id")
-        name = "Annual Report"
+        name = "Annual"
     elif id == 2:
         report = Report.objects.filter(rtype = 'Quarterly Report').order_by("-id")
-        name = "Quarterly Report"
+        name = "Quarterly"
     elif id == 3:
         report = Report.objects.filter(rtype = 'Minute Report').order_by("-id")
-        name = "Minute Report"
+        name = "Minute"
     else:
         report = Report.objects.filter(rtype = 'Other Report').order_by("-id")
-        name = "Other Report"
+        name = "Other"
 
     dist ={
         'name':name,
@@ -381,7 +381,8 @@ def setting(request):
 
 def addBod(request):
     form = BodForm()
-    branched = Bod.objects.all().order_by('-id')
+    form.fields['ordering'].initial = Bod.objects.all().count() + 1
+    branched = Bod.objects.all().order_by('ordering')
     dist = {
         'form':form,
         'bod':branched,
@@ -400,7 +401,8 @@ def addBod(request):
 
 def managementTeam(request):
     form = ManagementForm()
-    branched = ManagementTeam.objects.all().order_by('-id')
+    branched = ManagementTeam.objects.all().order_by('ordering')
+    form.fields['ordering'].initial = ManagementTeam.objects.all().count() + 1
     dist = {
         'form':form,
         'bod':branched,
@@ -420,7 +422,8 @@ def managementTeam(request):
 
 def ProductView(request):
     form = ProductFrom()
-    branched = Product.objects.all().order_by('-id')
+    branched = Product.objects.all().order_by('ordering')
+    form.fields['ordering'].initial = Product.objects.all().count() + 1
     dist = {
         'form':form,
         'bod':branched,
@@ -460,7 +463,8 @@ def SubProductView(request):
 
 def QuestionAnswerView(request):
     form = QuestionAnswerFrom()
-    branched = QuestionAnswer.objects.all().order_by('-id')
+    branched = QuestionAnswer.objects.all().order_by('ordering')
+    form.fields['ordering'].initial = QuestionAnswer.objects.all().count() + 1
     dist = {
         'form':form,
         'bod':branched,
@@ -518,7 +522,8 @@ def addForm(request):
 
 def DepartmentView(request):
     form = DepartmentHeadForm()
-    branched = DepartmentHead.objects.all().order_by('-id')
+    branched = DepartmentHead.objects.all().order_by('ordering')
+    form.fields['ordering'].initial = DepartmentHead.objects.all().count() + 1
     dist = {
         'form':form,
         'bod':branched,
@@ -655,7 +660,7 @@ def editProduct(request, id):
     form.fields['description'].initial = bod.description
     form.fields['discontinue'].initial = bod.discontinue
     form.fields['icons'].initial = bod.icons
-    form.fields['image'].initial = bod.image.url
+    form.fields['ordering'].initial = bod.ordering
 
     dist = {
         'form':form,
@@ -664,7 +669,7 @@ def editProduct(request, id):
     if request.method == 'POST':
         bod.name = request.POST['name']
         bod.description = request.POST['description']
-       
+        bod.ordering = request.POST['ordering']
         bod.icons = request.POST['icons']
         continues = request.POST.get('discontinue', False)
         if continues == 'on':
@@ -691,7 +696,7 @@ def editSubProduct(request, id):
     form.fields['name'].initial = bod.name
     form.fields['description'].initial = bod.description
     form.fields['discontinue'].initial = bod.discontinue
-    form.fields['image'].initial = bod.image.url
+    form.fields['icons'].initial = bod.icons
 
     dist = {
         'form':form,
@@ -700,6 +705,7 @@ def editSubProduct(request, id):
     if request.method == 'POST':
         bod.name = request.POST['name']
         bod.description = request.POST['description']
+        bod.icons = request.POST['icons']
         bod.product = Product.objects.get(id = request.POST['product']) 
         continues = request.POST.get('discontinue', False)
         if continues == 'on':
@@ -723,6 +729,8 @@ def editQuestion(request, id):
     bod = QuestionAnswer.objects.get(id = id)
     form.fields['question'].initial = bod.question
     form.fields['answer'].initial = bod.answer
+    form.fields['ordering'].initial = bod.ordering
+    
     dist = {
         'form':form,
         'bod':bod,
@@ -730,6 +738,7 @@ def editQuestion(request, id):
     if request.method == 'POST':
         bod.question = request.POST['question']
         bod.answer = request.POST['answer']
+        bod.ordering = request.POST['ordering']
         bod.save()
         messages.success(request, "FAQ Edited Succesfully")
         return HttpResponseRedirect(reverse('manager:editQuestionAns', args=[bod.id]))
@@ -741,9 +750,8 @@ def editDepartment(request, id):
     bod = DepartmentHead.objects.get(id = id)
     form.fields['name'].initial = bod.name
     form.fields['post'].initial = bod.post
-    # form.fields['type'].initial = bod.type
     form.fields['email'].initial = bod.email
-    form.fields['image'].initial = bod.image.url
+    form.fields['ordering'].initial = bod.ordering
 
     dist = {
         'form':form,
@@ -752,7 +760,7 @@ def editDepartment(request, id):
     if request.method == 'POST':
         bod.name = request.POST['name']
         bod.post = request.POST['post']
-    
+        bod.ordering = request.POST['ordering']
         bod.email = request.POST['email']
         try:
             bod.image = request.FILES['image']
@@ -814,6 +822,7 @@ def editAgent(request, id):
     form.fields['email'].initial = bod.email
     form.fields['lience_no'].initial = bod.lience_no
     form.fields['issue_date'].initial = bod.issue_date
+    form.fields['agent_code'].initial = bod.agent_code
 
     dist = {
         'form':form,
@@ -823,6 +832,7 @@ def editAgent(request, id):
         bod.name = request.POST['name']
         bod.address = request.POST['address']
         bod.contact = request.POST['contact']
+        bod.agent_code = request.POST['agent_code']
         bod.email = request.POST['email']
         bod.lience_no = request.POST['lience_no']
         bod.issue_date = request.POST['issue_date']
@@ -931,13 +941,13 @@ def editSurvey(request, id):
 def editBod(request, id):
     form = BodForm()
     bod = Bod.objects.get(id = id)
+    form.fields['ordering'].initial = bod.ordering
     form.fields['name'].initial = bod.name
     form.fields['post'].initial = bod.post
     form.fields['type'].initial = bod.type
     form.fields['email'].initial = bod.email
     form.fields['phone'].initial = bod.phone
     form.fields['description'].initial = bod.description
-    form.fields['image'].initial = bod.image.url
     form.fields['chairman'].initial = bod.chairman
     issue = bod.appointed_date
     renew = bod.re_appointed_date
@@ -958,6 +968,7 @@ def editBod(request, id):
         'renew':str(end_date),
     }
     if request.method == 'POST':
+        bod.ordering = request.POST['ordering']
         bod.name = request.POST['name']
         bod.post = request.POST['post']
         bod.type = request.POST['type']
@@ -997,7 +1008,8 @@ def editManagement(request, id):
     form.fields['post'].initial = bod.post
     form.fields['email'].initial = bod.email
     form.fields['phone'].initial = bod.phone
-    form.fields['image'].initial = bod.image.url
+    form.fields['ordering'].initial = bod.ordering
+    
     issue = bod.appointed_date
     renew = bod.re_appointed_date
     if issue: 
@@ -1021,6 +1033,7 @@ def editManagement(request, id):
         bod.post = request.POST['post']
         bod.email = request.POST['email']
         bod.phone = request.POST['phone']
+        bod.ordering = request.POST['ordering']
 
         try:
             bod.image = request.FILES['image']
@@ -1159,9 +1172,40 @@ def addCeoMessage(request):
         if request.method == 'POST':
             msg.message = request.POST['message']
             msg.save()
+
             messages.success(request, "Successfully Updated Ceo Message") 
             return HttpResponseRedirect(reverse('manager:addCeoMessage'))
         return render(request, 'manager/addCeoMessage.html', dist)
+
+def addRIpartner(request):
+    form = RIForm()
+    message = RIpartner.objects.all()
+    
+    if not message:
+        dist = {
+            'form':form
+        }
+        if request.method == 'POST':
+            fom = RIForm(request.POST, request.FILES)
+            if fom.is_valid():
+                fom.save()
+                messages.success(request, "Successfully Added RI Partner Description") 
+                return HttpResponseRedirect(reverse('manager:addRIpartner'))
+        return render(request, 'manager/addPartner.html', dist)
+    else:
+        for i in message:
+            msg = i
+            break
+        form.fields['description'].initial = msg.description
+        dist = {
+            'form':form
+        }
+        if request.method == 'POST':
+            msg.description = request.POST['description']
+            msg.save()
+            messages.success(request, "Successfully Updated RI Partner") 
+            return HttpResponseRedirect(reverse('manager:addRIpartner'))
+        return render(request, 'manager/addPartner.html', dist)
 
 def addSocialSite(request):
     form = socialSiteForm()
@@ -1294,3 +1338,36 @@ def deleteAdmin(request, id):
     use.delete()
     messages.success(request, "Successfully Deleted Admin")
     return HttpResponseRedirect(reverse('manager:addAdmin'))
+
+def deleteReport(request, id, slug):
+    if slug == 'report':
+        Report.objects.get(id =id ).files.delete(save=True)
+        messages.success(request, "Successfully Cleared File")
+        return HttpResponseRedirect(reverse('manager:editReport', args=[id]))
+    elif slug == 'news':
+        news.objects.get(id =id ).files.delete(save=True)
+        messages.success(request, "Successfully Cleared File")
+        return HttpResponseRedirect(reverse('manager:editNews', args=[id]))
+    elif slug == "form":
+        Download.objects.get(id = id).files.delete(save=True)
+        messages.success(request, "Successfully Cleared File")
+        return HttpResponseRedirect(reverse('manager:editForm', args=[id]))
+
+
+def deleteImage(request, id, slug):
+    if slug == 'news':
+        news.objects.get(id =id ).image.delete(save = True)
+        messages.success(request, "Successfully Cleared Image")
+        return HttpResponseRedirect(reverse('manager:editNews', args=[id]))
+    elif slug=="department":
+        DepartmentHead.objects.get(id =id ).image.delete(save = True)
+        messages.success(request, "Successfully Cleared Image")
+        return HttpResponseRedirect(reverse('manager:editDepartment', args=[id]))
+    elif slug=="bod":
+        Bod.objects.get(id =id ).image.delete(save = True)
+        messages.success(request, "Successfully Cleared Image")
+        return HttpResponseRedirect(reverse('manager:editBod', args=[id]))
+    elif slug=="management":
+        ManagementTeam.objects.get(id =id ).image.delete(save = True)
+        messages.success(request, "Successfully Cleared Image")
+        return HttpResponseRedirect(reverse('manager:editManagement', args=[id]))

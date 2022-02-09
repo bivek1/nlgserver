@@ -10,50 +10,95 @@
         font-size: 16px;
         text-decoration: none;
     }
+    .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+      color: rgb(243, 55, 55);
+      border-bottom: 3px solid red;
+      height: 31px;
+      background-color: initial;
+    }
+    .nav-pills .nav-link {
+    border-radius: 0rem;
+    }
+    .active {
+      height: 0px;
+      background-color: initial;
+
+    }
 </style>
 <div class="container-fluid" style="height:auto;">
+ 
     <div class="row backandrollall">
+      
         <div class="col-md-12 col-12 p-0 m-0 head-right">
             <div class=" p-3 ml-4">
                 <h3 class="text-light">Help Center</h3>
                 <hr>
-                <div class="accordion" id="accordionExample">
-                  
-                  {% for i in data %}
-                  <div class="card">
-                    <div class="card-header" id="heading{{i.id}}" style="display: flex; justify-content: space-between;">
-                      <h5 class="mb-0" >
-                        <h6 class="text-dark">
-                          {{i.title}} 
-                        </h6>
-                        <button class="btn text-danger" type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
-                          <i class="fa fa-plus"></i>
-                        </button>
-                      </h5>
-                    </div>
+             
+            </div>
+            <div class="download p-2 ml-4">
+              <ul class="nav nav-pills mb-1" id="pills-tab" role="tablist">
+                <li class="nav-item pl-3" role="presentation">
+                  <a class="nav-link active p-0" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><b>{{show.title}}</b> </a>
+                </li>
                 
-                    <div id="collapse{{i.id}}" class="collapse {%if i.id == show%} show {%else%} collapsed {%endif%}" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
-                      <div class="card-body">
-                        {{i.description|safe}}
-                          
+                {% for i in data %}
+                <li class="nav-item pl-3" role="presentation">
+                  <a class="nav-link p-0" id="pills-{{i.id}}-tab" data-toggle="pill" href="#pills-{{i.id}}" role="tab" aria-controls="pills-{{i.id}}" aria-selected="false"><b>{{i.title}}</b> </a>
+                </li>
+                {% endfor %}
+                  
+               
+                <li class="nav-item pl-3" role="presentation">
+                  <a class="nav-link p-0" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><b>FAQs</b></a>
+                </li>
+              </ul>
+              <div class="tab-content p-2" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" style="height: auto;">
+                  {{show.description|safe}}
+                </div>
+                
+                {% for i in data  %}
+                <div class="tab-pane fade" id="pills-{{i.id}}" role="tabpanel" aria-labelledby="pills-{{i.id}}-tab" style="height: auto;">
+                  {{i.description|safe}}
+                </div>
+                {% endfor %}
+                  
+                
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" style="height: auto;">
+                  <div class="accordion" id="accordionExample">
+                  
+                    {% for i in faq %}
+                    <div class="card">
+                      <div class="card-header" id="heading{{i.id}}" style="display: flex; justify-content: space-between;">
+                        <h5 class="mb-0" >
+                          <h6 class="text-dark" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}" style="cursor: pointer;">
+                            {{i.question}} 
+                          </h6>
+                          <button class="btn text-danger" type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </h5>
+                      </div>
+                  
+                      <div id="collapse{{i.id}}" class="collapse {%if i.id == fas%} show {%else%} collapsed {%endif%}" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
+                        <div class="card-body">
+                          {{i.answer|safe}}
+                            
+                        </div>
                       </div>
                     </div>
+                    {% endfor %}
+  
                   </div>
-                  {% endfor %}
-
+                    
                 </div>
-            </div>
-           
+              </div>
+          </div>
         </div>
     
     </div>
 
 </div>
 
-<script>
-$('.popover-dismiss').popover({
-    trigger: 'focus'
-  })
 
-</script>
 {% endblock content %}

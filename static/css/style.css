@@ -1030,6 +1030,8 @@ preloader
       }
       .mainman img{
         border-radius: 60%;
+        height: 200px;
+        width: 200px;
       }
       .mainman:hover{
         background-color: rgb(233, 232, 232);

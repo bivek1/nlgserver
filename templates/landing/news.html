@@ -1,0 +1,51 @@
+{% extends "pillar.html" %}
+{% block title %}
+  {{news.name}}
+{% endblock title %}
+{% block content %}
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=188302466607071&autoLogAppEvents=1" nonce="dwl2qg2Z"></script>
+<div class="container-fluid">
+    <div class="row backandrollall">
+        <div class="col-md-12 col-12 p-0 m-0 senright">
+          <div class="firsthead p-3 pl-3">
+                <h3>{{news.name}}</h3>
+         </div>
+        </div>
+        <div class="col-md-12 col-12 p-2 m-0">
+            <div class="download" style="width:100%">
+                <div class="row p-0 m-0">
+                    <div class="col-12 col-md-8 p-2">
+                        <h6 class="pl-2 m-0">{{news.dateof}}</h6>
+                        <hr>
+                    
+                       
+                        {% if news.image %}
+                            <div class="pl-2" >
+                                <img src="{{news.image.url}}" alt="{{news.name}}" style="height: auto; width: 80%;">
+                            </div>
+                        {% endif %}
+                            
+                        <div class="p-2">
+                            {{news.description|safe}}
+                        </div>
+                        {% if news.files %}
+                        <div class="text-center">
+                            <a href="{{news.pdf}}" target="_blank">
+                                <button class="btn btn-danger w-50"><i class="fa fa-eye"></i> Open PDF </button>
+                            </a>
+                        </div>
+                       
+                        
+                        {% endif %}
+                       
+                    </div>
+                    <div class="col-12 col-md-4 p-2">
+                        <div class="fb-page" data-href="https://www.facebook.com/nlginsurance/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/nlginsurance/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/nlginsurance/">NLG Insurance Co. Ltd.</a></blockquote></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+{% endblock content %}

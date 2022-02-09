@@ -102,7 +102,7 @@
                             </div>
                             <div class="pt-2">
                               <label for="name">Your Full Name</label>
-                              <input type="text" name="name" id="" placeholder="Enter your Full Name" class="form-control  form-control-line">
+                              <input type="text" name="name" id="" placeholder="Enter your Full Name" class="form-control  form-control-line" required>
                             </div>
                             <div class="pt-2">
                               <label for="name">Your valid Email Address</label>
@@ -110,12 +110,13 @@
                             </div>
                             <div class="pt-2">
                               <label for="name">Your Mobile Number</label>
-                              <input type="text" name="name" id="" placeholder="Enter your valid Mobile Number" class="form-control  form-control-line">
+                              <input type="number" name="number" id="" placeholder="Enter your valid Mobile Number" class="form-control  form-control-line" required>
                             </div>
                             <div class="pt-2">
                               <label for="name">Your Message</label>
                               <textarea type="text" name="message" id="" placeholder="Enter your message" class="form-control  form-control-line" style="height: 150px;"></textarea>
                             </div>
+                            {% csrf_token %}
                             <div class="pt-2">
                               <button class="btn btn-danger d-block btn-block">
                                 <i class="fa fa-envelope"></i>

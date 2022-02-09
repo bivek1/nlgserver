@@ -4,6 +4,19 @@
 {% endblock title %}
 
 {% block content %}
+<style>
+  body
+{
+    counter-reset: Serial;           /* Set the Serial counter to 0 */
+}
+
+
+tr td:first-child:before
+{
+  counter-increment: Serial;      /* Increment the Serial counter */
+  content:counter(Serial); /* Display the counter */
+}
+</style>
 <hr style="height: 7px; background-color:#fb0b3f;">
 <div class="container">
     <br>
@@ -16,26 +29,26 @@
             <th scope="col">Name of Surveyor</th>
             <th scope="col">Specilization</th>
             <th scope="col">Area</th>
-            <th scope="col">Contact No</th>
-            <th scope="col">Email</th>
             <th scope="col">Lience no:</th>
             <th scope="col">Issue Date:</th>
             <th scope="col">Renew Date:</th>
+            <th scope="col">Contact No</th>
+            <th scope="col">Email</th>
           </tr>
         </thead>
         <tbody>
             
             {% for sa in s  %}
             <tr>
-                <th scope="row">{{sa.id}}</th>
+                <td></td>
                 <td>{{sa.name}}</td>
                 <td>{{sa.specilization}}</td>
                 <td>{{sa.area}}</td>
-                <td>{{sa.contact}}</td>
-                <td>{{sa.email}}</td>
                 <td>{{sa.lience_no}}</td>
                 <td>{{sa.issued_date}}</td>
                 <td>{{sa.renew_date}}</td>
+                <td>{{sa.contact}}</td>
+                <td>{{sa.email}}</td>
             </tr>
             {% endfor %}
                 
@@ -45,4 +58,5 @@
       
       </table>
 </div>
+
 {% endblock content %}

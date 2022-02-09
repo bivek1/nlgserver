@@ -151,6 +151,10 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
                                 href="{%url 'manager:statementReport' 3 %}" aria-expanded="false"><i class="me-3 fa fa-table"
                                     aria-hidden="true"></i><span class="hide-menu">View Minute Report</span></a></li>
+                                    {%url 'manager:statementReport' 4 as das%}
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
+                                            href="{%url 'manager:statementReport' 4 %}" aria-expanded="false"><i class="me-3 fa fa-table"
+                                                aria-hidden="true"></i><span class="hide-menu">View Other Report</span></a></li>
                         {%url 'manager:newUpdate' as das%}
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link {%if request.path == das%}  active {%endif%}"
                                 href="{%url 'manager:newUpdate'%}" aria-expanded="false"><i class="me-3 fa fa-globe"
@@ -436,12 +440,12 @@
                     <!-- End HelpCenter -->
 
                       <!-- Contact Us -->
-                      <div class="col-12">
+                      <div class="col-12 col-md-6">
                         <div class="col-12">
                             <a href="{%url 'manager:contact'%}">
                                 <div class="card">
                                     <div class="card-body d-flex">
-                                        <i class="fas fa-podcast" id="annous"></i>
+                                        <i class="fas fa-phone" id="annous"></i>
                                         <h3 class="ms-2">Contact Us | Messages</h3>
                                     </div>
                                 </div>
@@ -450,6 +454,21 @@
                         </div>
                     </div>
                     <!-- End Contact Us -->
+                      <!--RI Partner -->
+                      <div class="col-12 col-md-6">
+                        <div class="col-12">
+                            <a href="{%url 'manager:addRIpartner'%}">
+                                <div class="card">
+                                    <div class="card-body d-flex">
+                                        <i class="fas fa-user-plus" id="annous"></i>
+                                        <h3 class="ms-2">RI Partner</h3>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    <!-- End RI Partner -->
                    
                     <!-- Add Branch -->
                     <div class="col-lg-3 col-md-3">

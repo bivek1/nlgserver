@@ -43,6 +43,11 @@
         <H3>Add Question Answer</H3>
         <hr>
         <div class="col-12">
+            {{form.ordering.label_tag}}
+            {{form.ordering}}
+            {{form.ordering.errors}}
+        </div>
+        <div class="col-12">
             {{form.question.label_tag}}
             {{form.question}}
             {{form.question.errors}}
@@ -76,6 +81,7 @@
                     <table class="table stylish-table no-wrap">
                         <thead>
                             <tr>
+                                <th class="border-top-0">Ordering</th>
                                 <th class="border-top-0">Question</th>
                            
                                 <th class="border-top-0">......</th>
@@ -84,7 +90,9 @@
                         <tbody>
                             {% for i in bod %}
                                 <tr>
-                               
+                                    <td>
+                                        {{i.ordering}}
+                                    </td>
                                     <td class="align-middle">
                                         <h6> {{i.question}} </h6>
                                         <small>

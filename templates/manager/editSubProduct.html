@@ -45,7 +45,9 @@
                     display: flex;
                     align-items: center;">
             <h3>Edit Sub Product- {{bod.name}}</h3>
+            {%if bod.image%}
             <img src="{{bod.image.url}}" alt="{{bod.name}}" srcset="" style="height: 100px; width: auto;">
+            {%endif%}
         </div>
         <hr>
         <div class="col-12">
@@ -63,7 +65,11 @@
             {{form.image}}
             {{form.image.errors}}
         </div>
-      
+        <div class="col-12">
+            {{form.icons.label_tag}}
+            {{form.icons}}
+            {{form.icons.errors}}
+        </div>
         <div class="col-12">
             {{form.description.label_tag}}
             {{form.media}}

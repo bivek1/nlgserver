@@ -71,6 +71,9 @@ urlpatterns = [
     path('topBarMenu', views.topBar, name="topBar"),
     path('topBarMenu/<int:id>', views.hideBar, name="topHide"),
     path('addAdmin', views.addAdmin, name="addAdmin"),
-    path('deleteAdmin/<int:id>', views.deleteAdmin, name="deleteAdmin")
+    path('deleteAdmin/<int:id>', views.deleteAdmin, name="deleteAdmin"),
+    path('addRIPartner', views.addRIpartner, name="addRIpartner"),
+    path('deleteReport/<int:id>/<slug:slug>', views.deleteReport, name="deleteReport"),
+    path('deleteImage/<int:id>/<slug:slug>', views.deleteImage, name="deleteImage"),
 ]
 

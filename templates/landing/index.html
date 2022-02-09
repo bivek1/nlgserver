@@ -1,7 +1,7 @@
 {% extends "pillar.html" %}
 {% load static %}
 {% block title %}
-    NLG Insurance Best Insurance in Nepal
+  NLG INSURANCE COMPANY LIMITED :: सबैको सुरक्षा, एनएलजीको ईच्छा
 {% endblock title %}
 {% block loader %}
 
@@ -41,13 +41,13 @@
               <a href="{{i.link}}" class="footer-logo text-center" target="_blank">
                 
                 {% if i.image %}
-                <img src="{{i.image.url}}" class="img-fluid" style="height: 145px; width: 50%;">
+                <img src="{{i.image.url}}" class="img-fluid" style="height: auto; width: 100%;">
                 {% endif %}
 
               </a>
               {%else%}
               {% if i.image %}
-              <img src="{{i.image.url}}" class="img-fluid" style="height: 145px; width: 50%;">
+              <img src="{{i.image.url}}" class="img-fluid" style="height: auto; width: 100%;">
               {% endif %}
               
 
@@ -170,7 +170,7 @@
                                 </p>
                               </div>
                               <div class="text-center">
-                                <a href="{%url 'landing:productPolicies'%}">
+                                <a href="{%url 'landing:thisProduct' i.id%}">
                                   <button class="btn btn-outline-danger">See More</button>
                                 </a>
                               </div>
@@ -234,8 +234,8 @@
                         
                           <img src="{%static 'assets/images/down.png'%}" alt="">
                           <h4>Downloads</h4>
-                          <p>Download News and latest updates from Insurance company Limited</p>
-                          <a href="{%url 'landing:download'%}" class="main-button-slider">
+                          <p>Download KYC, Claim, Proposal and other form.</p>
+                          <a href="{%url 'landing:downloadFile'%}" class="main-button-slider">
                               Discover More
                           </a>
                       </div>

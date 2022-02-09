@@ -1,7 +1,9 @@
 from statistics import mode
 from ckeditor.fields import RichTextField 
 from django.db import models
+from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
@@ -107,16 +109,20 @@ class Branch(models.Model):
     focal_img = models.ImageField(upload_to ="focalperson", default="/downlogo.PNG")
     objects = models.Manager()
 
+    def __str__(self):
+        return self.BranchName
+    def clear(self):
+        return reverse('manager:deleteImage',args=[self.id, 'branch'])
 
 class Surveryor(models.Model):
-    name = models.CharField(max_length=200, null = True, blank= True)
-    specilization = models.CharField(max_length=100, null = True, blank= True)
-    lience_no = models.BigIntegerField(null = True, blank = True)
+    name = models.CharField(max_length=200, null = True, blank= True, )
+    specilization = models.CharField(max_length=100, null = True, blank= True, )
+    lience_no = models.CharField(max_length=100, null = True, blank = True, )
     issued_date = models.DateField(null = True, blank = True)
     renew_date = models.DateField(null = True, blank=True)
-    area = models.CharField(max_length=100, null = True, blank= True)
-    contact = models.CharField(max_length=100, null = True, blank= True)
-    email = models.CharField(max_length=100, null = True, blank= True)
+    area = models.CharField(max_length=100, null = True, blank= True, )
+    contact = models.CharField(max_length=100, null = True, blank= True, )
+    email = models.CharField(max_length=100, null = True, blank= True, )
     objects = models.Manager()
     
     def __str__(self):
@@ -124,21 +130,21 @@ class Surveryor(models.Model):
     
     
 class Agent(models.Model):
-    name = models.CharField(max_length=500, null = True, blank= True)
-    address = models.CharField(max_length=100, null = True, blank= True)
+    name = models.CharField(max_length=500, null = True, blank= True, )
+    address = models.CharField(max_length=100, null = True, blank= True, )
     contact = models.CharField(max_length=100, null = True, blank= True)
     lience_no = models.CharField(max_length=100, null = True, blank= True)
-    issue_date = models.DateField(null = True, blank= True)
-    email = models.CharField(max_length=100, null = True, blank= True)
-  
+    issue_date = models.DateField(null = True, blank= True, )
+    email = models.CharField(max_length=100, null = True, blank= True, )
+    agent_code = models.CharField(max_length=200, null = True, blank= True, )
     objects = models.Manager()
     
     def __str__(self):
         return self.name
     
 class Citizen(models.Model):
-    name = models.CharField(max_length=500, null = True, blank= True)
-    details = RichTextUploadingField(null = True, blank= True)
+    name = models.CharField(max_length=500, null = True, blank= True, )
+    details = RichTextUploadingField(null = True, blank= True, )
     objects = models.Manager()
 
     def __str__(self):
@@ -166,7 +172,8 @@ class Report(models.Model):
     def __str__(self):
         return self.name
 
-   
+    def clearfiles(self):
+        return reverse('manager:deleteReport',args=[self.id, 'report'])
     
     def download(self):
         return reverse('landing:filedownload', args=[self.slug, self.id])
@@ -174,12 +181,9 @@ class Report(models.Model):
     def pdf(self):
         return reverse('landing:pdfview', args=[self.slug, self.id])
 
-
-    
 class news(models.Model):
     name = models.CharField(max_length = 200)
     slug = models.SlugField(default='news')
-    # description = models.CharField(max_length=2000, null= True, blank= True)
     description = RichTextUploadingField(null = True, blank = True)
     dateof = models.DateField(auto_now_add=False, null= True, blank= True) 
     files = models.FileField(upload_to='News/',  null= True, blank= True)
@@ -194,7 +198,12 @@ class news(models.Model):
     def pdf(self):
         return reverse('landing:pdfview', args=[self.slug, self.id])
 
+    def clearfiles(self):
+        return reverse('manager:deleteReport',args=[self.id, 'news'])
 
+    def clear(self):
+        return reverse('manager:deleteImage',args=[self.id, 'news'])
+       
 class Download(models.Model):
     name = models.CharField(max_length = 200, null = True, blank = True)
     slug = models.SlugField(default='download')
@@ -214,39 +223,51 @@ class Download(models.Model):
 
     def pdf(self):
         return reverse('landing:pdfview', args=[self.slug, self.id])
+
+    def clearfiles(self):
+        return reverse('manager:deleteReport',args=[self.id, 'form'])
     
 class Bod(models.Model):
+    ordering = models.IntegerField()
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to = "management/", null = True, blank= True)
-    post = models.CharField(max_length=200,null = True, blank= True)
-    type = models.CharField(max_length=100, null = True, blank= True)
-    email = models.EmailField(null = True, blank= True)
+    post = models.CharField(max_length=200,null = True, blank= True , )
+    type = models.CharField(max_length=100, null = True, blank= True, )
+    email = models.EmailField(null = True, blank= True, )
     appointed_date = models.DateField(null = True, blank= True)
     re_appointed_date = models.DateField(null = True, blank=True)
-    phone = models.BigIntegerField(null = True, blank = True)
-    description = RichTextUploadingField(null = True, blank = True)
+    phone = models.CharField(max_length=100,null = True, blank = True, )
+    description = RichTextUploadingField(null = True, blank = True, )
     chairman = models.BooleanField(default=False)
     objects = models.Manager()
 
     def __str__(self):
         return self.name
+    
+    def clear(self):
+        return reverse('manager:deleteImage',args=[self.id, 'bod'])
 
 class ManagementTeam(models.Model):
+    ordering = models.IntegerField()
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to = "management/", null = True, blank= True)
-    post = models.CharField(max_length=200, null = True, blank= True)
-    email = models.EmailField(null = True, blank=True)
+    post = models.CharField(max_length=200, null = True, blank= True , )
+    email = models.EmailField(null = True, blank=True, )
     appointed_date = models.DateField(null = True, blank=True)
     re_appointed_date = models.DateField(null = True, blank=True)
-    phone = models.BigIntegerField(null = True, blank = True)
+    phone = models.CharField(max_length=200,null = True, blank = True)
     objects = models.Manager()
 
     def __str__(self):
         return self.name
+    
+    def clear(self):
+        return reverse('manager:deleteImage',args=[self.id, 'management'])
 
 class Product(models.Model):
+    ordering = models.IntegerField()
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to = "products/")
+    image = models.ImageField(upload_to = "products/", null = True, blank=True)
     description = RichTextUploadingField(null = True, blank = True)
     icons = models.CharField(max_length=20, null = True, blank=True)
     
@@ -255,6 +276,8 @@ class Product(models.Model):
     objects = models.Manager()
     def __str__(self):
         return self.name
+    
+   
 
 class Sub_product(models.Model):
     product = models.ForeignKey(Product, related_name="sub_product", on_delete=models.CASCADE)
@@ -262,6 +285,7 @@ class Sub_product(models.Model):
     image = models.ImageField(upload_to = "products/",null = True, blank = True)
     description = RichTextUploadingField(null = True, blank = True)
     discontinue = models.BooleanField(default=False)
+    icons = models.CharField(max_length=20, null = True, blank=True)
     hide = models.BooleanField(default=False)
     objects = models.Manager()
     
@@ -269,6 +293,7 @@ class Sub_product(models.Model):
         return self.name
 
 class QuestionAnswer(models.Model):
+    ordering = models.IntegerField()
     question = models.CharField(max_length=500)
     answer = RichTextUploadingField(null = True, blank = True)
     objects = models.Manager()
@@ -309,6 +334,7 @@ class Announcement(models.Model):
         return self.name
 
 class DepartmentHead(models.Model):
+    ordering = models.IntegerField()
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to = "departmenthead/",null = True, blank = True)
     post = models.CharField(max_length=100,null = True, blank = True)
@@ -317,6 +343,9 @@ class DepartmentHead(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def clear(self):
+        return reverse('manager:deleteImage',args=[self.id, 'department'])
 
 class PageVisit(models.Model):
     count = models.BigIntegerField()
@@ -384,5 +413,10 @@ class TopBar(models.Model):
     def __str__(self):
         return self.name
 
+class RIpartner(models.Model):
+    description = RichTextUploadingField()
+
+    def __str__(self):
+        return f"{self.description}"
 
 

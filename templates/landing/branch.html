@@ -74,37 +74,37 @@
     
             
         <div class="col-md-4  col-lg-4 col-12 m-auto">
-            <div class="branchbox text-center mt-3 p-3" data-toggle="modal" data-target="#exampleModalCenter{{b.id}}">
+            <div class="branchbox text-center mt-3 p-3">
                 <div class="headbranch text-left">
                     <h6 class="text-dark">{{b.BranchName}}</h6>
-                    {{b.district}}
+                   
                     <p class="p-0 m-0">
                        {{b.street}}
                        
                     </p>
                     <p class="p-0 m-0">
                         <a href="tel:{{b.contact}}">
-                            <i class="fa fa-phone"></i> Contact No. : {{b.contact}}
+                            <i class="fa fa-phone"></i> {{b.contact}}
                         </a>
                     </p>
                     <p class="p-0 m-0">
                         <a href="mailto:{{b.email}}">
-                            <i class="fa fa-envelope-o"></i> Email : {{b.email}}
+                            <i class="fa fa-envelope-o"></i> {{b.email}}
                         </a>
                     </p>
                     <p class="p-0 m-0">
-                        <i class="fa fa-user"></i> Focal Person : {{b.focal}}<br>
+                        <i class="fa fa-user"></i> {{b.focal}}<br>
                     </p>
                     <p class="p-0 m-0">
                         <a href="tel:{{b.number}}">
-                            <i class="fa fa-mobile"></i>   Mobile No:&nbsp;{{b.number}}<br>
+                            <i class="fa fa-mobile"></i> &nbsp;{{b.number}}<br>
                         </a>
                     </p>
                 </div>
             
                 <div class="below">
                     <div class="p-2">
-                        <img src="{{b.focal_img.url}}" alt="" srcset="" style="height: 150px; width: 100%;border-radius: 50%;">
+                        <img src="{{b.focal_img.url}}" alt="" srcset="" style="height: 120px; width: 100%;border-radius: 50%;">
                     </div>
                    
                     <!-- <a href="tel:{{b.contact}}">

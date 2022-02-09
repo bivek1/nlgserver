@@ -6,56 +6,49 @@
 <div class="container-fluid">
     <div class="row backandrollall">
         <div class="col-md-12 col-12 p-0 m-0 senright">
-          <div class="firsthead p-3">
-            <h3 class="ml-3">News and Updates</h3>
+          <div class="firsthead p-3 pl-3">
+                <h3>News and Updates</h3>
+         </div>
+        
         </div>
-
-        </div>
-        <div class="col-md-12 col-12">
-            <div class="download  p-2" style="width: 100%;">
-                <div class="row">
-                    {%for i in d %}
-                        <div class="col-md-4 col-12" >
-                            {%if i.files%}
-                            <a href="{{i.pdf}}" target="_blank">
-                            {%endif%}
-                            {%if i.image%}
-                            <a href="http://182.93.78.43/{{i.image.url}}" target="_blank" data-toggle="modal" data-target="#exampleModalCenter{{i.id}}">
-                              
-                          
-                            {%endif%}
-                            <div class="products-show-satement mt-3" style="height: 15px; overflow: hidden;">
-                                <div class="text-center p-1">
-                                    <small>{{i.dateof}}</small>
-                                    <hr>
-                                    <h6 class="text-center p-0 m-0">{{i.name}}</h6>
-                                    <small>{{i.description|safe|truncatewords:10}}</small>
-                                    <div class="report-item p-3">
-                                        <div class="modal fade" id="exampleModalCenter{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">{{i.name}}</h5>
-                                                <p>{{i.description|safe}}</p>  
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                </div>
-                                            
-                                                <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>   
+        <div class="col-md-12 col-12 p-2 m-0">
+            <div class="download" style="width:100%">
+                <div class="row p-0 m-0">
+                    {% for i in  d%}
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="{%url 'landing:news' i.id%}">
+                            <div class="products-show-satement mt-3" style="height: 190px; width: 100%; overflow: hidden;">
+                                <div class="row">
+                                    {% if i.image %}
+                                        <div class="col-8">
+                                            <small>{{i.dateof}}</small>
+                                            <hr>
+                                            <h6 class="p-0 m-0">{{i.name}}</h6>
+                                            <small>
+                                                {{i.description|safe|truncatewords:20}}
+                                                <button class="btn btn-sm btn-light">Read More</button>
+                                            </small>
+                                        </div> 
+                                        <div class="col-4">
+                                            <img class="w-100 h-100" src="{{i.image.url}}" alt="{{i.name}}" srcset="">
+                                        </div>
+                                    {%else%}
+                                    <div class="col-12">
+                                        <small>{{i.dateof}}</small>
+                                        <hr>
+                                        <h6 class="p-0 m-0">{{i.name}}</h6>
+                                        <small>
+                                            {{i.description|safe|truncatewords:13}}
+                                            <button class="btn btn-sm btn-light">Read More</button>
+                                        </small>
                                     </div>
+                                    {% endif %}
+
                                 </div>
-                            
                             </div>
-                            </a>
-                        </div>
-                    {%endfor%}
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

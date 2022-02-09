@@ -41,12 +41,17 @@
 </div>
 
 <div class="row">
-    <div class="col-12 col-md-8">
-        <form action="" method="post" style="width: 100%; padding: 30px;" enctype="multipart/form-data">
+    <div class="col-12 col-md-9">
+        <form action="" method="post" style="width: 100%; padding: 10px;" enctype="multipart/form-data">
     
             <div class="row  formbox" >
                 <H3>Edit BOD</H3>
                 <hr>
+                <div class="col-12">
+                    {{form.ordering.label_tag}}
+                    {{form.ordering}}
+                    {{form.ordering.errors}}
+                </div>
                 <div class="col-6">
                     {{form.name.label_tag}}
                     {{form.name}}
@@ -111,11 +116,43 @@
           
         </form>
     </div>
-    <div class="col-12 col-md-4" style="padding: 30px;">
+    <div class="col-12 col-md-3" style="padding: 10px;">
+
         <div class="card p-2">
-            <h5>Image</h5>
-            <img src="{{bod.image.url}}" alt="" srcset="" style="height: 300px; width: 100%;">
+            {% if bod.image %}
+            <p>Image Available:</p>
+            
+            <img src="{{bod.image.url}}" alt="" srcset="" style="height: auto; width: 100%;" >
+
+            <button class="btn btn-danger text-center text-light mt-2 w-100" data-bs-toggle="modal" data-bs-target="#exampleModalImage">
+                Clear Image
+            </button>
+
+                <!-- Delete Modal -->
+                <div class="modal fade" id="exampleModalImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure want to Delete Image?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <a href="{{bod.clear}}">
+                        <button type="button" class="btn btn-primary">Yes</button>
+                        </a>
+                    
+                    </div>
+                    </div>
+                </div>
+                </div>
+            <!-- Delete Modal End --> 
+            {%else%}
+                <p>No Image Uploded</p>
+            {% endif %}
         </div>
+
     </div>
 </div>
 

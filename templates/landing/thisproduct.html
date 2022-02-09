@@ -58,7 +58,7 @@
                         
                         {% if product.discontinue %}
                
-                        <div class="badge badge-danger m-auto"> <i class="fa fa-exclamation"></i>  This Product is discontinued for a while</div>
+                        <div class="badge badge-danger m-auto"> <i class="fa fa-exclamation"></i>  This Product is discontinued</div>
                         {% endif %}
                           
                         
@@ -157,7 +157,7 @@
                             </div>
                             <div class="pt-2">
                               <label for="name">Your Full Name</label>
-                              <input type="text" name="name" id="" placeholder="Enter your Full Name" class="form-control  form-control-line">
+                              <input type="text" name="name" id="" placeholder="Enter your Full Name" class="form-control  form-control-line" required>
                             </div>
                             <div class="pt-2">
                               <label for="name">Your valid Email Address</label>
@@ -165,7 +165,7 @@
                             </div>
                             <div class="pt-2">
                               <label for="name">Your Mobile Number</label>
-                              <input type="text" name="number" id="" placeholder="Enter your valid Mobile Number" class="form-control  form-control-line">
+                              <input type="number" name="number" id="" placeholder="Enter your valid Mobile Number" class="form-control  form-control-line" required>
                             </div>
                             <div class="pt-2">
                               <label for="name">Your Message</label>

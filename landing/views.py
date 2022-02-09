@@ -1,14 +1,15 @@
 
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, Setting, Sub_product, Surveryor, Citizen, Report, Download, TopBar, fiscalYear, helpCenter, news, socialSite
+from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, RIpartner, Setting, Sub_product, Surveryor, Citizen, Report, Download, TopBar, fiscalYear, helpCenter, news, socialSite
 from django.http import FileResponse, Http404, HttpResponse, HttpResponseRedirect, JsonResponse, request
 from django.urls import reverse
 from django.conf import settings
 from django.db.models import Q
 from django.contrib.auth import login, logout, authenticate
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
+from django.template.loader import get_template
 # Create your views here.
 
 
@@ -19,7 +20,7 @@ def landing(request):
     PageVisitView()
     sett = Setting.objects.all()
     ann = Announcement.objects.all()
-    products = Product.objects.filter(hide=False)[:8]
+    products = Product.objects.filter(hide=False).order_by('ordering')[:8]
     setting = None
     message = CeoMessage.objects.all()
     if messages:
@@ -52,20 +53,42 @@ def landing(request):
             message = message,
         )
         email_from = settings.EMAIL_HOST_USER
-        real_msg = "Name: "+str(name)+ " I would like to get contact  "+ ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " + str(message)
+        contx = {
+            'name':name,
+            'number':phone,
+            'email':email,
+            'subject':subject,
+            'message':message
+        }
+      
+        email_from = settings.EMAIL_HOST_USER
         try:
-            send_mail(subject, real_msg, email_from, [setting.email] , fail_silently=False,)
+            message = get_template('contact.html').render(contx)
+            msg = EmailMessage(
+                'Subject',
+                message,
+                email_from,
+                [setting.email],
+            )
+            msg.content_subtype ="html"# Main content is now text/html
+            msg.send()
             messages.success(request,"Successfully Sent Message")
         except:
             messages.success(request,"Fail Sending Mail")
+        # real_msg = "Name: "+str(name)+ " I would like to get contact  "+ ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " + str(message)
+        # try:
+        #     send_mail(subject, real_msg, email_from, [setting.email] , fail_silently=False,)
+        #     messages.success(request,"Successfully Sent Message")
+        # except:
+        #     messages.success(request,"Fail Sending Mail")
         return HttpResponseRedirect(reverse('landing:landing'))
     return render(request, "landing/index.html", dist)
 
 def productPolicy(request):
     PageVisitView()
     sett = Setting.objects.all()
-    topP = Product.objects.filter(hide=False).filter(discontinue= False)[:8]
-    products = Product.objects.filter(hide=False).filter(discontinue= False)
+    topP = Product.objects.filter(hide=False).filter(discontinue= False).order_by('ordering')[:8]
+    products = Product.objects.filter(hide=False).filter(discontinue= False).order_by('ordering')
     allSub = Sub_product.objects.filter(hide=False).filter(discontinue= False)
     lens = products.count()
     discontineu = Product.objects.filter(discontinue=True)
@@ -96,6 +119,11 @@ def aboutUs(request):
     setting = None
     msg = None
     message = CeoMessage.objects.all()
+    riartner = RIpartner.objects.all()
+    ri = None
+    for i in riartner:
+        ri = i
+        break
     if messages:
         for i in message:
             msg = i.message
@@ -106,12 +134,13 @@ def aboutUs(request):
             break
     dist ={
         'setting':setting,
-        'bod':Bod.objects.all(),
+        'bod':Bod.objects.all().order_by('ordering'),
         'msg':msg,
-        'team':ManagementTeam.objects.all(),
-        'depart':DepartmentHead.objects.all(),
+        'team':ManagementTeam.objects.all().order_by('ordering'),
+        'depart':DepartmentHead.objects.all().order_by('ordering'),
         'bar':TopBar.objects.all(),
-        'social':socialSite.objects.all()
+        'social':socialSite.objects.all(),
+        'ri': ri
     }
     return render(request, "landing/about.html", dist)
 
@@ -141,30 +170,62 @@ def contact(request):
             subject = subject,
             message = message,
         )
+        contx = {
+            'name':name,
+            'number':phone,
+            'email':email,
+            'subject':subject,
+            'message':message
+        }
+      
         email_from = settings.EMAIL_HOST_USER
-        real_msg = "Name: "+str(name)+ " I would like to get contact  "+ ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " + str(message)
         try:
-            send_mail(subject, real_msg, email_from, [setting.email] , fail_silently=False,)
+            message = get_template('contact.html').render(contx)
+            msg = EmailMessage(
+                'Subject',
+                message,
+                email_from,
+                [setting.email],
+            )
+            msg.content_subtype ="html"# Main content is now text/html
+            msg.send()
             messages.success(request,"Successfully Sent Message")
         except:
             messages.success(request,"Fail Sending Mail")
+
+        # real_msg = "Name: "+str(name)+ " I would like to get contact  "+ ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " + str(message)
+        # try:
+        #     send_mail(subject, real_msg, email_from, [setting.email] , fail_silently=False,)
+        #     messages.success(request,"Successfully Sent Message")
+        # except:
+        #     messages.success(request,"Fail Sending Mail")
         return HttpResponseRedirect(reverse('landing:contact'))
     return render(request, "landing/contactus.html", dist)
 def helpCen(request):
-    data = helpCenter.objects.all().order_by('-id')
+    
     setting = None
     sett = Setting.objects.all()
-    show = None
+    name = None
+    fas = None
     if sett:
         for i in sett:
             setting = i 
             break
-    for i in data:
-        show = i.id
+    das = helpCenter.objects.all().order_by('-id')
+    for i in das:
+        name = i.id
         break
+    data = helpCenter.objects.all().order_by('-id').exclude(id=name)
+    fa = QuestionAnswer.objects.all().order_by('ordering')
+    for i in fa:
+        fas = i.id
+        break
+    print(name)
     dist = {
         'data':data,
-        'show':show,
+        'show':helpCenter.objects.get(id = name),
+        'faq': fa,
+        'fas':fas,
         'bar':TopBar.objects.all(),
         'setting':setting,
         'social':socialSite.objects.all()
@@ -175,7 +236,7 @@ def thisProduct(request,id):
     sett = Setting.objects.all()
     setting = None
     product = Product.objects.get(id = id)
-    all = Product.objects.filter(hide=False)
+    all = Product.objects.filter(hide=False).order_by('ordering')
     allSub = Sub_product.objects.filter(hide=False)
     if sett:
         for i in sett:
@@ -195,12 +256,34 @@ def thisProduct(request,id):
         phone = request.POST['number']
         message = request.POST['message']
         email_from = settings.EMAIL_HOST_USER
-        real_msg = "Name: "+name+ " I would like to query on "+ str(product.name) + ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " +message
+        contx = {
+            'name':name,
+            'number':phone,
+            'email':email,
+            'product':product.name,
+            'message':message
+        }
+      
+        email_from = settings.EMAIL_HOST_USER
         try:
-            send_mail(name+' queries on '+str(product.name), real_msg, email_from, [setting.product_email] , fail_silently=False,)
+            message = get_template('contact.html').render(contx)
+            msg = EmailMessage(
+                'Subject',
+                message,
+                email_from,
+                [setting.product_email],
+            )
+            msg.content_subtype ="html"# Main content is now text/html
+            msg.send()
             messages.success(request,"Successfully Sent Message")
         except:
             messages.success(request,"Fail Sending Mail")
+        # real_msg = "Name: "+name+ " I would like to query on "+ str(product.name) + ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " +message
+        # try:
+        #     send_mail(name+' queries on '+str(product.name), real_msg, email_from, [setting.product_email] , fail_silently=False,)
+        #     messages.success(request,"Successfully Sent Message")
+        # except:
+        #     messages.success(request,"Fail Sending Mail")
         return HttpResponseRedirect(reverse('landing:thisProduct',args=[product.id]))
     return render(request, "landing/thisproduct.html", dist)
 
@@ -211,7 +294,7 @@ def subProduct(request, id):
     setting = None
     product = Sub_product.objects.get(id = id)
     all = Sub_product.objects.filter(hide=False)
-    allPro = Product.objects.filter(hide=False)
+    allPro = Product.objects.filter(hide=False).order_by('ordering')
     if sett:
         for i in sett:
             setting = i 
@@ -230,19 +313,41 @@ def subProduct(request, id):
         phone = request.POST['number']
         message = request.POST['message']
         email_from = settings.EMAIL_HOST_USER
-        real_msg = "Name: "+name+ " I would like to query on "+ str(product.name) + ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " +message
+        contx = {
+            'name':name,
+            'number':phone,
+            'email':email,
+            'product':product.name,
+            'message':message
+        }
+      
+        email_from = settings.EMAIL_HOST_USER
         try:
-            send_mail(name+' queries on '+str(product.name), real_msg, email_from, [setting.product_email] , fail_silently=False,)
+            message = get_template('contact.html').render(contx)
+            msg = EmailMessage(
+                'Subject',
+                message,
+                email_from,
+                [setting.product_email],
+            )
+            msg.content_subtype ="html"# Main content is now text/html
+            msg.send()
             messages.success(request,"Successfully Sent Message")
         except:
             messages.success(request,"Fail Sending Mail")
+        # real_msg = "Name: "+name+ " I would like to query on "+ str(product.name) + ". Number: " + str(phone) + ". Email: " +str(email) + " Message: " +message
+        # try:
+        #     send_mail(name+' queries on '+str(product.name), real_msg, email_from, [setting.product_email] , fail_silently=False,)
+        #     messages.success(request,"Successfully Sent Message")
+        # except:
+        #     messages.success(request,"Fail Sending Mail")
         return HttpResponseRedirect(reverse('landing:thisProduct',args=[product.id]))
     return render(request, "landing/subproduct.html", dist)
 
 def faq(request):
     PageVisitView()
     sett = Setting.objects.all()
-    faq = QuestionAnswer.objects.all().order_by('-id')
+    faq = QuestionAnswer.objects.all().order_by('ordering')
     setting = None
     if sett:
         for i in sett:
@@ -372,10 +477,26 @@ def pdf_view(request,slug, id):
     file = open(aa+rep.files.url, "rb").read()
     try:
         # return FileResponse(open(aa+"/"+rep.files.url, 'rb'), content_type='application/pdf')
-        return FileResponse(open(aa+rep.files.url, 'rb'), content_type='application/pdf', target='_newtab')
+        return FileResponse(open(aa+rep.files.url, 'rb'), content_type='application/pdf')
     except FileNotFoundError:
         raise Http404()
 
+
+def Thenews(request,id):
+    new = news.objects.get(id = id)
+    sett = Setting.objects.all()
+    setting = None
+    if sett:
+        for i in sett:
+            setting = i 
+            break
+    dist = {
+        'news':new,
+        'setting':setting,
+        'bar':TopBar.objects.all(),
+        'social':socialSite.objects.all()
+    }
+    return render(request, "landing/news.html", dist)
 def surveyor(request):
     PageVisitView()
     s = Surveryor.objects.all().order_by('-id')

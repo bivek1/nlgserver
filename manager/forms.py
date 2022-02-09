@@ -2,12 +2,17 @@ from pyexpat import model
 from tkinter import Widget
 from django import forms
 from django.contrib.auth.models import User
-from landing.models import OtherDownload, helpCenter, socialSite,fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
+from landing.models import OtherDownload, RIpartner ,helpCenter, socialSite,fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class CeoMessageForm(forms.ModelForm):
     class Meta:
         model = CeoMessage
+        fields = ('__all__')
+    
+class RIForm(forms.ModelForm):
+    class Meta:
+        model = RIpartner
         fields = ('__all__')
 
 class AdminForm(forms.Form):
@@ -161,6 +166,7 @@ class AgentF(forms.ModelForm):
             'contact':forms.TextInput(attrs={'placeholder':'Contact of the Agents'}),
             'email':forms.TextInput(attrs={'placeholder':'Email@email.com'}),
             'lience_no':forms.TextInput(attrs={'placeholder':'Lience Number'}),
+            'agent_code':forms.TextInput(attrs={'placeholder':'Agent Code'}),
             'issue_date':forms.TextInput(attrs={'type':'date','placeholder':'Issue Date'}),
         }
         
@@ -223,6 +229,7 @@ class BodForm(forms.ModelForm):
         fields = ('__all__')   
 
         widgets =  {
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Name of the Bod'}),
             'image': forms.FileInput(),
             'post': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Post of Bod'}),
@@ -231,7 +238,7 @@ class BodForm(forms.ModelForm):
             'appointed_date': forms.DateInput(attrs={'class':'form-control ps-0 form-control-line','type':'date'}),
             'chairman':forms.CheckboxInput(),
             're_appointed_date':forms.DateInput(attrs={'class':'form-control ps-0 form-control-line','type':'date'}),
-            'phone': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Phone Number'}),
+            'phone': forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':'Phone Number'}),
             'description' : CKEditorUploadingWidget()
         }
 
@@ -247,13 +254,14 @@ class ManagementForm(forms.ModelForm):
         fields = ('__all__')  
 
         widgets =  {
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name': forms.TextInput(attrs={'placeholder':'Name of the Team'}),
             'image': forms.FileInput(),
             'post': forms.TextInput(attrs={'placeholder':'Post of the Team'}),
             'email' : forms.EmailInput(attrs={'placeholder':'user@nlgi.com'}),
             'appointed_date': forms.DateInput(attrs={'type':'date'}),
             're_appointed_date':forms.DateInput(attrs={'type':'date'}),
-            'phone': forms.TextInput(attrs={'placeholder':'Phone Number'}),
+            'phone': forms.NumberInput(attrs={'placeholder':'Phone Number'}),
         }
 
 class ProductFrom(forms.ModelForm):
@@ -263,6 +271,7 @@ class ProductFrom(forms.ModelForm):
         fields = ('__all__')    
 
         widgets = {
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Name of the Product"}),
             'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'description': CKEditorUploadingWidget(),
@@ -271,11 +280,7 @@ class ProductFrom(forms.ModelForm):
 
 class SubProductFrom(forms.ModelForm):
     
-    def __init__(self, *args, **kwargs):
-        super(SubProductFrom, self).__init__(*args, **kwargs)
-        # for visible in self.visible_fields():
-        #     visible.field.widget.attrs['class'] = 'form-control ps-0 form-control-line'
-    
+
     class Meta:
         model = Sub_product
         fields = ('__all__') 
@@ -285,7 +290,8 @@ class SubProductFrom(forms.ModelForm):
             'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'product': forms.Select(attrs={'class':'form-control ps-0 form-control-line'}),
             'description': CKEditorUploadingWidget(),
-            'discontinue': forms.CheckboxInput()
+            'discontinue': forms.CheckboxInput(),
+            'icons': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"fa fa-motorcycle"}),
         }
 
 class QuestionAnswerFrom(forms.ModelForm):
@@ -296,6 +302,7 @@ class QuestionAnswerFrom(forms.ModelForm):
         fields = ('__all__') 
 
         widgets = {
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'question': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Add a Questions"}),
             'answer':CKEditorUploadingWidget(),
            
@@ -334,6 +341,7 @@ class DepartmentHeadForm(forms.ModelForm):
         model = DepartmentHead
         fields = ('__all__')
         widgets = {
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name':forms.TextInput(attrs={'class':'form-control ps-0 form-control-line', 'placeholder':'Name of the Department Team'}),
             'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'post':forms.TextInput(attrs={'class':'form-control ps-0 form-control-line', 'placeholder':'Post of the Team'}),

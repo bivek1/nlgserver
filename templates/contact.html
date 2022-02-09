@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLG Queries</title>
+</head>
+<body>
+    
+    {% if product %}
+    <h3>Product Query by {{name}}</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th>Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+                <td>{{number}}</td>
+                <td>{{product}}</td>
+            </tr>
+        </tbody>
+    </table>
+    {%else%}
+    <h3>Contact Message from {{name}}</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+                <td>{{number}}</td>
+                <td>{{subject}}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+        
+  
+  
+  <hr>
+  <p>
+      <b>Messages:</b>
+      {{message}}
+  </p>
+
+</body>
+</html>

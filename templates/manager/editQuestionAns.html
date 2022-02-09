@@ -44,6 +44,11 @@
         <H3>Edit Question Answer</H3>
         <hr>
         <div class="col-12">
+            {{form.ordering.label_tag}}
+            {{form.ordering}}
+            {{form.ordering.errors}}
+        </div>
+        <div class="col-12">
             {{form.question.label_tag}}
             {{form.question}}
             {{form.question.errors}}
