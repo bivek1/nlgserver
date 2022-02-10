@@ -46,12 +46,42 @@
               <tr>
                   <td></td>
                   <td>{{sa.name}}</td>
-                  <td>{{sa.address}}</td>
-                  <td>{{sa.lience_no}}</td>
-                  <td>{{sa.issue_date}}</td>
-                  <td>{{sa.agent_code}}</td>
-                  <td>{{sa.contact}}</td>
-                  <td>{{sa.email}}</td>
+                  <td>
+                    {%if sa.address%}
+                      {{sa.address}}
+                    {%endif%}
+                    
+                  </td>
+                  <td>
+                    {%if sa.lience_no%}
+                      {{sa.lience_no}}
+                    {%endif%}
+                  
+                  </td>
+                  <td>
+                    {%if sa.issue_date%}
+                      {{sa.issue_date}}
+                    {%endif%}
+                   
+                  </td>
+                  <td>
+                    {%if sa.agent_code%}
+                      {{sa.agent_code}}
+                    {%endif%}
+                    
+                  </td>
+                  <td>
+                    {%if sa.contact%}
+                      {{sa.contact}}
+                    {%endif%}
+                   
+                  </td>
+                  <td>
+                    {%if sa.email%}
+                      {{sa.email}}
+                    {%endif%}
+                    
+                  </td>
               </tr>
               {% endfor %}
                   

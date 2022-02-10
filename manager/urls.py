@@ -75,5 +75,6 @@ urlpatterns = [
     path('addRIPartner', views.addRIpartner, name="addRIpartner"),
     path('deleteReport/<int:id>/<slug:slug>', views.deleteReport, name="deleteReport"),
     path('deleteImage/<int:id>/<slug:slug>', views.deleteImage, name="deleteImage"),
+    path('searchResult/<slug:slug>', views.search, name="search"),
 ]
 

@@ -1,0 +1,270 @@
+{% extends 'manager/dashboard.html' %}
+{% load static %}
+{% block title %}
+    {{name}}  Report
+{% endblock title %}
+
+
+{% block inner %}
+
+<div class="row p-4">
+    <div class="text-center ps-4 pe-4">
+        {% if messages %}
+            {% for m in messages  %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{m}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="col-12 p-2">
+        <form action="{%url 'manager:search' type%}">
+    
+          <div class="input-group mb-3">
+            <input type="text" name="search" class="form-control form-control-line" placeholder="Search {{type}} by name...." aria-label="Search {{type}} by name...." aria-describedby="basic-addon2">
+            {% csrf_token %}
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa fa-search"></i>
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+    </div>
+    <h4>Search Result </h4>
+    <hr>
+    {%if type == 'branch'%}
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table stylish-table no-wrap" id="tableSort">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0" onclick="sortTable(1)"> Name <i class="fa fa-sort p-1"></i></th>
+                                <th class="border-top-0">Street</th>
+                                <th class="border-top-0">Focal Image</th>
+                                <th class="border-top-0">......</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in report %}
+                                <tr>
+                               
+                                    <td class="align-middle">
+                                        <h6>Name: {{i.BranchName}}</h6>
+                                        <h6>District: {{i.district}} </h6>
+                                        <small class="d-block">Email: {{i.email}} </small>
+                                        <small>Contact: {{i.contact}} </small>
+                                        <small>Fax: {{i.fax}} </small>
+                                    </td>
+                                    <td class="align-middle">{{i.street}}</td>
+                                    
+                                    {% if i.focal_img %}
+                                        <td class="align-middle">
+                                            <img src="{{i.focal_img.url}}" alt="" srcset="" style="height: 50px; width: 50px; border-radius: 50%;">
+                                        </td>
+                                    {% endif %}
+                                        
+                                   
+                                    <td class="align-middle">
+                                        <a href="{%url 'manager:editBranch' i.id%}">
+                                            <button class="text-light btn btn-sm btn-primary">
+                                                <i class="fa fa-edit p-2"></i>
+                                                    Edit
+                                            </button>
+                                        </a> 
+                                        <button class=" text-light btn btn-sm  btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
+                                            <i class="fa fa-trash p-2"></i>
+                                            Delete
+                                        </button>
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">Are you sure want to Delete {{i.district}}?</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                               
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                  <a href="{%url 'manager:deleteBranch' i.id%}">
+                                                    <button type="button" class="btn btn-primary">Yes</button>
+                                                  </a>
+                                                
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        <!-- Delete Modal End -->
+   
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%elif type == 'surveyor'%}
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table stylish-table no-wrap" id="tableSort">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0" onclick="sortTable(1)"> Name <i class="fa fa-sort p-1"></i></th>
+                                <th class="border-top-0">Area</th>
+                                <th class="border-top-0">Contact</th>
+                                <th class="border-top-0">Email</th>
+                                <th class="border-top-0">......</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in report %}
+                                <tr>
+                               
+                                    <td class="align-middle">
+                                        <h6> {{i.name}} </h6>
+                                        <small class="d-block">Specilization: {{i.specilization}}</small>
+                                        <small class="d-block">Lience No: {{i.lience_no}}</small>
+                                        <small>Issue Date: {{i.issued_date}}</small>
+                                        <small>Renew Date: {{i.renew_date}}</small>
+                                    </td>
+                                    <td class="align-middle">
+                                        {{i.area}}
+                                    </td>
+                                    <td class="align-middle">
+                                        {{i.contact}}
+                                    </td>
+                                    <td class="align-middle">
+                                        {{i.email}}
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{%url 'manager:editSurvey' i.id%}">
+                                            <button class="text-light btn btn-sm btn-primary">
+                                                <i class="fa fa-edit p-2"></i>
+                                                    Edit
+                                            </button>
+                                        </a> 
+                                        <button class=" text-light btn btn-sm  btn-danger btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
+                                            <i class="fa fa-trash p-2"></i>
+                                            Delete
+                                        </button>
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">Are you sure want to Delete {{i.district}}?</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                               
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                  <a href="{%url 'manager:deleteSuveryor' i.id%}">
+                                                    <button type="button" class="btn btn-primary">Yes</button>
+                                                  </a>
+                                                
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        <!-- Delete Modal End -->
+   
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%else%}
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table stylish-table no-wrap" id="tableSort">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0" onclick="sortTable(1)"> Name <i class="fa fa-sort p-1"></i></th>
+                                <th class="border-top-0">Contact</th>
+                                <th class="border-top-0">Address</th>
+                                <th class="border-top-0">......</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in report %}
+                                <tr>
+                               
+                                    <td class="align-middle">
+                                        <h6> {{i.name}} </h6>
+                                        <small class="d-block">Email: {{i.email}} </small>
+                                       
+                                    </td>
+                                    <td class="align-middle">{{i.contact}}</td>
+                                    
+                                  
+                                    <td class="align-middle">
+                                        <h6>{{i.email}}</h6>
+                                    </td>
+                                  
+                                        
+                                   
+                                    <td class="align-middle">
+                                        <a href="{%url 'manager:editAgent' i.id%}">
+                                            <button class="text-light btn btn-sm btn-primary">
+                                                <i class="fa fa-edit p-2"></i>
+                                                    Edit
+                                            </button>
+                                        </a> 
+                                        <button class=" text-light btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
+                                            <i class="fa fa-trash p-2"></i>
+                                            Delete
+                                        </button>
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">Are you sure want to Delete {{i.district}}?</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                               
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                  <a href="{%url 'manager:deleteAgent' i.id%}">
+                                                    <button type="button" class="btn btn-primary">Yes</button>
+                                                  </a>
+                                                
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        <!-- Delete Modal End -->
+   
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+</div>
+       
+    
+{% endblock inner %}
+

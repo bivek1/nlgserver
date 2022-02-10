@@ -307,18 +307,20 @@ def formReport(request, id):
 
 def statementReport(request, id):
     if id == 1:
-        report = Report.objects.filter(rtype = 'Annual Report').order_by("-id")
+        report = Report.objects.filter(rtype = 'Annual Report').order_by("fiscal")
         name = "Annual"
     elif id == 2:
-        report = Report.objects.filter(rtype = 'Quarterly Report').order_by("-id")
+        report = Report.objects.filter(rtype = 'Quarterly Report').order_by("fiscal")
         name = "Quarterly"
     elif id == 3:
-        report = Report.objects.filter(rtype = 'Minute Report').order_by("-id")
+        report = Report.objects.filter(rtype = 'Minute Report').order_by("fiscal")
         name = "Minute"
     else:
-        report = Report.objects.filter(rtype = 'Other Report').order_by("-id")
+        report = Report.objects.filter(rtype = 'Other Report').order_by("fiscal")
         name = "Other"
-
+    if request.method == 'POST':
+        search = request.POST['search']
+        report = report.filter(name__icontains= search)
     dist ={
         'name':name,
         'report':report,
@@ -330,6 +332,9 @@ def newUpdate(request):
     report = news.objects.all().order_by("-dateof")
     name = "News and Update"
 
+    if request.method == 'POST':
+        search = request.POST['search']
+        report = news.objects.filter(name__icontains= search)
     dist ={
         'name':name,
         'report':report
@@ -1371,3 +1376,23 @@ def deleteImage(request, id, slug):
         ManagementTeam.objects.get(id =id ).image.delete(save = True)
         messages.success(request, "Successfully Cleared Image")
         return HttpResponseRedirect(reverse('manager:editManagement', args=[id]))
+
+def search(request, slug):
+    name = request.GET['search']
+    if slug == 'branch':
+        report = Branch.objects.filter(BranchName__icontains = name)
+        type = "branch"
+    elif slug == 'surveyor':
+        report = Surveryor.objects.filter(name__icontains = name)
+        type = "surveyor"
+    else:
+        report = Agent.objects.filter(name__icontains = name)
+        type = "agent"
+
+
+    dist ={
+        'report':report,
+        'type':type
+       
+    }
+    return render(request, "manager/search.html", dist)

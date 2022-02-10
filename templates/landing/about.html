@@ -238,8 +238,14 @@
                 <div class="mainman text-center ">
                     <img src="{%if i.image%}{{i.image.url}}{%else%}{%static 'images/downlogo.PNG'%} {%endif%}" alt="" srcset="">
                     <h6>{{i.name}}</h6>
+                    {%if i.post%} 
                     <p class="text-danger p-0 m-0">{{i.post}}</p>
+                    {%endif%}
+                    {%if i.type%}
                     <small class="d-block">{{i.type}}</small>
+                    {%endif%}
+                    
+                   
                     <button class="btn btn-outline-danger mt-2" data-toggle="modal" data-target="#exampleModalCenterBOD{{i.id}}" >
                         View More
                     </button>
@@ -262,10 +268,16 @@
                               <div class="row pl-2 mt-2">
                                 <div class="col-10 m-auto p-2" style="height: auto;">
                                   <h6 class="text-center text-dark">{{i.name}}</h6>
-                                  <p class="text-center text-danger p-0 m-0"> {{i.post}}</p>
-                                  <p class="text-center p-0 m-0">
-                                    <small >{{i.type}}</small>
-                                  </p>
+                                  {%if i.post%}
+                                  <p class="text-center text-danger p-0 m-0"> {{i.post}} </p>
+                                  {%endif%}
+                                  
+                                  {%if i.type%}
+                                    <p class="text-center p-0 m-0">
+                                      <small >{{i.type}}</small>
+                                    </p>
+                                  {%endif%}
+                                 
               
                                   {% if i.description %}
                                   <div class="text-center p-0 m-0" style="font-size: 14px;">{{i.description|safe}}</div>
@@ -273,27 +285,21 @@
                                     
                                 
                                   <div class="text-center">
-                                    
-                                    {% if i.re_appointed_date %}
-                                    <div  style="display: flex;justify-content:space-around;align-items: center;">
-                                      <p class="p-0 m-0">Appointed Date:</p>
-                                      <p class="p-0 m-0">{{i.appointed_date}}</p>
-                                    </div>
-                                    <div  style="display: flex;justify-content: space-around;align-items: center;">
-                                      <p class="p-0 m-0">Re- Appointed Date:</p>
-                                      <p class="p-0 m-0">{{i.re_appointed_date}}</p>
-                                    </div>
-                                    
-                                
-                                    {%else%}
+                                    {%if i.appointed_date%}
                                     <div style="display: flex;justify-content: space-around;align-items: center;">
                                       <p>Appointed Date:</p>
                                       <p>{{i.appointed_date}}</p>
                                     
                                     </div>
-                                 
-                          
+                                  {%endif%}
+                                    {% if i.re_appointed_date %}
+                                    
+                                      <div  style="display: flex;justify-content: space-around;align-items: center;">
+                                        <p class="p-0 m-0">Re- Appointed Date:</p>
+                                        <p class="p-0 m-0">{{i.re_appointed_date}}</p>
+                                      </div>
                                     {% endif %}
+                                 
                           
                                     
                                   </div>                
@@ -351,8 +357,6 @@
                   </div>
                 </div>
             </div>
-
-    
         
           <!-- Modal -->
           <div class="modal fade bd-example-modal-lg" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

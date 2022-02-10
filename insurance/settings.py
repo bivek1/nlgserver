@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'landing.apps.LandingConfig',
     'manager.apps.ManagerConfig',
     'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [

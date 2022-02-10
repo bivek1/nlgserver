@@ -83,7 +83,7 @@
                             </div>
                             <div class="col-4 col-md-3 p-0 m-0 text-center">
                                 <p class="text-light p-0 m-0 topline">
-                                     <a href="tel:{{setting.number1}}" class="topline"> {{setting.number2}} </a></p>
+                                     <a href="tel:{{setting.number1}}" class="topline"> {{setting.number1}} </a></p>
                                 <p class="text-light p-0 m-0 topline"><a class ="topline" href="tel:{{setting.number2}}"> {{setting.number2}} </a></p>
                             </div>
                             <div class="col-6 col-md-6 p-0 m-0 pl-3">
@@ -367,7 +367,7 @@
                                 </div>
                                 <!-- End contact Icon -->
                                 <div class="contact-info">
-                                    <h3>Lazimpat, Kathmandu Nepal</h3>
+                                    <h3>{{setting.location}}</h3>
                                     <p>Head Office</p>
                                 </div>
                                 <!-- End Contact Info -->
@@ -382,9 +382,9 @@
                                 </div>
                                 <!-- End contact Icon -->
                                 <div class="contact-info">
-                                    <a href="tel:01-4211122"> <h3>01-4211122</h3></a>
+                                    <a href="tel:{{setting.number1}}"> <h3>{{setting.number1}}</h3></a>
                                    
-                                    <a href="tel:01-4006648"><h3>01-4006648</h3></a>
+                                    <a href="tel:{{setting.number2}}"><h3>{{setting.number2}}</h3></a>
                                     
                                     <p>Give us a call</p>
                                 </div>
@@ -400,9 +400,9 @@
                                 </div> -->
                                 <!-- End contact Icon -->
                                 <div class="contact-info">
-                                    <h3>Toll Free No - 16600199099</h3>
-                                    <a href="mailto:info@nlgi.com.np">
-                                        <h3>Email- info@nlgi.com.np</h3>
+                                    <h3>Toll Free No - {{setting.toll_free_no}}</h3>
+                                    <a href="mailto:{{setting.email}}">
+                                        <h3>Email- {{setting.email}}</h3>
                                     </a>
                                     
                                     
