@@ -79,7 +79,7 @@ def loadData(request):
                 email = full_data[5]
                 agent_code = full_data[6]
                 # iss = datetime.datetime.strftime
-                Agent.objects.create(name=name, agent_code=agent_code, address=address, contact= contact, lience_no= lience,  email=email, issue_date= issue)
+                Agent.objects.create(ordering = Agent.objects.all().count()+1 ,name=name, agent_code=agent_code, address=address, contact= contact, lience_no= lience,  email=email, issue_date= issue)
         messages.success(request, "Successfully Uploaded From excel File")
         # except:
         #     messages.success(request, "No data to Load. Something went wrong")
@@ -111,7 +111,7 @@ def loadDataSuv(request):
                 area = full_data[5]
                 contact = full_data[6]
                 email = full_data[7]
-                Surveryor.objects.create(name=name, specilization=specilization, contact= contact, lience_no= lience,  email=email, issued_date= issue, area=area, renew_date=renew)
+                Surveryor.objects.create(ordering = Surveryor.objects.all().count()+1, name=name, specilization=specilization, contact= contact, lience_no= lience,  email=email, issued_date= issue, area=area, renew_date=renew)
         messages.success(request, "Successfully Uploaded From excel File")
         # except:
         #     messages.success(request, "No data to Load. Something went wrong")
@@ -120,7 +120,8 @@ def loadDataSuv(request):
 
 def addAgent(request):
     form = AgentF(request.POST or None)
-    agent = Agent.objects.all().order_by('-id')
+    agent = Agent.objects.all().order_by('ordering')
+    form.fields['ordering'].initial = agent.count()+1
     dist = {
         'form':form,
         'data':agent
@@ -162,7 +163,8 @@ def deleteBranch(request, id):
 
 def addSurveryor(request):
     form = SurveryorF(request.POST or None)
-    agent = Surveryor.objects.all().order_by('-id')
+    agent = Surveryor.objects.all().order_by('ordering')
+    form.fields['ordering'].initial = agent.count()+1
     dist = {
         'form':form,
         'data':agent
@@ -179,7 +181,8 @@ def addSurveryor(request):
 
 def addCitizen(request):
     form = CitizenF(request.POST or None)
-    agent = Citizen.objects.all().order_by('-id')
+    agent = Citizen.objects.all().order_by('ordering')
+    form.fields['ordering'].initial = agent.count()+1
     dist = {
         'form':form,
         'data':agent
@@ -247,13 +250,13 @@ def editNews(request, id):
 
 def addReport(request):
     form = ReportF()
+    form.fields['ordering'].initial = Report.objects.all().count()+1
     dist = {
         'form':form
     }
     if request.method == 'POST':
         forms = ReportF(request.POST, request.FILES)
         if forms.is_valid():
-        
             forms.save()
             messages.success(request, "Report Saved Succesfully")
             return HttpResponseRedirect(reverse('manager:addReport'))
@@ -269,7 +272,7 @@ def editReport(request, id):
     form.fields['name'].initial = bod.name
     form.fields['rtype'].initial = bod.rtype
     form.fields['fiscal'].initial = bod.fiscal
-
+    form.fields['ordering'].initial = bod.ordering
 
     dist = {
         'form':form,
@@ -279,6 +282,7 @@ def editReport(request, id):
         bod.name = request.POST['name']
         bod.rtype = request.POST['rtype']
         bod.fiscal = fiscalYear.objects.get(id = request.POST['fiscal'])
+        bod.ordering = request.POST['ordering']
         if request.FILES:
             bod.files = request.FILES['files']
         bod.save()
@@ -287,6 +291,31 @@ def editReport(request, id):
     else:
         return render(request, 'manager/editReport.html',dist )
 
+
+def editAnnouncement(request, id):
+    form = AnnouncementForm()
+    bod = Announcement.objects.get(id = id)
+    form.fields['ordering'].initial = bod.ordering
+    form.fields['name'].initial = bod.name
+    form.fields['description'].initial = bod.description
+    form.fields['link'].initial = bod.link
+
+    dist = {
+        'form':form,
+        'bod':bod,
+    }
+    if request.method == 'POST':
+        bod.ordering = request.POST['ordering']
+        bod.name = request.POST['name']
+        bod.description = request.POST['description']
+        bod.link = request.POST['link']
+        if request.FILES:
+            bod.image = request.FILES['image']
+        bod.save()
+        messages.success(request, "Announcement Edited Succesfully")
+        return HttpResponseRedirect(reverse('manager:editAnnoucement', args=[bod.id]))
+    else:
+        return render(request, 'manager/editAnnoucement.html', dist )
 def formReport(request, id):
     if id == 1:
         report = Download.objects.filter(dtype = 'KYC Form').order_by("-id")
@@ -307,16 +336,16 @@ def formReport(request, id):
 
 def statementReport(request, id):
     if id == 1:
-        report = Report.objects.filter(rtype = 'Annual Report').order_by("fiscal")
+        report = Report.objects.filter(rtype = 'Annual Report').order_by("ordering")
         name = "Annual"
     elif id == 2:
         report = Report.objects.filter(rtype = 'Quarterly Report').order_by("fiscal")
         name = "Quarterly"
     elif id == 3:
-        report = Report.objects.filter(rtype = 'Minute Report').order_by("fiscal")
+        report = Report.objects.filter(rtype = 'Minute Report').order_by("ordering")
         name = "Minute"
     else:
-        report = Report.objects.filter(rtype = 'Other Report').order_by("fiscal")
+        report = Report.objects.filter(rtype = 'Other Report').order_by("ordering")
         name = "Other"
     if request.method == 'POST':
         search = request.POST['search']
@@ -448,7 +477,8 @@ def ProductView(request):
 
 def SubProductView(request):
     form = SubProductFrom()
-    branched = Sub_product.objects.all().order_by('-id')
+    branched = Sub_product.objects.all().order_by('ordering')
+    form.fields['ordering'].initial = branched.count()+1
     dist = {
         'form':form,
         'bod':branched,
@@ -489,6 +519,7 @@ def QuestionAnswerView(request):
 def AnnouncementView(request):
     form = AnnouncementForm()
     branched = Announcement.objects.all().order_by('-id')
+    form.fields['ordering'].initial = branched.count()+1
     dist = {
         'form':form,
         'bod':branched,
@@ -702,6 +733,7 @@ def editSubProduct(request, id):
     form.fields['description'].initial = bod.description
     form.fields['discontinue'].initial = bod.discontinue
     form.fields['icons'].initial = bod.icons
+    form.fields['ordering'].initial = bod.ordering
 
     dist = {
         'form':form,
@@ -711,6 +743,7 @@ def editSubProduct(request, id):
         bod.name = request.POST['name']
         bod.description = request.POST['description']
         bod.icons = request.POST['icons']
+        bod.ordering = request.POST['ordering']
         bod.product = Product.objects.get(id = request.POST['product']) 
         continues = request.POST.get('discontinue', False)
         if continues == 'on':
@@ -828,6 +861,7 @@ def editAgent(request, id):
     form.fields['lience_no'].initial = bod.lience_no
     form.fields['issue_date'].initial = bod.issue_date
     form.fields['agent_code'].initial = bod.agent_code
+    form.fields['ordering'].initial = bod.ordering
 
     dist = {
         'form':form,
@@ -840,7 +874,9 @@ def editAgent(request, id):
         bod.agent_code = request.POST['agent_code']
         bod.email = request.POST['email']
         bod.lience_no = request.POST['lience_no']
-        bod.issue_date = request.POST['issue_date']
+        if  request.POST['issue_date']:
+            bod.issue_date = request.POST['issue_date']
+        bod.ordering = request.POST['ordering']
       
         bod.save()
         messages.success(request, "Agent Edited Succesfully")
@@ -876,6 +912,7 @@ def editCitizen(request, id):
     bod = Citizen.objects.get(id = id)
     form.fields['name'].initial = bod.name
     form.fields['details'].initial = bod.details
+    form.fields['ordering'].initial = bod.ordering
 
     dist = {
         'form':form,
@@ -884,6 +921,7 @@ def editCitizen(request, id):
     if request.method == 'POST':
         bod.name = request.POST['name']
         bod.details = request.POST['details']
+        bod.ordering = request.POST['ordering']
     
         bod.save()
         messages.success(request, "Citizen Edited Succesfully")
@@ -902,6 +940,7 @@ def editSurvey(request, id):
     form.fields['lience_no'].initial = bod.lience_no
     form.fields['issued_date'].initial = bod.issued_date
     form.fields['renew_date'].initial = bod.renew_date
+    form.fields['ordering'].initial = bod.ordering
     issue = bod.issued_date
     renew = bod.renew_date
     if issue: 
@@ -926,6 +965,7 @@ def editSurvey(request, id):
         bod.specilization = request.POST['specilization']
         bod.contact = request.POST['contact']
         bod.email = request.POST['email']
+        bod.ordering = request.POST['ordering']
         bod.lience_no = request.POST['lience_no']
         first_date = request.POST['issued_date']
         last_date = request.POST['renew_date']
@@ -1376,7 +1416,10 @@ def deleteImage(request, id, slug):
         ManagementTeam.objects.get(id =id ).image.delete(save = True)
         messages.success(request, "Successfully Cleared Image")
         return HttpResponseRedirect(reverse('manager:editManagement', args=[id]))
-
+    elif slug == "annoucement":
+        Announcement.objects.get(id =id ).image.delete(save = True)
+        messages.success(request, "Successfully Cleared Image")
+        return HttpResponseRedirect(reverse('manager:editAnnoucement', args=[id]))
 def search(request, slug):
     name = request.GET['search']
     if slug == 'branch':

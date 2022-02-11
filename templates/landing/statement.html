@@ -71,89 +71,29 @@
             </div>
         </div>
         <br><br>
-
-
-            {%for i in fis%}
-            
-                <div class="col-lg-12 col-md-12 col-12 showAnnual">
-
-                    <!-- <div class="accordion" id="accordionExample">
-                        <div class="card arcorcard" style="background-color: #fcfcfc;">
-                          <div class="card-header" id="heading{{i.id}}">
-                            <div class="mb-0" style="display: flex;justify-content: space-between;">
-                                <h6 class="text-dark" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}" style="cursor: pointer;">{{i.fiscal}}</h6>
-                                <p class="btn text-danger " type="button" data-toggle="collapse" data-target="#collapse{{i.id}}" aria-expanded="true" aria-controls="collapse{{i.id}}">
-                                    <i class="fa fa-plus"></i>
-                                </p>
-                            </div>
-                          </div>
-                      
-                          <div id="collapse{{i.id}}" class="collapse {%if bb == i.id %}show {%else%}collapsed {%endif%}" aria-labelledby="heading{{i.id}}" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <div class="row">
-
-                                    {%for j in i.fiscalyear.all%}
-                                    {%if j.rtype == 'Annual Report' %}
-                                    <div class="col-md-3 col-12 col-lg-3">
-                                        <a href="{{j.pdf}}" target="_blank">
-                                            <div class="products-show-satement mt-2">
-                                                <div class="text-center p-1 forQuater">
-                                                    <p class="text-center p-0 m-0 pt-2 lowTextForName" >{{j.name}}</p>
-                                                    <div class="report-item">
-                                                        <a href="{{j.pdf}}" target="_blank">
-                                                            <i class="fa fa-eye p-2"></i>
-                                                        </a>      
-                                                    
-                                                        <a href="{{j.download}}">
-                                                            <i class="fa fa-download p-2"></i>
-                                                        </a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    {%endif%}
-                                    {%endfor%}
-                                
-                                </div>
-                            </div>
-                          </div>
-                        </div>
-                      
-                    </div> -->
-
-                    <div class="row">
-
-                        {%for j in i.fiscalyear.all%}
-                        {%if j.rtype == 'Annual Report' %}
-                        <div class="col-md-6 col-12 col-lg-6 m-auto">
+        {%for j in rep%}
+        {%if j.rtype == 'Annual Report' %}
+        <div class="col-md-6 col-12 col-lg-6 showAnnual">
+            <a href="{{j.pdf}}">
+                <div class="products-show-satement mt-2">
+                    <div class="text-center p-1 forQuater">
+                        <p class="text-center p-0 m-0 pt-2 lowTextForName" >{{j.name}}</p>
+                        <div class="report-item">
                             <a href="{{j.pdf}}">
-                                <div class="products-show-satement mt-2">
-                                    <div class="text-center p-1 forQuater">
-                                        <p class="text-center p-0 m-0 pt-2 lowTextForName" >{{j.name}}</p>
-                                        <div class="report-item">
-                                            <a href="{{j.pdf}}">
-                                                <i class="fa fa-eye p-2"></i>
-                                            </a>      
-                                        
-                                            <a href="{{j.download}}">
-                                                <i class="fa fa-download p-2"></i>
-                                            </a>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
+                                <i class="fa fa-eye p-2"></i>
+                            </a>      
+                        
+                            <a href="{{j.download}}">
+                                <i class="fa fa-download p-2"></i>
                             </a>
+                            
                         </div>
-                        {%endif%}
-                        {%endfor%}
-                    
                     </div>
-                                    
                 </div>
-           
-            {%endfor%}
+            </a>
+        </div>
+        {%endif%}
+        {%endfor%}
             {%for i in fis%}
             
                 <div class="col-lg-12 col-md-12 col-12 showQuarterly">

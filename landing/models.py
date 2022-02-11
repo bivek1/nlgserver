@@ -115,6 +115,7 @@ class Branch(models.Model):
         return reverse('manager:deleteImage',args=[self.id, 'branch'])
 
 class Surveryor(models.Model):
+    ordering = models.IntegerField()
     name = models.CharField(max_length=200, null = True, blank= True, )
     specilization = models.CharField(max_length=100, null = True, blank= True, )
     lience_no = models.CharField(max_length=100, null = True, blank = True, )
@@ -130,6 +131,7 @@ class Surveryor(models.Model):
     
     
 class Agent(models.Model):
+    ordering = models.IntegerField()
     name = models.CharField(max_length=500, null = True, blank= True, )
     address = models.CharField(max_length=100, null = True, blank= True, )
     contact = models.CharField(max_length=100, null = True, blank= True)
@@ -143,6 +145,7 @@ class Agent(models.Model):
         return self.name
     
 class Citizen(models.Model):
+    ordering = models.IntegerField()
     name = models.CharField(max_length=500, null = True, blank= True, )
     details = RichTextUploadingField(null = True, blank= True, )
     objects = models.Manager()
@@ -158,6 +161,7 @@ class fiscalYear(models.Model):
         return self.fiscal
    
 class Report(models.Model):
+    ordering = models.IntegerField()
     name = models.CharField(max_length = 200, null = True, blank = True)
     slug = models.SlugField(default='report')
     fiscal = models.ForeignKey(fiscalYear, null= True, related_name='fiscalyear', blank= True, on_delete=models.PROTECT)
@@ -280,6 +284,7 @@ class Product(models.Model):
    
 
 class Sub_product(models.Model):
+    ordering = models.IntegerField()
     product = models.ForeignKey(Product, related_name="sub_product", on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to = "products/",null = True, blank = True)
@@ -324,6 +329,7 @@ class Setting(models.Model):
 
 
 class Announcement(models.Model):
+    ordering = models.IntegerField()
     name = models.CharField(max_length=200,null = True, blank = True)
     image = models.ImageField(upload_to ="announcement",null = True, blank = True)
     description = RichTextUploadingField(null = True, blank = True)
@@ -332,6 +338,9 @@ class Announcement(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def clear(self):
+        return reverse('manager:deleteImage',args=[self.id, 'annoucement'])
 
 class DepartmentHead(models.Model):
     ordering = models.IntegerField()

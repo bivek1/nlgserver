@@ -107,29 +107,31 @@
   </div>
   <br>
 </div>
-
-<div class="row p-0 m-0">
-  <div class="col-12">
-    <h4 class="text-danger text-center">Discontinued <span class="text-dark">Products</span></h4>
-    <hr>
-  </div>
-
-  {% for i in discon  %}
-  <div class="col-md-4 col-12 p-2 m-auto">
-    <a href="{%url 'landing:thisProduct' i.id%}">
-      <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterCovidaa{{i.id}}">
-        <div class="text-center p-1">
-            <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="width: 90px; height:60px;">
-            <p class="text-center text-dark p-0 m-0">{{i.name}}</p>
-          
-        </div>
-      
+<div class="col-12">
+  <div class="row p-0 m-0">
+    <div class="col-12">
+      <h4 class="text-danger text-center">Discontinued <span class="text-dark">Products</span></h4>
+      <hr>
     </div>
-    </a>
-   
+  
+    {% for i in discon  %}
+    <div class="col-md-4 col-12 p-2 m-auto">
+      <a href="{%url 'landing:thisProduct' i.id%}">
+        <div class="white-box" data-toggle="modal" data-target="#exampleModalCenterCovidaa{{i.id}}">
+          <div class="text-center p-1">
+              <img class="res-gif" src="{{i.image.url}}" alt="" srcset="" style="width: 90px; height:60px;">
+              <p class="text-center text-dark p-0 m-0">{{i.name}}</p>
+            
+          </div>
+        
+      </div>
+      </a>
+     
+    </div>
+    {% endfor %}
+      
   </div>
-  {% endfor %}
-    
 </div>
+
 
 {% endblock content %}

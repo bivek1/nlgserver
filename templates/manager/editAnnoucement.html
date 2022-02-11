@@ -1,0 +1,127 @@
+{% extends "manager/dashboard.html" %}
+{% block title %}
+   Edit Announcement
+{% endblock title %}
+
+{% block inner %}
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Dashboard</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{%url 'landing:landing'%}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{%url 'manager:dashboard'%}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{%url 'manager:announcement'%}">Announcement</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Announcement</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+<div class="text-center ps-4 pe-4">
+    {% if messages %}
+        {% for m in messages  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="row">
+    <div class="col-12 col-md-9">
+        <form action="" method="post" style="width: 100%; padding: 30px;" enctype="multipart/form-data">
+    
+            <div class="row  formbox" >
+                <H3>Edit Announcement</H3>
+                <hr>
+                <div class="col-12">
+                    {{form.ordering.label_tag}}
+                    {{form.ordering}}
+                    {{form.ordering.errors}}
+                </div>
+                <div class="col-12">
+                    {{form.name.label_tag}}
+                    {{form.name}}
+                    {{form.name.errors}}
+                </div>
+                <div class="col-12">
+                    {{form.image.label_tag}}
+                    {{form.image}}
+                    {{form.image.errors}}
+                </div>
+             
+                <div class="col-12">
+                    {{form.link.label_tag}}
+                    {{form.link}}
+                    {{form.link.errors}}
+                </div>
+                <div class="col-12">
+                    {{form.description.label_tag}}
+                    {{form.media}}
+                    {{form.description}}
+                    {{form.description.errors}}
+                </div>
+               
+        
+                {% csrf_token %}
+                <br>
+                <div class="p-2 d-grid">
+                    <button class="btn btn-danger btn-block text-light mb-3" id="submit"> <i class="fa fa-key"></i> Edit Announcement</button>
+                </div>
+               
+            </div>
+          
+        </form>
+    </div>
+    <div class="col-12 col-md-3" style="padding: 10px;">
+
+        <div class="card p-2">
+            {% if bod.image %}
+            <p>Image Available:</p>
+            
+            <img src="{{bod.image.url}}" alt="" srcset="" style="height: auto; width: 100%;" >
+
+            <button class="btn btn-danger text-center text-light mt-2 w-100" data-bs-toggle="modal" data-bs-target="#exampleModalImage">
+                Clear Image
+            </button>
+
+                <!-- Delete Modal -->
+                <div class="modal fade" id="exampleModalImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure want to Delete Image?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <a href="{{bod.clear}}">
+                        <button type="button" class="btn btn-primary">Yes</button>
+                        </a>
+                    
+                    </div>
+                    </div>
+                </div>
+                </div>
+            <!-- Delete Modal End --> 
+            {%else%}
+                <p>No Image Uploded</p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock inner %}

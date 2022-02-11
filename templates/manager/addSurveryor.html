@@ -71,6 +71,11 @@
         <div class="row formbox">
             <h3>Add Surveryor</h3>
             <hr>
+            <div class="col-12">
+                {{form.ordering.label_tag}}
+                {{form.ordering}}
+                {{form.ordering.errors}}
+            </div>
             <div class="col-6">
                 {{form.name.label_tag}}
                 {{form.name}}
@@ -129,8 +134,8 @@
                         <table class="table stylish-table no-wrap" id="tableSort">
                             <thead>
                                 <tr>
+                                    <th class="border-top-0" onclick="sortTable(0)">Ordering <i class="fa fa-sort p-1"></i></th>
                                     <th class="border-top-0" onclick="sortTable(1)"> Name <i class="fa fa-sort p-1"></i></th>
-                                    <th class="border-top-0">Area</th>
                                     <th class="border-top-0">Contact</th>
                                     <th class="border-top-0">Email</th>
                                     <th class="border-top-0">......</th>
@@ -139,7 +144,9 @@
                             <tbody>
                                 {% for i in data %}
                                     <tr>
-                                   
+                                        <td>
+                                            {{i.ordering}}
+                                        </td>
                                         <td class="align-middle">
                                             <h6> {{i.name}} </h6>
                                             <small class="d-block">Specilization: {{i.specilization}}</small>
@@ -224,16 +231,33 @@
               /* Check if the two rows should switch place,
               based on the direction, asc or desc: */
               if (dir == "asc") {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                  // If so, mark as a switch and break the loop:
-                  shouldSwitch = true;
-                  break;
+                if (n == 0){
+                  if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                  }
+                }else{
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                      // If so, mark as a switch and break the loop:
+                      shouldSwitch = true;
+                      break;
+                    }
                 }
+                
               } else if (dir == "desc") {
-                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                  // If so, mark as a switch and break the loop:
-                  shouldSwitch = true;
-                  break;
+                if (n == 0){
+                    if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                      // If so, mark as a switch and break the loop:
+                      shouldSwitch = true;
+                      break;
+                    }
+                }else{
+                  if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                  }
                 }
               }
             }
@@ -254,5 +278,7 @@
             }
           }
         }
+        
+    
     </script>
 {% endblock inner %}

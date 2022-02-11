@@ -38,6 +38,11 @@
         <div class="row formbox">
             <h3>Edit Surveryor</h3>
             <hr>
+            <div class="col-12">
+                {{form.ordering.label_tag}}
+                {{form.ordering}}
+                {{form.ordering.errors}}
+            </div>
             <div class="col-6">
                 {{form.name.label_tag}}
                 {{form.name}}

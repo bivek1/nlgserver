@@ -19,7 +19,7 @@ def PageVisitView():
 def landing(request):
     PageVisitView()
     sett = Setting.objects.all()
-    ann = Announcement.objects.all()
+    ann = Announcement.objects.all().order_by('-ordering')
     products = Product.objects.filter(hide=False).order_by('ordering')[:8]
     setting = None
     message = CeoMessage.objects.all()
@@ -89,7 +89,7 @@ def productPolicy(request):
     sett = Setting.objects.all()
     topP = Product.objects.filter(hide=False).filter(discontinue= False).order_by('ordering')[:8]
     products = Product.objects.filter(hide=False).filter(discontinue= False).order_by('ordering')
-    allSub = Sub_product.objects.filter(hide=False).filter(discontinue= False)
+    allSub = Sub_product.objects.all().filter(hide= False).order_by('ordering')
     lens = products.count()
     discontineu = Product.objects.filter(discontinue=True)
     setting = None
@@ -237,7 +237,7 @@ def thisProduct(request,id):
     setting = None
     product = Product.objects.get(id = id)
     all = Product.objects.filter(hide=False).order_by('ordering')
-    allSub = Sub_product.objects.filter(hide=False)
+    allSub = Sub_product.objects.filter(hide=False).order_by('ordering')
     if sett:
         for i in sett:
             setting = i 
@@ -293,7 +293,7 @@ def subProduct(request, id):
     sett = Setting.objects.all()
     setting = None
     product = Sub_product.objects.get(id = id)
-    all = Sub_product.objects.filter(hide=False)
+    all = Sub_product.objects.filter(hide=False).order_by('ordering')
     allPro = Product.objects.filter(hide=False).order_by('ordering')
     if sett:
         for i in sett:
@@ -422,7 +422,7 @@ def finance(request):
             setting = i 
             break
 
-    report = Report.objects.all().order_by('-id')
+    report = Report.objects.all().order_by('ordering')
     Yeara = fiscalYear.objects.all().order_by('-id')
     for i in Yeara:
         bb = i.id
@@ -499,7 +499,7 @@ def Thenews(request,id):
     return render(request, "landing/news.html", dist)
 def surveyor(request):
     PageVisitView()
-    s = Surveryor.objects.all().order_by('-id')
+    s = Surveryor.objects.all().order_by('ordering')
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -516,7 +516,7 @@ def surveyor(request):
 
 def agents(request):
     PageVisitView()
-    s = Agent.objects.all().order_by('-id')
+    s = Agent.objects.all().order_by('ordering')
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -534,7 +534,7 @@ def agents(request):
 
 def citizen(request):
     PageVisitView()
-    s = Citizen.objects.all().order_by('-id')
+    s = Citizen.objects.all().order_by('ordering')
     sett = Setting.objects.all()
     setting = None
     if sett:

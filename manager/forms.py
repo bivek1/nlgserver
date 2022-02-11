@@ -1,5 +1,4 @@
-from pyexpat import model
-from tkinter import Widget
+
 from django import forms
 from django.contrib.auth.models import User
 from landing.models import OtherDownload, RIpartner ,helpCenter, socialSite,fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
@@ -140,6 +139,7 @@ class SurveryorF(forms.ModelForm):
         fields = ('__all__')   
 
         widgets ={
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name':forms.TextInput(attrs={'placeholder':'Name of the Surveryor'}),
             'specilization':forms.TextInput(attrs={'placeholder':'Specilization of the Surveryor'}),
             'lience_no':forms.TextInput(attrs={'placeholder':'Licence No. of the Surveryor'}),
@@ -161,6 +161,7 @@ class AgentF(forms.ModelForm):
         fields = ('__all__')
 
         widgets = {
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name':forms.TextInput(attrs={'placeholder':'Name of the Agents'}),
             'address':forms.TextInput(attrs={'placeholder':'Address of the Agent'}),
             'contact':forms.TextInput(attrs={'placeholder':'Contact of the Agents'}),
@@ -182,6 +183,7 @@ class CitizenF(forms.ModelForm):
         fields = ('__all__')   
 
         widgets={
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name':forms.TextInput(attrs={'placeholder':'Name of the Citizen'}),
             'details':CKEditorUploadingWidget()
         }
@@ -198,6 +200,7 @@ class ReportF(forms.ModelForm):
         fields = ('__all__')   
         exclude= ('slug',)
         widgets = {
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name':forms.TextInput(attrs={'placeholder':'Name of the Report'})
         }
         
@@ -286,6 +289,7 @@ class SubProductFrom(forms.ModelForm):
         fields = ('__all__') 
 
         widgets = {
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Name of the Product"}),
             'image':forms.FileInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'product': forms.Select(attrs={'class':'form-control ps-0 form-control-line'}),
@@ -315,6 +319,7 @@ class AnnouncementForm(forms.ModelForm):
         fields=('__all__')
 
         widgets = {
+            'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
             'name': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line','placeholder':"Announcement Name"}),
             'image': forms.FileInput(attrs={'class':'form-control ps-0'}),
             'link': forms.TextInput(attrs={'class':'form-control ps-0 form-control-line', 'placeholder':'Enter Redirect Link' }),

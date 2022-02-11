@@ -22,6 +22,7 @@ urlpatterns = [
     path('subproduct', views.SubProductView, name="subProduct"),
     path('questionAnswer', views.QuestionAnswerView, name="questionAnswer"),
     path('announcement', views.AnnouncementView, name="announcement"),
+
     path('addForms', views.addForm, name="addForm"),
     path('departmentTeam', views.DepartmentView, name = "departmentTeam"),
     path('deleteAnn/<int:id>', views.deleteAnn, name="deleteAnn"),
@@ -76,5 +77,6 @@ urlpatterns = [
     path('deleteReport/<int:id>/<slug:slug>', views.deleteReport, name="deleteReport"),
     path('deleteImage/<int:id>/<slug:slug>', views.deleteImage, name="deleteImage"),
     path('searchResult/<slug:slug>', views.search, name="search"),
+    path('editAnnoucement/<int:id>', views.editAnnouncement, name="editAnnoucement"),
 ]
 

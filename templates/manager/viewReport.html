@@ -57,23 +57,27 @@
                             <table class="table stylish-table no-wrap" id="tableSort">
                                 <thead>
                                     <tr>
+                                      <th class="border-top-0" onclick="sortTable(0)"> Ordering <i class="fa fa-sort p-1"></i></th>
                                         <th class="border-top-0" colspan="2" onclick="sortTable(1)">Name <i class="fa fa-sort p-1"></i></th>
-                                        <th class="border-top-0" onclick=sortTableNum(0)> Year <i class="fa fa-sort p-1">
+                                        <th class="border-top-0" > Year 
                                         </th>
                                         <th class="border-top-0">File</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for i in report %}
+                                    
                                         <tr>
-                                            <td style="width:50px;"><span class="round">F</span></td>
+                                          <td>{{i.ordering}}</td>
+                                            
                                             <td class="align-middle">
                                                 <h6>{{i.name}}</h6>
                                             </td>
+                                            <td style="width:50px;"><span class="round">F</span></td>
                                             <td class="align-middle">{{i.fiscal}}</td>
                                             <td class="align-middle">
                                                
-                                                <a href="{{i.pdf}}">
+                                                <a href="{{i.pdf}}" target="_blank">
                                                     <button class="btn btn-sm btn-warning text-light">
                                                         <i class="fa fa-eye p-2"></i>
                                                         View
@@ -136,36 +140,52 @@
             
     </div>
     <script>
-        function sortTable(n) {
-          var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-          table = document.getElementById("tableSort");
-          switching = true;
-          // Set the sorting direction to ascending:
-          dir = "asc";
-          /* Make a loop that will continue until
-          no switching has been done: */
-          while (switching) {
-            // Start by saying: no switching is done:
-            switching = false;
-            rows = table.rows;
-            /* Loop through all table rows (except the
-            first, which contains table headers): */
-            for (i = 1; i < (rows.length - 1); i++) {
-              // Start by saying there should be no switching:
-              shouldSwitch = false;
-              /* Get the two elements you want to compare,
-              one from current row and one from the next: */
-              x = rows[i].getElementsByTagName("TD")[n];
-              y = rows[i + 1].getElementsByTagName("TD")[n];
-              /* Check if the two rows should switch place,
-              based on the direction, asc or desc: */
-              if (dir == "asc") {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+      function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("tableSort");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+          // Start by saying: no switching is done:
+          switching = false;
+          rows = table.rows;
+          /* Loop through all table rows (except the
+          first, which contains table headers): */
+          for (i = 1; i < (rows.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+            one from current row and one from the next: */
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            /* Check if the two rows should switch place,
+            based on the direction, asc or desc: */
+            if (dir == "asc") {
+              if (n == 0){
+                if (Number(x.innerHTML) > Number(y.innerHTML)) {
                   // If so, mark as a switch and break the loop:
                   shouldSwitch = true;
                   break;
                 }
-              } else if (dir == "desc") {
+              }else{
+                  if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                  }
+              }
+              
+            } else if (dir == "desc") {
+              if (n == 0){
+                  if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                  }
+              }else{
                 if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                   // If so, mark as a switch and break the loop:
                   shouldSwitch = true;
@@ -173,25 +193,27 @@
                 }
               }
             }
-            if (shouldSwitch) {
-              /* If a switch has been marked, make the switch
-              and mark that a switch has been done: */
-              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          }
+          if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            // Each time a switch is done, increase this count by 1:
+            switchcount ++;
+          } else {
+            /* If no switching has been done AND the direction is "asc",
+            set the direction to "desc" and run the while loop again. */
+            if (switchcount == 0 && dir == "asc") {
+              dir = "desc";
               switching = true;
-              // Each time a switch is done, increase this count by 1:
-              switchcount ++;
-            } else {
-              /* If no switching has been done AND the direction is "asc",
-              set the direction to "desc" and run the while loop again. */
-              if (switchcount == 0 && dir == "asc") {
-                dir = "desc";
-                switching = true;
-              }
             }
           }
         }
-       
-    </script>
+      }
+      
+  
+  </script>
 
 {% endblock inner %}
 
