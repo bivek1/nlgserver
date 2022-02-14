@@ -1,7 +1,7 @@
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, RIpartner, Setting, Sub_product, Surveryor, Citizen, Report, Download, TopBar, fiscalYear, helpCenter, news, socialSite
+from .models import Announcement, CeoMessage,Contact, Bod, Branch, Agent, DepartmentHead, Download, ManagementTeam, OtherDownload, PageVisit, Product, QuestionAnswer, RIpartner, Setting, Sub_product, Surveryor, Citizen, Report, Download, Term, TopBar, fiscalYear, helpCenter, news, socialSite
 from django.http import FileResponse, Http404, HttpResponse, HttpResponseRedirect, JsonResponse, request
 from django.urls import reverse
 from django.conf import settings
@@ -368,6 +368,11 @@ def faq(request):
 def term(request):
     PageVisitView()
     sett = Setting.objects.all()
+    terms = Term.objects.all()
+    new_term = None
+    for i in terms:
+        new_term = i.description
+        break
     setting = None
     if sett:
         for i in sett:
@@ -376,7 +381,8 @@ def term(request):
     dist ={
         'setting':setting,
         'bar':TopBar.objects.all(),
-        'social':socialSite.objects.all()
+        'social':socialSite.objects.all(),
+        'new_term':new_term
     }
     return render(request, "landing/terms.html", dist)
 
@@ -423,6 +429,7 @@ def finance(request):
             break
 
     report = Report.objects.all().order_by('ordering')
+    reporta = Report.objects.all().order_by('-ordering')
     Yeara = fiscalYear.objects.all().order_by('-id')
     for i in Yeara:
         bb = i.id
@@ -432,6 +439,7 @@ def finance(request):
     aa = media.replace('\\media',"")
     dist = {
         'rep':report,
+        'repa':reporta,
         'aa':aa,
         'bb':bb,
         'fis':Yeara,
@@ -501,13 +509,22 @@ def surveyor(request):
     PageVisitView()
     s = Surveryor.objects.all().order_by('ordering')
     sett = Setting.objects.all()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(s, 40)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
     setting = None
     if sett:
         for i in sett:
             setting = i 
             break
     dist = {
-        's':s,
+        's':data,
         'setting':setting,
         'bar':TopBar.objects.all(),
         'social':socialSite.objects.all()
@@ -517,6 +534,16 @@ def surveyor(request):
 def agents(request):
     PageVisitView()
     s = Agent.objects.all().order_by('ordering')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(s, 40)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
+    
     sett = Setting.objects.all()
     setting = None
     if sett:
@@ -524,7 +551,7 @@ def agents(request):
             setting = i 
             break
     dist = {
-        's':s,
+        's':data,
         'setting':setting,
         'bar':TopBar.objects.all(),
         'social':socialSite.objects.all()
@@ -555,12 +582,21 @@ def branch(request):
     branch = Branch.objects.all().order_by('district')
     sett = Setting.objects.all()
     setting = None
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(branch, 40)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
     if sett:
         for i in sett:
             setting = i 
             break
     dist = {
-        'branch':branch,
+        'branch':data,
         'Nfound':False,
         'setting':setting,
         'bar':TopBar.objects.all(),
@@ -607,12 +643,21 @@ def download(request):
     sett = Setting.objects.all()
    
     setting = None
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(d, 40)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
     if sett:
         for i in sett:
             setting = i 
             break
     dist = {
-        'd':d,
+        'd':data,
         'setting':setting,
         'bar':TopBar.objects.all(),
         'social':socialSite.objects.all()

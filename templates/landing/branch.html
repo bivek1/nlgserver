@@ -124,6 +124,31 @@
             
 
     </div>
+    <div class="row">
+        <div class="col-12 text-center">
+          {% if branch.has_other_pages %}
+          <ul class="pagi">
+          {% if branch.has_previous %}
+            <li><a href="?page={{ branch.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+          {% endif %}
+          {% for i in branch.paginator.page_range %}
+            {% if branch.number == i %}
+              <li class="activePag"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+              <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if branch.has_next %}
+            <li style="border-right:1px solid #fb0b3f;"><a href="?page={{ branch.next_page_number }}">&raquo;</a></li>
+          {% else %}
+            <li class="disabled" style="border-right:1px solid #fb0b3f;"><span>&raquo;</span></li>
+          {% endif %}
+          </ul>
+          {% endif %}
+        </div>
+    </div>
 
     
 

@@ -1,6 +1,6 @@
 {% extends "manager/dashboard.html" %}
 {% block title %}
-    Add Report
+    Terms and Condition
 {% endblock title %}
 
 {% block inner %}
@@ -13,14 +13,14 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{%url 'landing:landing'%}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{%url 'manager:dashboard'%}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Report</li>
+                        <li class="breadcrumb-item active" aria-current="page">Terms and Condition</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
 </div>
-    <div class="text-center ps-3 pe-3">
+    <div class="text-center ps-4 pe-4">
         {% if messages %}
         {% for m in messages  %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -33,43 +33,17 @@
    
     
     <form action="" method="post" style="width: 100%; padding: 30px;" enctype="multipart/form-data">
-        
+       
         <div class="row formbox">
-            <h3>Add Report</h3>
+            <h3>Manipulate Term and Condition</h3>
             <hr>
+            {{form.media}}
             {{form}}
-            
             {% csrf_token %}
-            <br>
-            <button class="mt-3 btn btn-danger btn-block text-light" id="submit"> <i class="fa fa-key"></i> ADD REPORT </button>
+           
+            <button class="btn btn-danger btn-block text-light mt-3" id="submit"> <i class="fa fa-key"></i> Save Information </button>        
         </div>
-
-    </form>
-    <script>
-        function changeOrder(sel){
-            Tid =  sel.options[sel.selectedIndex].value
-            console.log(Tid)
-            $.ajax({
-                type:'GET',
-                url:'{%url "manager:getOrdering"%}',
-                data:{
-                  'tourId':Tid,
-                },
-                dataType: 'json',
-                success: function(data){
-                    
-                    console.log(data.order)
-                    $('#id_ordering').val(data.order)
-                   
-                  
-                },
-                error:function(){
-                  
-                }
-                        
-                    
-            });
-        }
+   
         
-    </script>
+    </form>
 {% endblock inner %}

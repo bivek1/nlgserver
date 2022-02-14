@@ -74,9 +74,11 @@ urlpatterns = [
     path('addAdmin', views.addAdmin, name="addAdmin"),
     path('deleteAdmin/<int:id>', views.deleteAdmin, name="deleteAdmin"),
     path('addRIPartner', views.addRIpartner, name="addRIpartner"),
+    path('addTermandCondition', views.term, name="addTerm"),
     path('deleteReport/<int:id>/<slug:slug>', views.deleteReport, name="deleteReport"),
     path('deleteImage/<int:id>/<slug:slug>', views.deleteImage, name="deleteImage"),
     path('searchResult/<slug:slug>', views.search, name="search"),
     path('editAnnoucement/<int:id>', views.editAnnouncement, name="editAnnoucement"),
+    path('getOrdering', views.getOrdering, name="getOrdering")
 ]
 

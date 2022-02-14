@@ -6,6 +6,26 @@
 
 
 {% block inner %}
+<style>
+  .pagi {
+    display: flex;
+    list-style: none;
+    justify-content: center!important;
+    padding: 20px!important;
+  }
+  .pagi li {
+  padding: 10px!important;
+  border-top: 1px solid #fb0b3f;
+  border-left: 1px solid #fb0b3f;
+  border-bottom: 1px solid #fb0b3f;
+  font-size: 20px;
+
+  }
+.activePag{
+  background-color: #fb0b3f;
+  color: white;
+}
+</style>
 <div class="page-breadcrumb">
     <div class="row align-items-center">
         <div class="col-md-6 col-8 align-self-center">
@@ -163,6 +183,31 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+          <div class="col-12 text-center">
+            {% if report.has_other_pages %}
+            <ul class="pagi">
+            {% if report.has_previous %}
+              <li><a href="?page={{ report.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in report.paginator.page_range %}
+              {% if report.number == i %}
+                <li class="activePag"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if report.has_next %}
+              <li style="border-right:1px solid #fb0b3f;"><a href="?page={{ report.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled" style="border-right:1px solid #fb0b3f;"><span>&raquo;</span></li>
+            {% endif %}
+            </ul>
+            {% endif %}
+          </div>
+      </div>
     
         
             

@@ -428,4 +428,9 @@ class RIpartner(models.Model):
     def __str__(self):
         return f"{self.description}"
 
+class Term(models.Model):
+    description = RichTextUploadingField()
 
+    def __str__(self):
+        return f"{self.description}"
+        

@@ -1,12 +1,18 @@
 
+from turtle import onclick
 from django import forms
 from django.contrib.auth.models import User
-from landing.models import OtherDownload, RIpartner ,helpCenter, socialSite,fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
+from landing.models import OtherDownload, Term, RIpartner ,helpCenter, socialSite,fiscalYear,CeoMessage, Branch, Download,Surveryor,Agent,Citizen,Report,news, Setting, Announcement, Sub_product, Product, Bod, ManagementTeam, QuestionAnswer, DepartmentHead
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class CeoMessageForm(forms.ModelForm):
     class Meta:
         model = CeoMessage
+        fields = ('__all__')
+
+class TermForm(forms.ModelForm):
+    class Meta:
+        model = Term
         fields = ('__all__')
     
 class RIForm(forms.ModelForm):
@@ -201,7 +207,8 @@ class ReportF(forms.ModelForm):
         exclude= ('slug',)
         widgets = {
             'ordering':forms.NumberInput(attrs={'class':'form-control ps-0 form-control-line'}),
-            'name':forms.TextInput(attrs={'placeholder':'Name of the Report'})
+            'name':forms.TextInput(attrs={'placeholder':'Name of the Report'}),
+            'rtype':forms.Select(attrs={'onchange':"changeOrder(this);"})
         }
         
 class newsF(forms.ModelForm):

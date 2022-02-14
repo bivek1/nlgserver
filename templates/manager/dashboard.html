@@ -203,9 +203,7 @@
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper" style="background-color: white;">
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
+
             <!-- Container fluid  -->
             <!-- ============================================================== -->
 
@@ -310,7 +308,7 @@
                                     <h4 class="card-title">Fiscal Year</h4>
                                     <div class="text-end">
                                         <h2 class="font-light mb-0"><i class="ti-time text-danger"></i>{{fiscal}}</h2>
-                                        <span class="text-muted">Page Visit</span>
+                                        <span class="text-muted">Fiscal Year</span>
                                     </div>
                                    
                                 </div>
@@ -438,6 +436,7 @@
                         </div>
                     </div>
                     <!-- End HelpCenter -->
+                   
 
                       <!-- Contact Us -->
                       <div class="col-12 col-md-6">
@@ -469,7 +468,21 @@
                         </div>
                     </div>
                     <!-- End RI Partner -->
-                   
+                     <!-- Terms and Condition -->
+                     <div class="col-12 col-md-12">
+                        <div class="col-12">
+                            <a href="{%url 'manager:addTerm'%}">
+                                <div class="card">
+                                    <div class="card-body d-flex">
+                                        <i class="fas fa-question" id="annous"></i>
+                                        <h3 class="ms-2">Terms and Condition</h3>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    <!-- End Terms and Condition -->
                     <!-- Add Branch -->
                     <div class="col-lg-3 col-md-3">
                         <a href="{%url 'manager:addBranch'%}">

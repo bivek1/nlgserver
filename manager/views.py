@@ -1,17 +1,30 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, update_session_auth_hash
-from .forms import AdminForm, AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, RIForm, SettingForm, SurveryorF, CitizenF, ReportF, helpForm, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom, socialSiteForm
-from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, RIpartner, Setting, TopBar, fiscalYear, helpCenter, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer, socialSite
+from .forms import AdminForm, AgentF, AnnouncementForm, BranchF, CeoMessageForm,DepartmentHeadForm, DownloadForm, FiscalForm, OtherDownloadForm, RIForm, SettingForm, SurveryorF, CitizenF, ReportF, TermForm, helpForm, newsF, BodForm, ManagementForm, ProductFrom, SubProductFrom, QuestionAnswerFrom, socialSiteForm
+from landing.models import Announcement, CeoMessage, Branch, Contact, DepartmentHead, OtherDownload, PageVisit, RIpartner, Setting, Term, TopBar, fiscalYear, helpCenter, news, Surveryor, Agent, Citizen, Report, Download, Bod, ManagementTeam, Product, Sub_product, QuestionAnswer, socialSite
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 from .forms import FormChangePassword
 import openpyxl
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.models import User
 
 # Create your views here.
+
+
+def getOrdering(request):
+    Rid = request.GET.get('tourId', None)
+    que = Report.objects.filter(rtype = Rid).count() + 1
+    
+    data = {
+            'order':que
+        }
+    return JsonResponse(data)
+
 @login_required
 def dashboard(request):
     news_count = news.objects.all().count()
@@ -122,9 +135,18 @@ def addAgent(request):
     form = AgentF(request.POST or None)
     agent = Agent.objects.all().order_by('ordering')
     form.fields['ordering'].initial = agent.count()+1
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(agent, 40)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
     dist = {
         'form':form,
-        'data':agent
+        'data':data
     }
     if form.is_valid():
         form.save()
@@ -139,9 +161,18 @@ def addAgent(request):
 def addBranch(request):
     form = BranchF()
     branched = Branch.objects.all().order_by('-id')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(branched, 40)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
     dist = {
         'form':form,
-        'branch':branched,
+        'branch':data,
     }
     if request.method == 'POST':
         form = BranchF(request.POST, request.FILES or None)
@@ -165,9 +196,18 @@ def addSurveryor(request):
     form = SurveryorF(request.POST or None)
     agent = Surveryor.objects.all().order_by('ordering')
     form.fields['ordering'].initial = agent.count()+1
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(agent, 40)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
     dist = {
         'form':form,
-        'data':agent
+        'data':data
     }
     if form.is_valid():
         form.save()
@@ -360,13 +400,21 @@ def statementReport(request, id):
 def newUpdate(request):
     report = news.objects.all().order_by("-dateof")
     name = "News and Update"
+    page = request.GET.get('page', 1)
 
+    paginator = Paginator(report, 40)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
     if request.method == 'POST':
         search = request.POST['search']
         report = news.objects.filter(name__icontains= search)
     dist ={
         'name':name,
-        'report':report
+        'report':data
     }
     return render(request, 'manager/news.html', dist)
 
@@ -1251,6 +1299,36 @@ def addRIpartner(request):
             messages.success(request, "Successfully Updated RI Partner") 
             return HttpResponseRedirect(reverse('manager:addRIpartner'))
         return render(request, 'manager/addPartner.html', dist)
+
+def term(request):
+    form = TermForm()
+    message = Term.objects.all()
+    
+    if not message:
+        dist = {
+            'form':form
+        }
+        if request.method == 'POST':
+            fom = TermForm(request.POST, request.FILES)
+            if fom.is_valid():
+                fom.save()
+                messages.success(request, "Successfully Added Terms and Conditions") 
+                return HttpResponseRedirect(reverse('manager:addTerm'))
+        return render(request, 'manager/addTerm.html', dist)
+    else:
+        for i in message:
+            msg = i
+            break
+        form.fields['description'].initial = msg.description
+        dist = {
+            'form':form
+        }
+        if request.method == 'POST':
+            msg.description = request.POST['description']
+            msg.save()
+            messages.success(request, "Successfully Updated Term and Condition") 
+            return HttpResponseRedirect(reverse('manager:addTerm'))
+        return render(request, 'manager/addTerm.html', dist)
 
 def addSocialSite(request):
     form = socialSiteForm()

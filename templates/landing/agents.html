@@ -5,7 +5,7 @@
 
 {% block content %}
 <hr style="height: 7px; background-color:#fb0b3f;">
-<div class="container">
+<div class="container-fluid">
     <br>
     <h4 class="text-center">Our  <span class="text-danger">Agents</span></h4>
  
@@ -75,9 +75,32 @@
   
         </table>
       </div>
-
+      <div class="col-12">
+          <div class="text-center">
+            {% if s.has_other_pages %}
+            <ul class="pagi">
+            {% if s.has_previous %}
+              <li><a href="?page={{ s.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in s.paginator.page_range %}
+              {% if s.number == i %}
+                <li class="activePag"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if s.has_next %}
+              <li style="border-right:1px solid #fb0b3f;"><a href="?page={{ s.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled" style="border-right:1px solid #fb0b3f;"><span>&raquo;</span></li>
+            {% endif %}
+            </ul>
+            {% endif %}
+          </div>
+      </div>
     </div>
-
 </div>
 <script>
   function sortTable(n) {

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Branch, OtherDownload,Surveryor,CeoMessage, Agent, Citizen, Report, TopBar,news, Download, fiscalYear
+from .models import Branch, Term, OtherDownload,Surveryor,CeoMessage, Agent, Citizen, Report, TopBar,news, Download, fiscalYear
 # Register your models here.
 admin.site.register(Branch)
 admin.site.register(OtherDownload)
@@ -13,7 +13,7 @@ class CustomReport(admin.ModelAdmin):
     list_editable =('id','name','fiscal', 'rtype')
 
 admin.site.register(Report, CustomReport)
-
+admin.site.register(Term)
 admin.site.register(news)
 admin.site.register(Download)
 
